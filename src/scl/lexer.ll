@@ -3,6 +3,7 @@
 #include "scl/ast/operand.hpp"
 #include "scl/types/integer.hpp"
 #include "scl/types/float.hpp"
+#include "scl/types/string.hpp"
 #include "scl/parserresult.hpp"
 #include "scl/parser.hh"
 
@@ -43,9 +44,15 @@ loc.step();
 \$[a-zA-Z0-9]+        return Parser::make_VARIABLE(new SCL::AST::Variable(yytext + 1), loc);
 
 
-\"(\\|[^\\"])*\"      return Parser::make_STRING(new SCL::AST::String(yytext), loc);
-\'(\\|[^\\'])*\'      return Parser::make_STRING(new SCL::AST::String(yytext), loc);
+\"(\\|[^\\"])*\"    {
+						auto s = std::string(yytext);
+						return Parser::make_STRING(new SCL::Types::String(s.substr(1, s.size() - 2)), loc);
+					}
 
+\'(\\|[^\\'])*\'    {
+						auto s = std::string(yytext);
+						return Parser::make_STRING(new SCL::Types::String(s.substr(1, s.size() - 2)), loc);
+					}
 
 %{
 /* analyctics */

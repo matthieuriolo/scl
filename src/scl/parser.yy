@@ -50,7 +50,7 @@
 
 
 %token <SCL::AST::Variable*> VARIABLE
-%token <SCL::Type*> INTEGER FLOAT
+%token <SCL::Type*> INTEGER FLOAT STRING
 %token END 0
 
 %token PRINTTOKEN "print"
@@ -103,6 +103,7 @@ EXPRESSION
 TYPE
 	: INTEGER
 	| FLOAT
+	| STRING
 ;
 
 
