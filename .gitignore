@@ -1,3 +1,23 @@
+.deps/
+.dirstamp
+stamp-h1
+build-aux/
+aclocal.m4
+autom4te.cache/
+
+Makefile
+Makefile.in
+config.h
+config.h.in
+config.log
+config.status
+configure
+location.hh
+src/scl/lexer.cc
+src/scl/parser.cc
+src/scl/parser.hh
+
+
 # Prerequisites
 *.d
 
