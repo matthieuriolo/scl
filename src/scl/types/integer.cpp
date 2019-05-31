@@ -5,7 +5,7 @@
 namespace SCL {
 	namespace Types {
 		Integer::Integer() {
-			this->value = 0;
+			value = 0;
 		}
 
 		Integer::Integer(long value) {
@@ -18,6 +18,10 @@ namespace SCL {
 
 		Float *Integer::toFloat() {
 			return new Float(value);
+		}
+
+		long Integer::getValue() {
+			return value;
 		}
 
 		std::string Integer::getTypeName() {
@@ -34,17 +38,17 @@ namespace SCL {
 		}
 
 		int Integer::compare(Context *ctx, Type *right) {
-			if(this->getName() != right->getName()) {
+			if(getName() != right->getName()) {
 				return SCL::Type::comparison(this, right);
 			}
 
-			return this->value - ((Integer*)right)->value;
+			return value - ((Integer*)right)->value;
 		}
 		
 		Type *Integer::operator_plus(Context *ctx, Type *right) {
-			if(right->getName() == "integer") {
+			if(right->getName() == Integer::getTypeName()) {
 				return new Integer(value + ((Integer*)right)->value);
-			}else if(right->getName() == "float") {
+			}else if(right->getName() == Float::getTypeName()) {
 				return toFloat()->operator_plus(ctx, right);
 			}
 
@@ -52,7 +56,7 @@ namespace SCL {
 		}
 
 		Type *Integer::operator_minus(Context *ctx, Type *right) {
-			if(right->getName() == "integer") {
+			if(right->getName() == Integer::getTypeName()) {
 				return new Integer(value - ((Integer*)right)->value);
 			}
 
@@ -60,7 +64,7 @@ namespace SCL {
 		}
 
 		Type *Integer::operator_asterisk(Context *ctx, Type *right) {
-			if(right->getName() == "integer") {
+			if(right->getName() == Integer::getTypeName()) {
 				return new Integer(value * ((Integer*)right)->value);
 			}
 
@@ -68,7 +72,7 @@ namespace SCL {
 		}
 
 		Type *Integer::operator_slash(Context *ctx, Type *right) {
-			if(right->getName() == "integer") {
+			if(right->getName() == Integer::getTypeName()) {
 				return new Integer(value / ((Integer*)right)->value);
 			}
 
@@ -76,7 +80,7 @@ namespace SCL {
 		}
 
 		Type *Integer::operator_caret(Context *ctx, Type *right) {
-			if(right->getName() == "integer") {
+			if(right->getName() == Integer::getTypeName()) {
 				return new Integer((long)std::pow(value, ((Integer*)right)->value));
 			}
 

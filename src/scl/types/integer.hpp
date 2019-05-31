@@ -16,7 +16,8 @@ namespace SCL {
 				Integer(std::string value);
 
 				Float *toFloat();
-
+				long getValue();
+				
 				std::string getName();
 				static std::string getTypeName();
 				std::string stringify(Context *ctx);

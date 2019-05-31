@@ -6,7 +6,7 @@
 namespace SCL {
 	namespace Types {
 		Float::Float() {
-			this->value = 0.0;
+			value = 0.0;
 		}
 
 		Float::Float(double value) {
@@ -31,15 +31,15 @@ namespace SCL {
 		}
 
 		int Float::compare(Context *ctx, Type *right) {
-			if(this->getName() != right->getName()) {
+			if(getName() != right->getName()) {
 				return SCL::Type::comparison(this, right);
 			}
 
-			return this->value - ((Float*)right)->value;
+			return value - ((Float*)right)->value;
 		}
 		
 		Type *Float::operator_plus(Context *ctx, Type *right) {
-			if(right->getName() == "float") {
+			if(right->getName() == Float::getTypeName()) {
 				return new Float(value + ((Float*)right)->value);
 			}else if(right->getName() == "integer") {
 				return operator_plus(ctx, ((Integer*)right)->toFloat());
@@ -49,7 +49,7 @@ namespace SCL {
 		}
 
 		Type *Float::operator_minus(Context *ctx, Type *right) {
-			if(right->getName() == "float") {
+			if(right->getName() == Float::getTypeName()) {
 				return new Float(value - ((Float*)right)->value);
 			}
 
@@ -57,7 +57,7 @@ namespace SCL {
 		}
 
 		Type *Float::operator_asterisk(Context *ctx, Type *right) {
-			if(right->getName() == "float") {
+			if(right->getName() == Float::getTypeName()) {
 				return new Float(value * ((Float*)right)->value);
 			}
 
@@ -65,7 +65,7 @@ namespace SCL {
 		}
 
 		Type *Float::operator_slash(Context *ctx, Type *right) {
-			if(right->getName() == "float") {
+			if(right->getName() == Float::getTypeName()) {
 				return new Float(value / ((Float*)right)->value);
 			}
 
@@ -73,7 +73,7 @@ namespace SCL {
 		}
 
 		Type *Float::operator_caret(Context *ctx, Type *right) {
-			if(right->getName() == "float") {
+			if(right->getName() == Float::getTypeName()) {
 				return new Float(std::pow(value, ((Float*)right)->value));
 			}
 

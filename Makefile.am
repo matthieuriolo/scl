@@ -28,6 +28,7 @@ scl_SOURCES = \
 	src/scl/ast/variable.cpp \
 	src/scl/ast/print.cpp \
 	\
+	src/scl/types/string.cpp \
 	src/scl/types/float.cpp \
 	src/scl/types/integer.cpp \
 	src/scl/types/undefined.cpp
