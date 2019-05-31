@@ -43,8 +43,5 @@ AC_CHECK_HEADERS([stdlib.h])
 AC_CHECK_HEADER_STDBOOL
 AC_TYPE_SIZE_T
 
-# Checks for library functions.
-AC_CHECK_FUNCS([powl])
-
 AC_OUTPUT
 
