@@ -9,3 +9,19 @@ print $variable
 
 $variable = 2.3 + 1
 print $variable
+
+
+$variable = 'a test'
+print $variable
+
+
+$variable = $variable + ' concating'
+print $variable
+
+
+$variable = "a test"
+print $variable
+
+
+$variable = '1234567' * 3
+print $variable
