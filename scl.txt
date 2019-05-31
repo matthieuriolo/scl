@@ -1,0 +1,316 @@
+##########################################
+#
+# scl - system control language
+#
+##########################################
+
+
+# command call
+command whatever you want "not tokenized" 'not tokenized'
+cmd -g "getopt" --get-opt="parameter"
+subfolder/anotherfolder/command whatever you want
+/abs/path/command
+./rel/path/command
+
+firstCmd && secondCmd --param="secondCmd will be executed except firstCmd fails"
+firstCmd || secondCmd --param="secondCmd will only be executed if firstCmd fails"
+firstCmd; secondCmd --param="executes both command"
+
+# masking
+\\
+\$
+\|
+\&
+\;
+\)
+
+# named pipes
+
+command:$input:$output:$error --arguments="all pipes set"
+$thread = command:::$error --arguments="only error pipe set"
+
+
+# variable - will not be tokenized
+$var = "a variable"
+command $var
+command --parameters-wont-get-tokenized=$var
+$var[$keyForArrayAndDictionaryAccess]
+$assignStdout = echo "hello world"
+$expantion = 'not expanded $var' + " also not $var "  + " but this one will " + $var
+
+# predefined variables (indicated with an @ instead of a $)
+# those variables are read only
+@status
+	the status returned by a command
+@arguments
+	all arguments passed to a function (tokenized)
+@argumentString
+	all arguments passed to  a function (untokenized)
+@variables
+	dictionary of all variables
+@functions
+	dictionary of all functions
+@binaries
+	dictionary of all binaries
+@commands
+	dictionary of all functions and binaries
+@module
+	dictionary with the following structure
+	{
+		"location": location of the module
+		"variables": same as @variables
+		"functions": same as @functions
+	}
+
+@modules
+	list of all included modules
+
+@environment
+	dictionary with the following structure
+	{
+		"system": {
+			"architecture": architecture of the system
+			"version": version of the kernel
+			"created": built time
+			"commit": commit id of the built
+		},
+
+		"scl": {
+			"created": built time
+			"commit": the commit id of the built
+			"version": version of the shell
+			"location": where it was started from
+			"modules": built in modules (can differ from the loaded modules)
+		},
+
+		"user": which user runs scl
+		"variables": environment variables
+		"binary_path": search paths for binaries
+		"module_path": search paths for modules
+		"current_directory": cwd
+	}
+
+# builtin types
+
+$var = "variable"
+$var = 10
+$var = ["array", 10, true, false, null]
+$var = {dictionary: "dsf", index: "value"}
+
+$builtinDefinedType = datetime 2019-02-13
+$builtinDefinedType = file /tmp/test.txt
+$builtinDefinedType = url https://helenos.org
+$builtinDefinedType = thread cmd --param=$var
+
+# operator
+$plus = "var" + "iable"
+$minus = 10 - 1
+$division = 2 / 1
+$multi = 2 * 1
+$powerof = 2^4 # = 8
+$module = 6 % 3
+$integerdivision = 5 // 2
+$range = 2..4
+$var = $arrDictStr[0]
+$var = $arrDictStr[0:10]
+$var = $arrDictStr[0:-1]
+
+
+# comparing
+$var = true == false
+$var = true != false
+$var = true < false
+$var = true > false
+$var = true <= false
+$var = true >= false
+
+
+
+# default functions for builtin types (types are immutable)
+type "returns a string with the name of the type"
+size "string"
+size ['array']
+size {dict: "size"}
+
+keys {dict: "flattens a dict to it's keys"}
+values {dict: "flattens a dict to it's values"}
+
+empty "shortcut for $(size $var) == 0"
+filter $var "functionForFiltering"
+map $var "functionForMapping"
+sort $var "functionForSorting"
+contains $searching "key"
+
+start $thread
+getPipe $thread "error" 
+stop $thread
+
+
+random $from $to
+log
+
+
+
+
+# if-block
+
+if $a == 1
+
+else if $a == 2
+
+else
+
+end
+
+# for-block
+
+for $value in 2..3
+
+end
+
+for $value in {key: "value"}
+
+end
+
+for $value, $key in {key: "value"}
+	
+end
+
+for $value in ['array', 0, $var]
+	
+end
+
+for $value, $index in ['array', 0, $var]
+	
+end
+
+# scope-block
+$a = $(1 + 1)
+$b = $(firstCommand && secondCommand)
+aCommand --file $(aSubcommand --param-of-subcmd=$var)
+
+# function
+:afunc
+
+end
+
+:afunction($value:key,alt,k
+	$valueButNoKey
+	$flag!flag,f
+	$intern:e,extern="default"
+	$intern?type1,type2:p,param="default"
+)
+
+end
+
+
+:functionWhichFails
+	cancel 1
+end
+
+# multiple bodies for the same function
+:afunction($var:variable)
+:($flag!flag,f)
+:()
+end
+
+#anonym function
+$func = :()
+end
+
+
+# code expansion
+$cmd = 'cmd'
+$param = '--param="value"'
+$result = $$cmd $$param
+
+
+
+# modules
+include module.scl #includes a module from @environment['module_path']
+include ./sub/module.scl #includes a module relative to @environment['current_directory']
+include /sub/module.scl #absolute path
+
+include module.so # includes a dynamic library (must implement a function according to (scope_t*)(context_t*))
+
+
+
+
+
+
+
+
+# prompt
+
+## input mode
+echo "every command (not structures) will be displayed, then newline and then the output"
+every command (not structures) will be displayed, then newline and then the output
+username@hostname:/pwd>
+ 1: echo "current execution block"
+ 2: echo "can contain multiple lines"
+ 3: echo "execute with ctrl-newline or enter"
+
+## search mode
+username@hostname:/pwd> echo "search pattern
+ 1: echo "search pattern - shows the matching execution block"
+ 2: echo "preferable with colors for the matching part"
+
+
+## history mode
+username@hostname:/pwd> 1256
+ 1: echo "displays the entry 1256 in the history"
+
+## runtime error
+username@hostname:/pwd> rm /
+!                       ^^^^
+! runtime error on line 1
+! the command 'rm' failed with status 1
+ 1:
+
+## parser error
+username@hostname:/pwd> $var = 213asd
+!                              ^^^^^^
+! runtime error on line 1
+! the token '213asd' cannot be parsed
+ 1:
+
+
+# keyboard interface
+
+## navigation
+ctrl-a|left arrow   set cursor to the left
+ctrl-d|right arrow  set cursor to the right
+ctrl-w|up arrow     set cursor to one line up
+ctrl-s|down arrow   set cursor to one line down
+
+ctrl-A              jump to the beginning of line
+ctrl-D              jump to the end of line
+ctrl-W              jump to highest line
+ctrl-S              jump to lowest line
+
+ctrl-q              jump one word forward
+ctrl-e              jump one word backward
+
+## manipulation
+ctrl-x|ctrl-del     deletes current word
+ctrl-X              deletes current line
+esc                 delete current execution block
+
+## history navigation
+ctrl-h              history search or return back to already entered commands
+ctrl-p              previous history entry
+ctrl-n              next history entry
+
+## search
+ctrl-f              search current execution block
+ctrl-g              find next match
+ctrl-G              find previous match
+
+## control
+ctrl-c              abort current execution
+ctrl-newline|enter  execute current exection block
+
+
+
+
+
