@@ -36,6 +36,17 @@ loc.step();
 "^"                   return Parser::make_OPERAND_CARET(AST::CARET, loc);
 
 %{
+/* symbols */
+%}
+
+"["                   return Parser::make_SYMBOL_SQUARED_BRACKET_OPEN(loc);
+"]"                   return Parser::make_SYMBOL_SQUARED_BRACKET_CLOSE(loc);
+"{"                   return Parser::make_SYMBOL_CURLY_BRACKET_OPEN(loc);
+"}"                   return Parser::make_SYMBOL_CURLY_BRACKET_CLOSE(loc);
+":"                   return Parser::make_SYMBOL_COLON(loc);
+","                   return Parser::make_SYMBOL_COMMA(loc);
+
+%{
 /* types */
 %}
 [0-9]+                return Parser::make_INTEGER(new SCL::Types::Integer(yytext), loc);
