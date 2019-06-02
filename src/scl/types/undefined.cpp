@@ -30,25 +30,5 @@ namespace SCL {
 		int Undefined::compare(Context *ctx, Type *right) {
 			return SCL::Type::comparison(this, right);
 		}
-		
-		Type *Undefined::operator_plus(Context *ctx, Type *right) {
-			return NULL;
-		}
-
-		Type *Undefined::operator_minus(Context *ctx, Type *right) {
-			return NULL;
-		}
-		
-		Type *Undefined::operator_asterisk(Context *ctx, Type *right) {
-			return NULL;
-		}
-		
-		Type *Undefined::operator_slash(Context *ctx, Type *right) {
-			return NULL;
-		}
-
-		Type *Undefined::operator_caret(Context *ctx, Type *right) {
-			return NULL;
-		}
 	}
 }

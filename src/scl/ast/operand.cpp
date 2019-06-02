@@ -20,6 +20,10 @@ namespace SCL {
 					return left->compute(ctx)->operator_slash(ctx, right->compute(ctx));
 				case CARET:
 					return left->compute(ctx)->operator_caret(ctx, right->compute(ctx));
+				case AND:
+					return left->compute(ctx)->operator_and(ctx, right->compute(ctx));
+				case OR:
+					return left->compute(ctx)->operator_or(ctx, right->compute(ctx));
 			}
 
 			throw new std::logic_error("invalid operand type");

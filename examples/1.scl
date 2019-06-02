@@ -25,3 +25,18 @@ print $variable
 
 $variable = '1234567' * 3
 print $variable
+
+
+$variable = TRUE
+print $variable
+
+$variable = FALSE
+print $variable
+
+
+$variable = TRUE || FALSE
+print $variable
+
+
+$variable = TRUE && FALSE
+print $variable

@@ -42,10 +42,6 @@ namespace SCL {
 			return Undefined::getUndefined();
 		}
 
-		Type *String::operator_minus(Context *ctx, Type *right) {
-			return Undefined::getUndefined();
-		}
-
 		Type *String::operator_asterisk(Context *ctx, Type *right) {
 			if(right->getName() == "integer") {
 				std::stringstream ss;
@@ -56,14 +52,6 @@ namespace SCL {
 				return new String(ss.str());
 			}
 
-			return Undefined::getUndefined();
-		}
-
-		Type *String::operator_slash(Context *ctx, Type *right) {
-			return Undefined::getUndefined();
-		}
-
-		Type *String::operator_caret(Context *ctx, Type *right) {
 			return Undefined::getUndefined();
 		}
 	}

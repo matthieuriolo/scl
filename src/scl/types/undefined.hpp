@@ -14,13 +14,6 @@ namespace SCL {
 				static std::string getTypeName();
 				std::string stringify(SCL::Context *ctx);
 				int compare(SCL::Context *ctx, Type *right);
-
-
-				Type *operator_plus(SCL::Context *ctx, Type *right);
-				Type *operator_minus(SCL::Context *ctx, Type *right);
-				Type *operator_asterisk(SCL::Context *ctx, Type *right);
-				Type *operator_slash(SCL::Context *ctx, Type *right);
-				Type *operator_caret(SCL::Context *ctx, Type *right);
 		};
 	}
 }

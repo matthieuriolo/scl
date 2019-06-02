@@ -1,22 +1,24 @@
-#ifndef __SCL_TYPES_STRING__
-#define __SCL_TYPES_STRING__
+#ifndef __SCL_TYPES_ARRAY__
+#define __SCL_TYPES_ARRAY__
 
-#include <string>
+#include <vector>
 #include "scl/type.hpp"
 
 namespace SCL {
 	namespace Types {
-		class String : public Type {
+		class Array : public Type {
 			private:
-				std::string value;
+				std::vector<SCL::AST::Expression *> values;
 			public:
-				String();
-				String(std::string value);
+				Array();
+
+				void add(SCL::AST::Expression* value);
 
 				std::string getName();
 				static std::string getTypeName();
 				std::string stringify(Context *ctx);
 				int compare(SCL::Context *ctx, Type *right);
+
 				Type *operator_plus(Context *ctx, Type *right);
 				Type *operator_asterisk(Context *ctx, Type *right);
 		};

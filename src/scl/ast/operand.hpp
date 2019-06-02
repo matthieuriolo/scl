@@ -11,7 +11,9 @@ namespace SCL {
 			MINUS,
 			ASTERISK,
 			SLASH,
-			CARET
+			CARET,
+			AND,
+			OR
 		};
 
 		class Operand : public SCL::AST::Expression {

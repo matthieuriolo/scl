@@ -16,24 +16,35 @@ using namespace SCL;
 %{
 #define YY_USER_ACTION  loc.columns(yyleng);
 %}
-%%
 
+
+
+
+
+
+
+%%
 %{
 SCL::location& loc = result.location;
 loc.step();	
 %}
 
+
+"print"               return Parser::make_PRINTTOKEN(loc);
+
 %{
 /* operands */
 %}
 
-"print"               return Parser::make_PRINTTOKEN(loc);
 "="                   return Parser::make_OPERAND_EQUAL(loc);
 "+"                   return Parser::make_OPERAND_PLUS(AST::PLUS, loc);
 "-"                   return Parser::make_OPERAND_MINUS(AST::MINUS, loc);
 "*"                   return Parser::make_OPERAND_ASTERISK(AST::ASTERISK, loc);
 "/"                   return Parser::make_OPERAND_SLASH(AST::SLASH, loc);
 "^"                   return Parser::make_OPERAND_CARET(AST::CARET, loc);
+
+"&&"                  return Parser::make_OPERAND_AND(AST::AND, loc);
+"||"                  return Parser::make_OPERAND_OR(AST::OR, loc);
 
 %{
 /* symbols */
@@ -49,20 +60,24 @@ loc.step();
 %{
 /* types */
 %}
-[0-9]+                return Parser::make_INTEGER(new SCL::Types::Integer(yytext), loc);
-[0-9]+\.[0-9]*        return Parser::make_FLOAT(new SCL::Types::Float(yytext), loc);
 
-\$[a-zA-Z0-9]+        return Parser::make_VARIABLE(new SCL::AST::Variable(yytext + 1), loc);
+"TRUE"                return Parser::make_BOOLEAN_TRUE(Types::Boolean::getTrue(), loc);
+"FALSE"               return Parser::make_BOOLEAN_FALSE(Types::Boolean::getFalse(), loc);
+
+[0-9]+                return Parser::make_INTEGER(new Types::Integer(yytext), loc);
+[0-9]+\.[0-9]*        return Parser::make_FLOAT(new Types::Float(yytext), loc);
+
+\$[a-zA-Z0-9]+        return Parser::make_VARIABLE(new AST::Variable(yytext + 1), loc);
 
 
 \"(\\|[^\\"])*\"    {
 						auto s = std::string(yytext);
-						return Parser::make_STRING(new SCL::Types::String(s.substr(1, s.size() - 2)), loc);
+						return Parser::make_STRING(new Types::String(s.substr(1, s.size() - 2)), loc);
 					}
 
 \'(\\|[^\\'])*\'    {
 						auto s = std::string(yytext);
-						return Parser::make_STRING(new SCL::Types::String(s.substr(1, s.size() - 2)), loc);
+						return Parser::make_STRING(new Types::String(s.substr(1, s.size() - 2)), loc);
 					}
 
 %{

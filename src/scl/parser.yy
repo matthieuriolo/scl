@@ -26,7 +26,10 @@
 	#include "scl/ast/assign.hpp"
 	#include "scl/ast/print.hpp"
 
+	#include "scl/types/float.hpp"
 	#include "scl/types/integer.hpp"
+	#include "scl/types/boolean.hpp"
+
 	namespace SCL {
 		class ParserResult;
 	}
@@ -38,12 +41,17 @@
 
 
 %token OPERAND_EQUAL
+
 %token <SCL::AST::Operand_Type> OPERAND_PLUS OPERAND_MINUS OPERAND_ASTERISK OPERAND_SLASH OPERAND_CARET
 %left OPERAND_PLUS OPERAND_MINUS OPERAND_ASTERISK OPERAND_SLASH OPERAND_CARET
+
+%token <SCL::AST::Operand_Type> OPERAND_AND OPERAND_OR
+%left OPERAND_AND OPERAND_OR
 
 %token SYMBOL_SQUARED_BRACKET_OPEN SYMBOL_SQUARED_BRACKET_CLOSE
 %token SYMBOL_CURLY_BRACKET_OPEN SYMBOL_CURLY_BRACKET_CLOSE
 %token SYMBOL_COLON SYMBOL_COMMA
+
 
 // %type <instructions> MODULE INSTRUCTIONS
 %type <SCL::AST::Instruction*> INSTRUCTION
@@ -54,7 +62,7 @@
 
 
 %token <SCL::AST::Variable*> VARIABLE
-%token <SCL::Type*> INTEGER FLOAT STRING
+%token <SCL::Type*> INTEGER FLOAT STRING BOOLEAN_FALSE BOOLEAN_TRUE
 %token END 0
 
 %token PRINTTOKEN "print"
@@ -99,6 +107,8 @@ EXPRESSION
 	| EXPRESSION OPERAND_ASTERISK EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
 	| EXPRESSION OPERAND_SLASH EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
 	| EXPRESSION OPERAND_CARET EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
+	| EXPRESSION OPERAND_AND EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
+	| EXPRESSION OPERAND_OR EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
 ;
 
 /* Types */
@@ -106,6 +116,8 @@ TYPE
 	: INTEGER
 	| FLOAT
 	| STRING
+	| BOOLEAN_TRUE
+	| BOOLEAN_FALSE
 ;
 
 
