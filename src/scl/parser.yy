@@ -19,6 +19,7 @@
 %param { SCL::ParserResult& result }
 
 %code requires {
+	#include "scl/module.hpp"
 	#include "scl/ast/array.hpp"
 	#include "scl/ast/dictionary.hpp"
 
@@ -55,10 +56,11 @@
 
 %token SYMBOL_SQUARED_BRACKET_OPEN SYMBOL_SQUARED_BRACKET_CLOSE
 %token SYMBOL_CURLY_BRACKET_OPEN SYMBOL_CURLY_BRACKET_CLOSE
+%token SYMBOL_NEW_LINE SYMBOL_SEMICOLON
 %token SYMBOL_COLON SYMBOL_COMMA
 
 
-// %type <instructions> MODULE INSTRUCTIONS
+%type <SCL::Module*> MODULE INSTRUCTIONS
 %type <SCL::AST::Instruction*> INSTRUCTION
 %type <SCL::AST::Instruction*> ASSIGN
 %type <SCL::AST::Instruction*> PRINT
@@ -86,11 +88,11 @@ MODULE
 ;
 
 INSTRUCTIONS
-	: %empty
-	| INSTRUCTION { result.module.instructions.push_back($1); }
-	| INSTRUCTIONS INSTRUCTION { result.module.instructions.push_back($2); }
+	: INSTRUCTION { result.module.instructions.push_back($1); }
+	| INSTRUCTIONS SYMBOL_NEW_LINE INSTRUCTION { result.module.instructions.push_back($3); }
+	| INSTRUCTIONS SYMBOL_SEMICOLON INSTRUCTION { result.module.instructions.push_back($3); }
+	| INSTRUCTIONS SYMBOL_NEW_LINE { $$ = $1; }
 ;
-
 
 INSTRUCTION
 	: ASSIGN

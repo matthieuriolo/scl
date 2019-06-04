@@ -18,11 +18,6 @@ using namespace SCL;
 %}
 
 
-
-
-
-
-
 %%
 %{
 SCL::location& loc = result.location;
@@ -31,6 +26,16 @@ loc.step();
 
 
 "print"               return Parser::make_PRINTTOKEN(loc);
+
+%{
+/* control structure 
+
+"for"                 return Parser::make_CONTROL_FOR(, loc);
+"if"                  return Parser::make_CONTROL_IF(, loc);
+".."                  return Parser::make_OPERAND_RANGE(AST::RANGE, loc);
+
+*/	
+%}
 
 %{
 /* operands */
@@ -42,7 +47,6 @@ loc.step();
 "*"                   return Parser::make_OPERAND_ASTERISK(AST::ASTERISK, loc);
 "/"                   return Parser::make_OPERAND_SLASH(AST::SLASH, loc);
 "^"                   return Parser::make_OPERAND_CARET(AST::CARET, loc);
-
 "&&"                  return Parser::make_OPERAND_AND(AST::AND, loc);
 "||"                  return Parser::make_OPERAND_OR(AST::OR, loc);
 
@@ -54,6 +58,8 @@ loc.step();
 "]"                   return Parser::make_SYMBOL_SQUARED_BRACKET_CLOSE(loc);
 "{"                   return Parser::make_SYMBOL_CURLY_BRACKET_OPEN(loc);
 "}"                   return Parser::make_SYMBOL_CURLY_BRACKET_CLOSE(loc);
+\n+                  return Parser::make_SYMBOL_NEW_LINE(loc);
+";"                   return Parser::make_SYMBOL_SEMICOLON(loc);
 ":"                   return Parser::make_SYMBOL_COLON(loc);
 ","                   return Parser::make_SYMBOL_COMMA(loc);
 
