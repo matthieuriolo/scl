@@ -1,0 +1,13 @@
+$variable = TRUE
+print $variable
+
+$variable = FALSE
+print $variable
+
+
+$variable = TRUE || FALSE
+print $variable
+
+
+$variable = TRUE && FALSE
+print $variable

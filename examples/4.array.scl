@@ -1,0 +1,14 @@
+$variable = []
+print $variable
+$variable = [1]
+print $variable
+$variable = [1,]
+print $variable
+$variable = [1,2]
+print $variable
+$variable = [1,2,]
+print $variable
+$variable = [1,2,3]
+print $variable
+
+
