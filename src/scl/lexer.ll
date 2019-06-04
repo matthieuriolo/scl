@@ -68,6 +68,19 @@ loc.step();
 					   }
 
 %{
+/* comparators */
+%}
+
+"=="                   return Parser::make_COMPARATOR_EQUAL(AST::EQUAL, loc);
+"!="                   return Parser::make_COMPARATOR_NOT_EQUAL(AST::NOT_EQUAL, loc);
+"<"                    return Parser::make_COMPARATOR_LESS(AST::LESS, loc);
+">"                    return Parser::make_COMPARATOR_GREATER(AST::GREATER, loc);
+"<="                   return Parser::make_COMPARATOR_LESS_EQUAL(AST::LESS_EQUAL, loc);
+">="                   return Parser::make_COMPARATOR_GREATER_EQUAL(AST::GREATER_EQUAL, loc);
+
+
+
+%{
 /* types */
 %}
 

@@ -23,6 +23,7 @@
 	#include "scl/ast/array.hpp"
 	#include "scl/ast/dictionary.hpp"
 
+	#include "scl/ast/comparator.hpp"
 	#include "scl/ast/operand.hpp"
 	#include "scl/ast/expressiontype.hpp"
 	#include "scl/ast/instruction.hpp"
@@ -45,7 +46,7 @@
 	#include "scl/parserresult.hpp"
 }
 
-
+%type <SCL::AST::Operand_Type> OPERAND
 %token OPERAND_EQUAL
 
 %token <SCL::AST::Operand_Type> OPERAND_PLUS OPERAND_MINUS OPERAND_ASTERISK OPERAND_SLASH OPERAND_CARET
@@ -53,6 +54,16 @@
 
 %token <SCL::AST::Operand_Type> OPERAND_AND OPERAND_OR
 %left OPERAND_AND OPERAND_OR
+
+
+%type <SCL::AST::Comparator_Type> COMPARATOR
+%token <SCL::AST::Comparator_Type> COMPARATOR_EQUAL COMPARATOR_NOT_EQUAL
+%token <SCL::AST::Comparator_Type> COMPARATOR_LESS COMPARATOR_GREATER
+%token <SCL::AST::Comparator_Type> COMPARATOR_LESS_EQUAL COMPARATOR_GREATER_EQUAL
+%left COMPARATOR_EQUAL COMPARATOR_NOT_EQUAL
+%left COMPARATOR_LESS COMPARATOR_GREATER
+%left COMPARATOR_LESS_EQUAL COMPARATOR_GREATER_EQUAL
+
 
 %token SYMBOL_SQUARED_BRACKET_OPEN SYMBOL_SQUARED_BRACKET_CLOSE
 %token SYMBOL_CURLY_BRACKET_OPEN SYMBOL_CURLY_BRACKET_CLOSE
@@ -113,14 +124,32 @@ EXPRESSION
 	| VARIABLE { $$ = $1; }
 	| ARRAY { $$ = $1; }
 	| DICTIONARY { $$ = $1; }
-	| EXPRESSION OPERAND_PLUS EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
-	| EXPRESSION OPERAND_MINUS EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
-	| EXPRESSION OPERAND_ASTERISK EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
-	| EXPRESSION OPERAND_SLASH EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
-	| EXPRESSION OPERAND_CARET EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
-	| EXPRESSION OPERAND_AND EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
-	| EXPRESSION OPERAND_OR EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
+	| EXPRESSION OPERAND EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
+	| EXPRESSION COMPARATOR EXPRESSION { $$ = new SCL::AST::Comparator($2, $1, $3); }
 ;
+
+
+
+OPERAND
+	: OPERAND_PLUS
+	| OPERAND_MINUS
+	| OPERAND_ASTERISK
+	| OPERAND_SLASH
+	| OPERAND_CARET
+	| OPERAND_AND
+	| OPERAND_OR
+;
+
+
+COMPARATOR
+	: COMPARATOR_EQUAL
+	| COMPARATOR_NOT_EQUAL
+	| COMPARATOR_LESS
+	| COMPARATOR_GREATER
+	| COMPARATOR_LESS_EQUAL
+	| COMPARATOR_GREATER_EQUAL
+;
+
 
 /* Types */
 TYPE
