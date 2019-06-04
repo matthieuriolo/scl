@@ -14,8 +14,8 @@ namespace SCL {
 
 				std::string getName();
 				static std::string getTypeName();
-				std::string stringify(Context *ctx);
-				int compare(SCL::Context *ctx, Type *right);
+				std::string stringify();
+				int compare(Type *right);
 
 				Type *operator_and(SCL::Context *ctx, Type *right);
 				Type *operator_or(SCL::Context *ctx, Type *right);

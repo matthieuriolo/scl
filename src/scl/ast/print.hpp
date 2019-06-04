@@ -6,6 +6,7 @@
 
 namespace SCL {
 	namespace AST {
+		/* just for testing porpuses, will be removed afterwards */
 		class Print : public Instruction {
 			private:
 				SCL::AST::Variable *variable;

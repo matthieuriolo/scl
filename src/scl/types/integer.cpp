@@ -33,11 +33,11 @@ namespace SCL {
 		}
 
 
-		std::string Integer::stringify(Context *ctx) {
+		std::string Integer::stringify() {
 			return std::to_string(value);
 		}
 
-		int Integer::compare(Context *ctx, Type *right) {
+		int Integer::compare(Type *right) {
 			if(getName() != right->getName()) {
 				return SCL::Type::comparison(this, right);
 			}

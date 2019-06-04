@@ -30,11 +30,11 @@ namespace SCL {
 		}
 
 
-		std::string Boolean::stringify(Context *ctx) {
+		std::string Boolean::stringify() {
 			return this == getTrue() ? "true" : "false";
 		}
 
-		int Boolean::compare(Context *ctx, Type *right) {
+		int Boolean::compare(Type *right) {
 			if(right->getName() != "boolean") {
 				return SCL::Type::comparison(this, right);
 			}

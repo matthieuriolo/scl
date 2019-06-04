@@ -9,7 +9,7 @@ namespace SCL {
 
 		void Print::execute(SCL::Context * ctx) {
 			std::cout << "result is\n";
-			std::cout << ctx->getScope()->getValue(variable)->stringify(ctx) << "\n";
+			std::cout << ctx->getScope()->getValue(variable)->stringify() << "\n";
 		}
 	}
 }

@@ -26,11 +26,11 @@ namespace SCL {
 		}
 
 
-		std::string Float::stringify(Context *ctx) {
+		std::string Float::stringify() {
 			return std::to_string(value);
 		}
 
-		int Float::compare(Context *ctx, Type *right) {
+		int Float::compare(Type *right) {
 			if(getName() != right->getName()) {
 				return SCL::Type::comparison(this, right);
 			}

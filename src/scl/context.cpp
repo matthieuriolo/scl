@@ -19,6 +19,7 @@ namespace SCL {
 	void Context::execute() {
 		for(auto& instr : scope->instructions) {
 			std::cout << "executing\n";
+			std::cout.flush();
 			instr->execute(this);
 		}
 	}

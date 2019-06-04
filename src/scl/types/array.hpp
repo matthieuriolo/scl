@@ -8,16 +8,16 @@ namespace SCL {
 	namespace Types {
 		class Array : public Type {
 			private:
-				std::vector<SCL::AST::Expression *> values;
+				std::vector<SCL::Type *> values;
 			public:
 				Array();
 
-				void add(SCL::AST::Expression* value);
+				void add(SCL::Type* value);
 
 				std::string getName();
 				static std::string getTypeName();
-				std::string stringify(Context *ctx);
-				int compare(SCL::Context *ctx, Type *right);
+				std::string stringify();
+				int compare(Type *right);
 
 				Type *operator_plus(Context *ctx, Type *right);
 				Type *operator_asterisk(Context *ctx, Type *right);

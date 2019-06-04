@@ -1,5 +1,6 @@
 #include "scl/type.hpp"
 #include "scl/types/undefined.hpp"
+#include <iostream>
 
 namespace SCL {
 	int Type::comparison(Type *left, Type *right) {

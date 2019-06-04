@@ -19,6 +19,9 @@
 %param { SCL::ParserResult& result }
 
 %code requires {
+	#include "scl/ast/array.hpp"
+	#include "scl/ast/dictionary.hpp"
+
 	#include "scl/ast/operand.hpp"
 	#include "scl/ast/expressiontype.hpp"
 	#include "scl/ast/instruction.hpp"
@@ -29,6 +32,8 @@
 	#include "scl/types/float.hpp"
 	#include "scl/types/integer.hpp"
 	#include "scl/types/boolean.hpp"
+	
+	#include <iostream>
 
 	namespace SCL {
 		class ParserResult;
@@ -58,6 +63,8 @@
 %type <SCL::AST::Instruction*> ASSIGN
 %type <SCL::AST::Instruction*> PRINT
 %type <SCL::AST::Expression*> EXPRESSION
+%type <SCL::AST::Array*> ARRAY ARRAY_ELEMENTS
+%type <SCL::AST::Dictionary*> DICTIONARY DICTIONARY_ELEMENTS
 %type <SCL::Type*> TYPE
 
 
@@ -102,6 +109,8 @@ ASSIGN
 EXPRESSION
 	: TYPE { $$ = new SCL::AST::ExpressionType($1); }
 	| VARIABLE { $$ = $1; }
+	| ARRAY { $$ = $1; }
+	| DICTIONARY { $$ = $1; }
 	| EXPRESSION OPERAND_PLUS EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
 	| EXPRESSION OPERAND_MINUS EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
 	| EXPRESSION OPERAND_ASTERISK EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
@@ -120,25 +129,28 @@ TYPE
 	| BOOLEAN_FALSE
 ;
 
-
-/* Operators 
-ARITHMETICOPERATOR:
-	OPERATIONPLUS { $$ = PSH::AST::PLUS; }
-	| OPERATIONMINUS { $$ = PSH::AST::MINUS; }
-	| OPERATIONMULTI { $$ = PSH::AST::ASTERISK; }
-	| OPERATIONDIVIDE { $$ = PSH::AST::SLASH; }
-	| OPERATIONPOWER { $$ = PSH::AST::CARET; }
+ARRAY
+	: SYMBOL_SQUARED_BRACKET_OPEN SYMBOL_SQUARED_BRACKET_CLOSE { $$ = new SCL::AST::Array(); }
+	| SYMBOL_SQUARED_BRACKET_OPEN ARRAY_ELEMENTS SYMBOL_SQUARED_BRACKET_CLOSE { $$ = $2; }
 ;
 
-COMPARISON:
-	COMPAREEQUAL { $$ = PSH::AST::EQUAL; }
-	| COMPARENOTEQUAL { $$ = PSH::AST::NOTEQUAL; }
-	| COMPAREEQUALSMALLER { $$ = PSH::AST::EQUALSMALLER; }
-	| COMPARESMALLER { $$ = PSH::AST::SMALLER; }
-	| COMPAREEQUALBIGGER { $$ = PSH::AST::EQUALBIGGER; }
-	| COMPAREBIGGER { $$ = PSH::AST::EQUALBIGGER; }
+ARRAY_ELEMENTS
+	: EXPRESSION { $$ = new SCL::AST::Array(); $$->add($1); }
+	| ARRAY_ELEMENTS SYMBOL_COMMA EXPRESSION { $1->add($3); $$ = $1; }
+	| ARRAY_ELEMENTS SYMBOL_COMMA { $$ = $1; }
 ;
-*/
+
+DICTIONARY
+	: SYMBOL_CURLY_BRACKET_OPEN SYMBOL_CURLY_BRACKET_CLOSE { $$ = new SCL::AST::Dictionary(); }
+	| SYMBOL_CURLY_BRACKET_OPEN DICTIONARY_ELEMENTS SYMBOL_CURLY_BRACKET_CLOSE { $$ = $2; }
+;
+
+DICTIONARY_ELEMENTS
+	: EXPRESSION SYMBOL_COLON EXPRESSION { $$ = new SCL::AST::Dictionary(); $$->add($1, $3); }
+	| DICTIONARY_ELEMENTS SYMBOL_COMMA EXPRESSION SYMBOL_COLON EXPRESSION { $1->add($3, $5); $$ = $1; }
+	| DICTIONARY_ELEMENTS SYMBOL_COMMA { $$ = $1; }
+;
+
 %%
 
 void SCL::Parser::error(const location_type& l, const std::string& m) {

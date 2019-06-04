@@ -12,8 +12,8 @@ namespace SCL {
 				static Undefined *getUndefined();
 				std::string getName();
 				static std::string getTypeName();
-				std::string stringify(SCL::Context *ctx);
-				int compare(SCL::Context *ctx, Type *right);
+				std::string stringify();
+				int compare(Type *right);
 		};
 	}
 }

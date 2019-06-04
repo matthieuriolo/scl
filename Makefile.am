@@ -20,6 +20,8 @@ scl_SOURCES = \
 	src/scl/scope.cpp \
 	src/scl/type.cpp \
 	\
+	src/scl/ast/dictionary.cpp \
+	src/scl/ast/array.cpp \
 	src/scl/ast/assign.cpp \
 	src/scl/ast/expression.cpp \
 	src/scl/ast/expressiontype.cpp \
@@ -28,6 +30,8 @@ scl_SOURCES = \
 	src/scl/ast/variable.cpp \
 	src/scl/ast/print.cpp \
 	\
+	src/scl/types/dictionary.cpp \
+	src/scl/types/array.cpp \
 	src/scl/types/boolean.cpp \
 	src/scl/types/string.cpp \
 	src/scl/types/float.cpp \

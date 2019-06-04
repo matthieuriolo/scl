@@ -22,11 +22,11 @@ namespace SCL {
 		}
 
 
-		std::string String::stringify(Context *ctx) {
+		std::string String::stringify() {
 			return value;
 		}
 
-		int String::compare(Context *ctx, Type *right) {
+		int String::compare(Type *right) {
 			if(getName() != right->getName()) {
 				return SCL::Type::comparison(this, right);
 			}

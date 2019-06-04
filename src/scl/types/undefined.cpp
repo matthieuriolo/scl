@@ -23,11 +23,11 @@ namespace SCL {
 		}
 
 
-		std::string Undefined::stringify(Context *ctx) {
+		std::string Undefined::stringify() {
 			return this->getName();
 		}
 
-		int Undefined::compare(Context *ctx, Type *right) {
+		int Undefined::compare(Type *right) {
 			return SCL::Type::comparison(this, right);
 		}
 	}

@@ -27,7 +27,7 @@ firstCmd; secondCmd --param="executes both command"
 # named pipes
 
 command:$input:$output:$error --arguments="all pipes set"
-$thread = command:::$error --arguments="only error pipe set"
+$thread = $(command:::$error --arguments="only error pipe set")
 
 
 # variable - will not be tokenized
@@ -35,7 +35,7 @@ $var = "a variable"
 command $var
 command --parameters-wont-get-tokenized=$var
 $var[$keyForArrayAndDictionaryAccess]
-$assignStdout = echo "hello world"
+$assignStdout = $(echo "hello world")
 $expantion = 'not expanded $var' + " also not $var "  + " but this one will " + $var
 
 # predefined variables (indicated with an @ instead of a $)
@@ -97,10 +97,10 @@ $var = 10
 $var = ["array", 10, true, false, null]
 $var = {dictionary: "dsf", index: "value"}
 
-$builtinDefinedType = datetime 2019-02-13
-$builtinDefinedType = file /tmp/test.txt
-$builtinDefinedType = url https://helenos.org
-$builtinDefinedType = thread cmd --param=$var
+$builtinDefinedType = $(datetime 2019-02-13)
+$builtinDefinedType = $(file /tmp/test.txt)
+$builtinDefinedType = $(url https://helenos.org)
+$builtinDefinedType = $(thread cmd --param=$var)
 
 # operator
 $plus = "var" + "iable"
