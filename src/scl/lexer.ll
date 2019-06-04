@@ -58,10 +58,14 @@ loc.step();
 "]"                   return Parser::make_SYMBOL_SQUARED_BRACKET_CLOSE(loc);
 "{"                   return Parser::make_SYMBOL_CURLY_BRACKET_OPEN(loc);
 "}"                   return Parser::make_SYMBOL_CURLY_BRACKET_CLOSE(loc);
-\n+                  return Parser::make_SYMBOL_NEW_LINE(loc);
 ";"                   return Parser::make_SYMBOL_SEMICOLON(loc);
 ":"                   return Parser::make_SYMBOL_COLON(loc);
 ","                   return Parser::make_SYMBOL_COMMA(loc);
+\n+                   {
+						loc.lines(yyleng);
+						loc.step();
+						return Parser::make_SYMBOL_NEW_LINE(loc);
+					   }
 
 %{
 /* types */
