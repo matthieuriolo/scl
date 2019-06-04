@@ -40,6 +40,26 @@ namespace SCL {
 		}
 
 		int Dictionary::compare(Type *right) {
+			if(right->getName() == "dictionary") {
+				SCL::Types::Dictionary* dict = (SCL::Types::Dictionary*)right;
+
+				if(values.size() != dict->values.size()) {
+					return values.size() - dict->values.size();
+				}
+
+				for(auto lPair : values) {
+					auto rPair = dict->values.find(lPair.first);
+					if(rPair == dict->values.end()) {
+						return -1;
+					}
+
+					int ret = lPair.second->compare(rPair->second);
+					if(ret != 0) {
+						return ret;
+					}
+				}
+			}
+
 			return SCL::Type::comparison(this, right);
 		}
 	}

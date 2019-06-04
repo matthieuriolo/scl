@@ -38,7 +38,9 @@ namespace SCL {
 		}
 
 		int Integer::compare(Type *right) {
-			if(getName() != right->getName()) {
+			if(right->getName() == "float") {
+				return toFloat()->compare(right);
+			}else if(getName() != right->getName()) {
 				return SCL::Type::comparison(this, right);
 			}
 

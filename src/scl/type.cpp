@@ -6,8 +6,12 @@ namespace SCL {
 	int Type::comparison(Type *left, Type *right) {
 		std::string types[] = {
 			"undefined",
-			"null",
-			"integer"
+			"boolean",
+			"integer",
+			"float",
+			"string",
+			"array",
+			"dictionary"
 		};
 
 		return

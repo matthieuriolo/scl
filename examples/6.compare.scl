@@ -1,0 +1,34 @@
+$var = 1 == 1
+print $var
+
+$var = 1 != 1
+print $var
+
+$var = 1 < 1
+print $var
+
+$var = 1 > 1
+print $var
+
+$var = 1 <= 1
+print $var
+
+$var = 1 >= 1
+print $var
+
+$var = 1 == 1.0
+print $var
+
+$var = 1.0 == 1
+print $var
+
+
+$var = ["test", "hum"] == ["test", "hum"]
+print $var
+
+$var = ["test", "hum"] == ["test", "hum12"]
+print $var
+
+
+$var = {"test": "hum"} == {"test": "hum"}
+print $var

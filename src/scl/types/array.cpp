@@ -39,6 +39,21 @@ namespace SCL {
 		}
 
 		int Array::compare(Type *right) {
+			if(right->getName() == "array") {
+				SCL::Types::Array* arr = (SCL::Types::Array*)right;
+
+				if(values.size() != arr->values.size()) {
+					return values.size() - arr->values.size();
+				}
+
+				for(size_t idx = 0; idx < values.size(); idx++) {
+					int ret = values[idx]->compare(arr->values[idx]);
+					if(ret != 0) {
+						return ret;
+					}
+				}
+			}
+			
 			return SCL::Type::comparison(this, right);
 		}
 		
