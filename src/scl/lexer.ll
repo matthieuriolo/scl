@@ -30,12 +30,19 @@ loc.step();
 %{
 /* control structure 
 
-"for"                 return Parser::make_CONTROL_FOR(, loc);
 "if"                  return Parser::make_CONTROL_IF(, loc);
 ".."                  return Parser::make_OPERAND_RANGE(AST::RANGE, loc);
 
 */	
 %}
+
+%{
+/* control structure */
+%}
+
+"for"                 return Parser::make_CONTROL_FOR(loc);
+"in"                  return Parser::make_CONTROL_IN(loc);
+"end"                 return Parser::make_CONTROL_END(loc);               
 
 %{
 /* operands */

@@ -19,23 +19,24 @@
 %param { SCL::ParserResult& result }
 
 %code requires {
-	#include "scl/module.hpp"
+	#include <list>
+	#include <iostream>
+
 	#include "scl/ast/array.hpp"
 	#include "scl/ast/dictionary.hpp"
-
 	#include "scl/ast/comparator.hpp"
 	#include "scl/ast/operand.hpp"
 	#include "scl/ast/expressiontype.hpp"
 	#include "scl/ast/instruction.hpp"
 	#include "scl/ast/variable.hpp"
 	#include "scl/ast/assign.hpp"
+	#include "scl/ast/forvalue.hpp"
+
 	#include "scl/ast/print.hpp"
 
 	#include "scl/types/float.hpp"
 	#include "scl/types/integer.hpp"
 	#include "scl/types/boolean.hpp"
-	
-	#include <iostream>
 
 	namespace SCL {
 		class ParserResult;
@@ -70,8 +71,10 @@
 %token SYMBOL_NEW_LINE SYMBOL_SEMICOLON
 %token SYMBOL_COLON SYMBOL_COMMA
 
+%token CONTROL_FOR CONTROL_IN CONTROL_END
 
-%type <SCL::Module*> MODULE INSTRUCTIONS
+
+%type <std::list<SCL::AST::Instruction *> > INSTRUCTIONS
 %type <SCL::AST::Instruction*> INSTRUCTION
 %type <SCL::AST::Instruction*> ASSIGN
 %type <SCL::AST::Instruction*> PRINT
@@ -89,26 +92,35 @@
 
 %start MODULE
 
+/*
 %printer { yyo << $$; } <*>;
+*/
 
 %%
 
-
 MODULE
-	: INSTRUCTIONS
+	: INSTRUCTIONS { result.module.instructions = $1; }
 ;
 
 INSTRUCTIONS
-	: INSTRUCTION { result.module.instructions.push_back($1); }
-	| INSTRUCTIONS SYMBOL_NEW_LINE INSTRUCTION { result.module.instructions.push_back($3); }
-	| INSTRUCTIONS SYMBOL_SEMICOLON INSTRUCTION { result.module.instructions.push_back($3); }
+	: %empty { $$ = std::list<SCL::AST::Instruction*>(); }
+	| INSTRUCTIONS INSTRUCTION { $$ = $1; $$.push_back($2); }
+	| INSTRUCTIONS SYMBOL_NEW_LINE INSTRUCTION { $$ = $1; $$.push_back($3); }
+	| INSTRUCTIONS SYMBOL_SEMICOLON INSTRUCTION { $$ = $1; $$.push_back($3); }
 	| INSTRUCTIONS SYMBOL_NEW_LINE { $$ = $1; }
 ;
 
 INSTRUCTION
 	: ASSIGN
 	| PRINT
+	
 ;
+/*
+| FOR VARIABLE IN EXPRESSION SYMBOL_NEW_LINE INSTRUCTIONS SYMBOL_NEW_LINE END {
+		$$ = new SCL::AST::ForValue($2, $4, $6);
+	}
+*/
+
 
 PRINT
 	: PRINTTOKEN VARIABLE { $$ = new SCL::AST::Print($2); }
@@ -166,8 +178,9 @@ ARRAY
 ;
 
 ARRAY_ELEMENTS
-	: EXPRESSION { $$ = new SCL::AST::Array(); $$->add($1); }
-	| ARRAY_ELEMENTS SYMBOL_COMMA EXPRESSION { $1->add($3); $$ = $1; }
+	: %empty { $$ = new SCL::AST::Array(); }
+	| ARRAY_ELEMENTS EXPRESSION { $$ = $1; $$->add($2); }
+	| ARRAY_ELEMENTS SYMBOL_COMMA EXPRESSION {  $$ = $1; $1->add($3); }
 	| ARRAY_ELEMENTS SYMBOL_COMMA { $$ = $1; }
 ;
 
@@ -177,8 +190,9 @@ DICTIONARY
 ;
 
 DICTIONARY_ELEMENTS
-	: EXPRESSION SYMBOL_COLON EXPRESSION { $$ = new SCL::AST::Dictionary(); $$->add($1, $3); }
-	| DICTIONARY_ELEMENTS SYMBOL_COMMA EXPRESSION SYMBOL_COLON EXPRESSION { $1->add($3, $5); $$ = $1; }
+	: %empty { $$ = new SCL::AST::Dictionary(); }
+	| DICTIONARY_ELEMENTS EXPRESSION SYMBOL_COLON EXPRESSION { $$ = $1; $$->add($2, $4); }
+	| DICTIONARY_ELEMENTS SYMBOL_COMMA EXPRESSION SYMBOL_COLON EXPRESSION { $$ = $1; $$->add($3, $5); }
 	| DICTIONARY_ELEMENTS SYMBOL_COMMA { $$ = $1; }
 ;
 
