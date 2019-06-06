@@ -1,4 +1,5 @@
 #include "scl/types/dictionary.hpp"
+#include "scl/types/iteratordictionary.hpp"
 #include <sstream>
 
 namespace SCL {
@@ -7,6 +8,10 @@ namespace SCL {
 
 		void Dictionary::add(SCL::Type* key, SCL::Type* value) {
 			values[key] = value;
+		}
+
+		std::map<SCL::Type *, SCL::Type *, DictionaryTypeCompar>& Dictionary::getValues() {
+			return values;
 		}
 
 		std::string Dictionary::getTypeName() {
@@ -40,6 +45,10 @@ namespace SCL {
 			ss << "}";
 
 			return ss.str();
+		}
+
+		SCL::Types::Iterator *Dictionary::iterator() {
+			return new SCL::Types::IteratorDictionary(this);
 		}
 
 		int Dictionary::compare(Type *right) {

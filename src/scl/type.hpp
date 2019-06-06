@@ -6,18 +6,15 @@
 namespace SCL {
 	namespace Types {
 		class Boolean;
+		class Iterator;
 	}
 	
 	class Type {
 		public:
 			virtual std::string getName() = 0;
-			/*virtual std::string stringify(SCL::Context *ctx) = 0;
-			virtual int compare(SCL::Context *ctx, Type *right) = 0;
-			*/
-
 			virtual std::string stringify() = 0;
 			virtual int compare(Type *right) = 0;
-			//virtual SCL::Types::Iterator *iterator();
+			virtual SCL::Types::Iterator *iterator();
 
 			virtual SCL::Types::Boolean *toBoolean() = 0;
 

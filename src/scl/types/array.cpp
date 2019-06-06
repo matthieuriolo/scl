@@ -1,5 +1,6 @@
 #include "scl/types/array.hpp"
 #include "scl/types/undefined.hpp"
+#include "scl/types/iteratorarray.hpp"
 #include <sstream>
 
 namespace SCL {
@@ -18,6 +19,9 @@ namespace SCL {
 			return Array::getTypeName();
 		}
 
+		std::vector<SCL::Type *>& Array::getValues() {
+			return values;
+		}
 
 		std::string Array::stringify() {
 			std::stringstream ss;
@@ -36,6 +40,10 @@ namespace SCL {
 			ss << "]";
 
 			return ss.str();
+		}
+		
+		SCL::Types::Iterator *Array::iterator() {
+			return new SCL::Types::IteratorArray(this);
 		}
 
 		SCL::Types::Boolean *Array::toBoolean() {

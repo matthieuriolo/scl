@@ -5,6 +5,7 @@ namespace SCL {
 	int Type::comparison(Type *left, Type *right) {
 		std::string types[] = {
 			"undefined",
+			"iterator",
 			"boolean",
 			"integer",
 			"float",
@@ -19,10 +20,9 @@ namespace SCL {
 			std::find(std::begin(types), std::end(types), right->getName());
 	}
 	
-	/*
-	SCL::Types::Iterator *iterator() {
+	SCL::Types::Iterator *Type::iterator() {
 		return NULL;
-	}*/
+	}
 
 	Type *Type::operator_plus(SCL::Context *ctx, Type *right) {
 		return Types::Undefined::getUndefined();

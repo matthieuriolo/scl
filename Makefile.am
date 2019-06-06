@@ -27,6 +27,7 @@ scl_SOURCES = \
 	src/scl/ast/expressiontype.cpp \
 	src/scl/ast/instruction.cpp \
 	src/scl/ast/if.cpp \
+	src/scl/ast/forvalue.cpp \
 	src/scl/ast/operand.cpp \
 	src/scl/ast/comparator.cpp \
 	src/scl/ast/variable.cpp \
@@ -38,6 +39,9 @@ scl_SOURCES = \
 	src/scl/types/string.cpp \
 	src/scl/types/float.cpp \
 	src/scl/types/integer.cpp \
+	src/scl/types/iterator.cpp \
+	src/scl/types/iteratorarray.cpp \
+	src/scl/types/iteratordictionary.cpp \
 	src/scl/types/undefined.cpp
 	
 
