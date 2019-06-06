@@ -29,6 +29,9 @@ namespace SCL {
 			return Boolean::getTypeName();
 		}
 
+		SCL::Types::Boolean *Boolean::toBoolean() {
+			return this;
+		}
 
 		std::string Boolean::stringify() {
 			return this == getTrue() ? "true" : "false";
@@ -55,7 +58,7 @@ namespace SCL {
 				return Undefined::getUndefined();
 			}
 
-			return this == Boolean::getTrue() || right == Boolean::getTrue() ? this : Boolean::getFalse();
+			return this == Boolean::getTrue() || right == Boolean::getTrue() ? Boolean::getTrue() : Boolean::getFalse();
 		}
 	}
 }

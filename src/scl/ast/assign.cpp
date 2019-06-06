@@ -9,7 +9,7 @@ namespace SCL {
 		}
 
 		void Assign::execute(SCL::Context * ctx) {
-			ctx->getScope()->setValue(variable->getName(), expression->compute(ctx));
+			ctx->setValue(variable->getName(), expression->compute(ctx));
 		}
 	}
 }

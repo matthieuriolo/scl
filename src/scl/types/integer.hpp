@@ -4,6 +4,7 @@
 #include <string>
 #include "scl/type.hpp"
 #include "scl/types/float.hpp"
+#include "scl/types/boolean.hpp"
 
 namespace SCL {
 	namespace Types {
@@ -15,6 +16,7 @@ namespace SCL {
 				Integer(long value);
 				Integer(std::string value);
 
+				SCL::Types::Boolean *toBoolean();
 				Float *toFloat();
 				long getValue();
 				

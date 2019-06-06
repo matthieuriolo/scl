@@ -30,5 +30,9 @@ namespace SCL {
 		int Undefined::compare(Type *right) {
 			return SCL::Type::comparison(this, right);
 		}
+
+		SCL::Types::Boolean *Undefined::toBoolean() {
+			return SCL::Types::Boolean::getFalse();
+		}
 	}
 }

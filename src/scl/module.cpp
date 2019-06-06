@@ -2,9 +2,10 @@
 #include "scl/context.hpp"
 
 namespace SCL {
-	void Module::execute() {
-		Context *ctx = new Context(this);
-		ctx->execute();
+	void Module::launch() {
+		//Context *ctx = new Context(this);
+		Context *ctx = new Context();
+		execute(ctx);
 		delete ctx;
 	}
 }

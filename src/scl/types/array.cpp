@@ -38,6 +38,10 @@ namespace SCL {
 			return ss.str();
 		}
 
+		SCL::Types::Boolean *Array::toBoolean() {
+			return values.size() > 0 ? SCL::Types::Boolean::getTrue() : SCL::Types::Boolean::getFalse();
+		}
+
 		int Array::compare(Type *right) {
 			if(right->getName() == "array") {
 				SCL::Types::Array* arr = (SCL::Types::Array*)right;

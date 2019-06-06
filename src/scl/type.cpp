@@ -1,6 +1,5 @@
 #include "scl/type.hpp"
 #include "scl/types/undefined.hpp"
-#include <iostream>
 
 namespace SCL {
 	int Type::comparison(Type *left, Type *right) {
@@ -19,8 +18,11 @@ namespace SCL {
 			-
 			std::find(std::begin(types), std::end(types), right->getName());
 	}
-
-
+	
+	/*
+	SCL::Types::Iterator *iterator() {
+		return NULL;
+	}*/
 
 	Type *Type::operator_plus(SCL::Context *ctx, Type *right) {
 		return Types::Undefined::getUndefined();

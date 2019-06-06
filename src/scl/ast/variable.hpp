@@ -1,7 +1,7 @@
 #ifndef __SCL_AST_VARIABLE__
 #define __SCL_AST_VARIABLE__
 
-
+#include <string>
 #include "scl/ast/expression.hpp"
 
 namespace SCL {

@@ -27,19 +27,20 @@ loc.step();
 
 "print"               return Parser::make_PRINTTOKEN(loc);
 
-%{
-/* control structure 
+				%{
+				/* control structure 
 
-"if"                  return Parser::make_CONTROL_IF(, loc);
-".."                  return Parser::make_OPERAND_RANGE(AST::RANGE, loc);
 
-*/	
-%}
+				".."                  return Parser::make_OPERAND_RANGE(AST::RANGE, loc);
+
+				*/	
+				%}
 
 %{
 /* control structure */
 %}
 
+"if"                  return Parser::make_CONTROL_IF(loc);
 "for"                 return Parser::make_CONTROL_FOR(loc);
 "in"                  return Parser::make_CONTROL_IN(loc);
 "end"                 return Parser::make_CONTROL_END(loc);               

@@ -30,6 +30,7 @@
 	#include "scl/ast/instruction.hpp"
 	#include "scl/ast/variable.hpp"
 	#include "scl/ast/assign.hpp"
+	#include "scl/ast/if.hpp"
 	#include "scl/ast/forvalue.hpp"
 
 	#include "scl/ast/print.hpp"
@@ -71,7 +72,7 @@
 %token SYMBOL_NEW_LINE SYMBOL_SEMICOLON
 %token SYMBOL_COLON SYMBOL_COMMA
 
-%token CONTROL_FOR CONTROL_IN CONTROL_END
+%token CONTROL_IF CONTROL_FOR CONTROL_IN CONTROL_END
 
 
 %type <std::list<SCL::AST::Instruction *> > INSTRUCTIONS
@@ -99,7 +100,7 @@
 %%
 
 MODULE
-	: INSTRUCTIONS { result.module.instructions = $1; }
+	: INSTRUCTIONS { result.module = new SCL::Module($1); }
 ;
 
 INSTRUCTIONS
@@ -113,13 +114,13 @@ INSTRUCTIONS
 INSTRUCTION
 	: ASSIGN
 	| PRINT
-	
-;
-/*
-| FOR VARIABLE IN EXPRESSION SYMBOL_NEW_LINE INSTRUCTIONS SYMBOL_NEW_LINE END {
-		$$ = new SCL::AST::ForValue($2, $4, $6);
+	| CONTROL_IF EXPRESSION SYMBOL_NEW_LINE INSTRUCTIONS SYMBOL_NEW_LINE CONTROL_END {
+		$$ = new SCL::AST::If($2, new SCL::Scope($4));
 	}
-*/
+	/*| FOR VARIABLE IN EXPRESSION SYMBOL_NEW_LINE INSTRUCTIONS SYMBOL_NEW_LINE CONTROL_END {
+		$$ = new SCL::AST::ForValue($2, $4, $6);
+	}*/
+;
 
 
 PRINT

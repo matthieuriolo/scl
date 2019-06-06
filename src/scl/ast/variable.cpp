@@ -8,7 +8,7 @@ namespace SCL {
 		}
 
 		SCL::Type *Variable::compute(SCL::Context *ctx) {
-			return ctx->getScope()->getValue(this);
+			return ctx->getValue(this);
 		}
 
 		std::string Variable::getName() {

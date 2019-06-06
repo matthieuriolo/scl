@@ -7,7 +7,7 @@ int main(int argc, char **argv) {
 
 	for(int i = 1; i < argc; i++) {
 		if(res.parse(argv[i]) == 0) {
-			res.module.execute();
+			res.module->launch();
 		}else {
 			std::cout << "failure\n";
 		}

@@ -25,6 +25,9 @@ namespace SCL {
 			return Float::getTypeName();
 		}
 
+		SCL::Types::Boolean *Float::toBoolean() {
+			return value != 0.0 ? SCL::Types::Boolean::getTrue() : SCL::Types::Boolean::getFalse();
+		}
 
 		std::string Float::stringify() {
 			return std::to_string(value);

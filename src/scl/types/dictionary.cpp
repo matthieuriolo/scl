@@ -17,6 +17,9 @@ namespace SCL {
 			return Dictionary::getTypeName();
 		}
 
+		SCL::Types::Boolean *Dictionary::toBoolean() {
+			return values.size() > 0 ? SCL::Types::Boolean::getTrue() : SCL::Types::Boolean::getFalse();
+		}
 
 		std::string Dictionary::stringify() {
 			std::stringstream ss;

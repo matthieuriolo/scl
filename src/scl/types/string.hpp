@@ -3,6 +3,7 @@
 
 #include <string>
 #include "scl/type.hpp"
+#include "scl/types/boolean.hpp"
 
 namespace SCL {
 	namespace Types {
@@ -16,7 +17,9 @@ namespace SCL {
 				std::string getName();
 				static std::string getTypeName();
 				std::string stringify();
+				SCL::Types::Boolean *toBoolean();
 				int compare(Type *right);
+
 				Type *operator_plus(Context *ctx, Type *right);
 				Type *operator_asterisk(Context *ctx, Type *right);
 		};

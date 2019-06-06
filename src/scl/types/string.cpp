@@ -26,6 +26,10 @@ namespace SCL {
 			return value;
 		}
 
+		SCL::Types::Boolean *String::toBoolean() {
+			return value.size() > 0 ? SCL::Types::Boolean::getTrue() : SCL::Types::Boolean::getFalse();
+		}
+
 		int String::compare(Type *right) {
 			if(getName() != right->getName()) {
 				return SCL::Type::comparison(this, right);

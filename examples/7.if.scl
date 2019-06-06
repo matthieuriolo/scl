@@ -1,0 +1,81 @@
+$var = 0
+
+if FALSE
+	$var = 1
+end
+
+print $var
+
+if TRUE == FALSE
+	$var = 2
+end
+
+print $var
+
+if 0
+	$var = 3
+end
+
+print $var
+
+
+if ""
+	$var = 4
+end
+
+print $var
+
+if {}
+	$var = 5
+end
+
+print $var
+
+if []
+	$var = 6
+end
+
+print $var
+
+
+
+
+
+$var = 1
+
+if TRUE
+	$var = 1
+end
+
+print $var
+
+if TRUE == FALSE || TRUE
+	$var = 2
+end
+
+print $var
+
+if 1
+	$var = 3
+end
+
+print $var
+
+
+if "test"
+	$var = 4
+end
+
+print $var
+
+if {"test": "as"}
+	$var = 5
+end
+
+print $var
+
+if ["sdf"]
+	$var = 6
+end
+
+print $var

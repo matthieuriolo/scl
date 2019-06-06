@@ -3,6 +3,7 @@
 
 #include <map>
 #include "scl/type.hpp"
+#include "scl/types/boolean.hpp"
 
 namespace SCL {
 	namespace Types {
@@ -23,6 +24,7 @@ namespace SCL {
 				Dictionary();
 				void add(SCL::Type* key, SCL::Type* value);
 
+				SCL::Types::Boolean *toBoolean();
 				std::string getName();
 				std::string stringify();
 				int compare(Type *right) ;

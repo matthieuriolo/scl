@@ -1,10 +1,13 @@
 #ifndef __SCL_TYPE__
 #define __SCL_TYPE__
 
-#include <string>
 #include "scl/context.hpp"
-#include <iostream>
+
 namespace SCL {
+	namespace Types {
+		class Boolean;
+	}
+	
 	class Type {
 		public:
 			virtual std::string getName() = 0;
@@ -14,7 +17,9 @@ namespace SCL {
 
 			virtual std::string stringify() = 0;
 			virtual int compare(Type *right) = 0;
+			//virtual SCL::Types::Iterator *iterator();
 
+			virtual SCL::Types::Boolean *toBoolean() = 0;
 
 			virtual Type *operator_plus(SCL::Context *ctx, Type *right);
 			virtual Type *operator_minus(SCL::Context *ctx, Type *right);

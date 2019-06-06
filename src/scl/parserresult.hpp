@@ -17,9 +17,14 @@ namespace SCL {
 	class ParserResult {
 		private:
 			std::string file;
+			/*SCL::Scope* scope;
+
+			friend class SCL::Parser;*/
 		public:
+
+			SCL::Module* module;
+
 			ParserResult();
-			SCL::Module module;
 
 			int parse(const std::string& f);
 

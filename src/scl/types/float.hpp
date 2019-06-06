@@ -17,6 +17,7 @@ namespace SCL {
 				std::string getName();
 				static std::string getTypeName();
 				std::string stringify();
+				SCL::Types::Boolean *toBoolean();
 				int compare(Type *right);
 
 				Type *operator_plus(Context *ctx, Type *right);

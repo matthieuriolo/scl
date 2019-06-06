@@ -15,6 +15,10 @@ namespace SCL {
 		Integer::Integer(std::string value) {
 			this->value = std::stoi(value);
 		}
+		
+		SCL::Types::Boolean *Integer::toBoolean() {
+			return value != 0 ? SCL::Types::Boolean::getTrue() : SCL::Types::Boolean::getFalse();
+		}
 
 		Float *Integer::toFloat() {
 			return new Float(value);
