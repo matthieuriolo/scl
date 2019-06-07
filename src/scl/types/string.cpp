@@ -1,6 +1,7 @@
 #include "scl/types/string.hpp"
 #include "scl/types/integer.hpp"
 #include "scl/types/undefined.hpp"
+#include "scl/types/iteratorstring.hpp"
 #include <sstream>
 
 namespace SCL {
@@ -11,6 +12,14 @@ namespace SCL {
 
 		String::String(std::string value) {
 			this->value = value;
+		}
+
+		String::String(char character) {
+			value = std::string(1, character);
+		}
+
+		std::string& String::getValue() {
+			return value;
 		}
 
 		std::string String::getTypeName() {
@@ -36,6 +45,10 @@ namespace SCL {
 			}
 
 			return value.compare(((String*)right)->value);
+		}
+
+		SCL::Types::Iterator *String::iterator() {
+			return new SCL::Types::IteratorString(this);
 		}
 		
 		Type *String::operator_plus(Context *ctx, Type *right) {

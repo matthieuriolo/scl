@@ -14,3 +14,7 @@ print $var
 for $var in {"a": 1, "b": 2, "c": 3}
 	print $var
 end
+
+for $var in "hello world!"
+	print $var
+end

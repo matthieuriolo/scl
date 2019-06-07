@@ -42,6 +42,7 @@ scl_SOURCES = \
 	src/scl/types/iterator.cpp \
 	src/scl/types/iteratorarray.cpp \
 	src/scl/types/iteratordictionary.cpp \
+	src/scl/types/iteratorstring.cpp \
 	src/scl/types/undefined.cpp
 	
 
