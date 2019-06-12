@@ -117,6 +117,8 @@ loc.step();
 /* analyctics */
 %}
 
+#.*                   loc.lines(yyleng);
+
 [ \t\r]+              loc.step();
 .                     {
 						throw SCL::Parser::syntax_error
