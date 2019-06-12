@@ -1,0 +1,25 @@
+for $var in [1, 2, 3]
+	print $var
+end
+
+$a = [1, 2, 3]
+$var = 1
+for $var in $a
+	print $var
+end
+
+print $var
+
+
+for $key in {"a": 1, "b": 2, "c": 3}
+	print $key
+end
+
+for $char in "hello world!"
+	print $char
+end
+
+for $key, $value in {"a": 1, "b": 2, "c": 3}
+	print $key
+	print $value
+end

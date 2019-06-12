@@ -7,13 +7,13 @@
 
 namespace SCL {
 	namespace AST {
-		class ForValue : public Instruction {
+		class For : public Instruction {
 			private:
 				SCL::AST::Variable *variable;
 				SCL::AST::Expression *expression;
 				SCL::Scope *scope;
 			public:
-				ForValue(SCL::AST::Variable *variable, SCL::AST::Expression *expression, SCL::Scope *scope);
+				For(SCL::AST::Variable *variable, SCL::AST::Expression *expression, SCL::Scope *scope);
 
 				void execute(SCL::Context * ctx);
 		};

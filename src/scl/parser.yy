@@ -31,7 +31,7 @@
 	#include "scl/ast/variable.hpp"
 	#include "scl/ast/assign.hpp"
 	#include "scl/ast/if.hpp"
-	#include "scl/ast/forvalue.hpp"
+	#include "scl/ast/for.hpp"
 
 	#include "scl/ast/print.hpp"
 
@@ -118,7 +118,7 @@ INSTRUCTION
 		$$ = new SCL::AST::If($2, new SCL::Scope($4));
 	}
 	| CONTROL_FOR VARIABLE CONTROL_IN EXPRESSION SYMBOL_NEW_LINE INSTRUCTIONS SYMBOL_NEW_LINE CONTROL_END {
-		$$ = new SCL::AST::ForValue($2, $4, new SCL::Scope($6));
+		$$ = new SCL::AST::For($2, $4, new SCL::Scope($6));
 	}
 ;
 
@@ -139,7 +139,19 @@ EXPRESSION
 	| DICTIONARY { $$ = $1; }
 	| EXPRESSION OPERAND EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
 	| EXPRESSION COMPARATOR EXPRESSION { $$ = new SCL::AST::Comparator($2, $1, $3); }
-;
+/*	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {
+		$$ = SCL::AST::Access($1, $3);
+	}
+	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_COLON SYMBOL_SQUARED_BRACKET_CLOSE {
+		$$ = SCL::AST::AccessRange($1, $3, NULL); 
+	}
+	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN SYMBOL_COLON EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {
+		$$ = SCL::AST::AccessRange($1, NULL, $4);
+	}
+	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_COLON EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {
+		$$ = SCL::AST::AccessRange($1, $3, $5);
+	}
+*/;
 
 
 

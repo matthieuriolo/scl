@@ -1,14 +1,14 @@
-#include "scl/ast/forvalue.hpp"
+#include "scl/ast/for.hpp"
 
 namespace SCL {
 	namespace AST {
-		ForValue::ForValue(SCL::AST::Variable *variable, SCL::AST::Expression *expression, SCL::Scope *scope) {
+		For::For(SCL::AST::Variable *variable, SCL::AST::Expression *expression, SCL::Scope *scope) {
 			this->variable = variable;
 			this->expression = expression;
 			this->scope = scope;
 		}
 
-		void ForValue::execute(SCL::Context * ctx) {
+		void For::execute(SCL::Context * ctx) {
 			SCL::Types::Iterator *iter = expression->compute(ctx)->iterator();
 
 			if(iter == NULL) {
