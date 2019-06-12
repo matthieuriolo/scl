@@ -1,3 +1,10 @@
+# -----------------------------
+#
+# Test case for array
+#
+# -----------------------------
+
+
 $variable = []
 print $variable
 $variable = [1]

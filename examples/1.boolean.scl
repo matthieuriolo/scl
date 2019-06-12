@@ -1,3 +1,9 @@
+# -----------------------------
+#
+# Test case for booleans
+#
+# -----------------------------
+
 $variable = TRUE
 print $variable
 

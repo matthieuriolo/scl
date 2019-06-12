@@ -1,3 +1,10 @@
+# -----------------------------
+#
+# Test case for for-structures
+#
+# -----------------------------
+
+
 for $var in [1, 2, 3]
 	print $var
 end
@@ -17,9 +24,4 @@ end
 
 for $char in "hello world!"
 	print $char
-end
-
-for $key, $value in {"a": 1, "b": 2, "c": 3}
-	print $key
-	print $value
 end

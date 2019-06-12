@@ -1,3 +1,9 @@
+# -----------------------------
+#
+# Test case for numbers
+#
+# -----------------------------
+
 $variable = 1 + 1
 print $variable
 $variable = 2^3
