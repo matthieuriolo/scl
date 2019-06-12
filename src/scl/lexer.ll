@@ -66,6 +66,8 @@ loc.step();
 "]"                   return Parser::make_SYMBOL_SQUARED_BRACKET_CLOSE(loc);
 "{"                   return Parser::make_SYMBOL_CURLY_BRACKET_OPEN(loc);
 "}"                   return Parser::make_SYMBOL_CURLY_BRACKET_CLOSE(loc);
+"("                   return Parser::make_SYMBOL_ROUND_BRACKET_OPEN(loc);
+")"                   return Parser::make_SYMBOL_ROUND_BRACKET_CLOSE(loc);
 ";"                   return Parser::make_SYMBOL_SEMICOLON(loc);
 ":"                   return Parser::make_SYMBOL_COLON(loc);
 ","                   return Parser::make_SYMBOL_COMMA(loc);
