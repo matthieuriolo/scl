@@ -32,6 +32,7 @@
 	#include "scl/ast/assign.hpp"
 	#include "scl/ast/if.hpp"
 	#include "scl/ast/for.hpp"
+	#include "scl/ast/unaryminus.hpp"
 
 	#include "scl/ast/print.hpp"
 
@@ -137,6 +138,7 @@ EXPRESSION
 	| VARIABLE { $$ = $1; }
 	| ARRAY { $$ = $1; }
 	| DICTIONARY { $$ = $1; }
+	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS { $$ = new SCL::AST::UnaryMinus($2); }
 	| EXPRESSION OPERAND EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
 	| EXPRESSION COMPARATOR EXPRESSION { $$ = new SCL::AST::Comparator($2, $1, $3); }
 /*	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {

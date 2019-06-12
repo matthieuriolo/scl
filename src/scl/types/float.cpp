@@ -17,6 +17,10 @@ namespace SCL {
 			this->value = std::stold(value);
 		}
 
+		double Float::getValue() {
+			return value;
+		}
+
 		std::string Float::getTypeName() {
 			return std::string("float");
 		}

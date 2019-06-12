@@ -10,3 +10,9 @@ print $variable
 $variable = 2.3 + 1
 print $variable
 
+$variable = -10
+print $variable
+
+$variable = 10
+$variable = -$variable
+print $variable

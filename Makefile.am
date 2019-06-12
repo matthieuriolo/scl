@@ -31,6 +31,7 @@ scl_SOURCES = \
 	src/scl/ast/operand.cpp \
 	src/scl/ast/comparator.cpp \
 	src/scl/ast/variable.cpp \
+	src/scl/ast/unaryminus.cpp \
 	src/scl/ast/print.cpp \
 	\
 	src/scl/types/dictionary.cpp \

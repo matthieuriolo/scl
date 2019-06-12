@@ -14,6 +14,7 @@ namespace SCL {
 				Float(double value);
 				Float(std::string value);
 
+				double getValue();
 				std::string getName();
 				static std::string getTypeName();
 				std::string stringify();
