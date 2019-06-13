@@ -1,5 +1,6 @@
 #include "scl/types/array.hpp"
 #include "scl/types/undefined.hpp"
+#include "scl/types/integer.hpp"
 #include "scl/types/iteratorarray.hpp"
 #include <sstream>
 
@@ -21,6 +22,22 @@ namespace SCL {
 
 		std::vector<SCL::Type *>& Array::getValues() {
 			return values;
+		}
+
+
+		SCL::Type *Array::getAccess(SCL::Type *key) {
+			if(key->getName() == "integer") {
+				long idx = ((SCL::Types::Integer *)key)->getValue();
+				if(idx < 0 ) {
+					idx = values.size() + idx;
+				}
+
+				if(idx >= 0 && idx < values.size()) {
+					return values[idx];
+				}
+			}
+
+			return Types::Undefined::getUndefined();
 		}
 
 		std::string Array::stringify() {

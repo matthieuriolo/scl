@@ -1,5 +1,6 @@
 #include "scl/types/dictionary.hpp"
 #include "scl/types/iteratordictionary.hpp"
+#include "scl/types/undefined.hpp"
 #include <sstream>
 
 namespace SCL {
@@ -24,6 +25,15 @@ namespace SCL {
 
 		SCL::Types::Boolean *Dictionary::toBoolean() {
 			return values.size() > 0 ? SCL::Types::Boolean::getTrue() : SCL::Types::Boolean::getFalse();
+		}
+
+		SCL::Type *Dictionary::getAccess(Type *key) {
+			auto pair = values.find(key);
+			if(pair != values.end()) {
+				return pair->second;
+			}
+
+			return Types::Undefined::getUndefined();
 		}
 
 		std::string Dictionary::stringify() {

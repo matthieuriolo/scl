@@ -24,6 +24,10 @@ namespace SCL {
 		return NULL;
 	}
 
+	Type *Type::getAccess(Type *key) {
+		return Types::Undefined::getUndefined();
+	}
+
 	Type *Type::operator_plus(SCL::Context *ctx, Type *right) {
 		return Types::Undefined::getUndefined();
 	}

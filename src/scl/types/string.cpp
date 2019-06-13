@@ -30,6 +30,20 @@ namespace SCL {
 			return String::getTypeName();
 		}
 
+		SCL::Type *String::getAccess(SCL::Type *key) {
+			if(key->getName() == "integer") {
+				long idx = ((SCL::Types::Integer *)key)->getValue();
+				if(idx < 0 ) {
+					idx = value.size() + idx;
+				}
+
+				if(idx >= 0 && idx < value.size()) {
+					return new String(value[idx]);
+				}
+			}
+
+			return Types::Undefined::getUndefined();
+		}
 
 		std::string String::stringify() {
 			return value;

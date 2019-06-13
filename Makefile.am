@@ -22,6 +22,7 @@ scl_SOURCES = \
 	\
 	src/scl/ast/dictionary.cpp \
 	src/scl/ast/array.cpp \
+	src/scl/ast/access.cpp \
 	src/scl/ast/assign.cpp \
 	src/scl/ast/expression.cpp \
 	src/scl/ast/expressiontype.cpp \

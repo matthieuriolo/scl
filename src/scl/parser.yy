@@ -30,6 +30,7 @@
 	#include "scl/ast/instruction.hpp"
 	#include "scl/ast/variable.hpp"
 	#include "scl/ast/assign.hpp"
+	#include "scl/ast/access.hpp"
 	#include "scl/ast/if.hpp"
 	#include "scl/ast/for.hpp"
 	#include "scl/ast/unaryminus.hpp"
@@ -144,10 +145,10 @@ EXPRESSION
 	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS { $$ = new SCL::AST::UnaryMinus($2); }
 	| EXPRESSION OPERAND EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
 	| EXPRESSION COMPARATOR EXPRESSION { $$ = new SCL::AST::Comparator($2, $1, $3); }
-/*	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {
-		$$ = SCL::AST::Access($1, $3);
+	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {
+		$$ = new SCL::AST::Access($1, $3);
 	}
-	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_COLON SYMBOL_SQUARED_BRACKET_CLOSE {
+/*	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_COLON SYMBOL_SQUARED_BRACKET_CLOSE {
 		$$ = SCL::AST::AccessRange($1, $3, NULL); 
 	}
 	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN SYMBOL_COLON EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {
