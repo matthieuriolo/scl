@@ -1,0 +1,26 @@
+# -----------------------------
+#
+# Test case for access range -structures
+#
+# -----------------------------
+
+$var =  "123"
+$a = $var[0:2]
+print $a
+$a = $var[0:0]
+print $a
+$a = $var[-3:2]
+print $a
+$a = $var[-3:-1]
+print $a
+
+
+$var = [1, 2, 3]
+$a = $var[0:2]
+print $a
+$a = $var[0:0]
+print $a
+$a = $var[-3:2]
+print $a
+$a = $var[-3:-1]
+print $a

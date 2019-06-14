@@ -30,23 +30,42 @@ namespace SCL {
 			return String::getTypeName();
 		}
 
+		std::string String::stringify() {
+			return std::string("\"") + value + std::string("\"");
+		}
+
 		SCL::Type *String::getAccess(SCL::Type *key) {
 			if(key->getName() == "integer") {
-				long idx = ((SCL::Types::Integer *)key)->getValue();
-				if(idx < 0 ) {
-					idx = value.size() + idx;
-				}
-
-				if(idx >= 0 && idx < value.size()) {
-					return new String(value[idx]);
+				long index = SCL::Type::getIndexFromNegative(((SCL::Types::Integer *)key)->getValue(), value.size());
+				if(index >= 0 && index < value.size()) {
+					return new String(value[index]);
 				}
 			}
 
 			return Types::Undefined::getUndefined();
 		}
 
-		std::string String::stringify() {
-			return value;
+		SCL::Type *String::getRange(Type *start, Type *end) {
+			long sIndex = 0;
+
+			if(start != NULL) {
+				sIndex = SCL::Type::getIndexFromNegative(((SCL::Types::Integer *)start)->getValue(), value.size());
+			}
+
+			long eIndex = 0;
+			if(end != NULL) {
+				eIndex = SCL::Type::getIndexFromNegative(((SCL::Types::Integer *)end)->getValue(), value.size());
+			}
+
+			if(sIndex >= 0 && eIndex >= 0 && sIndex < value.size() && eIndex < value.size()) {
+				if(sIndex < eIndex) {
+					return new String(value.substr(sIndex, eIndex - sIndex));
+				}
+
+				return new String();
+			}
+
+			return Types::Undefined::getUndefined();
 		}
 
 		SCL::Types::Boolean *String::toBoolean() {

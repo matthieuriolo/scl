@@ -19,12 +19,24 @@ namespace SCL {
 			-
 			std::find(std::begin(types), std::end(types), right->getName());
 	}
+
+	long Type::getIndexFromNegative(long index, long length) {
+		if(index < 0 ) {
+			index = length + index;
+		}
+
+		return index;
+	}
 	
 	SCL::Types::Iterator *Type::iterator() {
 		return NULL;
 	}
 
 	Type *Type::getAccess(Type *key) {
+		return Types::Undefined::getUndefined();
+	}
+
+	Type *Type::getRange(Type *start, Type *end) {
 		return Types::Undefined::getUndefined();
 	}
 

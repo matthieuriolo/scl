@@ -31,6 +31,7 @@
 	#include "scl/ast/variable.hpp"
 	#include "scl/ast/assign.hpp"
 	#include "scl/ast/access.hpp"
+	#include "scl/ast/range.hpp"
 	#include "scl/ast/if.hpp"
 	#include "scl/ast/for.hpp"
 	#include "scl/ast/unaryminus.hpp"
@@ -148,16 +149,16 @@ EXPRESSION
 	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {
 		$$ = new SCL::AST::Access($1, $3);
 	}
-/*	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_COLON SYMBOL_SQUARED_BRACKET_CLOSE {
-		$$ = SCL::AST::AccessRange($1, $3, NULL); 
+	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_COLON SYMBOL_SQUARED_BRACKET_CLOSE {
+		$$ = new SCL::AST::Range($1, $3, NULL); 
 	}
 	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN SYMBOL_COLON EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {
-		$$ = SCL::AST::AccessRange($1, NULL, $4);
+		$$ = new SCL::AST::Range($1, NULL, $4);
 	}
 	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_COLON EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE {
-		$$ = SCL::AST::AccessRange($1, $3, $5);
+		$$ = new SCL::AST::Range($1, $3, $5);
 	}
-*/;
+;
 
 
 

@@ -19,6 +19,7 @@ namespace SCL {
 			virtual SCL::Types::Boolean *toBoolean() = 0;
 
 			virtual Type *getAccess(Type *key);
+			virtual Type *getRange(Type *start, Type *end);
 
 			virtual Type *operator_plus(SCL::Context *ctx, Type *right);
 			virtual Type *operator_minus(SCL::Context *ctx, Type *right);
@@ -29,6 +30,8 @@ namespace SCL {
 			virtual Type *operator_or(SCL::Context *ctx, Type *right);
 
 			static int comparison(Type *left, Type *right);
+
+			static long getIndexFromNegative(long index, long length);
 	};
 }
 

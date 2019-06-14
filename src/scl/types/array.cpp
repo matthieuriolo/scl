@@ -8,6 +8,10 @@ namespace SCL {
 	namespace Types {
 		Array::Array() {}
 
+		Array::Array(std::vector<SCL::Type *> values) {
+			this->values = values;
+		}
+
 		void Array::add(SCL::Type* value) {
 			values.push_back(value);
 		}
@@ -27,14 +31,34 @@ namespace SCL {
 
 		SCL::Type *Array::getAccess(SCL::Type *key) {
 			if(key->getName() == "integer") {
-				long idx = ((SCL::Types::Integer *)key)->getValue();
-				if(idx < 0 ) {
-					idx = values.size() + idx;
+				long index = SCL::Type::getIndexFromNegative(((SCL::Types::Integer *)key)->getValue(), values.size());
+				
+				if(index >= 0 && index < values.size()) {
+					return values[index];
+				}
+			}
+
+			return Types::Undefined::getUndefined();
+		}
+
+		SCL::Type *Array::getRange(Type *start, Type *end) {
+			long sIndex = 0;
+
+			if(start != NULL) {
+				sIndex = SCL::Type::getIndexFromNegative(((SCL::Types::Integer *)start)->getValue(), values.size());
+			}
+
+			long eIndex = 0;
+			if(end != NULL) {
+				eIndex = SCL::Type::getIndexFromNegative(((SCL::Types::Integer *)end)->getValue(), values.size());
+			}
+
+			if(sIndex >= 0 && eIndex >= 0 && sIndex < values.size() && eIndex < values.size()) {
+				if(sIndex < eIndex) {
+					return new Array(std::vector<SCL::Type *>(values.begin() + sIndex, values.begin() + eIndex));
 				}
 
-				if(idx >= 0 && idx < values.size()) {
-					return values[idx];
-				}
+				return new Array();
 			}
 
 			return Types::Undefined::getUndefined();

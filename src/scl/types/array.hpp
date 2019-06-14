@@ -13,14 +13,16 @@ namespace SCL {
 				std::vector<SCL::Type *> values;
 			public:
 				Array();
-
+				Array(std::vector<SCL::Type *> values);
+				
 				void add(SCL::Type* value);
 				std::vector<SCL::Type *>& getValues();
 
 				std::string getName();
 				static std::string getTypeName();
 				SCL::Type *getAccess(SCL::Type *key);
-				
+				SCL::Type *getRange(Type *start, Type *end);
+
 				std::string stringify();
 				int compare(Type *right);
 				SCL::Types::Boolean *toBoolean();
