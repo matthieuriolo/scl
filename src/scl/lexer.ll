@@ -27,15 +27,6 @@ loc.step();
 
 "print"               return Parser::make_PRINTTOKEN(loc);
 
-				%{
-				/* control structure 
-
-
-				".."                  return Parser::make_OPERAND_RANGE(AST::RANGE, loc);
-
-				*/	
-				%}
-
 %{
 /* control structure */
 %}
@@ -62,6 +53,7 @@ loc.step();
 /* symbols */
 %}
 
+".."                  return Parser::make_SYMBOL_RANGE(loc);
 "["                   return Parser::make_SYMBOL_SQUARED_BRACKET_OPEN(loc);
 "]"                   return Parser::make_SYMBOL_SQUARED_BRACKET_CLOSE(loc);
 "{"                   return Parser::make_SYMBOL_CURLY_BRACKET_OPEN(loc);
@@ -98,8 +90,7 @@ loc.step();
 "FALSE"               return Parser::make_BOOLEAN_FALSE(Types::Boolean::getFalse(), loc);
 
 [0-9]+                return Parser::make_INTEGER(new Types::Integer(yytext), loc);
-[0-9]+\.[0-9]*        return Parser::make_FLOAT(new Types::Float(yytext), loc);
-
+[0-9]+\.[0-9]+        return Parser::make_FLOAT(new Types::Float(yytext), loc);
 \$[a-zA-Z0-9]+        return Parser::make_VARIABLE(new AST::Variable(yytext + 1), loc);
 
 
@@ -117,7 +108,7 @@ loc.step();
 /* analyctics */
 %}
 
-#.*                   loc.lines(yyleng);
+#[^\n]*
 
 [ \t\r]+              loc.step();
 .                     {

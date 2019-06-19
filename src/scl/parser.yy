@@ -32,6 +32,7 @@
 	#include "scl/ast/assign.hpp"
 	#include "scl/ast/access.hpp"
 	#include "scl/ast/range.hpp"
+	#include "scl/ast/rangeiterator.hpp"
 	#include "scl/ast/if.hpp"
 	#include "scl/ast/for.hpp"
 	#include "scl/ast/unaryminus.hpp"
@@ -78,7 +79,7 @@
 %token SYMBOL_COLON SYMBOL_COMMA
 
 %token CONTROL_IF CONTROL_FOR CONTROL_IN CONTROL_END
-
+%token SYMBOL_RANGE
 
 %type <std::list<SCL::AST::Instruction *> > INSTRUCTIONS
 %type <SCL::AST::Instruction*> INSTRUCTION
@@ -142,6 +143,8 @@ EXPRESSION
 	| VARIABLE { $$ = $1; }
 	| ARRAY { $$ = $1; }
 	| DICTIONARY { $$ = $1; }
+	| EXPRESSION SYMBOL_RANGE EXPRESSION SYMBOL_RANGE EXPRESSION { $$ = new AST::RangeIterator($1, $3, $5); }
+	| EXPRESSION SYMBOL_RANGE EXPRESSION { $$ = new AST::RangeIterator($1, $3); }
 	| SYMBOL_ROUND_BRACKET_OPEN EXPRESSION SYMBOL_ROUND_BRACKET_CLOSE { $$ = $2; }
 	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS { $$ = new SCL::AST::UnaryMinus($2); }
 	| EXPRESSION OPERAND EXPRESSION { $$ = new SCL::AST::Operand($2, $1, $3); }
@@ -159,8 +162,6 @@ EXPRESSION
 		$$ = new SCL::AST::Range($1, $3, $5);
 	}
 ;
-
-
 
 OPERAND
 	: OPERAND_PLUS

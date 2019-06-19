@@ -24,6 +24,7 @@ scl_SOURCES = \
 	src/scl/ast/array.cpp \
 	src/scl/ast/access.cpp \
 	src/scl/ast/range.cpp \
+	src/scl/ast/rangeiterator.cpp \
 	src/scl/ast/assign.cpp \
 	src/scl/ast/expression.cpp \
 	src/scl/ast/expressiontype.cpp \
@@ -46,6 +47,8 @@ scl_SOURCES = \
 	src/scl/types/iteratorarray.cpp \
 	src/scl/types/iteratordictionary.cpp \
 	src/scl/types/iteratorstring.cpp \
+	src/scl/types/iteratorinteger.cpp \
+	src/scl/types/iteratorfloat.cpp \
 	src/scl/types/undefined.cpp
 	
 
