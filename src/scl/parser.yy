@@ -22,6 +22,7 @@
 	#include <list>
 	#include <iostream>
 
+	#include "scl/ast/command.hpp"
 	#include "scl/ast/array.hpp"
 	#include "scl/ast/dictionary.hpp"
 	#include "scl/ast/comparator.hpp"
@@ -54,6 +55,7 @@
 
 %type <SCL::AST::Operand_Type> OPERAND
 %token OPERAND_EQUAL
+%left OPERAND_EQUAL
 
 %token <SCL::AST::Operand_Type> OPERAND_PLUS OPERAND_MINUS OPERAND_ASTERISK OPERAND_SLASH OPERAND_CARET
 %left OPERAND_PLUS OPERAND_MINUS OPERAND_ASTERISK OPERAND_SLASH OPERAND_CARET
@@ -81,6 +83,7 @@
 %token CONTROL_IF CONTROL_FOR CONTROL_IN CONTROL_END
 %token SYMBOL_RANGE
 
+
 %type <std::list<SCL::AST::Instruction *> > INSTRUCTIONS
 %type <SCL::AST::Instruction*> INSTRUCTION
 %type <SCL::AST::Instruction*> ASSIGN
@@ -90,12 +93,16 @@
 %type <SCL::AST::Dictionary*> DICTIONARY DICTIONARY_ELEMENTS
 %type <SCL::Type*> TYPE
 
-
 %token <SCL::AST::Variable*> VARIABLE
 %token <SCL::Type*> INTEGER FLOAT STRING BOOLEAN_FALSE BOOLEAN_TRUE
 %token END 0
 
 %token PRINTTOKEN "print"
+
+
+%type <SCL::AST::Command*> COMMAND
+%token <std::string> COMMANDPATH COMMANDARGUMENT
+//%right COMMANDARGUMENT
 
 %start MODULE
 
@@ -120,12 +127,19 @@ INSTRUCTIONS
 INSTRUCTION
 	: ASSIGN
 	| PRINT
+	| COMMAND { $$ = $1; }
 	| CONTROL_IF EXPRESSION SYMBOL_NEW_LINE INSTRUCTIONS SYMBOL_NEW_LINE CONTROL_END {
 		$$ = new SCL::AST::If($2, new SCL::Scope($4));
 	}
 	| CONTROL_FOR VARIABLE CONTROL_IN EXPRESSION SYMBOL_NEW_LINE INSTRUCTIONS SYMBOL_NEW_LINE CONTROL_END {
 		$$ = new SCL::AST::For($2, $4, new SCL::Scope($6));
 	}
+;
+
+
+COMMAND
+	: COMMANDPATH { $$ = new SCL::AST::Command($1) ; }
+	| COMMAND COMMANDARGUMENT { $$ = $1; $$->addArgument($2); }
 ;
 
 
@@ -144,6 +158,7 @@ EXPRESSION
 	| ARRAY { $$ = $1; }
 	| DICTIONARY { $$ = $1; }
 	| EXPRESSION SYMBOL_RANGE EXPRESSION SYMBOL_RANGE EXPRESSION { $$ = new AST::RangeIterator($1, $3, $5); }
+//this produces a reduce/reduce warning
 	| EXPRESSION SYMBOL_RANGE EXPRESSION { $$ = new AST::RangeIterator($1, $3); }
 	| SYMBOL_ROUND_BRACKET_OPEN EXPRESSION SYMBOL_ROUND_BRACKET_CLOSE { $$ = $2; }
 	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS { $$ = new SCL::AST::UnaryMinus($2); }

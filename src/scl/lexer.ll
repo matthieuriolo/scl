@@ -18,6 +18,8 @@ using namespace SCL;
 %}
 
 
+%x COMMAND
+
 %%
 %{
 SCL::location& loc = result.location;
@@ -63,7 +65,8 @@ loc.step();
 ";"                   return Parser::make_SYMBOL_SEMICOLON(loc);
 ":"                   return Parser::make_SYMBOL_COLON(loc);
 ","                   return Parser::make_SYMBOL_COMMA(loc);
-\n+                   {
+<INITIAL,COMMAND>\n+  {
+						BEGIN(INITIAL);
 						loc.lines(yyleng);
 						loc.step();
 						return Parser::make_SYMBOL_NEW_LINE(loc);
@@ -116,6 +119,33 @@ loc.step();
 						(loc, "invalid character: " + std::string(yytext));
                       }
 <<EOF>>               return Parser::make_END(loc);
+
+
+
+%{
+/* command */
+%}
+
+("/"|"./"|"../"|[a-zA-Z]|_|-)+              {
+											BEGIN(COMMAND);
+											return Parser::make_COMMANDPATH(yytext, loc);
+										}
+<COMMAND>[^ \n]+                        return Parser::make_COMMANDARGUMENT(yytext, loc);
+
+%{
+/*
+\"(\\|[^\\"])*\"     return Parser::make_COMMANDARGUMENT(yytext, loc);
+\'(\\|[^\\'])*\'     return Parser::make_COMMANDARGUMENT(yytext, loc);
+
+
+^[^\$ \n]+              return Parser::make_COMMANDPATH(yytext, loc);
+[^ \n]+              return Parser::make_COMMANDARGUMENT(yytext, loc);
+\"(\\|[^\\"])*\"     return Parser::make_COMMANDARGUMENT(yytext, loc);
+\'(\\|[^\\'])*\'     return Parser::make_COMMANDARGUMENT(yytext, loc);
+*/
+%}
+
+
 %%
 
 

@@ -2,6 +2,7 @@
 #include "scl/types/undefined.hpp"
 #include "scl/ast/variable.hpp"
 #include "scl/type.hpp"
+#include "scl/types/function.hpp"
 
 namespace SCL {
 	/*Context::Context(SCL::Scope *scope) {
@@ -55,5 +56,50 @@ namespace SCL {
 			}
 		}
 		return SCL::Types::Undefined::getUndefined();
+	}
+
+
+
+
+
+
+
+
+
+
+	void Context::declareFunction(SCL::AST::Variable *variable, SCL::Types::Function *func) {
+		declareFunction(variable->getName(), func);
+	}
+
+	SCL::Types::Function *Context::getFunction(SCL::AST::Variable *variable) {
+		return getFunction(variable->getName());
+	}
+
+	void Context::declareFunction(std::string name, SCL::Types::Function *func) {
+		Context *s = this;
+		while(s != NULL) {
+			if(s->functions.find(name) != s->functions.end()) {
+				s->functions[name] = func;
+				return;
+			}else {
+				s = s->parent;
+			}
+		}
+		
+		this->functions[name] = func;
+	}
+
+	SCL::Types::Function *Context::getFunction(std::string name) {
+		Context *s = this;
+		while(s != NULL) {
+			std::map<std::string, SCL::Types::Function *>::iterator iter = s->functions.find(name);
+			if(iter != s->functions.end()) {
+				return iter->second;
+			}else {
+				s = s->parent;
+			}
+		}
+
+		throw new std::logic_error("function not found");
 	}
 }

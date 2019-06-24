@@ -20,6 +20,7 @@ scl_SOURCES = \
 	src/scl/scope.cpp \
 	src/scl/type.cpp \
 	\
+	src/scl/ast/command.cpp \
 	src/scl/ast/dictionary.cpp \
 	src/scl/ast/array.cpp \
 	src/scl/ast/access.cpp \
@@ -37,6 +38,7 @@ scl_SOURCES = \
 	src/scl/ast/unaryminus.cpp \
 	src/scl/ast/print.cpp \
 	\
+	src/scl/types/function.cpp \
 	src/scl/types/dictionary.cpp \
 	src/scl/types/array.cpp \
 	src/scl/types/boolean.cpp \

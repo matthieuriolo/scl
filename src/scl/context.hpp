@@ -11,6 +11,10 @@ namespace SCL {
 	namespace AST {
 		class Variable;
 	}
+
+	namespace Types {
+		class Function;
+	}
 	
 	class Context {
 		private:
@@ -18,6 +22,8 @@ namespace SCL {
 			//SCL::Scope* scope;
 			
 			std::map<std::string, SCL::Type *> variables;
+			std::map<std::string, SCL::Types::Function *> functions;
+
 		public:
 			Context();
 			Context(Context* parent);
@@ -28,6 +34,11 @@ namespace SCL {
 			SCL::Type *getValue(std::string name);
 			void setValue(SCL::AST::Variable *, SCL::Type *);
 			SCL::Type *getValue(SCL::AST::Variable *);
+			
+			void declareFunction(std::string name, SCL::Types::Function *);
+			SCL::Types::Function *getFunction(std::string name);
+			void declareFunction(SCL::AST::Variable *, SCL::Types::Function *);
+			SCL::Types::Function *getFunction(SCL::AST::Variable *);
 	};
 }
 
