@@ -153,7 +153,10 @@ loc.step();
 
 namespace SCL {
 	void ParserResult::scan_begin() {
+		YY_FLUSH_BUFFER;
+		BEGIN(INITIAL);
 		yy_flex_debug = trace_scanning;
+
 		if(file.empty() || file == "-") {
 			yyin = stdin;
 		}else if(!(yyin = fopen(file.c_str (), "r"))) {
