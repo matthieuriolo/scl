@@ -42,6 +42,7 @@
 
 
 	#include "scl/ast/print.hpp"
+	#include "scl/ast/printStatic.hpp"
 
 	#include "scl/types/float.hpp"
 	#include "scl/types/integer.hpp"
@@ -225,6 +226,7 @@ IDENTIFIERS
 
 PRINT
 	: PRINTTOKEN VARIABLE { $$ = new SCL::AST::Print($2); }
+	| PRINTTOKEN STRING { $$ = new SCL::AST::PrintStatic($2); }
 ;
 
 ASSIGN
