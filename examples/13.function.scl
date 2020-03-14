@@ -1,0 +1,20 @@
+# -----------------------------
+#
+# Test case for functions
+#
+# -----------------------------
+
+:aFunc()
+	$a = "test"
+	print $a
+end
+
+#aFunc
+
+:anotherFunc($internA:aaa,a $internB:bbb,b)
+	print $internA
+	print $internB
+end
+
+anotherFunc -asad -bgjhjk
+anotherFunc --aaa=sad --bbb=gjhjk

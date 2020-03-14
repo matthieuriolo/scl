@@ -19,6 +19,7 @@ using namespace SCL;
 
 
 %x COMMAND
+%x FUNCTION
 
 %%
 %{
@@ -60,11 +61,17 @@ loc.step();
 "]"                   return Parser::make_SYMBOL_SQUARED_BRACKET_CLOSE(loc);
 "{"                   return Parser::make_SYMBOL_CURLY_BRACKET_OPEN(loc);
 "}"                   return Parser::make_SYMBOL_CURLY_BRACKET_CLOSE(loc);
-"("                   return Parser::make_SYMBOL_ROUND_BRACKET_OPEN(loc);
-")"                   return Parser::make_SYMBOL_ROUND_BRACKET_CLOSE(loc);
+<INITIAL,FUNCTION>"("                   return Parser::make_SYMBOL_ROUND_BRACKET_OPEN(loc);
+<INITIAL,FUNCTION>")"                   {
+									BEGIN(INITIAL);
+								return Parser::make_SYMBOL_ROUND_BRACKET_CLOSE(loc);
+								}
 ";"                   return Parser::make_SYMBOL_SEMICOLON(loc);
-":"                   return Parser::make_SYMBOL_COLON(loc);
-","                   return Parser::make_SYMBOL_COMMA(loc);
+<INITIAL,FUNCTION>":" return Parser::make_SYMBOL_COLON(loc);
+<INITIAL,FUNCTION>","                   return Parser::make_SYMBOL_COMMA(loc);
+<INITIAL,FUNCTION>"?"                   return Parser::make_SYMBOL_QUESTION_MARK(loc);
+<INITIAL,FUNCTION>"!"                   return Parser::make_SYMBOL_EXCLAMATION_MARK(loc);
+
 <INITIAL,COMMAND>\n+  {
 						BEGIN(INITIAL);
 						loc.lines(yyleng);
@@ -94,8 +101,7 @@ loc.step();
 
 [0-9]+                return Parser::make_INTEGER(new Types::Integer(yytext), loc);
 [0-9]+\.[0-9]+        return Parser::make_FLOAT(new Types::Float(yytext), loc);
-\$[a-zA-Z0-9]+        return Parser::make_VARIABLE(new AST::Variable(yytext + 1), loc);
-
+<INITIAL,FUNCTION>\$[a-zA-Z0-9]+        return Parser::make_VARIABLE(new AST::Variable(yytext + 1), loc);
 
 \"(\\|[^\\"])*\"    {
 						auto s = std::string(yytext);
@@ -108,21 +114,6 @@ loc.step();
 					}
 
 %{
-/* analyctics */
-%}
-
-#[^\n]*
-
-[ \t\r]+              loc.step();
-.                     {
-						throw SCL::Parser::syntax_error
-						(loc, "invalid character: " + std::string(yytext));
-                      }
-<<EOF>>               return Parser::make_END(loc);
-
-
-
-%{
 /* command */
 %}
 
@@ -130,20 +121,37 @@ loc.step();
 											BEGIN(COMMAND);
 											return Parser::make_COMMANDPATH(yytext, loc);
 										}
-<COMMAND>[^ \n]+                        return Parser::make_COMMANDARGUMENT(yytext, loc);
+<COMMAND>[^ \n]+                       return Parser::make_COMMANDARGUMENT(yytext, loc);
 
 %{
 /*
-\"(\\|[^\\"])*\"     return Parser::make_COMMANDARGUMENT(yytext, loc);
-\'(\\|[^\\'])*\'     return Parser::make_COMMANDARGUMENT(yytext, loc);
-
-
-^[^\$ \n]+              return Parser::make_COMMANDPATH(yytext, loc);
-[^ \n]+              return Parser::make_COMMANDARGUMENT(yytext, loc);
-\"(\\|[^\\"])*\"     return Parser::make_COMMANDARGUMENT(yytext, loc);
-\'(\\|[^\\'])*\'     return Parser::make_COMMANDARGUMENT(yytext, loc);
+<COMMAND>-[a-zA-Z0-9]+
+<COMMAND>--[^ =\n]+
 */
 %}
+
+
+:[a-zA-Z]+         {
+						BEGIN(FUNCTION);
+						return Parser::make_FUNCTION_NAME(std::string(yytext + 1), loc);
+					}
+
+<FUNCTION>[a-zA-Z0-9]+          return Parser::make_IDENTIFIER(std::string(yytext), loc);
+
+
+
+%{
+/* analyctics */
+%}
+
+#[^\n]*
+
+<INITIAL,FUNCTION,COMMAND>[ \t\r]+              loc.step();
+<INITIAL,FUNCTION,COMMAND>.                     {
+						throw SCL::Parser::syntax_error
+						(loc, "invalid character: " + std::string(yytext));
+                      }
+<<EOF>>               return Parser::make_END(loc);
 
 
 %%

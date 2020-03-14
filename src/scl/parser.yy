@@ -20,6 +20,7 @@
 
 %code requires {
 	#include <list>
+	#include <vector>
 	#include <iostream>
 
 	#include "scl/ast/command.hpp"
@@ -37,6 +38,8 @@
 	#include "scl/ast/if.hpp"
 	#include "scl/ast/for.hpp"
 	#include "scl/ast/unaryminus.hpp"
+	#include "scl/ast/functiondeclare.hpp"
+
 
 	#include "scl/ast/print.hpp"
 
@@ -80,6 +83,8 @@
 %token SYMBOL_NEW_LINE SYMBOL_SEMICOLON
 %token SYMBOL_COLON SYMBOL_COMMA
 
+%token SYMBOL_EXCLAMATION_MARK SYMBOL_QUESTION_MARK
+
 %token CONTROL_IF CONTROL_FOR CONTROL_IN CONTROL_END
 %token SYMBOL_RANGE
 
@@ -104,6 +109,15 @@
 %token <std::string> COMMANDPATH COMMANDARGUMENT
 //%right COMMANDARGUMENT
 
+
+%token <std::string> IDENTIFIER
+%type <std::list<std::string> > IDENTIFIERS
+%token <std::string> FUNCTION_NAME
+%type <SCL::AST::FunctionDeclare*> FUNCTION_DECLARATION
+%type <std::list<SCL::Types::FunctionBody*>> FUNCTION_BODIES
+%type <std::vector<SCL::Types::FunctionParameter*> > FUNCTION_SIGNATUR FUNCTION_PARAMETERS
+%type <SCL::Types::FunctionParameter*> FUNCTION_PARAMETER
+
 %start MODULE
 
 /*
@@ -127,6 +141,7 @@ INSTRUCTIONS
 INSTRUCTION
 	: ASSIGN
 	| PRINT
+	| FUNCTION_DECLARATION { $$ = $1; }
 	| COMMAND { $$ = $1; }
 	| CONTROL_IF EXPRESSION SYMBOL_NEW_LINE INSTRUCTIONS SYMBOL_NEW_LINE CONTROL_END {
 		$$ = new SCL::AST::If($2, new SCL::Scope($4));
@@ -142,6 +157,71 @@ COMMAND
 	| COMMAND COMMANDARGUMENT { $$ = $1; $$->addArgument($2); }
 ;
 
+FUNCTION_DECLARATION
+	: FUNCTION_NAME FUNCTION_BODIES CONTROL_END { $$ = new SCL::AST::FunctionDeclare($1, new SCL::Types::Function($2)); }
+;
+
+FUNCTION_BODIES
+	: %empty { $$ = std::list<SCL::Types::FunctionBody*>();}
+	| FUNCTION_BODIES FUNCTION_SIGNATUR INSTRUCTIONS { $$ = $1; $$.push_back(new SCL::Types::FunctionBody($2, new SCL::Scope($3))); }
+	| FUNCTION_BODIES SYMBOL_COLON FUNCTION_SIGNATUR INSTRUCTIONS { $$ = $1; $$.push_back(new SCL::Types::FunctionBody($3, new SCL::Scope($4))); }
+;
+
+FUNCTION_SIGNATUR
+	: SYMBOL_ROUND_BRACKET_OPEN FUNCTION_PARAMETERS SYMBOL_ROUND_BRACKET_CLOSE { $$ = $2; }
+;
+
+
+FUNCTION_PARAMETERS
+	: %empty { $$ = std::vector<SCL::Types::FunctionParameter*>(); }
+	| FUNCTION_PARAMETERS FUNCTION_PARAMETER { $$ = $1; $$.push_back($2); }
+;
+
+FUNCTION_PARAMETER
+	: VARIABLE { $$ = new SCL::Types::FunctionParameter($1); }
+	
+	| VARIABLE SYMBOL_COLON IDENTIFIERS {
+		$$ = new SCL::Types::FunctionParameter($1);
+		$$->externNames = $3;
+	}
+
+	| VARIABLE SYMBOL_COLON IDENTIFIERS OPERAND_EQUAL EXPRESSION {
+		$$ = new SCL::Types::FunctionParameter($1);
+		$$->externNames = $3;
+		$$->defaultValue = $5;
+	}
+
+	| VARIABLE SYMBOL_EXCLAMATION_MARK IDENTIFIERS {
+		$$ = new SCL::Types::FunctionParameter($1);
+		$$->externNames = $3;
+		$$->isFlag = true;
+	}
+
+	| VARIABLE SYMBOL_QUESTION_MARK IDENTIFIERS {
+		$$ = new SCL::Types::FunctionParameter($1);
+		$$->types = $3;
+	}
+
+	| VARIABLE SYMBOL_QUESTION_MARK IDENTIFIERS SYMBOL_COLON IDENTIFIERS {
+		$$ = new SCL::Types::FunctionParameter($1);
+		$$->types = $3;
+		$$->externNames = $5;
+	}
+
+	| VARIABLE SYMBOL_QUESTION_MARK IDENTIFIERS SYMBOL_COLON IDENTIFIERS OPERAND_EQUAL EXPRESSION {
+		$$ = new SCL::Types::FunctionParameter($1);
+		$$->types = $3;
+		$$->externNames = $5;
+		$$->defaultValue = $7;
+	}
+;
+
+
+IDENTIFIERS
+	: %empty { $$ = std::list<std::string>(); }
+	| IDENTIFIERS IDENTIFIER { $$ = $1; $$.push_back($2); }
+	| IDENTIFIERS SYMBOL_COMMA IDENTIFIER { $$ = $1; $$.push_back($3); }
+;
 
 PRINT
 	: PRINTTOKEN VARIABLE { $$ = new SCL::AST::Print($2); }
@@ -216,7 +296,7 @@ ARRAY
 ARRAY_ELEMENTS
 	: %empty { $$ = new SCL::AST::Array(); }
 	| ARRAY_ELEMENTS EXPRESSION { $$ = $1; $$->add($2); }
-	| ARRAY_ELEMENTS SYMBOL_COMMA EXPRESSION {  $$ = $1; $1->add($3); }
+	| ARRAY_ELEMENTS SYMBOL_COMMA EXPRESSION {  $$ = $1; $$->add($3); }
 	| ARRAY_ELEMENTS SYMBOL_COMMA { $$ = $1; }
 ;
 

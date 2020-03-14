@@ -36,9 +36,12 @@ scl_SOURCES = \
 	src/scl/ast/comparator.cpp \
 	src/scl/ast/variable.cpp \
 	src/scl/ast/unaryminus.cpp \
+	src/scl/ast/functiondeclare.cpp \
 	src/scl/ast/print.cpp \
 	\
 	src/scl/types/function.cpp \
+	src/scl/types/functionbody.cpp \
+	src/scl/types/functionparameter.cpp \
 	src/scl/types/dictionary.cpp \
 	src/scl/types/array.cpp \
 	src/scl/types/boolean.cpp \
