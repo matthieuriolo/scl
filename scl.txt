@@ -5,6 +5,20 @@
 ##########################################
 
 
+# todo
+# - typeof syntax aka shortcut for $(type $var) == "typeof"
+# - iterator functions/creation
+# 	- $newIterator = $[$firstElement]
+#	- flattening
+#	- pop
+#	- push
+#	- splice
+#	- reduce iterator $initialValue $anonymFunction
+#	- map iterator $anonymFunction
+# - list comprehension vs iterator syntax
+# - compound operators like +=
+
+
 # command call
 command whatever you want "not tokenized" 'not tokenized'
 cmd -g "getopt" --get-opt="parameter"
@@ -16,13 +30,18 @@ firstCmd && secondCmd --param="secondCmd will be executed except firstCmd fails"
 firstCmd || secondCmd --param="secondCmd will only be executed if firstCmd fails"
 firstCmd; secondCmd --param="executes both command"
 
+# piping
+cmd1 | cmd2
+cmd1 | $(cmd2 ; cmd3)
+cmd1 | $(cmd2 || cmd3)
+
 # masking
 \\
 \$
 \|
 \&
 \;
-\)
+\(
 
 # named pipes
 
@@ -36,7 +55,7 @@ command $var
 command --parameters-wont-get-tokenized=$var
 $var[$keyForArrayAndDictionaryAccess]
 $assignStdout = $(echo "hello world")
-$expantion = 'not expanded $var' + " also not $var "  + " but this one will " + $var
+$expansion = 'not expanded $var' + " also not $var "  + " but this one will " + $var
 
 # predefined variables (indicated with an @ instead of a $)
 # those variables are read only
@@ -102,6 +121,9 @@ $builtinDefinedType = $(file /tmp/test.txt)
 $builtinDefinedType = $(url https://helenos.org)
 $builtinDefinedType = $(thread cmd --param=$var)
 
+# multi assign
+$a, $b, $c = 12, "foobar", []
+
 # operator
 $plus = "var" + "iable"
 $minus = 10 - 1
@@ -123,7 +145,6 @@ $var = true < false
 $var = true > false
 $var = true <= false
 $var = true >= false
-
 
 
 # default functions for builtin types (types are immutable)
@@ -214,15 +235,15 @@ end
 :()
 end
 
-#anonym function
+# anonym function
 $func = :()
 end
 
 
 # code expansion
-$cmd = 'cmd'
-$param = '--param="value"'
-$result = $$cmd $$param
+#$cmd = 'cmd'
+#$param = '--param="value"'
+#$result = $$cmd $$param
 
 
 
