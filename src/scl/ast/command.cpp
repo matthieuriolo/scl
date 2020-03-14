@@ -48,17 +48,19 @@ namespace SCL {
 			std::string* path = findCommand(commandpath);
 			if(path != NULL) {
 				executeProcess(*path, ctx);
+				return;
 			}else {
 				SCL::Types::Function *func = ctx->getFunction(commandpath);
 				if(func != NULL) {
 					func->execute(ctx, arguments);
+					return;
 				}
 			}
 
-			throw new std::logic_error("command not found");
+			throw new std::logic_error(std::string("command `") + commandpath + std::string("` not found"));
 		}
 
-		void Command::executeProcess(std::string path, SCL::Context * ctx) {
+		void Command::executeProcess(std::string path, SCL::Context *ctx) {
 			std::string cmd = std::string(path);
 
 			for(auto arg : arguments) {

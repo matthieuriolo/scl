@@ -4,9 +4,6 @@
 #
 # -----------------------------
 
-#echo
-#echo haha hehe hihi hoho huhu
-
 /bin/cat /etc/shells
 
 cat /etc/shells
