@@ -26,6 +26,7 @@ namespace SCL {
 				void addArgument(std::string argument);
 
 				void execute(SCL::Context * ctx);
+				void printAST(int level);
 		};
 	}
 }

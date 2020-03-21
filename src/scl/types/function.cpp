@@ -1,7 +1,7 @@
 #include "scl/types/function.hpp"
 
 #include <iostream>
-
+#include <string>
 namespace SCL {
 	namespace Types {
 		Function::Function(std::list<SCL::Types::FunctionBody*> bodies) {
@@ -42,6 +42,13 @@ namespace SCL {
 			}
 
 			throw new std::logic_error("Invalid parameters");
+		}
+
+		void Function::printAST(int level) {
+			std::cout << std::string(level * 2, ' ') << "type.function\n";
+			for(auto body : bodies) {
+				body->printAST(level+1);
+			}
 		}
 	}
 }

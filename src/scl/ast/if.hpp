@@ -14,6 +14,7 @@ namespace SCL {
 				If(SCL::AST::Expression *expression, SCL::Scope *scope);
 
 				void execute(SCL::Context * ctx);
+				void printAST(int level);
 		};
 	}
 }

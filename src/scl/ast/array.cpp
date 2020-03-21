@@ -1,6 +1,8 @@
 #include "scl/ast/array.hpp"
 #include "scl/types/array.hpp"
 
+#include <string>
+#include <iostream>
 namespace SCL {
 	namespace AST {
 		Array::Array() {}
@@ -15,6 +17,13 @@ namespace SCL {
 				arr->add(expr->compute(ctx));
 			}
 			return arr;
+		}
+
+		void Array::printAST(int level) {
+			std::cout << std::string(level * 2, ' ') << "expression.array\n";
+			for(auto val : values) {
+				val->printAST(level+1);
+			}
 		}
 	}
 }

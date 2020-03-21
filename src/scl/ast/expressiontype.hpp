@@ -11,6 +11,8 @@ namespace SCL {
 			public:
 				ExpressionType(SCL::Type* type);
 				SCL::Type *compute(SCL::Context *ctx);
+
+				void printAST(int level);
 		};
 	}
 }

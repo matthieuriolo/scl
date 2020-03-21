@@ -10,6 +10,8 @@
 #include <algorithm>
 #include <getopt.h>
 
+#include <iostream>
+#include <string>
 namespace SCL {
 	namespace Types {
 		FunctionBody::FunctionBody(std::vector<SCL::Types::FunctionParameter*> parameters, SCL::Scope* scope) {
@@ -43,7 +45,6 @@ namespace SCL {
 						opt.name = strdup(name.c_str());
 						opt.has_arg = param->isFlag ? no_argument : required_argument;
 						opt.flag = NULL;
-						//opt.val = 'L';
 
 						long_options.push_back(opt);
 					}
@@ -101,8 +102,9 @@ namespace SCL {
 					}else {
 						option opt;
 						opt.name = strdup(name.c_str());
-						opt.has_arg = param->isFlag ? 0 : 1;
+						opt.has_arg = param->isFlag ? no_argument : required_argument;
 						opt.flag = NULL;
+
 						long_options.push_back(opt);
 					}
 				} 
@@ -126,7 +128,7 @@ namespace SCL {
 			std::vector<const char*> args;
 			args.push_back("internal-command");
 			for(auto a : arguments) {
-				args.push_back(strdup(a.c_str()));
+				args.push_back(a.c_str());
 			}
 
 			/* set all flags to false and set default values */
@@ -137,7 +139,7 @@ namespace SCL {
 					ctx->setValue(param->internName, param->defaultValue->compute(ctx));
 				}
 			}
-
+//weird failure in which it sometimes work and sometimes not
 			while((c = getopt_long(args.size(), (char *const *)args.data(), optstring.c_str(), options, &option_index)) != -1) {
 				switch(c) {
 					case 0:
@@ -174,8 +176,8 @@ namespace SCL {
 									if(optarg[0] == '$') {
 										val = ctx->getValue(std::string(optarg).substr(1));
 									}else {
+										//todo: better handling of none string types
 										val = new SCL::Types::String(optarg);
-
 									}
 								}else {
 									throw new std::logic_error("could not parse parameters3");
@@ -187,6 +189,7 @@ namespace SCL {
 						}
 
 						if(!foundParam) {
+							std::cout << "we found" << option_index << "\n" ;
 							throw new std::logic_error("could not parse parameters4");
 						}
 				}
@@ -196,6 +199,18 @@ namespace SCL {
 			delete(newCtx);
 
 			return NULL;
+		}
+
+
+		void FunctionBody::printAST(int level) {
+			std::cout << std::string(level * 2, ' ') << "type.functionBody\n";
+			std::cout << std::string((level+1) * 2, ' ') << "parameters:\n";
+			for(auto parameter : parameters) {
+				parameter->printAST(level+2);
+			}
+
+			std::cout << std::string((level+1) * 2, ' ') << "body:\n";
+			scope->printAST(level+2);
 		}
 	}
 }

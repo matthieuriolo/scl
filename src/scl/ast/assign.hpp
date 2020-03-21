@@ -15,6 +15,7 @@ namespace SCL {
 				Assign(SCL::AST::Variable *variable, SCL::AST::Expression *expression);
 
 				void execute(SCL::Context * ctx);
+				void printAST(int level);
 		};
 	}
 }

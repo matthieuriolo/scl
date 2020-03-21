@@ -23,6 +23,7 @@ namespace SCL {
 				int compare(SCL::Type *right);
 
 				SCL::Type *execute(SCL::Context *ctx, std::list<std::string> arguments);
+				void printAST(int level);
 		};
 	}
 }

@@ -1,5 +1,7 @@
 #include "scl/ast/operand.hpp"
 
+#include <string>
+#include <iostream>
 namespace SCL {
 	namespace AST {
 		Operand::Operand(Operand_Type operand, SCL::AST::Expression *left, SCL::AST::Expression *right) {
@@ -27,6 +29,35 @@ namespace SCL {
 			}
 
 			throw new std::logic_error("invalid operand type");
+		}
+
+		void Operand::printAST(int level) {
+			std::cout << std::string(level*2, ' ') << "instruction.operand\n";
+			std::cout << std::string((level+1)*2, ' ') << "operand: ";
+
+			switch(this->operand) {
+				case PLUS:
+					std::cout << "PLUS";
+				case MINUS:
+					std::cout << "MINUS";
+				case ASTERISK:
+					std::cout << "ASTERISK";
+				case SLASH:
+					std::cout << "SLASH";
+				case CARET:
+					std::cout << "CARET";
+				case AND:
+					std::cout << "AND";
+				case OR:
+					std::cout << "OR";
+			}
+
+			std::cout << "\n";
+
+			std::cout << std::string((level+1) * 2, ' ') << "left:\n";
+			left->printAST(level+2);
+			std::cout << std::string((level+1) * 2, ' ') << "right:\n";
+			right->printAST(level+2);
 		}
 	}
 }

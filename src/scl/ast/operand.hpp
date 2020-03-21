@@ -25,6 +25,7 @@ namespace SCL {
 			public:
 				Operand(Operand_Type operand, SCL::AST::Expression *left, SCL::AST::Expression *right);
 				SCL::Type *compute(SCL::Context *ctx);
+				void printAST(int level);
 		};
 	}
 }

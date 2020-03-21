@@ -18,6 +18,7 @@ namespace SCL {
 
 				bool matchingParameters(std::list<std::string> arguments);
 				SCL::Type *execute(SCL::Context *ctx, std::list<std::string> arguments);
+				void printAST(int level);
 		};
 	}
 }

@@ -14,6 +14,7 @@ namespace SCL {
 				Access(SCL::AST::Expression *expression, SCL::AST::Expression *key);
 
 				SCL::Type *compute(SCL::Context * ctx);
+				void printAST(int level);
 		};
 	}
 }

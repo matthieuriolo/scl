@@ -14,6 +14,7 @@ namespace SCL {
 			public:
 				PrintStatic(SCL::Type *type);
 				void execute(SCL::Context * ctx);
+				void printAST(int level);
 		};
 	}
 }

@@ -14,6 +14,7 @@ namespace SCL {
 			public:
 				Print(SCL::AST::Variable *variable);
 				void execute(SCL::Context * ctx);
+				void printAST(int level);
 		};
 	}
 }

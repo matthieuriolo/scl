@@ -9,6 +9,7 @@ namespace SCL {
 		class Expression {
 			public:
 				virtual SCL::Type *compute(SCL::Context *ctx) = 0;
+				virtual void printAST(int level) = 0;
 		};
 	}
 }

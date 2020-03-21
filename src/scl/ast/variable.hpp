@@ -13,6 +13,7 @@ namespace SCL {
 				Variable(std::string name);
 				std::string getName();
 				SCL::Type *compute(SCL::Context *ctx);
+				void printAST(int level);
 		};
 	}
 }

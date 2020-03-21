@@ -3,6 +3,8 @@
 #include "scl/types/integer.hpp"
 #include "scl/types/float.hpp"
 
+#include <string>
+#include <iostream>
 namespace SCL {
 	namespace AST {
 		UnaryMinus::UnaryMinus(SCL::AST::Expression *expression) {
@@ -18,6 +20,12 @@ namespace SCL {
 			}
 
 			throw new std::logic_error("invalid unary type");
+		}
+
+		void UnaryMinus::printAST(int level) {
+			std::cout << std::string(level * 2, ' ') << "expression.unaryMinus\n";
+			std::cout << std::string((level + 1) * 2, ' ') << "expression:\n";
+			expression->printAST(level + 2);
 		}
 	}
 }

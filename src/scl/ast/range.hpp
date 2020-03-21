@@ -15,6 +15,7 @@ namespace SCL {
 				Range(SCL::AST::Expression *expression, SCL::AST::Expression *start, SCL::AST::Expression *end);
 
 				SCL::Type *compute(SCL::Context * ctx);
+				void printAST(int level);
 		};
 	}
 }

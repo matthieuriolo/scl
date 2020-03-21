@@ -5,6 +5,7 @@
 #include <array>
 #include <vector>
 #include <cstdio>
+#include <string>
 #include <unistd.h>
 
 namespace SCL {
@@ -92,6 +93,16 @@ namespace SCL {
 				executeCommand(ctx);
 			}else {
 				executeProcess(commandpath, ctx);
+			}
+		}
+
+		void Command::printAST(int level) {
+			std::cout << std::string(level*2, ' ') << "instruction.command\n";
+			std::cout << std::string((level+1) * 2, ' ') << "path: " << commandpath << "\n";
+			std::cout << std::string((level+1) * 2, ' ') << "arguments:\n";
+
+			for(auto arg : arguments) {
+				std::cout << std::string((level+1) * 2, ' ') << arg <<"\n";
 			}
 		}
 

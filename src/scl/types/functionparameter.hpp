@@ -18,6 +18,8 @@ namespace SCL {
 				SCL::AST::Expression *defaultValue;
 			public:
 				FunctionParameter(SCL::AST::Variable* internName);
+
+				void printAST(int level);
 		};
 	}
 }

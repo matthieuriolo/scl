@@ -4,6 +4,7 @@
 #include "scl/ast/expression.hpp"
 #include <vector>
 
+
 namespace SCL {
 	namespace AST {
 		class Array : public Expression {
@@ -13,6 +14,7 @@ namespace SCL {
 				Array();
 				void add(Expression* value);
 				SCL::Type *compute(SCL::Context *ctx);
+				void printAST(int level);
 		};
 	}
 }

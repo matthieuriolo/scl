@@ -1,6 +1,7 @@
 #include "scl/ast/print.hpp"
-#include <iostream>
 
+#include <string>
+#include <iostream>
 namespace SCL {
 	namespace AST {
 		Print::Print(SCL::AST::Variable *variable) {
@@ -9,6 +10,12 @@ namespace SCL {
 
 		void Print::execute(SCL::Context * ctx) {
 			std::cout << ctx->getValue(variable)->stringify() << "\n";
+		}
+
+		void Print::printAST(int level) {
+			std::cout << std::string(level*2, ' ') << "instruction.print\n";
+			std::cout << std::string((level+1) * 2, ' ') << "variable:\n";
+			variable->printAST(level+2);
 		}
 	}
 }

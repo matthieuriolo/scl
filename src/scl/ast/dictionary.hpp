@@ -13,6 +13,7 @@ namespace SCL {
 				Dictionary();
 				void add(Expression *key, Expression *value);
 				SCL::Type *compute(SCL::Context *ctx);
+				void printAST(int level);
 		};
 	}
 }

@@ -15,6 +15,7 @@ namespace SCL {
 				FunctionDeclare(std::string name, SCL::Types::Function *function);
 
 				void execute(SCL::Context * ctx);
+				void printAST(int level);
 		};
 	}
 }

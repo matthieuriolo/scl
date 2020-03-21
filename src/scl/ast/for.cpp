@@ -1,5 +1,8 @@
 #include "scl/ast/for.hpp"
 
+
+#include <string>
+#include <iostream>
 namespace SCL {
 	namespace AST {
 		For::For(SCL::AST::Variable *variable, SCL::AST::Expression *expression, SCL::Scope *scope) {
@@ -22,6 +25,16 @@ namespace SCL {
 				scope->execute(newCtx);
 				delete(newCtx);
 			}
+		}
+
+		void For::printAST(int level) {
+			std::cout << std::string(level*2, ' ') << "instruction.for\n";
+			std::cout << std::string((level+1) * 2, ' ') << "variable:\n";
+			variable->printAST(level+2);
+			std::cout << std::string((level+1)*2, ' ') << "expression:\n";
+			expression->printAST(level+2);
+			std::cout << std::string((level+1)*2, ' ') << "scope:\n";
+			scope->printAST(level+2);
 		}
 	}
 }

@@ -5,6 +5,9 @@
 #include "scl/types/float.hpp"
 #include "scl/types/integer.hpp"
 
+
+#include <string>
+#include <iostream>
 namespace SCL {
 	namespace AST {
 		RangeIterator::RangeIterator(SCL::AST::Expression *start, SCL::AST::Expression *end, SCL::AST::Expression *increment) {
@@ -66,6 +69,25 @@ namespace SCL {
 					endT->getName() == "float" ? ((SCL::Types::Float *)endT)->getValue() : ((SCL::Types::Integer *)endT)->getValue()
 				);
 			}
+		}
+
+		void RangeIterator::printAST(int level) {
+			std::cout << std::string(level * 2, ' ') << "expression.rangeIterator\n";
+			
+			std::cout << std::string((level+1) * 2, ' ') << "start:\n";
+			start->printAST(level+2);
+
+			std::cout << std::string((level+1) * 2, ' ') << "end:\n";
+			end->printAST(level+2);
+
+			std::cout << std::string((level+1) * 2, ' ') << "increment:";
+			if(increment == NULL) {
+				std::cout << " NULL\n";
+			}else {
+				std::cout << "\n";
+				increment->printAST(level+2);
+			}
+
 		}
 	}
 }
