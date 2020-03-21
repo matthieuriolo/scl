@@ -13,6 +13,8 @@ namespace SCL {
 			Module(std::list<SCL::AST::Instruction *> instructions) : Scope(instructions) {}
 
 			void launch();
+			void printASTTree();
+			void printAST(int level);
 	};
 }
 

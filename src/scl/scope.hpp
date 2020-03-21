@@ -14,6 +14,8 @@ namespace SCL {
 			Scope(std::list<SCL::AST::Instruction *> instructions);
 
 			virtual void execute(Context * ctx);
+			virtual void printAST(int level);
+			void printASTInstruction(int level);
 	};
 }
 
