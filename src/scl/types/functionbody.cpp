@@ -45,6 +45,7 @@ namespace SCL {
 						opt.name = strdup(name.c_str());
 						opt.has_arg = param->isFlag ? no_argument : required_argument;
 						opt.flag = NULL;
+						opt.val = 1234;
 
 						long_options.push_back(opt);
 					}
@@ -55,6 +56,7 @@ namespace SCL {
 			opt.name = NULL;
 			opt.has_arg = 0;
 			opt.flag = NULL;
+			opt.val = 0;
 
 			long_options.push_back(opt);
 			
@@ -63,18 +65,18 @@ namespace SCL {
 
 			int option_index = 0;
 			opterr = 0;
-			optind = 1;
+			optind = 0;
 			int c;
 
 			std::vector<const char*> args;
-			//args.push_back("testing");
+			args.push_back("acommand");
 			for(auto a : arguments) {
-				//std::cout << a << "\n";
-				args.push_back(a.c_str());
+				args.push_back(strdup(a.c_str()));
 			}
 
 			while((c = getopt_long(args.size(), (char *const *)args.data(), optstring.c_str(), options, &option_index)) != -1) {
 				switch(c) {
+					/* TODO: we need to ensure that that the given paraments are REQUIRED and not only tested if others available */
 					case ':':
 					case '?':
 						std::cout << " failure\n";
@@ -87,9 +89,10 @@ namespace SCL {
 
 		SCL::Type *FunctionBody::execute(SCL::Context *ctx, std::list<std::string> arguments) {
 			SCL::Context *newCtx = new SCL::Context(ctx);
-
+			/*for(auto a : arguments) {
+				std::cout << a << "\n";
+			}*/
 			/* construct getopt options - cheap copy&paste from the previous method */
-
 			std::list<struct option> long_options;
 			std::string optstring;
 			for(auto param : parameters) {
@@ -104,6 +107,7 @@ namespace SCL {
 						opt.name = strdup(name.c_str());
 						opt.has_arg = param->isFlag ? no_argument : required_argument;
 						opt.flag = NULL;
+						opt.val = 0;
 
 						long_options.push_back(opt);
 					}
@@ -114,6 +118,7 @@ namespace SCL {
 			opt.name = NULL;
 			opt.has_arg = 0;
 			opt.flag = NULL;
+			opt.val = 0;
 
 			long_options.push_back(opt);
 			
@@ -122,78 +127,80 @@ namespace SCL {
 
 			int option_index = 0;
 			opterr = 0;
-			optind = 1;
+			optind = 0;
 			int c;
 
 			std::vector<const char*> args;
-			args.push_back("internal-command");
+			args.push_back("acommand");
 			for(auto a : arguments) {
-				args.push_back(a.c_str());
+				args.push_back(strdup(a.c_str()));
 			}
 
 			/* set all flags to false and set default values */
 			for(auto param : parameters) {
 				if(param->isFlag) {
-					ctx->setValue(param->internName, SCL::Types::Boolean::getFalse());
+					newCtx->setValue(param->internName, SCL::Types::Boolean::getFalse());
 				}else if(param->defaultValue) {
-					ctx->setValue(param->internName, param->defaultValue->compute(ctx));
+					newCtx->setValue(param->internName, param->defaultValue->compute(ctx));
 				}
 			}
-//weird failure in which it sometimes work and sometimes not
+
 			while((c = getopt_long(args.size(), (char *const *)args.data(), optstring.c_str(), options, &option_index)) != -1) {
+				const char *getoptParam = optarg ? strdup(optarg) : NULL;
+				
 				switch(c) {
-					case 0:
+					case 0://long param
 						SCL::Type *val;
 						if(parameters[option_index]->isFlag) {
 							val = SCL::Types::Boolean::getTrue();
-						}else if (optarg) {
-							if(optarg[0] == '$') {
-								val = ctx->getValue(std::string(optarg).substr(1));
+						}else if (getoptParam != NULL) {
+							if(getoptParam[0] == '$') {
+								val = newCtx->getValue(std::string(getoptParam).substr(1));
 							}else {
-								val = new SCL::Types::String(optarg);
+								val = new SCL::Types::String(getoptParam);
 							}
 						}else {
 							throw new std::logic_error("could not parse parameters1");
 						}
-
-						ctx->setValue(parameters[option_index]->internName, val);
+						newCtx->setValue(parameters[option_index]->internName, val);
 						break;
 					case ':':
 					case '?':
 						throw new std::logic_error("could not parse parameters2");
-					default:
+					default://short param
 						//find the parameter with the given name
 						bool foundParam = false;
 						for(auto param : parameters) {
 							if(foundParam) continue;
-
+							
 							auto iter = std::find(param->externNames.begin(), param->externNames.end(), std::string(1, (char)c));
-
 							if(iter != param->externNames.end()) {
-								if(parameters[option_index]->isFlag) {
+								SCL::Type *val;
+								if(param->isFlag) {
 									val = SCL::Types::Boolean::getTrue();
-								}else if (optarg) {
-									if(optarg[0] == '$') {
-										val = ctx->getValue(std::string(optarg).substr(1));
+								}else if (getoptParam) {
+									if(getoptParam[0] == '$') {
+										val = newCtx->getValue(std::string(getoptParam).substr(1));
 									}else {
+
 										//todo: better handling of none string types
-										val = new SCL::Types::String(optarg);
+										val = new SCL::Types::String(getoptParam);
+
 									}
 								}else {
 									throw new std::logic_error("could not parse parameters3");
 								}
-
-								ctx->setValue(param->internName, val);
+								newCtx->setValue(param->internName, val);
 								foundParam = true;
 							}
 						}
 
 						if(!foundParam) {
-							std::cout << "we found" << option_index << "\n" ;
 							throw new std::logic_error("could not parse parameters4");
 						}
 				}
 			}
+
 
 			scope->execute(newCtx);
 			delete(newCtx);

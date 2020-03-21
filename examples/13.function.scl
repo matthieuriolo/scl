@@ -16,5 +16,15 @@ end
 	print $internB
 end
 
+print "> non-long"
 anotherFunc -asad -bgjhjk
+print "> only long"
 anotherFunc --aaa=sad --bbb=gjhjk
+print "> mixed"
+anotherFunc -asad --bbb=gjhjk
+print "> overwritting non-long"
+anotherFunc -asad -agjhjk
+print "> overwritting long"
+anotherFunc --aaa=sad --aaa=gjhjk
+print "> overwritting mixed"
+anotherFunc -asad --aaa=gjhjk
