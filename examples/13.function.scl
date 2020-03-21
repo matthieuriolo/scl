@@ -23,8 +23,8 @@ anotherFunc --aaa=sad --bbb=gjhjk
 print "> mixed"
 anotherFunc -asad --bbb=gjhjk
 print "> overwritting non-long"
-anotherFunc -asad -agjhjk
+anotherFunc -asad -agjhjk -bhaha
 print "> overwritting long"
-anotherFunc --aaa=sad --aaa=gjhjk
+anotherFunc --aaa=sad --aaa=gjhjk --bbb=haha
 print "> overwritting mixed"
-anotherFunc -asad --aaa=gjhjk
+anotherFunc -asad --aaa=gjhjk -bhaha --bbb=haha

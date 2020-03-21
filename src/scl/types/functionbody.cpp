@@ -20,13 +20,6 @@ namespace SCL {
 		}
 
 		bool FunctionBody::matchingParameters(std::list<std::string> arguments) {
-			/*for(auto arg : parameters) {
-				for(auto name : arg->externNames) {
-					std::cout << name << "\n";
-				}
-			}*/
-
-
 			/* construct getopt options*/
 
 			std::list<struct option> long_options;
@@ -45,7 +38,7 @@ namespace SCL {
 						opt.name = strdup(name.c_str());
 						opt.has_arg = param->isFlag ? no_argument : required_argument;
 						opt.flag = NULL;
-						opt.val = 1234;
+						opt.val = 0;
 
 						long_options.push_back(opt);
 					}
@@ -74,14 +67,38 @@ namespace SCL {
 				args.push_back(strdup(a.c_str()));
 			}
 
+
+			std::vector<SCL::Types::FunctionParameter*> usedParameters(parameters);
 			while((c = getopt_long(args.size(), (char *const *)args.data(), optstring.c_str(), options, &option_index)) != -1) {
 				switch(c) {
-					/* TODO: we need to ensure that that the given paraments are REQUIRED and not only tested if others available */
 					case ':':
 					case '?':
-						std::cout << " failure\n";
 						return false;
+					case 0://long param
+						for(auto it = usedParameters.begin(); it != usedParameters.end(); ++it) {
+							auto param = *it;
+							auto iter = std::find(param->externNames.begin(), param->externNames.end(), parameters[option_index]->externNames.front());
+							if(iter != param->externNames.end()) {
+								usedParameters.erase(it, it + 1);
+								break;
+							}
+						}
+						break;
+					default:
+						for(auto it = usedParameters.begin(); it != usedParameters.end(); ++it) {
+							auto param = *it;
+							auto iter = std::find(param->externNames.begin(), param->externNames.end(), std::string(1, (char)c));
+							if(iter != param->externNames.end()) {
+								usedParameters.erase(it, it + 1);
+								break;
+							}
+						}
+						break;
 				}
+			}
+
+			if(usedParameters.size() > 0) {
+				return false;
 			}
 
 			return true;
