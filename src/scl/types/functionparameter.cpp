@@ -6,6 +6,8 @@ namespace SCL {
 	namespace Types {
 		FunctionParameter::FunctionParameter(SCL::AST::Variable* internName) {
 			this->internName = internName;
+			isFlag = false;
+			defaultValue = NULL;
 		}
 
 
@@ -20,15 +22,15 @@ namespace SCL {
 				std::cout << std::string((level+1) * 2, ' ') << name << "\n";
 			}
 
-			std::cout << std::string(level * 2, ' ') << "types:\n";
-			for(auto type : types) {
-				std::cout << std::string((level+1) * 2, ' ') << type << "\n";
-			}
+			//std::cout << std::string(level * 2, ' ') << "types:\n";
+			//for(auto type : types) {
+			//	std::cout << std::string((level+1) * 2, ' ') << type << "\n";
+			//}
 
 			std::cout << std::string(level * 2, ' ') << "isFlag: " << (isFlag ? "YES" : "NO") << "\n";
 			
-			std::cout << std::string(level * 2, ' ') << "defaultValue:\n";
-			defaultValue->printAST(level+1);
+			//#std::cout << std::string(level * 2, ' ') << "defaultValue:\n";
+			//defaultValue->printAST(level+1);
 		}
 	}
 }
