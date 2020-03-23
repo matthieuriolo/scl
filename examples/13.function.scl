@@ -18,6 +18,8 @@ end
 
 print "> non-long"
 anotherFunc -asad -bgjhjk
+print "> non-long (mixed spaces)"
+anotherFunc -a sad -bgjhjk
 print "> only long"
 anotherFunc --aaa=sad --bbb=gjhjk
 print "> mixed"
@@ -28,3 +30,28 @@ print "> overwritting long"
 anotherFunc --aaa=sad --aaa=gjhjk --bbb=haha
 print "> overwritting mixed"
 anotherFunc -asad --aaa=gjhjk -bhaha --bbb=haha
+
+
+:funcWithFlag($internA:aaa,a $internFlag!flag,f)
+	print $internA
+	print $internFlag
+end
+
+print "> testing function with flag and flag is set"
+funcWithFlag -asad -f
+
+print "> testing function with flag and flag is not set"
+funcWithFlag -asad
+
+print "> testing function with long flag"
+funcWithFlag -asad --flag
+
+:funcWithDefaultValues($internA:aaa,a="test1")
+	print $internA
+end
+
+print "testing default value - normal parameter and set value"
+funcWithDefaultValues -asad
+
+print "testing default value - normal parameter and without set value"
+funcWithDefaultValues

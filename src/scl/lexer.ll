@@ -43,7 +43,7 @@ loc.step();
 /* operands */
 %}
 
-"="                   return Parser::make_OPERAND_EQUAL(loc);
+<INITIAL,FUNCTION>"=" return Parser::make_OPERAND_EQUAL(loc);
 "+"                   return Parser::make_OPERAND_PLUS(AST::PLUS, loc);
 "-"                   return Parser::make_OPERAND_MINUS(AST::MINUS, loc);
 "*"                   return Parser::make_OPERAND_ASTERISK(AST::ASTERISK, loc);
@@ -96,19 +96,19 @@ loc.step();
 /* types */
 %}
 
-"TRUE"                return Parser::make_BOOLEAN_TRUE(Types::Boolean::getTrue(), loc);
-"FALSE"               return Parser::make_BOOLEAN_FALSE(Types::Boolean::getFalse(), loc);
+<INITIAL,FUNCTION>"TRUE"                return Parser::make_BOOLEAN_TRUE(Types::Boolean::getTrue(), loc);
+<INITIAL,FUNCTION>"FALSE"               return Parser::make_BOOLEAN_FALSE(Types::Boolean::getFalse(), loc);
 
-[0-9]+                return Parser::make_INTEGER(new Types::Integer(yytext), loc);
-[0-9]+\.[0-9]+        return Parser::make_FLOAT(new Types::Float(yytext), loc);
+<INITIAL,FUNCTION>[0-9]+                return Parser::make_INTEGER(new Types::Integer(yytext), loc);
+<INITIAL,FUNCTION>[0-9]+\.[0-9]+        return Parser::make_FLOAT(new Types::Float(yytext), loc);
 <INITIAL,FUNCTION>\$[a-zA-Z0-9]+        return Parser::make_VARIABLE(new AST::Variable(yytext + 1), loc);
 
-\"(\\|[^\\"])*\"    {
+<INITIAL,FUNCTION>\"(\\|[^\\"])*\"    {
 						auto s = std::string(yytext);
 						return Parser::make_STRING(new Types::String(s.substr(1, s.size() - 2)), loc);
 					}
 
-\'(\\|[^\\'])*\'    {
+<INITIAL,FUNCTION>\'(\\|[^\\'])*\'    {
 						auto s = std::string(yytext);
 						return Parser::make_STRING(new Types::String(s.substr(1, s.size() - 2)), loc);
 					}

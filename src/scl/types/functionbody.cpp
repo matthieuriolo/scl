@@ -69,6 +69,16 @@ namespace SCL {
 
 
 			std::vector<SCL::Types::FunctionParameter*> usedParameters(parameters);
+			//remove flags&optional parameters
+			for(auto it = usedParameters.begin(); it != usedParameters.end();) {
+				auto param = *it;
+				if(param->isFlag || param->defaultValue != NULL) {
+					it = usedParameters.erase(it);
+				}else {
+					it++;
+				}
+			}
+
 			while((c = getopt_long(args.size(), (char *const *)args.data(), optstring.c_str(), options, &option_index)) != -1) {
 				switch(c) {
 					case ':':
@@ -79,7 +89,7 @@ namespace SCL {
 							auto param = *it;
 							auto iter = std::find(param->externNames.begin(), param->externNames.end(), parameters[option_index]->externNames.front());
 							if(iter != param->externNames.end()) {
-								usedParameters.erase(it, it + 1);
+								usedParameters.erase(it);
 								break;
 							}
 						}
@@ -89,7 +99,7 @@ namespace SCL {
 							auto param = *it;
 							auto iter = std::find(param->externNames.begin(), param->externNames.end(), std::string(1, (char)c));
 							if(iter != param->externNames.end()) {
-								usedParameters.erase(it, it + 1);
+								usedParameters.erase(it);
 								break;
 							}
 						}
