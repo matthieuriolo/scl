@@ -31,6 +31,7 @@ scl_SOURCES = \
 	src/scl/ast/expressiontype.cpp \
 	src/scl/ast/instruction.cpp \
 	src/scl/ast/if.cpp \
+	src/scl/ast/include.cpp \
 	src/scl/ast/for.cpp \
 	src/scl/ast/operand.cpp \
 	src/scl/ast/comparator.cpp \

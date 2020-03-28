@@ -1,0 +1,7 @@
+# -----------------------------
+#
+# Test case for includes
+#
+# -----------------------------
+
+include examples/01.boolean.scl

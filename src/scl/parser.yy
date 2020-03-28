@@ -36,6 +36,7 @@
 	#include "scl/ast/range.hpp"
 	#include "scl/ast/rangeiterator.hpp"
 	#include "scl/ast/if.hpp"
+	#include "scl/ast/include.hpp"
 	#include "scl/ast/for.hpp"
 	#include "scl/ast/unaryminus.hpp"
 	#include "scl/ast/functiondeclare.hpp"
@@ -104,6 +105,7 @@
 %token END 0
 
 %token PRINTTOKEN "print"
+%token <SCL::AST::Include*> INCLUDE
 
 
 %type <SCL::AST::Command*> COMMAND
@@ -142,6 +144,7 @@ INSTRUCTIONS
 INSTRUCTION
 	: ASSIGN
 	| PRINT
+	| INCLUDE { $$ = $1; }
 	| FUNCTION_DECLARATION { $$ = $1; }
 	| COMMAND { $$ = $1; }
 	| CONTROL_IF EXPRESSION SYMBOL_NEW_LINE INSTRUCTIONS SYMBOL_NEW_LINE CONTROL_END {
