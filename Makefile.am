@@ -1,9 +1,6 @@
 ACLOCAL_AMFLAGS = -I m4macros ${ACLOCAL_FLAGS}
 bin_PROGRAMS = scl
 
-# EXTRA_DIST = autogen.sh
-# AM_PROG_LEX
-
 AM_YFLAGS = -d
 
 AM_CXXFLAGS = $(INIT_CFLAGS) -I$(top_srcdir)/src -Wall

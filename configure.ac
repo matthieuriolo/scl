@@ -17,22 +17,14 @@ AC_CONFIG_FILES([Makefile])
 
 
 # init linker
-#LT_INIT
 AC_LANG([C++])
 AX_CXX_COMPILE_STDCXX_11
 
 # Checks for programs.
 AC_PROG_CXX
-# AC_PROG_CC
-# AC_PROG_RANLIB
-
 
 AC_PROG_LEX
 AX_PROG_BISON
-
-#AC_PATH_PROG(YACC, bison)
-#AC_SUBST(YACC)
-
 
 # Checks for libraries.
 

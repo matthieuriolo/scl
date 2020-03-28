@@ -15,7 +15,6 @@ int main(int argc, char **argv) {
 		}
 
 		try {
-			std::cout << "executing file " << argv[i] << "\n";
 			SCL::ParserResult res;
 			if(res.parse(argv[i]) == 0) {
 				if(displayAST) {
@@ -24,7 +23,7 @@ int main(int argc, char **argv) {
 					res.module->launch();
 				}
 			}else {
-				std::cout << "failure\n";
+				std::cout << "failure while parsing file '" << argv[i] << "'\n";
 			}
 		}catch(const std::exception* e) {
 			std::cout << "Standard exception: " << e->what() << std::endl;
