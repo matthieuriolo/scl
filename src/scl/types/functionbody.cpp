@@ -20,6 +20,10 @@ namespace SCL {
 		}
 
 		bool FunctionBody::matchingParameters(std::list<std::string> arguments) {
+			if(parameters.size() == 0) {
+				return true;
+			}
+
 			/* construct getopt options*/
 
 			std::list<struct option> long_options;
@@ -116,9 +120,14 @@ namespace SCL {
 
 		SCL::Type *FunctionBody::execute(SCL::Context *ctx, std::list<std::string> arguments) {
 			SCL::Context *newCtx = new SCL::Context(ctx);
-			/*for(auto a : arguments) {
-				std::cout << a << "\n";
-			}*/
+			
+			if(parameters.size() == 0) {
+				scope->execute(newCtx);
+				delete(newCtx);
+				return NULL;
+			}
+
+			
 			/* construct getopt options - cheap copy&paste from the previous method */
 			std::list<struct option> long_options;
 			std::string optstring;

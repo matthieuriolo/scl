@@ -4,12 +4,14 @@
 #
 # -----------------------------
 
+print "function without arguments"
 :aFunc()
 	$a = "test"
 	print $a
 end
 
-#aFunc
+aFunc
+aFunc --test=asd -a asdad
 
 :anotherFunc($internA:aaa,a $internB:bbb,b)
 	print $internA
