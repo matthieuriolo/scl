@@ -1,0 +1,10 @@
+# -----------------------------
+#
+# Test case for includes
+#
+# -----------------------------
+
+import examples/15.import/.libs/libimport.dylib
+
+print "test if we included the value from 15.import/.libs/libimport.dylib"
+print $PI

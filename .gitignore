@@ -51,3 +51,9 @@ src/scl/parser.hh
 *.exe
 *.out
 *.app
+
+
+
+# ignore submakefile
+examples/15.import/libtool
+examples/15.import/m4macros

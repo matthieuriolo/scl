@@ -8,6 +8,8 @@ AM_YFLAGS = -d
 
 AM_CXXFLAGS = $(INIT_CFLAGS) -I$(top_srcdir)/src -Wall
 
+SUBDIRS = examples/15.import
+
 scl_SOURCES = \
 	src/scl/parser.yy \
 	src/scl/lexer.ll \
@@ -31,6 +33,7 @@ scl_SOURCES = \
 	src/scl/ast/expressiontype.cpp \
 	src/scl/ast/instruction.cpp \
 	src/scl/ast/if.cpp \
+	src/scl/ast/import.cpp \
 	src/scl/ast/include.cpp \
 	src/scl/ast/for.cpp \
 	src/scl/ast/operand.cpp \

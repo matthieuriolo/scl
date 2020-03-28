@@ -38,8 +38,18 @@ include\ +([^\n]+)      {
 					auto wsfront=std::find_if_not(s.begin(),s.end(),[](int c){return std::isspace(c);});
 					auto wsback=std::find_if_not(s.rbegin(),s.rend(),[](int c){return std::isspace(c);}).base();
 					s = (wsback<=wsfront ? std::string() : std::string(wsfront,wsback));
-					
+
 					return Parser::make_INCLUDE(new AST::Include(s), loc);
+				}
+
+import\ +([^\n]+)      {
+					auto s = std::string(yytext);
+					s = s.substr(6, s.size());
+					auto wsfront=std::find_if_not(s.begin(),s.end(),[](int c){return std::isspace(c);});
+					auto wsback=std::find_if_not(s.rbegin(),s.rend(),[](int c){return std::isspace(c);}).base();
+					s = (wsback<=wsfront ? std::string() : std::string(wsfront,wsback));
+					
+					return Parser::make_IMPORT(new AST::Import(s), loc);
 				}
 
 %{
