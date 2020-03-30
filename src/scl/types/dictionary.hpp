@@ -29,6 +29,7 @@ namespace SCL {
 				std::map<SCL::Type *, SCL::Type *, DictionaryTypeCompar>& getValues();
 				
 				SCL::Type *getAccess(Type *key);
+				void setAttribute(Type *key, Type *value);
 
 				SCL::Types::Iterator *iterator();
 

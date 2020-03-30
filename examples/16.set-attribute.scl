@@ -1,0 +1,15 @@
+# -----------------------------
+#
+# Test case for includes
+#
+# -----------------------------
+
+print "overwrite array value"
+$var = ["bonjourno","hello"]
+$var[0] = "hallo"
+print $var
+
+print "overwrite dictionary value"
+$var = {"hello": "hello"}
+$var["hello"] = "hallo"
+print $var

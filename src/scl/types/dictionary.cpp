@@ -36,6 +36,16 @@ namespace SCL {
 			return Types::Undefined::getUndefined();
 		}
 
+		void Dictionary::setAttribute(Type *key, Type *value) {
+			values[key] = value;
+			/*auto pair = values.find(key);
+			if(pair != values.end()) {
+				pair->second = value;
+			}
+
+			throw new std::logic_error("key has the wrong type");*/
+		}
+
 		std::string Dictionary::stringify() {
 			std::stringstream ss;
 			ss << "{";

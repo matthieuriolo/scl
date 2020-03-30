@@ -20,6 +20,7 @@ namespace SCL {
 
 			virtual Type *getAccess(Type *key);
 			virtual Type *getRange(Type *start, Type *end);
+			virtual void setAttribute(Type *key, Type *value);
 
 			virtual Type *operator_plus(SCL::Context *ctx, Type *right);
 			virtual Type *operator_minus(SCL::Context *ctx, Type *right);

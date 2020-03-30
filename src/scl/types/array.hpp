@@ -22,6 +22,7 @@ namespace SCL {
 				static std::string getTypeName();
 				SCL::Type *getAccess(SCL::Type *key);
 				SCL::Type *getRange(Type *start, Type *end);
+				void setAttribute(Type *key, Type *value);
 
 				std::string stringify();
 				int compare(Type *right);

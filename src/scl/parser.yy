@@ -32,6 +32,7 @@
 	#include "scl/ast/instruction.hpp"
 	#include "scl/ast/variable.hpp"
 	#include "scl/ast/assign.hpp"
+	#include "scl/ast/assignattribute.hpp"
 	#include "scl/ast/access.hpp"
 	#include "scl/ast/range.hpp"
 	#include "scl/ast/rangeiterator.hpp"
@@ -237,6 +238,9 @@ PRINT
 
 ASSIGN
 	: VARIABLE OPERAND_EQUAL EXPRESSION { $$ = new SCL::AST::Assign($1, $3); }
+	| EXPRESSION SYMBOL_SQUARED_BRACKET_OPEN EXPRESSION SYMBOL_SQUARED_BRACKET_CLOSE OPERAND_EQUAL EXPRESSION {
+		$$ = new SCL::AST::AssignAttribute($1, $3, $6);
+	}
 ;
 
 

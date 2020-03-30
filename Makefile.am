@@ -26,6 +26,7 @@ scl_SOURCES = \
 	src/scl/ast/range.cpp \
 	src/scl/ast/rangeiterator.cpp \
 	src/scl/ast/assign.cpp \
+	src/scl/ast/assignattribute.cpp \
 	src/scl/ast/expression.cpp \
 	src/scl/ast/expressiontype.cpp \
 	src/scl/ast/instruction.cpp \

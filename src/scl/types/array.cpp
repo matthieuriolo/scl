@@ -64,6 +64,21 @@ namespace SCL {
 			return Types::Undefined::getUndefined();
 		}
 
+		void Array::setAttribute(Type *key, Type *value) {
+			if(key->getName() == "integer") {
+				long index = SCL::Type::getIndexFromNegative(((SCL::Types::Integer *)key)->getValue(), values.size());
+				
+				if(index >= 0 && index < values.size()) {
+					values[index] = value;
+					return;
+				}else {
+					throw new std::logic_error("key is out of range");
+				}
+			}
+
+			throw new std::logic_error("key has the wrong type");
+		}
+
 		std::string Array::stringify() {
 			std::stringstream ss;
 			ss << "[";

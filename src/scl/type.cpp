@@ -40,6 +40,10 @@ namespace SCL {
 		return Types::Undefined::getUndefined();
 	}
 
+	void Type::setAttribute(Type *key, Type *value) {
+		throw new std::logic_error("type '" + getName() + "' does not have attribute access");
+	}
+
 	Type *Type::operator_plus(SCL::Context *ctx, Type *right) {
 		return Types::Undefined::getUndefined();
 	}
