@@ -12,7 +12,6 @@ namespace SCL {
 		}
 
 		void Include::execute(SCL::Context * ctx) {
-			std::cout << "pfad: " << path << "\n";
 			SCL::ParserResult res;
 			if(res.parse(path) == 0) {
 				res.module->execute(ctx);
