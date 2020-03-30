@@ -13,3 +13,15 @@ print "overwrite dictionary value"
 $var = {"hello": "hello"}
 $var["hello"] = "hallo"
 print $var
+
+print "overwrite nested array value"
+$var = [["hello"],{"hello": "hello"}]
+$var[0][0] = "hallo"
+$var[1]["hello"] = "hallo"
+print $var
+
+print "overwrite dictionary value"
+$var = {"hello": ["hello"], "hallo": {"hello": "hello"}}
+$var["hello"][0] = "hallo"
+$var["hallo"]["hello"] = "hallo"
+print $var
