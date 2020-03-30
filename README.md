@@ -6,7 +6,7 @@ SCL is an attempt to reinvent a proper shell
 You need to have bison, flex, autoconf and a c++11 compiler (clang, gcc) installed on your system
 
 ```
-autoreconf -ri
+autoreconf -fi
 ./configure
 make
 ```
