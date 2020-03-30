@@ -5,7 +5,7 @@ AM_YFLAGS = -d
 
 AM_CXXFLAGS = $(INIT_CFLAGS) -I$(top_srcdir)/src -Wall
 
-SUBDIRS = examples/15.import
+SUBDIRS = examples/01.tests/15.import
 
 scl_SOURCES = \
 	src/scl/parser.yy \

@@ -10,6 +10,8 @@ AC_CONFIG_HEADERS([config.h])
 AC_CONFIG_AUX_DIR([build-aux])
 AC_CONFIG_MACRO_DIR([m4macros])
 
+# sub directory
+AC_CONFIG_SUBDIRS([examples/01.tests/15.import])
 
 # init automake
 AM_INIT_AUTOMAKE([subdir-objects])

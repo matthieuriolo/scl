@@ -4,7 +4,7 @@
 #
 # -----------------------------
 
-include examples/01.boolean.scl
+include examples/01.tests/01.boolean.scl
 
 print "test if we included the value from 01.boolean.scl"
 print $variable
