@@ -6,19 +6,7 @@ project(
 	meson_version: '>=0.50.1'
 )
 
-# flex = find_program('flex', required: false)
-# bison = find_program('bison', required: false)
-
-# if not flex.found()
-#   error('MESON_SKIP_TEST flex not found.')
-# endif
-
-# if not bison.found()
-#   error('MESON_SKIP_TEST bison not found.')
-# endif
-
-
-src = [
+src = files(
 	#'src/scl/parser.yy',
 	#'src/scl/lexer.ll',
 
@@ -69,10 +57,14 @@ src = [
 	'src/scl/types/iteratorinteger.cpp',
 	'src/scl/types/iteratorfloat.cpp',
 	'src/scl/types/undefined.cpp',
-]
+)
+
+
+subdir('src/scl')
+
 
 executable(
 	'scl',
-	src,
+	sources: src,
 	include_directories: include_directories('src')
 )
