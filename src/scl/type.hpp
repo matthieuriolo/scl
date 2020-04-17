@@ -33,6 +33,9 @@ namespace SCL {
 			static int comparison(Type *left, Type *right);
 
 			static long getIndexFromNegative(long index, long length);
+
+
+			virtual ~Type() = 0;
 	};
 }
 

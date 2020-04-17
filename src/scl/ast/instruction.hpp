@@ -9,6 +9,8 @@ namespace SCL {
 			public:
 				virtual void execute(SCL::Context * ctx) = 0;
 				virtual void printAST(int level) = 0;
+
+				virtual ~Instruction() = 0;
 		};
 	}
 }

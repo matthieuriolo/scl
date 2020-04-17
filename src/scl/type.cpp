@@ -71,4 +71,7 @@ namespace SCL {
 	Type *Type::operator_or(SCL::Context *ctx, Type *right) {
 		return Types::Undefined::getUndefined();
 	}
+
+
+	Type::~Type() {}
 }

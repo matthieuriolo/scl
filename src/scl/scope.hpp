@@ -16,6 +16,9 @@ namespace SCL {
 			virtual void execute(Context * ctx);
 			virtual void printAST(int level);
 			void printASTInstruction(int level);
+
+
+			virtual ~Scope() = 0;
 	};
 }
 

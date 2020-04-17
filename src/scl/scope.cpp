@@ -28,4 +28,6 @@ namespace SCL {
 			instr->printAST(level + 1);
 		}
 	}
+
+	Scope::~Scope() {}
 }
