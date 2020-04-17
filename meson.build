@@ -57,13 +57,14 @@ src = files(
 )
 
 
-subdir('src/scl')
+subdir('src/scl/parser')
 
 cpp = meson.get_compiler('cpp')
 antlr_runtime = cpp.find_library('antlr4-runtime', required: true)
 
 executable(
 	'scl',
+	#antlr_src,
 	sources: src,
 	include_directories: [include_directories('src'), include_directories('/usr/local/include/antlr4-runtime/')],
 	dependencies: antlr_runtime

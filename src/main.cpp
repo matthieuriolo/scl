@@ -4,9 +4,9 @@
 
 
 #include "antlr4-runtime.h"
-#include "scl/sclParser.h"
-#include "scl/sclLexer.h"
-#include "scl/sclBaseVisitor.h"
+#include "scl/parser/sclParser.h"
+#include "scl/parser/sclLexer.h"
+#include "scl/parser/sclBaseVisitor.h"
 
 using namespace antlr4;
 
