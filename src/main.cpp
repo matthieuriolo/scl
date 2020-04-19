@@ -6,7 +6,8 @@
 #include "antlr4-runtime.h"
 #include "scl/parser/sclParser.h"
 #include "scl/parser/sclLexer.h"
-#include "scl/parser/sclBaseVisitor.h"
+#include "scl/ASTVisitor.hpp"
+#include "scl/module.hpp"
 
 using namespace antlr4;
 
@@ -19,7 +20,7 @@ int main(int argc, char **argv) {
 			displayAST = true;
 			continue;
 		}else if(strcasecmp(argv[i], "--trace") == 0) {
-			displayAST = true;
+			displayTrace = true;
 			continue;
 		}
 
@@ -35,8 +36,15 @@ int main(int argc, char **argv) {
 			parser.setTrace(displayTrace);
 
 			sclParser::ModuleContext* tree = parser.module();
-			sclBaseVisitor visitor;
-			//SCL::Module Module = visitor.visitModule(tree);
+			if(!displayTrace) {
+				SCL::ASTVisitor visitor;
+				SCL::Module* module = visitor.visitModule(tree);
+				if(displayAST) {
+					module->printAST();
+				}else {
+					module->launch();
+				}
+			}
 		}catch(const std::exception* e) {
 			std::cout << "Standard exception: " << e->what() << std::endl;
 		}

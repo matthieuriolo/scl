@@ -11,9 +11,10 @@ src = files(
 
 	'src/scl/context.cpp',
 	'src/scl/module.cpp',
-	'src/scl/parserresult.cpp',
 	'src/scl/scope.cpp',
 	'src/scl/type.cpp',
+	
+	'src/scl/ASTVisitor.cpp',
 
 	'src/scl/ast/command.cpp',
 	'src/scl/ast/dictionary.cpp',
@@ -28,7 +29,7 @@ src = files(
 	'src/scl/ast/instruction.cpp',
 	'src/scl/ast/if.cpp',
 	'src/scl/ast/import.cpp',
-	'src/scl/ast/include.cpp',
+	#'src/scl/ast/include.cpp',
 	'src/scl/ast/for.cpp',
 	'src/scl/ast/operand.cpp',
 	'src/scl/ast/comparator.cpp',
@@ -64,7 +65,7 @@ antlr_runtime = cpp.find_library('antlr4-runtime', required: true)
 
 executable(
 	'scl',
-	sources: [src, parser_files],
+	sources: [parser_files, src],
 	include_directories: [include_directories('src'), include_directories('/usr/local/include/antlr4-runtime/')],
 	dependencies: antlr_runtime
 )
