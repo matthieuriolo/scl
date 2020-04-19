@@ -55,17 +55,35 @@ src = files(
 	'src/scl/types/iteratorinteger.cpp',
 	'src/scl/types/iteratorfloat.cpp',
 	'src/scl/types/undefined.cpp',
+
+	'src/scl/parser/sclParser.cpp',
+	'src/scl/parser/sclVisitor.cpp',
+	'src/scl/parser/sclBaseVisitor.cpp',
+	'src/scl/parser/sclLexer.cpp',
 )
 
 
-subdir('src/scl')
+antlr_compiler = find_program('antlr')
+run_target('build-parser',
+	command: [
+ 		antlr_compiler,
+ 		'-Dlanguage=Cpp',
+ 		'-no-listener',
+ 		'-visitor',
+ 		'-encoding',
+ 		'UTF-8',
+ 		'-o',
+ 		meson.current_source_dir() + '/src/scl/parser',
+ 		meson.current_source_dir() + '/src/scl/scl.g4'
+ 	],
+)
 
 cpp = meson.get_compiler('cpp')
 antlr_runtime = cpp.find_library('antlr4-runtime', required: true)
 
 executable(
 	'scl',
-	sources: [parser_files, src],
+	sources: src,
 	include_directories: [include_directories('src'), include_directories('/usr/local/include/antlr4-runtime/')],
 	dependencies: antlr_runtime
 )

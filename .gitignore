@@ -18,8 +18,6 @@ src/scl/lexer.cc
 src/scl/parser.cc
 src/scl/parser.hh
 
-src/scl/parser/
-
 
 # Prerequisites
 *.d
