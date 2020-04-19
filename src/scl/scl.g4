@@ -217,4 +217,4 @@ STRING_SINGLE_QUOTE: '\'' .*? '\'';
 FUNCTION_NAME: ':' [a-zA-Z]+;
 
 IDENTIFIER: [a-zA-Z0-9]+;
-/* COMMENT: '#' [^\n]* -> skip; */
+COMMENT: '#' ~('\n')* -> skip;
