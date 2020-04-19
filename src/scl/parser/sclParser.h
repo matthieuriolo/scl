@@ -12,23 +12,23 @@
 class  sclParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, KEYWORD_PRINT = 2, KEYWORD_INCLUDE = 3, KEYWORD_IMPORT = 4, 
-    CONTROL_IF = 5, CONTROL_FOR = 6, CONTROL_IN = 7, CONTROL_END = 8, OPERAND_EQUAL = 9, 
-    OPERAND_PLUS = 10, OPERAND_MINUS = 11, OPERAND_ASTERISK = 12, OPERAND_SLASH = 13, 
-    OPERAND_CARET = 14, OPERAND_AND = 15, OPERAND_OR = 16, RANGE = 17, SQUARED_BRACKET_OPEN = 18, 
-    SQUARED_BRACKET_CLOSE = 19, CURLY_BRACKET_OPEN = 20, CURLY_BRACKET_CLOSE = 21, 
-    ROUND_BRACKET_OPEN = 22, ROUND_BRACKET_CLOSE = 23, SEMICOLON = 24, COLON = 25, 
-    COMMA = 26, QUESTION_MARK = 27, EXCLAMATION_MARK = 28, DELIMITER = 29, 
-    NEWLINE = 30, SPACE = 31, TAB = 32, COMPARATOR_EQUAL = 33, COMPARATOR_NOT_EQUAL = 34, 
-    COMPARATOR_GREATER = 35, COMPARATOR_GREATER_EQUAL = 36, COMPARATOR_LESS = 37, 
-    COMPARATOR_LESS_EQUAL = 38, BOOLEAN_TRUE = 39, BOOLEAN_FALSE = 40, INTEGER = 41, 
-    FLOAT = 42, STRING_DOUBLE_QUOTE = 43, STRING_SINGLE_QUOTE = 44, FUNCTION_NAME = 45, 
-    IDENTIFIER = 46, COMMENT = 47
+    T__0 = 1, DELIMITER = 2, NEWLINE = 3, SPACE = 4, TAB = 5, KEYWORD_PRINT = 6, 
+    KEYWORD_INCLUDE = 7, KEYWORD_IMPORT = 8, CONTROL_IF = 9, CONTROL_FOR = 10, 
+    CONTROL_IN = 11, CONTROL_END = 12, OPERAND_EQUAL = 13, OPERAND_PLUS = 14, 
+    OPERAND_MINUS = 15, OPERAND_ASTERISK = 16, OPERAND_SLASH = 17, OPERAND_CARET = 18, 
+    OPERAND_AND = 19, OPERAND_OR = 20, RANGE = 21, SQUARED_BRACKET_OPEN = 22, 
+    SQUARED_BRACKET_CLOSE = 23, CURLY_BRACKET_OPEN = 24, CURLY_BRACKET_CLOSE = 25, 
+    ROUND_BRACKET_OPEN = 26, ROUND_BRACKET_CLOSE = 27, SEMICOLON = 28, COLON = 29, 
+    COMMA = 30, QUESTION_MARK = 31, EXCLAMATION_MARK = 32, COMPARATOR_EQUAL = 33, 
+    COMPARATOR_NOT_EQUAL = 34, COMPARATOR_GREATER = 35, COMPARATOR_GREATER_EQUAL = 36, 
+    COMPARATOR_LESS = 37, COMPARATOR_LESS_EQUAL = 38, BOOLEAN_TRUE = 39, 
+    BOOLEAN_FALSE = 40, INTEGER = 41, FLOAT = 42, STRING_DOUBLE_QUOTE = 43, 
+    STRING_SINGLE_QUOTE = 44, FUNCTION_NAME = 45, IDENTIFIER = 46, COMMENT = 47
   };
 
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
-    RulePrint = 4, RuleAssign = 5, RuleExpression = 6, RuleOperand = 7, 
+    RulePrint = 4, RuleAssign = 5, RuleExpression = 6, RuleExpressionoperand = 7, 
     RuleComparator = 8, RuleExpressiontype = 9, RuleType = 10, RuleBoolean = 11, 
     RuleString = 12, RuleArray = 13
   };
@@ -50,7 +50,7 @@ public:
   class PrintContext;
   class AssignContext;
   class ExpressionContext;
-  class OperandContext;
+  class ExpressionoperandContext;
   class ComparatorContext;
   class ExpressiontypeContext;
   class TypeContext;
@@ -63,7 +63,6 @@ public:
     sclParser::ScopeContext *content = nullptr;;
     ModuleContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *EOF();
     ScopeContext *scope();
 
 
@@ -79,10 +78,11 @@ public:
     std::vector<InstructionContext *> instructions;;
     ScopeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<InstructionContext *> instruction();
-    InstructionContext* instruction(size_t i);
+    antlr4::tree::TerminalNode *EOF();
     std::vector<antlr4::tree::TerminalNode *> DELIMITER();
     antlr4::tree::TerminalNode* DELIMITER(size_t i);
+    std::vector<InstructionContext *> instruction();
+    InstructionContext* instruction(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -172,10 +172,13 @@ public:
 
   ExpressionContext* expression();
 
-  class  OperandContext : public antlr4::ParserRuleContext {
+  class  ExpressionoperandContext : public antlr4::ParserRuleContext {
   public:
-    OperandContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    antlr4::Token *operand = nullptr;;
+    ExpressionoperandContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
+    std::vector<ExpressionContext *> expression();
+    ExpressionContext* expression(size_t i);
     antlr4::tree::TerminalNode *OPERAND_PLUS();
     antlr4::tree::TerminalNode *OPERAND_MINUS();
     antlr4::tree::TerminalNode *OPERAND_ASTERISK();
@@ -189,7 +192,7 @@ public:
    
   };
 
-  OperandContext* operand();
+  ExpressionoperandContext* expressionoperand();
 
   class  ComparatorContext : public antlr4::ParserRuleContext {
   public:

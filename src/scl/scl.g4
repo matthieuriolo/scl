@@ -1,8 +1,8 @@
 grammar scl;
 
 /* grammar */
-module: content=scope EOF;
-scope: (instructions +=instruction DELIMITER?)* ;
+module: content=scope;
+scope: (instructions += instruction DELIMITER)* (instructions += instruction)? EOF;
 
 
 variable: '$' IDENTIFIER;
@@ -73,27 +73,28 @@ expression
 	: expressiontype
 	| variable
 /*	| expression RANGE expression RANGE expression
-	| expression RANGE expression
-	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
-	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS 
-	| expression operand expression
-	| expression comparator expression
+	| expression RANGE expression*/
+//	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
+//	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS
+//	| expressionoperand
+/*	| expression comparator expression
 	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE
 	| expression SQUARED_BRACKET_OPEN expression COLON SQUARED_BRACKET_CLOSE
 	| expression SQUARED_BRACKET_OPEN COLON expression SQUARED_BRACKET_CLOSE
 	| expression SQUARED_BRACKET_OPEN expression COLON expression SQUARED_BRACKET_CLOSE*/
 ;
 
-operand
-	: OPERAND_PLUS
-	| OPERAND_MINUS
-	| OPERAND_ASTERISK
-	| OPERAND_SLASH
-	| OPERAND_CARET
-	| OPERAND_AND
-	| OPERAND_OR
+expressionoperand: expression
+	operand=(
+		OPERAND_PLUS
+		| OPERAND_MINUS
+		| OPERAND_ASTERISK
+		| OPERAND_SLASH
+		| OPERAND_CARET
+		| OPERAND_AND
+		| OPERAND_OR
+	) expression
 ;
-
 
 comparator
 	: COMPARATOR_EQUAL
@@ -155,6 +156,11 @@ DICTIONARY_ELEMENTS
 
 /* symbols */
 
+DELIMITER: (NEWLINE | SEMICOLON)+;
+NEWLINE: ('\n'|'\r')+ -> skip;
+SPACE: (' ' | TAB)+ -> skip;
+TAB: '\t'+ -> skip;
+
 
 KEYWORD_PRINT: 'print';
 KEYWORD_INCLUDE: 'include';
@@ -192,11 +198,6 @@ COMMA: ',';
 QUESTION_MARK: '?';
 EXCLAMATION_MARK: '!';
 
-DELIMITER: ( NEWLINE | SEMICOLON )+ -> skip;
-NEWLINE: ('\n'|'\r')+ -> skip;
-SPACE: (' ' | TAB)+ -> skip;
-TAB: '\t'+ -> skip;
-
 COMPARATOR_EQUAL: '==';
 COMPARATOR_NOT_EQUAL: '!=';
 COMPARATOR_GREATER: '>';
@@ -217,4 +218,4 @@ STRING_SINGLE_QUOTE: '\'' .*? '\'';
 FUNCTION_NAME: ':' [a-zA-Z]+;
 
 IDENTIFIER: [a-zA-Z0-9]+;
-COMMENT: '#' ~('\n')* -> skip;
+COMMENT: '#' ~('\n')*? -> skip;

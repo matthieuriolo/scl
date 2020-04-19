@@ -43,7 +43,7 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitOperand(sclParser::OperandContext *ctx) override {
+  virtual antlrcpp::Any visitExpressionoperand(sclParser::ExpressionoperandContext *ctx) override {
     return visitChildren(ctx);
   }
 
