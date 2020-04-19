@@ -5,19 +5,19 @@
 #include <string>
 
 namespace SCL {
+	Module::Module(SCL::Scope* scope) {
+		this->scope = scope;
+	}
+
 	void Module::launch() {
 		//Context *ctx = new Context(this);
 		Context *ctx = new Context();
-		execute(ctx);
+		scope->execute(ctx);
 		delete ctx;
 	}
 
-	void Module::printASTTree() {
-		Scope::printAST(0);
-	}
-
-	void Module::printAST(int level) {
-		std::cout << std::string(level, ' ') << "module\n";
-		printASTInstruction(level);
+	void Module::printAST() {
+		std::cout << "module\n";
+		scope->printASTInstruction(1);
 	}
 }

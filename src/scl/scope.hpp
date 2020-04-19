@@ -18,7 +18,7 @@ namespace SCL {
 			void printASTInstruction(int level);
 
 
-			virtual ~Scope() = 0;
+			virtual ~Scope();
 	};
 }
 

@@ -1,20 +1,17 @@
 #ifndef __SCL_MODUL__
 #define __SCL_MODUL__
 
-#include <list>
-#include "scl/ast/instruction.hpp"
 #include "scl/scope.hpp"
 
 namespace SCL {
-	class Module : public SCL::Scope {
-		
+	class Module {
+		private:
+			SCL::Scope* scope;
 		public:
-			Module() : Scope() {}
-			Module(std::list<SCL::AST::Instruction *> instructions) : Scope(instructions) {}
+			Module(SCL::Scope* scope);
 
 			void launch();
-			void printASTTree();
-			void printAST(int level);
+			void printAST();
 	};
 }
 
