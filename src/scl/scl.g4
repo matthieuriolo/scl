@@ -10,7 +10,8 @@ variable: '$' IDENTIFIER;
 
 
 instruction
-	: assign
+	: /*COMMENT
+	| */ assign
 	| print
 /*	| INCLUDE
 	| IMPORT
@@ -60,7 +61,7 @@ IDENTIFIERS
 	| IDENTIFIERS COMMA IDENTIFIER
 ;*/
 
-print: KEYWORD_PRINT SPACE param=expressiontype;
+print: KEYWORD_PRINT expression;
 
 assign
 	: key=variable OPERAND_EQUAL value=expression
@@ -70,6 +71,7 @@ assign
 
 expression
 	: expressiontype
+	| variable
 /*	| expression RANGE expression RANGE expression
 	| expression RANGE expression
 	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
@@ -106,7 +108,9 @@ comparator
 /* Types */
 expressiontype: type;
 
-type: boolean;
+type
+	: boolean
+;
 
 /*
 type
@@ -190,7 +194,7 @@ EXCLAMATION_MARK: '!';
 
 DELIMITER: ( NEWLINE | SEMICOLON )+ -> skip;
 NEWLINE: ('\n'|'\r')+ -> skip;
-SPACE: ' '+ -> skip;
+SPACE: (' ' | TAB)+ -> skip;
 TAB: '\t'+ -> skip;
 
 COMPARATOR_EQUAL: '==';
@@ -213,4 +217,4 @@ STRING_SINGLE_QUOTE: '\'' .*? '\'';
 FUNCTION_NAME: ':' [a-zA-Z]+;
 
 IDENTIFIER: [a-zA-Z0-9]+;
-COMMENT: '#' [^\n]* -> skip;
+/* COMMENT: '#' [^\n]* -> skip; */

@@ -23,7 +23,7 @@ public:
     COMPARATOR_GREATER = 35, COMPARATOR_GREATER_EQUAL = 36, COMPARATOR_LESS = 37, 
     COMPARATOR_LESS_EQUAL = 38, BOOLEAN_TRUE = 39, BOOLEAN_FALSE = 40, INTEGER = 41, 
     FLOAT = 42, STRING_DOUBLE_QUOTE = 43, STRING_SINGLE_QUOTE = 44, FUNCTION_NAME = 45, 
-    IDENTIFIER = 46, COMMENT = 47
+    IDENTIFIER = 46
   };
 
   enum {
@@ -129,12 +129,10 @@ public:
 
   class  PrintContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::ExpressiontypeContext *param = nullptr;;
     PrintContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *KEYWORD_PRINT();
-    antlr4::tree::TerminalNode *SPACE();
-    ExpressiontypeContext *expressiontype();
+    ExpressionContext *expression();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -165,6 +163,7 @@ public:
     ExpressionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     ExpressiontypeContext *expressiontype();
+    VariableContext *variable();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;

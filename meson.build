@@ -37,7 +37,6 @@ src = files(
 	'src/scl/ast/unaryminus.cpp',
 	'src/scl/ast/functiondeclare.cpp',
 	'src/scl/ast/print.cpp',
-	'src/scl/ast/printStatic.cpp',
 
 	'src/scl/types/function.cpp',
 	'src/scl/types/functionbody.cpp',

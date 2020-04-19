@@ -4,18 +4,18 @@
 #include <iostream>
 namespace SCL {
 	namespace AST {
-		Print::Print(SCL::AST::Variable *variable) {
-			this->variable = variable;
+		Print::Print(SCL::AST::Expression *expression) {
+			this->expression = expression;
 		}
 
 		void Print::execute(SCL::Context * ctx) {
-			std::cout << ctx->getValue(variable)->stringify() << "\n";
+			std::cout << expression->compute(ctx)->stringify() << "\n";
 		}
 
 		void Print::printAST(int level) {
 			std::cout << std::string(level*2, ' ') << "instruction.print\n";
-			std::cout << std::string((level+1) * 2, ' ') << "variable:\n";
-			variable->printAST(level+2);
+			std::cout << std::string((level+1) * 2, ' ') << "expression:\n";
+			expression->printAST(level+2);
 		}
 	}
 }

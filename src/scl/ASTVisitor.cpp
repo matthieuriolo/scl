@@ -6,11 +6,9 @@
 #include "scl/ast/variable.hpp"
 #include "scl/ast/assign.hpp"
 #include "scl/types/boolean.hpp"
+#include "scl/ast/print.hpp"
 
 
-/*
-#include "scl/ast/printStatic.hpp"
-*/
 namespace SCL {
 	antlrcpp::Any ASTVisitor::visitModule(sclParser::ModuleContext *ctx) {
 		return new SCL::Module(visitScope(ctx->content).as<SCL::Scope*>());
@@ -25,6 +23,10 @@ namespace SCL {
 	}
 
 	antlrcpp::Any ASTVisitor::visitVariable(sclParser::VariableContext *ctx) {
+		return (SCL::AST::Expression*)visitExplicitVariable(ctx);
+	}
+
+	SCL::AST::Variable* ASTVisitor::visitExplicitVariable(sclParser::VariableContext *ctx) {
 		return new SCL::AST::Variable(ctx->IDENTIFIER()->getText().substr(1));
 	}
 
@@ -33,7 +35,7 @@ namespace SCL {
 	}
 
 	antlrcpp::Any ASTVisitor::visitAssign(sclParser::AssignContext *ctx) {
-		return (SCL::AST::Instruction*)new SCL::AST::Assign(visitVariable(ctx->key), visitExpression(ctx->value));
+		return (SCL::AST::Instruction*)new SCL::AST::Assign(visitExplicitVariable(ctx->key), visitExpression(ctx->value));
 	}
 
 	antlrcpp::Any ASTVisitor::visitBoolean(sclParser::BooleanContext *ctx) {
@@ -43,8 +45,8 @@ namespace SCL {
 
 		return (SCL::Type*)SCL::Types::Boolean::getFalse();
 	}
-/*
+
 	antlrcpp::Any ASTVisitor::visitPrint(sclParser::PrintContext *ctx)  {
-		return new SCL::AST::PrintStatic(ctx->param);
-	}*/
+		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
+	}
 }
