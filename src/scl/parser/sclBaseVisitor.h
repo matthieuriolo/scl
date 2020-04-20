@@ -47,6 +47,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitExpressiongrouped(sclParser::ExpressiongroupedContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitExpressionconst(sclParser::ExpressionconstContext *ctx) override {
     return visitChildren(ctx);
   }

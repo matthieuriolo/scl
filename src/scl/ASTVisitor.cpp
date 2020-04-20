@@ -31,9 +31,18 @@ namespace SCL {
 		return new SCL::AST::Variable(ctx->IDENTIFIER()->getText().substr(1));
 	}
 
-	antlrcpp::Any ASTVisitor::visitExpressionconcated(sclParser::ExpressionconcatedContext *ctx) {
+	antlrcpp::Any ASTVisitor::visitExpressiongrouped(sclParser::ExpressiongroupedContext *ctx) {
 		if(ctx->expressionconst()) {
-			return visitExpressionconst(ctx->expressionconst());	
+			return visitExpressionconst(ctx->expressionconst());
+		}else if(ctx->expression()) {
+			return visitExpression(ctx->expression());
+		}
+		throw new std::logic_error("cannot parse tree");
+	}
+
+	antlrcpp::Any ASTVisitor::visitExpressionconcated(sclParser::ExpressionconcatedContext *ctx) {
+		if(ctx->expressiongrouped()) {
+			return visitExpressiongrouped(ctx->expressiongrouped());	
 		}else if(ctx->operand) {
 			AST::Operand_Type operand;
 			

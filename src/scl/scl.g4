@@ -67,11 +67,12 @@ assign
 /*	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE OPERAND_EQUAL expression */
 ;
 
-expression: expressionconcated
+expression
+	: expressionconcated
 ;
 
 expressionconcated
-	: expressionconst
+	: expressiongrouped
 	| left=expressionconcated operand=(
 		  OPERAND_PLUS
 		| OPERAND_MINUS
@@ -91,12 +92,16 @@ expressionconcated
 	) right=expressionconcated
 ;
 
+expressiongrouped
+	: expressionconst
+	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
+;
+
 expressionconst
 	: expressiontype
 	| variable
 //	| expression RANGE expression RANGE expression
 //	| expression RANGE expression
-//	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
 //	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS
 //	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE
 //	| expression SQUARED_BRACKET_OPEN expression COLON SQUARED_BRACKET_CLOSE

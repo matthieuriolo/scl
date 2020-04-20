@@ -29,8 +29,8 @@ public:
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
     RulePrint = 4, RuleAssign = 5, RuleExpression = 6, RuleExpressionconcated = 7, 
-    RuleExpressionconst = 8, RuleExpressiontype = 9, RuleType = 10, RuleBoolean = 11, 
-    RuleString = 12, RuleArray = 13
+    RuleExpressiongrouped = 8, RuleExpressionconst = 9, RuleExpressiontype = 10, 
+    RuleType = 11, RuleBoolean = 12, RuleString = 13, RuleArray = 14
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -51,6 +51,7 @@ public:
   class AssignContext;
   class ExpressionContext;
   class ExpressionconcatedContext;
+  class ExpressiongroupedContext;
   class ExpressionconstContext;
   class ExpressiontypeContext;
   class TypeContext;
@@ -170,7 +171,7 @@ public:
     antlr4::Token *comparator = nullptr;;
     ExpressionconcatedContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    ExpressionconstContext *expressionconst();
+    ExpressiongroupedContext *expressiongrouped();
     std::vector<ExpressionconcatedContext *> expressionconcated();
     ExpressionconcatedContext* expressionconcated(size_t i);
     antlr4::tree::TerminalNode *OPERAND_PLUS();
@@ -194,6 +195,22 @@ public:
 
   ExpressionconcatedContext* expressionconcated();
   ExpressionconcatedContext* expressionconcated(int precedence);
+  class  ExpressiongroupedContext : public antlr4::ParserRuleContext {
+  public:
+    ExpressiongroupedContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    ExpressionconstContext *expressionconst();
+    antlr4::tree::TerminalNode *ROUND_BRACKET_OPEN();
+    ExpressionContext *expression();
+    antlr4::tree::TerminalNode *ROUND_BRACKET_CLOSE();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  ExpressiongroupedContext* expressiongrouped();
+
   class  ExpressionconstContext : public antlr4::ParserRuleContext {
   public:
     ExpressionconstContext(antlr4::ParserRuleContext *parent, size_t invokingState);
