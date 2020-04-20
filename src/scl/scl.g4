@@ -10,15 +10,14 @@ variable: '$' IDENTIFIER;
 
 
 instruction
-	: /*COMMENT
-	| */ assign
+	: assign
 	| print
 /*	| INCLUDE
 	| IMPORT
 	| FUNCTION_DECLARATION
-	| command */
+	| command
 	| CONTROL_IF expression DELIMITER scope DELIMITER CONTROL_END
-	| CONTROL_FOR variable CONTROL_IN expression DELIMITER scope DELIMITER CONTROL_END
+	| CONTROL_FOR variable CONTROL_IN expression DELIMITER scope DELIMITER CONTROL_END */
 ;
 
 
@@ -68,33 +67,39 @@ assign
 /*	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE OPERAND_EQUAL expression */
 ;
 
-
-expression
-	: expressiontype
-	| variable
-/*	| expression RANGE expression RANGE expression
-	| expression RANGE expression*/
-//	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
-//	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS
-//	| expressionoperand
-/*	| expression comparator expression
-	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE
-	| expression SQUARED_BRACKET_OPEN expression COLON SQUARED_BRACKET_CLOSE
-	| expression SQUARED_BRACKET_OPEN COLON expression SQUARED_BRACKET_CLOSE
-	| expression SQUARED_BRACKET_OPEN expression COLON expression SQUARED_BRACKET_CLOSE*/
+expression:
+	| expressionoperand
 ;
 
-expressionoperand: expression
-	operand=(
-		OPERAND_PLUS
+expressionoperand
+	: expressionconst
+	| left=expressionoperand operand=(OPERAND_PLUS
 		| OPERAND_MINUS
 		| OPERAND_ASTERISK
 		| OPERAND_SLASH
 		| OPERAND_CARET
 		| OPERAND_AND
 		| OPERAND_OR
-	) expression
+	) right=expressionoperand
 ;
+
+expressionconst
+	: expressiontype
+	| variable
+//	| expression RANGE expression RANGE expression
+//	| expression RANGE expression
+//	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
+//	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS
+//	| expressionoperand
+//	| expression comparator expression
+//	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE
+//	| expression SQUARED_BRACKET_OPEN expression COLON SQUARED_BRACKET_CLOSE
+//	| expression SQUARED_BRACKET_OPEN COLON expression SQUARED_BRACKET_CLOSE
+//	| expression SQUARED_BRACKET_OPEN expression COLON expression SQUARED_BRACKET_CLOSE
+;
+
+
+
 
 comparator
 	: COMPARATOR_EQUAL

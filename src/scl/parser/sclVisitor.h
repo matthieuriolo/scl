@@ -35,6 +35,8 @@ public:
 
     virtual antlrcpp::Any visitExpressionoperand(sclParser::ExpressionoperandContext *context) = 0;
 
+    virtual antlrcpp::Any visitExpressionconst(sclParser::ExpressionconstContext *context) = 0;
+
     virtual antlrcpp::Any visitComparator(sclParser::ComparatorContext *context) = 0;
 
     virtual antlrcpp::Any visitExpressiontype(sclParser::ExpressiontypeContext *context) = 0;

@@ -29,8 +29,8 @@ public:
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
     RulePrint = 4, RuleAssign = 5, RuleExpression = 6, RuleExpressionoperand = 7, 
-    RuleComparator = 8, RuleExpressiontype = 9, RuleType = 10, RuleBoolean = 11, 
-    RuleString = 12, RuleArray = 13
+    RuleExpressionconst = 8, RuleComparator = 9, RuleExpressiontype = 10, 
+    RuleType = 11, RuleBoolean = 12, RuleString = 13, RuleArray = 14
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -51,6 +51,7 @@ public:
   class AssignContext;
   class ExpressionContext;
   class ExpressionoperandContext;
+  class ExpressionconstContext;
   class ComparatorContext;
   class ExpressiontypeContext;
   class TypeContext;
@@ -110,15 +111,6 @@ public:
     virtual size_t getRuleIndex() const override;
     AssignContext *assign();
     PrintContext *print();
-    antlr4::tree::TerminalNode *CONTROL_IF();
-    ExpressionContext *expression();
-    std::vector<antlr4::tree::TerminalNode *> DELIMITER();
-    antlr4::tree::TerminalNode* DELIMITER(size_t i);
-    ScopeContext *scope();
-    antlr4::tree::TerminalNode *CONTROL_END();
-    antlr4::tree::TerminalNode *CONTROL_FOR();
-    VariableContext *variable();
-    antlr4::tree::TerminalNode *CONTROL_IN();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -162,8 +154,7 @@ public:
   public:
     ExpressionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    ExpressiontypeContext *expressiontype();
-    VariableContext *variable();
+    ExpressionoperandContext *expressionoperand();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -174,11 +165,14 @@ public:
 
   class  ExpressionoperandContext : public antlr4::ParserRuleContext {
   public:
+    sclParser::ExpressionoperandContext *left = nullptr;;
     antlr4::Token *operand = nullptr;;
+    sclParser::ExpressionoperandContext *right = nullptr;;
     ExpressionoperandContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<ExpressionContext *> expression();
-    ExpressionContext* expression(size_t i);
+    ExpressionconstContext *expressionconst();
+    std::vector<ExpressionoperandContext *> expressionoperand();
+    ExpressionoperandContext* expressionoperand(size_t i);
     antlr4::tree::TerminalNode *OPERAND_PLUS();
     antlr4::tree::TerminalNode *OPERAND_MINUS();
     antlr4::tree::TerminalNode *OPERAND_ASTERISK();
@@ -193,6 +187,20 @@ public:
   };
 
   ExpressionoperandContext* expressionoperand();
+  ExpressionoperandContext* expressionoperand(int precedence);
+  class  ExpressionconstContext : public antlr4::ParserRuleContext {
+  public:
+    ExpressionconstContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    ExpressiontypeContext *expressiontype();
+    VariableContext *variable();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  ExpressionconstContext* expressionconst();
 
   class  ComparatorContext : public antlr4::ParserRuleContext {
   public:
@@ -286,6 +294,9 @@ public:
 
   ArrayContext* array();
 
+
+  virtual bool sempred(antlr4::RuleContext *_localctx, size_t ruleIndex, size_t predicateIndex) override;
+  bool expressionoperandSempred(ExpressionoperandContext *_localctx, size_t predicateIndex);
 
 private:
   static std::vector<antlr4::dfa::DFA> _decisionToDFA;
