@@ -63,7 +63,7 @@ sclParser::ModuleContext* sclParser::module() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(30);
+    setState(28);
     dynamic_cast<ModuleContext *>(_localctx)->content = scope();
    
   }
@@ -126,33 +126,33 @@ sclParser::ScopeContext* sclParser::scope() {
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(37);
+    setState(35);
     _errHandler->sync(this);
     alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 0, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1) {
-        setState(32);
+        setState(30);
         dynamic_cast<ScopeContext *>(_localctx)->instructionContext = instruction();
         dynamic_cast<ScopeContext *>(_localctx)->instructions.push_back(dynamic_cast<ScopeContext *>(_localctx)->instructionContext);
-        setState(33);
+        setState(31);
         match(sclParser::DELIMITER); 
       }
-      setState(39);
+      setState(37);
       _errHandler->sync(this);
       alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 0, _ctx);
     }
-    setState(41);
+    setState(39);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if (_la == sclParser::T__0
 
     || _la == sclParser::KEYWORD_PRINT) {
-      setState(40);
+      setState(38);
       dynamic_cast<ScopeContext *>(_localctx)->instructionContext = instruction();
       dynamic_cast<ScopeContext *>(_localctx)->instructions.push_back(dynamic_cast<ScopeContext *>(_localctx)->instructionContext);
     }
-    setState(43);
+    setState(41);
     match(sclParser::EOF);
    
   }
@@ -197,9 +197,9 @@ sclParser::VariableContext* sclParser::variable() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(45);
+    setState(43);
     match(sclParser::T__0);
-    setState(46);
+    setState(44);
     match(sclParser::IDENTIFIER);
    
   }
@@ -247,19 +247,19 @@ sclParser::InstructionContext* sclParser::instruction() {
     exitRule();
   });
   try {
-    setState(50);
+    setState(48);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case sclParser::T__0: {
         enterOuterAlt(_localctx, 1);
-        setState(48);
+        setState(46);
         assign();
         break;
       }
 
       case sclParser::KEYWORD_PRINT: {
         enterOuterAlt(_localctx, 2);
-        setState(49);
+        setState(47);
         print();
         break;
       }
@@ -314,9 +314,9 @@ sclParser::PrintContext* sclParser::print() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(52);
+    setState(50);
     match(sclParser::KEYWORD_PRINT);
-    setState(53);
+    setState(51);
     expression();
    
   }
@@ -369,11 +369,11 @@ sclParser::AssignContext* sclParser::assign() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(55);
+    setState(53);
     dynamic_cast<AssignContext *>(_localctx)->key = variable();
-    setState(56);
+    setState(54);
     match(sclParser::OPERAND_EQUAL);
-    setState(57);
+    setState(55);
     dynamic_cast<AssignContext *>(_localctx)->value = expression();
    
   }
@@ -392,8 +392,8 @@ sclParser::ExpressionContext::ExpressionContext(ParserRuleContext *parent, size_
   : ParserRuleContext(parent, invokingState) {
 }
 
-sclParser::ExpressionoperandContext* sclParser::ExpressionContext::expressionoperand() {
-  return getRuleContext<sclParser::ExpressionoperandContext>(0);
+sclParser::ExpressionconcatedContext* sclParser::ExpressionContext::expressionconcated() {
+  return getRuleContext<sclParser::ExpressionconcatedContext>(0);
 }
 
 
@@ -417,29 +417,9 @@ sclParser::ExpressionContext* sclParser::expression() {
     exitRule();
   });
   try {
-    setState(61);
-    _errHandler->sync(this);
-    switch (_input->LA(1)) {
-      case sclParser::EOF:
-      case sclParser::DELIMITER:
-      case sclParser::COMMA: {
-        enterOuterAlt(_localctx, 1);
-
-        break;
-      }
-
-      case sclParser::T__0:
-      case sclParser::BOOLEAN_TRUE:
-      case sclParser::BOOLEAN_FALSE: {
-        enterOuterAlt(_localctx, 2);
-        setState(60);
-        expressionoperand(0);
-        break;
-      }
-
-    default:
-      throw NoViableAltException(this);
-    }
+    enterOuterAlt(_localctx, 1);
+    setState(57);
+    expressionconcated(0);
    
   }
   catch (RecognitionException &e) {
@@ -451,78 +431,102 @@ sclParser::ExpressionContext* sclParser::expression() {
   return _localctx;
 }
 
-//----------------- ExpressionoperandContext ------------------------------------------------------------------
+//----------------- ExpressionconcatedContext ------------------------------------------------------------------
 
-sclParser::ExpressionoperandContext::ExpressionoperandContext(ParserRuleContext *parent, size_t invokingState)
+sclParser::ExpressionconcatedContext::ExpressionconcatedContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-sclParser::ExpressionconstContext* sclParser::ExpressionoperandContext::expressionconst() {
+sclParser::ExpressionconstContext* sclParser::ExpressionconcatedContext::expressionconst() {
   return getRuleContext<sclParser::ExpressionconstContext>(0);
 }
 
-std::vector<sclParser::ExpressionoperandContext *> sclParser::ExpressionoperandContext::expressionoperand() {
-  return getRuleContexts<sclParser::ExpressionoperandContext>();
+std::vector<sclParser::ExpressionconcatedContext *> sclParser::ExpressionconcatedContext::expressionconcated() {
+  return getRuleContexts<sclParser::ExpressionconcatedContext>();
 }
 
-sclParser::ExpressionoperandContext* sclParser::ExpressionoperandContext::expressionoperand(size_t i) {
-  return getRuleContext<sclParser::ExpressionoperandContext>(i);
+sclParser::ExpressionconcatedContext* sclParser::ExpressionconcatedContext::expressionconcated(size_t i) {
+  return getRuleContext<sclParser::ExpressionconcatedContext>(i);
 }
 
-tree::TerminalNode* sclParser::ExpressionoperandContext::OPERAND_PLUS() {
+tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_PLUS() {
   return getToken(sclParser::OPERAND_PLUS, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionoperandContext::OPERAND_MINUS() {
+tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_MINUS() {
   return getToken(sclParser::OPERAND_MINUS, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionoperandContext::OPERAND_ASTERISK() {
+tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_ASTERISK() {
   return getToken(sclParser::OPERAND_ASTERISK, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionoperandContext::OPERAND_SLASH() {
+tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_SLASH() {
   return getToken(sclParser::OPERAND_SLASH, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionoperandContext::OPERAND_CARET() {
+tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_CARET() {
   return getToken(sclParser::OPERAND_CARET, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionoperandContext::OPERAND_AND() {
+tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_AND() {
   return getToken(sclParser::OPERAND_AND, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionoperandContext::OPERAND_OR() {
+tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_OR() {
   return getToken(sclParser::OPERAND_OR, 0);
 }
 
+tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_EQUAL() {
+  return getToken(sclParser::COMPARATOR_EQUAL, 0);
+}
 
-size_t sclParser::ExpressionoperandContext::getRuleIndex() const {
-  return sclParser::RuleExpressionoperand;
+tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_NOT_EQUAL() {
+  return getToken(sclParser::COMPARATOR_NOT_EQUAL, 0);
+}
+
+tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_LESS() {
+  return getToken(sclParser::COMPARATOR_LESS, 0);
+}
+
+tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_GREATER() {
+  return getToken(sclParser::COMPARATOR_GREATER, 0);
+}
+
+tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_LESS_EQUAL() {
+  return getToken(sclParser::COMPARATOR_LESS_EQUAL, 0);
+}
+
+tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_GREATER_EQUAL() {
+  return getToken(sclParser::COMPARATOR_GREATER_EQUAL, 0);
 }
 
 
-antlrcpp::Any sclParser::ExpressionoperandContext::accept(tree::ParseTreeVisitor *visitor) {
+size_t sclParser::ExpressionconcatedContext::getRuleIndex() const {
+  return sclParser::RuleExpressionconcated;
+}
+
+
+antlrcpp::Any sclParser::ExpressionconcatedContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitExpressionoperand(this);
+    return parserVisitor->visitExpressionconcated(this);
   else
     return visitor->visitChildren(this);
 }
 
 
-sclParser::ExpressionoperandContext* sclParser::expressionoperand() {
-   return expressionoperand(0);
+sclParser::ExpressionconcatedContext* sclParser::expressionconcated() {
+   return expressionconcated(0);
 }
 
-sclParser::ExpressionoperandContext* sclParser::expressionoperand(int precedence) {
+sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int precedence) {
   ParserRuleContext *parentContext = _ctx;
   size_t parentState = getState();
-  sclParser::ExpressionoperandContext *_localctx = _tracker.createInstance<ExpressionoperandContext>(_ctx, parentState);
-  sclParser::ExpressionoperandContext *previousContext = _localctx;
+  sclParser::ExpressionconcatedContext *_localctx = _tracker.createInstance<ExpressionconcatedContext>(_ctx, parentState);
+  sclParser::ExpressionconcatedContext *previousContext = _localctx;
   (void)previousContext; // Silence compiler, in case the context is not used by generated code.
   size_t startState = 14;
-  enterRecursionRule(_localctx, 14, sclParser::RuleExpressionoperand, precedence);
+  enterRecursionRule(_localctx, 14, sclParser::RuleExpressionconcated, precedence);
 
     size_t _la = 0;
 
@@ -532,10 +536,10 @@ sclParser::ExpressionoperandContext* sclParser::expressionoperand(int precedence
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(64);
+    setState(60);
     expressionconst();
     _ctx->stop = _input->LT(-1);
-    setState(71);
+    setState(70);
     _errHandler->sync(this);
     alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 4, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
@@ -543,33 +547,69 @@ sclParser::ExpressionoperandContext* sclParser::expressionoperand(int precedence
         if (!_parseListeners.empty())
           triggerExitRuleEvent();
         previousContext = _localctx;
-        _localctx = _tracker.createInstance<ExpressionoperandContext>(parentContext, parentState);
-        _localctx->left = previousContext;
-        pushNewRecursionContext(_localctx, startState, RuleExpressionoperand);
-        setState(66);
-
-        if (!(precpred(_ctx, 1))) throw FailedPredicateException(this, "precpred(_ctx, 1)");
-        setState(67);
-        dynamic_cast<ExpressionoperandContext *>(_localctx)->operand = _input->LT(1);
-        _la = _input->LA(1);
-        if (!((((_la & ~ 0x3fULL) == 0) &&
-          ((1ULL << _la) & ((1ULL << sclParser::OPERAND_PLUS)
-          | (1ULL << sclParser::OPERAND_MINUS)
-          | (1ULL << sclParser::OPERAND_ASTERISK)
-          | (1ULL << sclParser::OPERAND_SLASH)
-          | (1ULL << sclParser::OPERAND_CARET)
-          | (1ULL << sclParser::OPERAND_AND)
-          | (1ULL << sclParser::OPERAND_OR))) != 0))) {
-          dynamic_cast<ExpressionoperandContext *>(_localctx)->operand = _errHandler->recoverInline(this);
-        }
-        else {
-          _errHandler->reportMatch(this);
-          consume();
-        }
         setState(68);
-        dynamic_cast<ExpressionoperandContext *>(_localctx)->right = expressionoperand(2); 
+        _errHandler->sync(this);
+        switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx)) {
+        case 1: {
+          _localctx = _tracker.createInstance<ExpressionconcatedContext>(parentContext, parentState);
+          _localctx->left = previousContext;
+          pushNewRecursionContext(_localctx, startState, RuleExpressionconcated);
+          setState(62);
+
+          if (!(precpred(_ctx, 2))) throw FailedPredicateException(this, "precpred(_ctx, 2)");
+          setState(63);
+          dynamic_cast<ExpressionconcatedContext *>(_localctx)->operand = _input->LT(1);
+          _la = _input->LA(1);
+          if (!((((_la & ~ 0x3fULL) == 0) &&
+            ((1ULL << _la) & ((1ULL << sclParser::OPERAND_PLUS)
+            | (1ULL << sclParser::OPERAND_MINUS)
+            | (1ULL << sclParser::OPERAND_ASTERISK)
+            | (1ULL << sclParser::OPERAND_SLASH)
+            | (1ULL << sclParser::OPERAND_CARET)
+            | (1ULL << sclParser::OPERAND_AND)
+            | (1ULL << sclParser::OPERAND_OR))) != 0))) {
+            dynamic_cast<ExpressionconcatedContext *>(_localctx)->operand = _errHandler->recoverInline(this);
+          }
+          else {
+            _errHandler->reportMatch(this);
+            consume();
+          }
+          setState(64);
+          dynamic_cast<ExpressionconcatedContext *>(_localctx)->right = expressionconcated(3);
+          break;
+        }
+
+        case 2: {
+          _localctx = _tracker.createInstance<ExpressionconcatedContext>(parentContext, parentState);
+          _localctx->left = previousContext;
+          pushNewRecursionContext(_localctx, startState, RuleExpressionconcated);
+          setState(65);
+
+          if (!(precpred(_ctx, 1))) throw FailedPredicateException(this, "precpred(_ctx, 1)");
+          setState(66);
+          dynamic_cast<ExpressionconcatedContext *>(_localctx)->comparator = _input->LT(1);
+          _la = _input->LA(1);
+          if (!((((_la & ~ 0x3fULL) == 0) &&
+            ((1ULL << _la) & ((1ULL << sclParser::COMPARATOR_EQUAL)
+            | (1ULL << sclParser::COMPARATOR_NOT_EQUAL)
+            | (1ULL << sclParser::COMPARATOR_GREATER)
+            | (1ULL << sclParser::COMPARATOR_GREATER_EQUAL)
+            | (1ULL << sclParser::COMPARATOR_LESS)
+            | (1ULL << sclParser::COMPARATOR_LESS_EQUAL))) != 0))) {
+            dynamic_cast<ExpressionconcatedContext *>(_localctx)->comparator = _errHandler->recoverInline(this);
+          }
+          else {
+            _errHandler->reportMatch(this);
+            consume();
+          }
+          setState(67);
+          dynamic_cast<ExpressionconcatedContext *>(_localctx)->right = expressionconcated(2);
+          break;
+        }
+
+        } 
       }
-      setState(73);
+      setState(72);
       _errHandler->sync(this);
       alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 4, _ctx);
     }
@@ -617,105 +657,26 @@ sclParser::ExpressionconstContext* sclParser::expressionconst() {
     exitRule();
   });
   try {
-    setState(76);
+    setState(75);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case sclParser::BOOLEAN_TRUE:
       case sclParser::BOOLEAN_FALSE: {
         enterOuterAlt(_localctx, 1);
-        setState(74);
+        setState(73);
         expressiontype();
         break;
       }
 
       case sclParser::T__0: {
         enterOuterAlt(_localctx, 2);
-        setState(75);
+        setState(74);
         variable();
         break;
       }
 
     default:
       throw NoViableAltException(this);
-    }
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- ComparatorContext ------------------------------------------------------------------
-
-sclParser::ComparatorContext::ComparatorContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* sclParser::ComparatorContext::COMPARATOR_EQUAL() {
-  return getToken(sclParser::COMPARATOR_EQUAL, 0);
-}
-
-tree::TerminalNode* sclParser::ComparatorContext::COMPARATOR_NOT_EQUAL() {
-  return getToken(sclParser::COMPARATOR_NOT_EQUAL, 0);
-}
-
-tree::TerminalNode* sclParser::ComparatorContext::COMPARATOR_LESS() {
-  return getToken(sclParser::COMPARATOR_LESS, 0);
-}
-
-tree::TerminalNode* sclParser::ComparatorContext::COMPARATOR_GREATER() {
-  return getToken(sclParser::COMPARATOR_GREATER, 0);
-}
-
-tree::TerminalNode* sclParser::ComparatorContext::COMPARATOR_LESS_EQUAL() {
-  return getToken(sclParser::COMPARATOR_LESS_EQUAL, 0);
-}
-
-tree::TerminalNode* sclParser::ComparatorContext::COMPARATOR_GREATER_EQUAL() {
-  return getToken(sclParser::COMPARATOR_GREATER_EQUAL, 0);
-}
-
-
-size_t sclParser::ComparatorContext::getRuleIndex() const {
-  return sclParser::RuleComparator;
-}
-
-
-antlrcpp::Any sclParser::ComparatorContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitComparator(this);
-  else
-    return visitor->visitChildren(this);
-}
-
-sclParser::ComparatorContext* sclParser::comparator() {
-  ComparatorContext *_localctx = _tracker.createInstance<ComparatorContext>(_ctx, getState());
-  enterRule(_localctx, 18, sclParser::RuleComparator);
-  size_t _la = 0;
-
-  auto onExit = finally([=] {
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(78);
-    _la = _input->LA(1);
-    if (!((((_la & ~ 0x3fULL) == 0) &&
-      ((1ULL << _la) & ((1ULL << sclParser::COMPARATOR_EQUAL)
-      | (1ULL << sclParser::COMPARATOR_NOT_EQUAL)
-      | (1ULL << sclParser::COMPARATOR_GREATER)
-      | (1ULL << sclParser::COMPARATOR_GREATER_EQUAL)
-      | (1ULL << sclParser::COMPARATOR_LESS)
-      | (1ULL << sclParser::COMPARATOR_LESS_EQUAL))) != 0))) {
-    _errHandler->recoverInline(this);
-    }
-    else {
-      _errHandler->reportMatch(this);
-      consume();
     }
    
   }
@@ -753,14 +714,14 @@ antlrcpp::Any sclParser::ExpressiontypeContext::accept(tree::ParseTreeVisitor *v
 
 sclParser::ExpressiontypeContext* sclParser::expressiontype() {
   ExpressiontypeContext *_localctx = _tracker.createInstance<ExpressiontypeContext>(_ctx, getState());
-  enterRule(_localctx, 20, sclParser::RuleExpressiontype);
+  enterRule(_localctx, 18, sclParser::RuleExpressiontype);
 
   auto onExit = finally([=] {
     exitRule();
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(80);
+    setState(77);
     type();
    
   }
@@ -798,14 +759,14 @@ antlrcpp::Any sclParser::TypeContext::accept(tree::ParseTreeVisitor *visitor) {
 
 sclParser::TypeContext* sclParser::type() {
   TypeContext *_localctx = _tracker.createInstance<TypeContext>(_ctx, getState());
-  enterRule(_localctx, 22, sclParser::RuleType);
+  enterRule(_localctx, 20, sclParser::RuleType);
 
   auto onExit = finally([=] {
     exitRule();
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(82);
+    setState(79);
     boolean();
    
   }
@@ -847,7 +808,7 @@ antlrcpp::Any sclParser::BooleanContext::accept(tree::ParseTreeVisitor *visitor)
 
 sclParser::BooleanContext* sclParser::boolean() {
   BooleanContext *_localctx = _tracker.createInstance<BooleanContext>(_ctx, getState());
-  enterRule(_localctx, 24, sclParser::RuleBoolean);
+  enterRule(_localctx, 22, sclParser::RuleBoolean);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -855,7 +816,7 @@ sclParser::BooleanContext* sclParser::boolean() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(84);
+    setState(81);
     _la = _input->LA(1);
     if (!(_la == sclParser::BOOLEAN_TRUE
 
@@ -906,7 +867,7 @@ antlrcpp::Any sclParser::StringContext::accept(tree::ParseTreeVisitor *visitor) 
 
 sclParser::StringContext* sclParser::string() {
   StringContext *_localctx = _tracker.createInstance<StringContext>(_ctx, getState());
-  enterRule(_localctx, 26, sclParser::RuleString);
+  enterRule(_localctx, 24, sclParser::RuleString);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -914,7 +875,7 @@ sclParser::StringContext* sclParser::string() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(86);
+    setState(83);
     _la = _input->LA(1);
     if (!(_la == sclParser::STRING_DOUBLE_QUOTE
 
@@ -981,7 +942,7 @@ antlrcpp::Any sclParser::ArrayContext::accept(tree::ParseTreeVisitor *visitor) {
 
 sclParser::ArrayContext* sclParser::array() {
   ArrayContext *_localctx = _tracker.createInstance<ArrayContext>(_ctx, getState());
-  enterRule(_localctx, 28, sclParser::RuleArray);
+  enterRule(_localctx, 26, sclParser::RuleArray);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -989,26 +950,25 @@ sclParser::ArrayContext* sclParser::array() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(88);
+    setState(85);
     match(sclParser::SQUARED_BRACKET_OPEN);
-    setState(94);
+    setState(91);
     _errHandler->sync(this);
     _la = _input->LA(1);
     while ((((_la & ~ 0x3fULL) == 0) &&
       ((1ULL << _la) & ((1ULL << sclParser::T__0)
-      | (1ULL << sclParser::COMMA)
       | (1ULL << sclParser::BOOLEAN_TRUE)
       | (1ULL << sclParser::BOOLEAN_FALSE))) != 0)) {
-      setState(89);
+      setState(86);
       dynamic_cast<ArrayContext *>(_localctx)->expressionContext = expression();
       dynamic_cast<ArrayContext *>(_localctx)->elements.push_back(dynamic_cast<ArrayContext *>(_localctx)->expressionContext);
-      setState(90);
+      setState(87);
       match(sclParser::COMMA);
-      setState(96);
+      setState(93);
       _errHandler->sync(this);
       _la = _input->LA(1);
     }
-    setState(97);
+    setState(94);
     match(sclParser::SQUARED_BRACKET_CLOSE);
    
   }
@@ -1023,7 +983,7 @@ sclParser::ArrayContext* sclParser::array() {
 
 bool sclParser::sempred(RuleContext *context, size_t ruleIndex, size_t predicateIndex) {
   switch (ruleIndex) {
-    case 7: return expressionoperandSempred(dynamic_cast<ExpressionoperandContext *>(context), predicateIndex);
+    case 7: return expressionconcatedSempred(dynamic_cast<ExpressionconcatedContext *>(context), predicateIndex);
 
   default:
     break;
@@ -1031,9 +991,10 @@ bool sclParser::sempred(RuleContext *context, size_t ruleIndex, size_t predicate
   return true;
 }
 
-bool sclParser::expressionoperandSempred(ExpressionoperandContext *_localctx, size_t predicateIndex) {
+bool sclParser::expressionconcatedSempred(ExpressionconcatedContext *_localctx, size_t predicateIndex) {
   switch (predicateIndex) {
-    case 0: return precpred(_ctx, 1);
+    case 0: return precpred(_ctx, 2);
+    case 1: return precpred(_ctx, 1);
 
   default:
     break;
@@ -1051,8 +1012,8 @@ std::vector<uint16_t> sclParser::_serializedATN;
 
 std::vector<std::string> sclParser::_ruleNames = {
   "module", "scope", "variable", "instruction", "print", "assign", "expression", 
-  "expressionoperand", "expressionconst", "comparator", "expressiontype", 
-  "type", "boolean", "string", "array"
+  "expressionconcated", "expressionconst", "expressiontype", "type", "boolean", 
+  "string", "array"
 };
 
 std::vector<std::string> sclParser::_literalNames = {
@@ -1097,67 +1058,66 @@ sclParser::Initializer::Initializer() {
 
   _serializedATN = {
     0x3, 0x608b, 0xa72a, 0x8133, 0xb9ed, 0x417c, 0x3be7, 0x7786, 0x5964, 
-    0x3, 0x31, 0x66, 0x4, 0x2, 0x9, 0x2, 0x4, 0x3, 0x9, 0x3, 0x4, 0x4, 0x9, 
+    0x3, 0x31, 0x63, 0x4, 0x2, 0x9, 0x2, 0x4, 0x3, 0x9, 0x3, 0x4, 0x4, 0x9, 
     0x4, 0x4, 0x5, 0x9, 0x5, 0x4, 0x6, 0x9, 0x6, 0x4, 0x7, 0x9, 0x7, 0x4, 
     0x8, 0x9, 0x8, 0x4, 0x9, 0x9, 0x9, 0x4, 0xa, 0x9, 0xa, 0x4, 0xb, 0x9, 
     0xb, 0x4, 0xc, 0x9, 0xc, 0x4, 0xd, 0x9, 0xd, 0x4, 0xe, 0x9, 0xe, 0x4, 
-    0xf, 0x9, 0xf, 0x4, 0x10, 0x9, 0x10, 0x3, 0x2, 0x3, 0x2, 0x3, 0x3, 0x3, 
-    0x3, 0x3, 0x3, 0x7, 0x3, 0x26, 0xa, 0x3, 0xc, 0x3, 0xe, 0x3, 0x29, 0xb, 
-    0x3, 0x3, 0x3, 0x5, 0x3, 0x2c, 0xa, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x4, 
-    0x3, 0x4, 0x3, 0x4, 0x3, 0x5, 0x3, 0x5, 0x5, 0x5, 0x35, 0xa, 0x5, 0x3, 
-    0x6, 0x3, 0x6, 0x3, 0x6, 0x3, 0x7, 0x3, 0x7, 0x3, 0x7, 0x3, 0x7, 0x3, 
-    0x8, 0x3, 0x8, 0x5, 0x8, 0x40, 0xa, 0x8, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 
-    0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x7, 0x9, 0x48, 0xa, 0x9, 0xc, 0x9, 0xe, 
-    0x9, 0x4b, 0xb, 0x9, 0x3, 0xa, 0x3, 0xa, 0x5, 0xa, 0x4f, 0xa, 0xa, 0x3, 
-    0xb, 0x3, 0xb, 0x3, 0xc, 0x3, 0xc, 0x3, 0xd, 0x3, 0xd, 0x3, 0xe, 0x3, 
-    0xe, 0x3, 0xf, 0x3, 0xf, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 
-    0x7, 0x10, 0x5f, 0xa, 0x10, 0xc, 0x10, 0xe, 0x10, 0x62, 0xb, 0x10, 0x3, 
-    0x10, 0x3, 0x10, 0x3, 0x10, 0x2, 0x3, 0x10, 0x11, 0x2, 0x4, 0x6, 0x8, 
-    0xa, 0xc, 0xe, 0x10, 0x12, 0x14, 0x16, 0x18, 0x1a, 0x1c, 0x1e, 0x2, 
-    0x6, 0x3, 0x2, 0x10, 0x16, 0x3, 0x2, 0x23, 0x28, 0x3, 0x2, 0x29, 0x2a, 
-    0x3, 0x2, 0x2d, 0x2e, 0x2, 0x5d, 0x2, 0x20, 0x3, 0x2, 0x2, 0x2, 0x4, 
-    0x27, 0x3, 0x2, 0x2, 0x2, 0x6, 0x2f, 0x3, 0x2, 0x2, 0x2, 0x8, 0x34, 
-    0x3, 0x2, 0x2, 0x2, 0xa, 0x36, 0x3, 0x2, 0x2, 0x2, 0xc, 0x39, 0x3, 0x2, 
-    0x2, 0x2, 0xe, 0x3f, 0x3, 0x2, 0x2, 0x2, 0x10, 0x41, 0x3, 0x2, 0x2, 
-    0x2, 0x12, 0x4e, 0x3, 0x2, 0x2, 0x2, 0x14, 0x50, 0x3, 0x2, 0x2, 0x2, 
-    0x16, 0x52, 0x3, 0x2, 0x2, 0x2, 0x18, 0x54, 0x3, 0x2, 0x2, 0x2, 0x1a, 
-    0x56, 0x3, 0x2, 0x2, 0x2, 0x1c, 0x58, 0x3, 0x2, 0x2, 0x2, 0x1e, 0x5a, 
-    0x3, 0x2, 0x2, 0x2, 0x20, 0x21, 0x5, 0x4, 0x3, 0x2, 0x21, 0x3, 0x3, 
-    0x2, 0x2, 0x2, 0x22, 0x23, 0x5, 0x8, 0x5, 0x2, 0x23, 0x24, 0x7, 0x4, 
-    0x2, 0x2, 0x24, 0x26, 0x3, 0x2, 0x2, 0x2, 0x25, 0x22, 0x3, 0x2, 0x2, 
-    0x2, 0x26, 0x29, 0x3, 0x2, 0x2, 0x2, 0x27, 0x25, 0x3, 0x2, 0x2, 0x2, 
-    0x27, 0x28, 0x3, 0x2, 0x2, 0x2, 0x28, 0x2b, 0x3, 0x2, 0x2, 0x2, 0x29, 
-    0x27, 0x3, 0x2, 0x2, 0x2, 0x2a, 0x2c, 0x5, 0x8, 0x5, 0x2, 0x2b, 0x2a, 
-    0x3, 0x2, 0x2, 0x2, 0x2b, 0x2c, 0x3, 0x2, 0x2, 0x2, 0x2c, 0x2d, 0x3, 
-    0x2, 0x2, 0x2, 0x2d, 0x2e, 0x7, 0x2, 0x2, 0x3, 0x2e, 0x5, 0x3, 0x2, 
-    0x2, 0x2, 0x2f, 0x30, 0x7, 0x3, 0x2, 0x2, 0x30, 0x31, 0x7, 0x30, 0x2, 
-    0x2, 0x31, 0x7, 0x3, 0x2, 0x2, 0x2, 0x32, 0x35, 0x5, 0xc, 0x7, 0x2, 
-    0x33, 0x35, 0x5, 0xa, 0x6, 0x2, 0x34, 0x32, 0x3, 0x2, 0x2, 0x2, 0x34, 
-    0x33, 0x3, 0x2, 0x2, 0x2, 0x35, 0x9, 0x3, 0x2, 0x2, 0x2, 0x36, 0x37, 
-    0x7, 0x8, 0x2, 0x2, 0x37, 0x38, 0x5, 0xe, 0x8, 0x2, 0x38, 0xb, 0x3, 
-    0x2, 0x2, 0x2, 0x39, 0x3a, 0x5, 0x6, 0x4, 0x2, 0x3a, 0x3b, 0x7, 0xf, 
-    0x2, 0x2, 0x3b, 0x3c, 0x5, 0xe, 0x8, 0x2, 0x3c, 0xd, 0x3, 0x2, 0x2, 
-    0x2, 0x3d, 0x40, 0x3, 0x2, 0x2, 0x2, 0x3e, 0x40, 0x5, 0x10, 0x9, 0x2, 
-    0x3f, 0x3d, 0x3, 0x2, 0x2, 0x2, 0x3f, 0x3e, 0x3, 0x2, 0x2, 0x2, 0x40, 
-    0xf, 0x3, 0x2, 0x2, 0x2, 0x41, 0x42, 0x8, 0x9, 0x1, 0x2, 0x42, 0x43, 
-    0x5, 0x12, 0xa, 0x2, 0x43, 0x49, 0x3, 0x2, 0x2, 0x2, 0x44, 0x45, 0xc, 
-    0x3, 0x2, 0x2, 0x45, 0x46, 0x9, 0x2, 0x2, 0x2, 0x46, 0x48, 0x5, 0x10, 
-    0x9, 0x4, 0x47, 0x44, 0x3, 0x2, 0x2, 0x2, 0x48, 0x4b, 0x3, 0x2, 0x2, 
-    0x2, 0x49, 0x47, 0x3, 0x2, 0x2, 0x2, 0x49, 0x4a, 0x3, 0x2, 0x2, 0x2, 
-    0x4a, 0x11, 0x3, 0x2, 0x2, 0x2, 0x4b, 0x49, 0x3, 0x2, 0x2, 0x2, 0x4c, 
-    0x4f, 0x5, 0x16, 0xc, 0x2, 0x4d, 0x4f, 0x5, 0x6, 0x4, 0x2, 0x4e, 0x4c, 
-    0x3, 0x2, 0x2, 0x2, 0x4e, 0x4d, 0x3, 0x2, 0x2, 0x2, 0x4f, 0x13, 0x3, 
-    0x2, 0x2, 0x2, 0x50, 0x51, 0x9, 0x3, 0x2, 0x2, 0x51, 0x15, 0x3, 0x2, 
-    0x2, 0x2, 0x52, 0x53, 0x5, 0x18, 0xd, 0x2, 0x53, 0x17, 0x3, 0x2, 0x2, 
-    0x2, 0x54, 0x55, 0x5, 0x1a, 0xe, 0x2, 0x55, 0x19, 0x3, 0x2, 0x2, 0x2, 
-    0x56, 0x57, 0x9, 0x4, 0x2, 0x2, 0x57, 0x1b, 0x3, 0x2, 0x2, 0x2, 0x58, 
-    0x59, 0x9, 0x5, 0x2, 0x2, 0x59, 0x1d, 0x3, 0x2, 0x2, 0x2, 0x5a, 0x60, 
-    0x7, 0x18, 0x2, 0x2, 0x5b, 0x5c, 0x5, 0xe, 0x8, 0x2, 0x5c, 0x5d, 0x7, 
-    0x20, 0x2, 0x2, 0x5d, 0x5f, 0x3, 0x2, 0x2, 0x2, 0x5e, 0x5b, 0x3, 0x2, 
-    0x2, 0x2, 0x5f, 0x62, 0x3, 0x2, 0x2, 0x2, 0x60, 0x5e, 0x3, 0x2, 0x2, 
-    0x2, 0x60, 0x61, 0x3, 0x2, 0x2, 0x2, 0x61, 0x63, 0x3, 0x2, 0x2, 0x2, 
-    0x62, 0x60, 0x3, 0x2, 0x2, 0x2, 0x63, 0x64, 0x7, 0x19, 0x2, 0x2, 0x64, 
-    0x1f, 0x3, 0x2, 0x2, 0x2, 0x9, 0x27, 0x2b, 0x34, 0x3f, 0x49, 0x4e, 0x60, 
+    0xf, 0x9, 0xf, 0x3, 0x2, 0x3, 0x2, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x7, 
+    0x3, 0x24, 0xa, 0x3, 0xc, 0x3, 0xe, 0x3, 0x27, 0xb, 0x3, 0x3, 0x3, 0x5, 
+    0x3, 0x2a, 0xa, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x4, 0x3, 0x4, 0x3, 0x4, 
+    0x3, 0x5, 0x3, 0x5, 0x5, 0x5, 0x33, 0xa, 0x5, 0x3, 0x6, 0x3, 0x6, 0x3, 
+    0x6, 0x3, 0x7, 0x3, 0x7, 0x3, 0x7, 0x3, 0x7, 0x3, 0x8, 0x3, 0x8, 0x3, 
+    0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 
+    0x9, 0x3, 0x9, 0x7, 0x9, 0x47, 0xa, 0x9, 0xc, 0x9, 0xe, 0x9, 0x4a, 0xb, 
+    0x9, 0x3, 0xa, 0x3, 0xa, 0x5, 0xa, 0x4e, 0xa, 0xa, 0x3, 0xb, 0x3, 0xb, 
+    0x3, 0xc, 0x3, 0xc, 0x3, 0xd, 0x3, 0xd, 0x3, 0xe, 0x3, 0xe, 0x3, 0xf, 
+    0x3, 0xf, 0x3, 0xf, 0x3, 0xf, 0x7, 0xf, 0x5c, 0xa, 0xf, 0xc, 0xf, 0xe, 
+    0xf, 0x5f, 0xb, 0xf, 0x3, 0xf, 0x3, 0xf, 0x3, 0xf, 0x2, 0x3, 0x10, 0x10, 
+    0x2, 0x4, 0x6, 0x8, 0xa, 0xc, 0xe, 0x10, 0x12, 0x14, 0x16, 0x18, 0x1a, 
+    0x1c, 0x2, 0x6, 0x3, 0x2, 0x10, 0x16, 0x3, 0x2, 0x23, 0x28, 0x3, 0x2, 
+    0x29, 0x2a, 0x3, 0x2, 0x2d, 0x2e, 0x2, 0x5b, 0x2, 0x1e, 0x3, 0x2, 0x2, 
+    0x2, 0x4, 0x25, 0x3, 0x2, 0x2, 0x2, 0x6, 0x2d, 0x3, 0x2, 0x2, 0x2, 0x8, 
+    0x32, 0x3, 0x2, 0x2, 0x2, 0xa, 0x34, 0x3, 0x2, 0x2, 0x2, 0xc, 0x37, 
+    0x3, 0x2, 0x2, 0x2, 0xe, 0x3b, 0x3, 0x2, 0x2, 0x2, 0x10, 0x3d, 0x3, 
+    0x2, 0x2, 0x2, 0x12, 0x4d, 0x3, 0x2, 0x2, 0x2, 0x14, 0x4f, 0x3, 0x2, 
+    0x2, 0x2, 0x16, 0x51, 0x3, 0x2, 0x2, 0x2, 0x18, 0x53, 0x3, 0x2, 0x2, 
+    0x2, 0x1a, 0x55, 0x3, 0x2, 0x2, 0x2, 0x1c, 0x57, 0x3, 0x2, 0x2, 0x2, 
+    0x1e, 0x1f, 0x5, 0x4, 0x3, 0x2, 0x1f, 0x3, 0x3, 0x2, 0x2, 0x2, 0x20, 
+    0x21, 0x5, 0x8, 0x5, 0x2, 0x21, 0x22, 0x7, 0x4, 0x2, 0x2, 0x22, 0x24, 
+    0x3, 0x2, 0x2, 0x2, 0x23, 0x20, 0x3, 0x2, 0x2, 0x2, 0x24, 0x27, 0x3, 
+    0x2, 0x2, 0x2, 0x25, 0x23, 0x3, 0x2, 0x2, 0x2, 0x25, 0x26, 0x3, 0x2, 
+    0x2, 0x2, 0x26, 0x29, 0x3, 0x2, 0x2, 0x2, 0x27, 0x25, 0x3, 0x2, 0x2, 
+    0x2, 0x28, 0x2a, 0x5, 0x8, 0x5, 0x2, 0x29, 0x28, 0x3, 0x2, 0x2, 0x2, 
+    0x29, 0x2a, 0x3, 0x2, 0x2, 0x2, 0x2a, 0x2b, 0x3, 0x2, 0x2, 0x2, 0x2b, 
+    0x2c, 0x7, 0x2, 0x2, 0x3, 0x2c, 0x5, 0x3, 0x2, 0x2, 0x2, 0x2d, 0x2e, 
+    0x7, 0x3, 0x2, 0x2, 0x2e, 0x2f, 0x7, 0x30, 0x2, 0x2, 0x2f, 0x7, 0x3, 
+    0x2, 0x2, 0x2, 0x30, 0x33, 0x5, 0xc, 0x7, 0x2, 0x31, 0x33, 0x5, 0xa, 
+    0x6, 0x2, 0x32, 0x30, 0x3, 0x2, 0x2, 0x2, 0x32, 0x31, 0x3, 0x2, 0x2, 
+    0x2, 0x33, 0x9, 0x3, 0x2, 0x2, 0x2, 0x34, 0x35, 0x7, 0x8, 0x2, 0x2, 
+    0x35, 0x36, 0x5, 0xe, 0x8, 0x2, 0x36, 0xb, 0x3, 0x2, 0x2, 0x2, 0x37, 
+    0x38, 0x5, 0x6, 0x4, 0x2, 0x38, 0x39, 0x7, 0xf, 0x2, 0x2, 0x39, 0x3a, 
+    0x5, 0xe, 0x8, 0x2, 0x3a, 0xd, 0x3, 0x2, 0x2, 0x2, 0x3b, 0x3c, 0x5, 
+    0x10, 0x9, 0x2, 0x3c, 0xf, 0x3, 0x2, 0x2, 0x2, 0x3d, 0x3e, 0x8, 0x9, 
+    0x1, 0x2, 0x3e, 0x3f, 0x5, 0x12, 0xa, 0x2, 0x3f, 0x48, 0x3, 0x2, 0x2, 
+    0x2, 0x40, 0x41, 0xc, 0x4, 0x2, 0x2, 0x41, 0x42, 0x9, 0x2, 0x2, 0x2, 
+    0x42, 0x47, 0x5, 0x10, 0x9, 0x5, 0x43, 0x44, 0xc, 0x3, 0x2, 0x2, 0x44, 
+    0x45, 0x9, 0x3, 0x2, 0x2, 0x45, 0x47, 0x5, 0x10, 0x9, 0x4, 0x46, 0x40, 
+    0x3, 0x2, 0x2, 0x2, 0x46, 0x43, 0x3, 0x2, 0x2, 0x2, 0x47, 0x4a, 0x3, 
+    0x2, 0x2, 0x2, 0x48, 0x46, 0x3, 0x2, 0x2, 0x2, 0x48, 0x49, 0x3, 0x2, 
+    0x2, 0x2, 0x49, 0x11, 0x3, 0x2, 0x2, 0x2, 0x4a, 0x48, 0x3, 0x2, 0x2, 
+    0x2, 0x4b, 0x4e, 0x5, 0x14, 0xb, 0x2, 0x4c, 0x4e, 0x5, 0x6, 0x4, 0x2, 
+    0x4d, 0x4b, 0x3, 0x2, 0x2, 0x2, 0x4d, 0x4c, 0x3, 0x2, 0x2, 0x2, 0x4e, 
+    0x13, 0x3, 0x2, 0x2, 0x2, 0x4f, 0x50, 0x5, 0x16, 0xc, 0x2, 0x50, 0x15, 
+    0x3, 0x2, 0x2, 0x2, 0x51, 0x52, 0x5, 0x18, 0xd, 0x2, 0x52, 0x17, 0x3, 
+    0x2, 0x2, 0x2, 0x53, 0x54, 0x9, 0x4, 0x2, 0x2, 0x54, 0x19, 0x3, 0x2, 
+    0x2, 0x2, 0x55, 0x56, 0x9, 0x5, 0x2, 0x2, 0x56, 0x1b, 0x3, 0x2, 0x2, 
+    0x2, 0x57, 0x5d, 0x7, 0x18, 0x2, 0x2, 0x58, 0x59, 0x5, 0xe, 0x8, 0x2, 
+    0x59, 0x5a, 0x7, 0x20, 0x2, 0x2, 0x5a, 0x5c, 0x3, 0x2, 0x2, 0x2, 0x5b, 
+    0x58, 0x3, 0x2, 0x2, 0x2, 0x5c, 0x5f, 0x3, 0x2, 0x2, 0x2, 0x5d, 0x5b, 
+    0x3, 0x2, 0x2, 0x2, 0x5d, 0x5e, 0x3, 0x2, 0x2, 0x2, 0x5e, 0x60, 0x3, 
+    0x2, 0x2, 0x2, 0x5f, 0x5d, 0x3, 0x2, 0x2, 0x2, 0x60, 0x61, 0x7, 0x19, 
+    0x2, 0x2, 0x61, 0x1d, 0x3, 0x2, 0x2, 0x2, 0x9, 0x25, 0x29, 0x32, 0x46, 
+    0x48, 0x4d, 0x5d, 
   };
 
   atn::ATNDeserializer deserializer;

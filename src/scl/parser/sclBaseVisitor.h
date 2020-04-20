@@ -43,15 +43,11 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitExpressionoperand(sclParser::ExpressionoperandContext *ctx) override {
+  virtual antlrcpp::Any visitExpressionconcated(sclParser::ExpressionconcatedContext *ctx) override {
     return visitChildren(ctx);
   }
 
   virtual antlrcpp::Any visitExpressionconst(sclParser::ExpressionconstContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitComparator(sclParser::ComparatorContext *ctx) override {
     return visitChildren(ctx);
   }
 

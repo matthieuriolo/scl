@@ -67,20 +67,28 @@ assign
 /*	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE OPERAND_EQUAL expression */
 ;
 
-expression:
-	| expressionoperand
+expression: expressionconcated
 ;
 
-expressionoperand
+expressionconcated
 	: expressionconst
-	| left=expressionoperand operand=(OPERAND_PLUS
+	| left=expressionconcated operand=(
+		  OPERAND_PLUS
 		| OPERAND_MINUS
 		| OPERAND_ASTERISK
 		| OPERAND_SLASH
 		| OPERAND_CARET
 		| OPERAND_AND
 		| OPERAND_OR
-	) right=expressionoperand
+	) right=expressionconcated
+	| left=expressionconcated comparator=(
+		  COMPARATOR_EQUAL
+		| COMPARATOR_NOT_EQUAL
+		| COMPARATOR_LESS
+		| COMPARATOR_GREATER
+		| COMPARATOR_LESS_EQUAL
+		| COMPARATOR_GREATER_EQUAL
+	) right=expressionconcated
 ;
 
 expressionconst
@@ -90,24 +98,10 @@ expressionconst
 //	| expression RANGE expression
 //	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
 //	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS
-//	| expressionoperand
-//	| expression comparator expression
 //	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE
 //	| expression SQUARED_BRACKET_OPEN expression COLON SQUARED_BRACKET_CLOSE
 //	| expression SQUARED_BRACKET_OPEN COLON expression SQUARED_BRACKET_CLOSE
 //	| expression SQUARED_BRACKET_OPEN expression COLON expression SQUARED_BRACKET_CLOSE
-;
-
-
-
-
-comparator
-	: COMPARATOR_EQUAL
-	| COMPARATOR_NOT_EQUAL
-	| COMPARATOR_LESS
-	| COMPARATOR_GREATER
-	| COMPARATOR_LESS_EQUAL
-	| COMPARATOR_GREATER_EQUAL
 ;
 
 

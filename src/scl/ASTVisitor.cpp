@@ -7,7 +7,8 @@
 #include "scl/ast/assign.hpp"
 #include "scl/types/boolean.hpp"
 #include "scl/ast/print.hpp"
-
+#include "scl/ast/operand.hpp"
+#include "scl/ast/comparator.hpp"
 
 namespace SCL {
 	antlrcpp::Any ASTVisitor::visitModule(sclParser::ModuleContext *ctx) {
@@ -28,6 +29,56 @@ namespace SCL {
 
 	SCL::AST::Variable* ASTVisitor::visitExplicitVariable(sclParser::VariableContext *ctx) {
 		return new SCL::AST::Variable(ctx->IDENTIFIER()->getText().substr(1));
+	}
+
+	antlrcpp::Any ASTVisitor::visitExpressionconcated(sclParser::ExpressionconcatedContext *ctx) {
+		if(ctx->expressionconst()) {
+			return visitExpressionconst(ctx->expressionconst());	
+		}else if(ctx->operand) {
+			AST::Operand_Type operand;
+			
+			if(ctx->OPERAND_PLUS()) {
+				operand = AST::PLUS;
+			}else if(ctx->OPERAND_MINUS()) {
+				operand = AST::MINUS;
+			}else if(ctx->OPERAND_ASTERISK()) {
+				operand = AST::ASTERISK;
+			}else if(ctx->OPERAND_SLASH()) {
+				operand = AST::SLASH;
+			}else if(ctx->OPERAND_CARET()) {
+				operand = AST::CARET;
+			}else if(ctx->OPERAND_AND()) {
+				operand = AST::AND;
+			}else if(ctx->OPERAND_OR()) {
+				operand = AST::OR;
+			}else {
+				throw new std::logic_error("Unknown operand");
+			}
+
+			return (SCL::AST::Expression*)new SCL::AST::Operand(operand, visitExpressionconcated(ctx->left), visitExpressionconcated(ctx->right));
+		}else if(ctx->comparator) {
+			AST::Comparator_Type comparator;
+			
+			if(ctx->COMPARATOR_EQUAL()) {
+				comparator = AST::EQUAL;
+			}else if(ctx->COMPARATOR_NOT_EQUAL()) {
+				comparator = AST::NOT_EQUAL;
+			}else if(ctx->COMPARATOR_LESS()) {
+				comparator = AST::LESS;
+			}else if(ctx->COMPARATOR_GREATER()) {
+				comparator = AST::GREATER;
+			}else if(ctx->COMPARATOR_LESS_EQUAL()) {
+				comparator = AST::LESS_EQUAL;
+			}else if(ctx->COMPARATOR_GREATER_EQUAL()) {
+				comparator = AST::GREATER_EQUAL;
+			}else {
+				throw new std::logic_error("Unknown comparator");
+			}
+
+			return (SCL::AST::Expression*)new SCL::AST::Comparator(comparator, visitExpressionconcated(ctx->left), visitExpressionconcated(ctx->right));
+		}
+
+		throw new std::logic_error("cannot parse tree");
 	}
 
 	antlrcpp::Any ASTVisitor::visitExpressiontype(sclParser::ExpressiontypeContext *ctx) {
