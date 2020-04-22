@@ -30,7 +30,8 @@ public:
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
     RulePrint = 4, RuleAssign = 5, RuleExpression = 6, RuleExpressionconcated = 7, 
     RuleExpressiongrouped = 8, RuleExpressionconst = 9, RuleExpressiontype = 10, 
-    RuleType = 11, RuleBoolean = 12, RuleString = 13, RuleArray = 14
+    RuleType = 11, RuleBoolean = 12, RuleNumericInt = 13, RuleNumericFloat = 14, 
+    RuleString = 15, RuleArray = 16
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -56,6 +57,8 @@ public:
   class ExpressiontypeContext;
   class TypeContext;
   class BooleanContext;
+  class NumericIntContext;
+  class NumericFloatContext;
   class StringContext;
   class ArrayContext; 
 
@@ -243,6 +246,8 @@ public:
     TypeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     BooleanContext *boolean();
+    NumericIntContext *numericInt();
+    NumericFloatContext *numericFloat();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -264,6 +269,32 @@ public:
   };
 
   BooleanContext* boolean();
+
+  class  NumericIntContext : public antlr4::ParserRuleContext {
+  public:
+    NumericIntContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *INTEGER();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  NumericIntContext* numericInt();
+
+  class  NumericFloatContext : public antlr4::ParserRuleContext {
+  public:
+    NumericFloatContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *FLOAT();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  NumericFloatContext* numericFloat();
 
   class  StringContext : public antlr4::ParserRuleContext {
   public:

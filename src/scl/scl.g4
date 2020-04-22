@@ -115,6 +115,8 @@ expressiontype: type;
 
 type
 	: boolean
+	| numericInt
+	| numericFloat
 ;
 
 /*
@@ -132,6 +134,9 @@ boolean
 	: BOOLEAN_TRUE
 	| BOOLEAN_FALSE
 ;
+
+numericInt: INTEGER;
+numericFloat: FLOAT;
 
 string
 	: STRING_SINGLE_QUOTE

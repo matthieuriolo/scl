@@ -45,6 +45,10 @@ public:
 
     virtual antlrcpp::Any visitBoolean(sclParser::BooleanContext *context) = 0;
 
+    virtual antlrcpp::Any visitNumericInt(sclParser::NumericIntContext *context) = 0;
+
+    virtual antlrcpp::Any visitNumericFloat(sclParser::NumericFloatContext *context) = 0;
+
     virtual antlrcpp::Any visitString(sclParser::StringContext *context) = 0;
 
     virtual antlrcpp::Any visitArray(sclParser::ArrayContext *context) = 0;

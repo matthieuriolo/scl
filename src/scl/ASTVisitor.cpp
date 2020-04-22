@@ -5,10 +5,15 @@
 #include "scl/ast/expressiontype.hpp"
 #include "scl/ast/variable.hpp"
 #include "scl/ast/assign.hpp"
-#include "scl/types/boolean.hpp"
 #include "scl/ast/print.hpp"
 #include "scl/ast/operand.hpp"
 #include "scl/ast/comparator.hpp"
+
+
+
+#include "scl/types/boolean.hpp"
+#include "scl/types/integer.hpp"
+#include "scl/types/float.hpp"
 
 namespace SCL {
 	antlrcpp::Any ASTVisitor::visitModule(sclParser::ModuleContext *ctx) {
@@ -98,6 +103,17 @@ namespace SCL {
 		return (SCL::AST::Instruction*)new SCL::AST::Assign(visitExplicitVariable(ctx->key), visitExpression(ctx->value));
 	}
 
+	antlrcpp::Any ASTVisitor::visitPrint(sclParser::PrintContext *ctx)  {
+		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
+	}
+
+
+
+
+
+
+
+	/* types */
 	antlrcpp::Any ASTVisitor::visitBoolean(sclParser::BooleanContext *ctx) {
 		if(ctx->BOOLEAN_TRUE()) {
 			return (SCL::Type*)SCL::Types::Boolean::getTrue();
@@ -106,7 +122,15 @@ namespace SCL {
 		return (SCL::Type*)SCL::Types::Boolean::getFalse();
 	}
 
-	antlrcpp::Any ASTVisitor::visitPrint(sclParser::PrintContext *ctx)  {
-		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
+
+
+	antlrcpp::Any ASTVisitor::visitNumericInt(sclParser::NumericIntContext *ctx) {
+		return (SCL::Type*)new SCL::Types::Integer(ctx->INTEGER()->getText());
+	}
+
+
+
+	antlrcpp::Any ASTVisitor::visitNumericFloat(sclParser::NumericFloatContext *ctx) {
+		return (SCL::Type*)new SCL::Types::Float(ctx->FLOAT()->getText());
 	}
 }

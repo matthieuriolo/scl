@@ -16,9 +16,13 @@ namespace SCL {
 			antlrcpp::Any visitExpressionconcated(sclParser::ExpressionconcatedContext *ctx) override;
 			antlrcpp::Any visitExpressiontype(sclParser::ExpressiontypeContext *ctx) override;
 			antlrcpp::Any visitAssign(sclParser::AssignContext *ctx) override;
-			antlrcpp::Any visitBoolean(sclParser::BooleanContext *ctx) override;
 
 			antlrcpp::Any visitPrint(sclParser::PrintContext *ctx) override;
+
+
+			antlrcpp::Any visitBoolean(sclParser::BooleanContext *ctx) override;
+			antlrcpp::Any visitNumericInt(sclParser::NumericIntContext *ctx) override;
+			antlrcpp::Any visitNumericFloat(sclParser::NumericFloatContext *ctx) override;
 	};
 }
 

@@ -67,6 +67,14 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitNumericInt(sclParser::NumericIntContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitNumericFloat(sclParser::NumericFloatContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitString(sclParser::StringContext *ctx) override {
     return visitChildren(ctx);
   }
