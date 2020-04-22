@@ -100,6 +100,7 @@ expressiongrouped
 expressionconst
 	: expressiontype
 	| variable
+	| array
 //	| expression RANGE expression RANGE expression
 //	| expression RANGE expression
 //	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS
@@ -118,14 +119,9 @@ type
 	| numericInt
 	| numericFloat
 	| string
+/*	| array
+	| dictionary*/
 ;
-
-/*
-type
-	: variable
-	| array
-	| dictionary 
-;*/
 
 boolean
 	: BOOLEAN_TRUE
@@ -140,7 +136,7 @@ string
 	| STRING_DOUBLE_QUOTE
 ;
 
-array: SQUARED_BRACKET_OPEN (elements+=expression COMMA)*  SQUARED_BRACKET_CLOSE;
+array: SQUARED_BRACKET_OPEN (elements+=expression COMMA)*  (elements+=expression COMMA?)? SQUARED_BRACKET_CLOSE;
 
 /*
 dictionary

@@ -220,6 +220,7 @@ public:
     virtual size_t getRuleIndex() const override;
     ExpressiontypeContext *expressiontype();
     VariableContext *variable();
+    ArrayContext *array();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;

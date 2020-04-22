@@ -10,6 +10,7 @@
 #include "scl/ast/comparator.hpp"
 
 
+#include "scl/ast/array.hpp"
 
 #include "scl/types/boolean.hpp"
 #include "scl/types/integer.hpp"
@@ -29,12 +30,18 @@ namespace SCL {
 		return new SCL::Scope(instructions);
 	}
 
-	antlrcpp::Any ASTVisitor::visitVariable(sclParser::VariableContext *ctx) {
-		return (SCL::AST::Expression*)visitExplicitVariable(ctx);
+	/* instructions */
+	antlrcpp::Any ASTVisitor::visitAssign(sclParser::AssignContext *ctx) {
+		return (SCL::AST::Instruction*)new SCL::AST::Assign(visitExplicitVariable(ctx->key), visitExpression(ctx->value));
 	}
 
-	SCL::AST::Variable* ASTVisitor::visitExplicitVariable(sclParser::VariableContext *ctx) {
-		return new SCL::AST::Variable(ctx->IDENTIFIER()->getText().substr(1));
+	antlrcpp::Any ASTVisitor::visitPrint(sclParser::PrintContext *ctx)  {
+		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
+	}
+
+	/* expression */
+	antlrcpp::Any ASTVisitor::visitExpressiontype(sclParser::ExpressiontypeContext *ctx) {
+		return (SCL::AST::Expression*)new SCL::AST::ExpressionType(visitType(ctx->type()).as<SCL::Type*>());
 	}
 
 	antlrcpp::Any ASTVisitor::visitExpressiongrouped(sclParser::ExpressiongroupedContext *ctx) {
@@ -96,23 +103,24 @@ namespace SCL {
 		throw new std::logic_error("cannot parse tree");
 	}
 
-	antlrcpp::Any ASTVisitor::visitExpressiontype(sclParser::ExpressiontypeContext *ctx) {
-		return (SCL::AST::Expression*)new SCL::AST::ExpressionType(visitType(ctx->type()).as<SCL::Type*>());
+
+
+
+	antlrcpp::Any ASTVisitor::visitVariable(sclParser::VariableContext *ctx) {
+		return (SCL::AST::Expression*)visitExplicitVariable(ctx);
 	}
 
-	antlrcpp::Any ASTVisitor::visitAssign(sclParser::AssignContext *ctx) {
-		return (SCL::AST::Instruction*)new SCL::AST::Assign(visitExplicitVariable(ctx->key), visitExpression(ctx->value));
+	SCL::AST::Variable* ASTVisitor::visitExplicitVariable(sclParser::VariableContext *ctx) {
+		return new SCL::AST::Variable(ctx->IDENTIFIER()->getText().substr(1));
 	}
 
-	antlrcpp::Any ASTVisitor::visitPrint(sclParser::PrintContext *ctx)  {
-		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
+	antlrcpp::Any ASTVisitor::visitArray(sclParser::ArrayContext *ctx) {
+		auto arr = new SCL::AST::Array();
+		for(auto val : ctx->elements) {
+			arr->add(visitExpression(val));
+		}
+		return (SCL::AST::Expression*)arr;
 	}
-
-
-
-
-
-
 
 	/* types */
 	antlrcpp::Any ASTVisitor::visitBoolean(sclParser::BooleanContext *ctx) {
@@ -141,7 +149,7 @@ namespace SCL {
 		}else {
 			throw new std::logic_error("cannot parse tree");
 		}
-		
+
 		return (SCL::Type*)new SCL::Types::String(s.substr(1, s.length() - 2));
 	}
 }
