@@ -14,6 +14,7 @@
 #include "scl/types/boolean.hpp"
 #include "scl/types/integer.hpp"
 #include "scl/types/float.hpp"
+#include "scl/types/string.hpp"
 
 namespace SCL {
 	antlrcpp::Any ASTVisitor::visitModule(sclParser::ModuleContext *ctx) {
@@ -122,15 +123,25 @@ namespace SCL {
 		return (SCL::Type*)SCL::Types::Boolean::getFalse();
 	}
 
-
-
 	antlrcpp::Any ASTVisitor::visitNumericInt(sclParser::NumericIntContext *ctx) {
 		return (SCL::Type*)new SCL::Types::Integer(ctx->INTEGER()->getText());
 	}
 
-
-
 	antlrcpp::Any ASTVisitor::visitNumericFloat(sclParser::NumericFloatContext *ctx) {
 		return (SCL::Type*)new SCL::Types::Float(ctx->FLOAT()->getText());
+	}
+
+	antlrcpp::Any ASTVisitor::visitString(sclParser::StringContext *ctx) {
+		std::string s;
+
+		if(ctx->STRING_SINGLE_QUOTE()) {
+			s = ctx->STRING_SINGLE_QUOTE()->getText();
+		}else if(ctx->STRING_DOUBLE_QUOTE()) {
+			s = ctx->STRING_DOUBLE_QUOTE()->getText();
+		}else {
+			throw new std::logic_error("cannot parse tree");
+		}
+		
+		return (SCL::Type*)new SCL::Types::String(s.substr(1, s.length() - 2));
 	}
 }

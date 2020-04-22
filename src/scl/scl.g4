@@ -117,15 +117,12 @@ type
 	: boolean
 	| numericInt
 	| numericFloat
+	| string
 ;
 
 /*
 type
-	: INTEGER
-	| FLOAT
-	| boolean
-	| string
-	| variable
+	: variable
 	| array
 	| dictionary 
 ;*/

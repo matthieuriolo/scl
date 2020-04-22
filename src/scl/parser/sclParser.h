@@ -248,6 +248,7 @@ public:
     BooleanContext *boolean();
     NumericIntContext *numericInt();
     NumericFloatContext *numericFloat();
+    StringContext *string();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;

@@ -23,6 +23,7 @@ namespace SCL {
 			antlrcpp::Any visitBoolean(sclParser::BooleanContext *ctx) override;
 			antlrcpp::Any visitNumericInt(sclParser::NumericIntContext *ctx) override;
 			antlrcpp::Any visitNumericFloat(sclParser::NumericFloatContext *ctx) override;
+			antlrcpp::Any visitString(sclParser::StringContext *ctx) override;
 	};
 }
 
