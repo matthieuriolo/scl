@@ -63,7 +63,7 @@ sclParser::ModuleContext* sclParser::module() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(34);
+    setState(38);
     dynamic_cast<ModuleContext *>(_localctx)->content = scope();
    
   }
@@ -126,33 +126,33 @@ sclParser::ScopeContext* sclParser::scope() {
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(41);
+    setState(45);
     _errHandler->sync(this);
     alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 0, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1) {
-        setState(36);
+        setState(40);
         dynamic_cast<ScopeContext *>(_localctx)->instructionContext = instruction();
         dynamic_cast<ScopeContext *>(_localctx)->instructions.push_back(dynamic_cast<ScopeContext *>(_localctx)->instructionContext);
-        setState(37);
+        setState(41);
         match(sclParser::DELIMITER); 
       }
-      setState(43);
+      setState(47);
       _errHandler->sync(this);
       alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 0, _ctx);
     }
-    setState(45);
+    setState(49);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if (_la == sclParser::T__0
 
     || _la == sclParser::KEYWORD_PRINT) {
-      setState(44);
+      setState(48);
       dynamic_cast<ScopeContext *>(_localctx)->instructionContext = instruction();
       dynamic_cast<ScopeContext *>(_localctx)->instructions.push_back(dynamic_cast<ScopeContext *>(_localctx)->instructionContext);
     }
-    setState(47);
+    setState(51);
     match(sclParser::EOF);
    
   }
@@ -197,9 +197,9 @@ sclParser::VariableContext* sclParser::variable() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(49);
+    setState(53);
     match(sclParser::T__0);
-    setState(50);
+    setState(54);
     match(sclParser::IDENTIFIER);
    
   }
@@ -247,19 +247,19 @@ sclParser::InstructionContext* sclParser::instruction() {
     exitRule();
   });
   try {
-    setState(54);
+    setState(58);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case sclParser::T__0: {
         enterOuterAlt(_localctx, 1);
-        setState(52);
+        setState(56);
         assign();
         break;
       }
 
       case sclParser::KEYWORD_PRINT: {
         enterOuterAlt(_localctx, 2);
-        setState(53);
+        setState(57);
         print();
         break;
       }
@@ -314,9 +314,9 @@ sclParser::PrintContext* sclParser::print() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(56);
+    setState(60);
     match(sclParser::KEYWORD_PRINT);
-    setState(57);
+    setState(61);
     expression();
    
   }
@@ -369,11 +369,11 @@ sclParser::AssignContext* sclParser::assign() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(59);
+    setState(63);
     dynamic_cast<AssignContext *>(_localctx)->key = variable();
-    setState(60);
+    setState(64);
     match(sclParser::OPERAND_EQUAL);
-    setState(61);
+    setState(65);
     dynamic_cast<AssignContext *>(_localctx)->value = expression();
    
   }
@@ -418,7 +418,7 @@ sclParser::ExpressionContext* sclParser::expression() {
   });
   try {
     enterOuterAlt(_localctx, 1);
-    setState(63);
+    setState(67);
     expressionconcated(0);
    
   }
@@ -536,10 +536,10 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(66);
+    setState(70);
     expressiongrouped();
     _ctx->stop = _input->LT(-1);
-    setState(76);
+    setState(80);
     _errHandler->sync(this);
     alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 4, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
@@ -547,17 +547,17 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
         if (!_parseListeners.empty())
           triggerExitRuleEvent();
         previousContext = _localctx;
-        setState(74);
+        setState(78);
         _errHandler->sync(this);
         switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx)) {
         case 1: {
           _localctx = _tracker.createInstance<ExpressionconcatedContext>(parentContext, parentState);
           _localctx->left = previousContext;
           pushNewRecursionContext(_localctx, startState, RuleExpressionconcated);
-          setState(68);
+          setState(72);
 
           if (!(precpred(_ctx, 2))) throw FailedPredicateException(this, "precpred(_ctx, 2)");
-          setState(69);
+          setState(73);
           dynamic_cast<ExpressionconcatedContext *>(_localctx)->operand = _input->LT(1);
           _la = _input->LA(1);
           if (!((((_la & ~ 0x3fULL) == 0) &&
@@ -574,7 +574,7 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
             _errHandler->reportMatch(this);
             consume();
           }
-          setState(70);
+          setState(74);
           dynamic_cast<ExpressionconcatedContext *>(_localctx)->right = expressionconcated(3);
           break;
         }
@@ -583,10 +583,10 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
           _localctx = _tracker.createInstance<ExpressionconcatedContext>(parentContext, parentState);
           _localctx->left = previousContext;
           pushNewRecursionContext(_localctx, startState, RuleExpressionconcated);
-          setState(71);
+          setState(75);
 
           if (!(precpred(_ctx, 1))) throw FailedPredicateException(this, "precpred(_ctx, 1)");
-          setState(72);
+          setState(76);
           dynamic_cast<ExpressionconcatedContext *>(_localctx)->comparator = _input->LT(1);
           _la = _input->LA(1);
           if (!((((_la & ~ 0x3fULL) == 0) &&
@@ -602,14 +602,14 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
             _errHandler->reportMatch(this);
             consume();
           }
-          setState(73);
+          setState(77);
           dynamic_cast<ExpressionconcatedContext *>(_localctx)->right = expressionconcated(2);
           break;
         }
 
         } 
       }
-      setState(78);
+      setState(82);
       _errHandler->sync(this);
       alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 4, _ctx);
     }
@@ -665,11 +665,12 @@ sclParser::ExpressiongroupedContext* sclParser::expressiongrouped() {
     exitRule();
   });
   try {
-    setState(84);
+    setState(88);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case sclParser::T__0:
       case sclParser::SQUARED_BRACKET_OPEN:
+      case sclParser::CURLY_BRACKET_OPEN:
       case sclParser::BOOLEAN_TRUE:
       case sclParser::BOOLEAN_FALSE:
       case sclParser::INTEGER:
@@ -677,18 +678,18 @@ sclParser::ExpressiongroupedContext* sclParser::expressiongrouped() {
       case sclParser::STRING_DOUBLE_QUOTE:
       case sclParser::STRING_SINGLE_QUOTE: {
         enterOuterAlt(_localctx, 1);
-        setState(79);
+        setState(83);
         expressionconst();
         break;
       }
 
       case sclParser::ROUND_BRACKET_OPEN: {
         enterOuterAlt(_localctx, 2);
-        setState(80);
+        setState(84);
         match(sclParser::ROUND_BRACKET_OPEN);
-        setState(81);
+        setState(85);
         expression();
-        setState(82);
+        setState(86);
         match(sclParser::ROUND_BRACKET_CLOSE);
         break;
       }
@@ -725,6 +726,10 @@ sclParser::ArrayContext* sclParser::ExpressionconstContext::array() {
   return getRuleContext<sclParser::ArrayContext>(0);
 }
 
+sclParser::DictionaryContext* sclParser::ExpressionconstContext::dictionary() {
+  return getRuleContext<sclParser::DictionaryContext>(0);
+}
+
 
 size_t sclParser::ExpressionconstContext::getRuleIndex() const {
   return sclParser::RuleExpressionconst;
@@ -746,7 +751,7 @@ sclParser::ExpressionconstContext* sclParser::expressionconst() {
     exitRule();
   });
   try {
-    setState(89);
+    setState(94);
     _errHandler->sync(this);
     switch (_input->LA(1)) {
       case sclParser::BOOLEAN_TRUE:
@@ -756,370 +761,34 @@ sclParser::ExpressionconstContext* sclParser::expressionconst() {
       case sclParser::STRING_DOUBLE_QUOTE:
       case sclParser::STRING_SINGLE_QUOTE: {
         enterOuterAlt(_localctx, 1);
-        setState(86);
+        setState(90);
         expressiontype();
         break;
       }
 
       case sclParser::T__0: {
         enterOuterAlt(_localctx, 2);
-        setState(87);
+        setState(91);
         variable();
         break;
       }
 
       case sclParser::SQUARED_BRACKET_OPEN: {
         enterOuterAlt(_localctx, 3);
-        setState(88);
+        setState(92);
         array();
         break;
       }
 
-    default:
-      throw NoViableAltException(this);
-    }
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- ExpressiontypeContext ------------------------------------------------------------------
-
-sclParser::ExpressiontypeContext::ExpressiontypeContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-sclParser::TypeContext* sclParser::ExpressiontypeContext::type() {
-  return getRuleContext<sclParser::TypeContext>(0);
-}
-
-
-size_t sclParser::ExpressiontypeContext::getRuleIndex() const {
-  return sclParser::RuleExpressiontype;
-}
-
-
-antlrcpp::Any sclParser::ExpressiontypeContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitExpressiontype(this);
-  else
-    return visitor->visitChildren(this);
-}
-
-sclParser::ExpressiontypeContext* sclParser::expressiontype() {
-  ExpressiontypeContext *_localctx = _tracker.createInstance<ExpressiontypeContext>(_ctx, getState());
-  enterRule(_localctx, 20, sclParser::RuleExpressiontype);
-
-  auto onExit = finally([=] {
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(91);
-    type();
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- TypeContext ------------------------------------------------------------------
-
-sclParser::TypeContext::TypeContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-sclParser::BooleanContext* sclParser::TypeContext::boolean() {
-  return getRuleContext<sclParser::BooleanContext>(0);
-}
-
-sclParser::NumericIntContext* sclParser::TypeContext::numericInt() {
-  return getRuleContext<sclParser::NumericIntContext>(0);
-}
-
-sclParser::NumericFloatContext* sclParser::TypeContext::numericFloat() {
-  return getRuleContext<sclParser::NumericFloatContext>(0);
-}
-
-sclParser::StringContext* sclParser::TypeContext::string() {
-  return getRuleContext<sclParser::StringContext>(0);
-}
-
-
-size_t sclParser::TypeContext::getRuleIndex() const {
-  return sclParser::RuleType;
-}
-
-
-antlrcpp::Any sclParser::TypeContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitType(this);
-  else
-    return visitor->visitChildren(this);
-}
-
-sclParser::TypeContext* sclParser::type() {
-  TypeContext *_localctx = _tracker.createInstance<TypeContext>(_ctx, getState());
-  enterRule(_localctx, 22, sclParser::RuleType);
-
-  auto onExit = finally([=] {
-    exitRule();
-  });
-  try {
-    setState(97);
-    _errHandler->sync(this);
-    switch (_input->LA(1)) {
-      case sclParser::BOOLEAN_TRUE:
-      case sclParser::BOOLEAN_FALSE: {
-        enterOuterAlt(_localctx, 1);
-        setState(93);
-        boolean();
-        break;
-      }
-
-      case sclParser::INTEGER: {
-        enterOuterAlt(_localctx, 2);
-        setState(94);
-        numericInt();
-        break;
-      }
-
-      case sclParser::FLOAT: {
-        enterOuterAlt(_localctx, 3);
-        setState(95);
-        numericFloat();
-        break;
-      }
-
-      case sclParser::STRING_DOUBLE_QUOTE:
-      case sclParser::STRING_SINGLE_QUOTE: {
+      case sclParser::CURLY_BRACKET_OPEN: {
         enterOuterAlt(_localctx, 4);
-        setState(96);
-        string();
+        setState(93);
+        dictionary();
         break;
       }
 
     default:
       throw NoViableAltException(this);
-    }
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- BooleanContext ------------------------------------------------------------------
-
-sclParser::BooleanContext::BooleanContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* sclParser::BooleanContext::BOOLEAN_TRUE() {
-  return getToken(sclParser::BOOLEAN_TRUE, 0);
-}
-
-tree::TerminalNode* sclParser::BooleanContext::BOOLEAN_FALSE() {
-  return getToken(sclParser::BOOLEAN_FALSE, 0);
-}
-
-
-size_t sclParser::BooleanContext::getRuleIndex() const {
-  return sclParser::RuleBoolean;
-}
-
-
-antlrcpp::Any sclParser::BooleanContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitBoolean(this);
-  else
-    return visitor->visitChildren(this);
-}
-
-sclParser::BooleanContext* sclParser::boolean() {
-  BooleanContext *_localctx = _tracker.createInstance<BooleanContext>(_ctx, getState());
-  enterRule(_localctx, 24, sclParser::RuleBoolean);
-  size_t _la = 0;
-
-  auto onExit = finally([=] {
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(99);
-    _la = _input->LA(1);
-    if (!(_la == sclParser::BOOLEAN_TRUE
-
-    || _la == sclParser::BOOLEAN_FALSE)) {
-    _errHandler->recoverInline(this);
-    }
-    else {
-      _errHandler->reportMatch(this);
-      consume();
-    }
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- NumericIntContext ------------------------------------------------------------------
-
-sclParser::NumericIntContext::NumericIntContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* sclParser::NumericIntContext::INTEGER() {
-  return getToken(sclParser::INTEGER, 0);
-}
-
-
-size_t sclParser::NumericIntContext::getRuleIndex() const {
-  return sclParser::RuleNumericInt;
-}
-
-
-antlrcpp::Any sclParser::NumericIntContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitNumericInt(this);
-  else
-    return visitor->visitChildren(this);
-}
-
-sclParser::NumericIntContext* sclParser::numericInt() {
-  NumericIntContext *_localctx = _tracker.createInstance<NumericIntContext>(_ctx, getState());
-  enterRule(_localctx, 26, sclParser::RuleNumericInt);
-
-  auto onExit = finally([=] {
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(101);
-    match(sclParser::INTEGER);
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- NumericFloatContext ------------------------------------------------------------------
-
-sclParser::NumericFloatContext::NumericFloatContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* sclParser::NumericFloatContext::FLOAT() {
-  return getToken(sclParser::FLOAT, 0);
-}
-
-
-size_t sclParser::NumericFloatContext::getRuleIndex() const {
-  return sclParser::RuleNumericFloat;
-}
-
-
-antlrcpp::Any sclParser::NumericFloatContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitNumericFloat(this);
-  else
-    return visitor->visitChildren(this);
-}
-
-sclParser::NumericFloatContext* sclParser::numericFloat() {
-  NumericFloatContext *_localctx = _tracker.createInstance<NumericFloatContext>(_ctx, getState());
-  enterRule(_localctx, 28, sclParser::RuleNumericFloat);
-
-  auto onExit = finally([=] {
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(103);
-    match(sclParser::FLOAT);
-   
-  }
-  catch (RecognitionException &e) {
-    _errHandler->reportError(this, e);
-    _localctx->exception = std::current_exception();
-    _errHandler->recover(this, _localctx->exception);
-  }
-
-  return _localctx;
-}
-
-//----------------- StringContext ------------------------------------------------------------------
-
-sclParser::StringContext::StringContext(ParserRuleContext *parent, size_t invokingState)
-  : ParserRuleContext(parent, invokingState) {
-}
-
-tree::TerminalNode* sclParser::StringContext::STRING_SINGLE_QUOTE() {
-  return getToken(sclParser::STRING_SINGLE_QUOTE, 0);
-}
-
-tree::TerminalNode* sclParser::StringContext::STRING_DOUBLE_QUOTE() {
-  return getToken(sclParser::STRING_DOUBLE_QUOTE, 0);
-}
-
-
-size_t sclParser::StringContext::getRuleIndex() const {
-  return sclParser::RuleString;
-}
-
-
-antlrcpp::Any sclParser::StringContext::accept(tree::ParseTreeVisitor *visitor) {
-  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitString(this);
-  else
-    return visitor->visitChildren(this);
-}
-
-sclParser::StringContext* sclParser::string() {
-  StringContext *_localctx = _tracker.createInstance<StringContext>(_ctx, getState());
-  enterRule(_localctx, 30, sclParser::RuleString);
-  size_t _la = 0;
-
-  auto onExit = finally([=] {
-    exitRule();
-  });
-  try {
-    enterOuterAlt(_localctx, 1);
-    setState(105);
-    _la = _input->LA(1);
-    if (!(_la == sclParser::STRING_DOUBLE_QUOTE
-
-    || _la == sclParser::STRING_SINGLE_QUOTE)) {
-    _errHandler->recoverInline(this);
-    }
-    else {
-      _errHandler->reportMatch(this);
-      consume();
     }
    
   }
@@ -1177,7 +846,7 @@ antlrcpp::Any sclParser::ArrayContext::accept(tree::ParseTreeVisitor *visitor) {
 
 sclParser::ArrayContext* sclParser::array() {
   ArrayContext *_localctx = _tracker.createInstance<ArrayContext>(_ctx, getState());
-  enterRule(_localctx, 32, sclParser::RuleArray);
+  enterRule(_localctx, 20, sclParser::RuleArray);
   size_t _la = 0;
 
   auto onExit = finally([=] {
@@ -1186,30 +855,31 @@ sclParser::ArrayContext* sclParser::array() {
   try {
     size_t alt;
     enterOuterAlt(_localctx, 1);
-    setState(107);
+    setState(96);
     match(sclParser::SQUARED_BRACKET_OPEN);
-    setState(113);
+    setState(102);
     _errHandler->sync(this);
-    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx);
+    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 7, _ctx);
     while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
       if (alt == 1) {
-        setState(108);
+        setState(97);
         dynamic_cast<ArrayContext *>(_localctx)->expressionContext = expression();
         dynamic_cast<ArrayContext *>(_localctx)->elements.push_back(dynamic_cast<ArrayContext *>(_localctx)->expressionContext);
-        setState(109);
+        setState(98);
         match(sclParser::COMMA); 
       }
-      setState(115);
+      setState(104);
       _errHandler->sync(this);
-      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 8, _ctx);
+      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 7, _ctx);
     }
-    setState(120);
+    setState(109);
     _errHandler->sync(this);
 
     _la = _input->LA(1);
     if ((((_la & ~ 0x3fULL) == 0) &&
       ((1ULL << _la) & ((1ULL << sclParser::T__0)
       | (1ULL << sclParser::SQUARED_BRACKET_OPEN)
+      | (1ULL << sclParser::CURLY_BRACKET_OPEN)
       | (1ULL << sclParser::ROUND_BRACKET_OPEN)
       | (1ULL << sclParser::BOOLEAN_TRUE)
       | (1ULL << sclParser::BOOLEAN_FALSE)
@@ -1217,20 +887,531 @@ sclParser::ArrayContext* sclParser::array() {
       | (1ULL << sclParser::FLOAT)
       | (1ULL << sclParser::STRING_DOUBLE_QUOTE)
       | (1ULL << sclParser::STRING_SINGLE_QUOTE))) != 0)) {
-      setState(116);
+      setState(105);
       dynamic_cast<ArrayContext *>(_localctx)->expressionContext = expression();
       dynamic_cast<ArrayContext *>(_localctx)->elements.push_back(dynamic_cast<ArrayContext *>(_localctx)->expressionContext);
-      setState(118);
+      setState(107);
       _errHandler->sync(this);
 
       _la = _input->LA(1);
       if (_la == sclParser::COMMA) {
-        setState(117);
+        setState(106);
         match(sclParser::COMMA);
       }
     }
-    setState(122);
+    setState(111);
     match(sclParser::SQUARED_BRACKET_CLOSE);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- DictionaryContext ------------------------------------------------------------------
+
+sclParser::DictionaryContext::DictionaryContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* sclParser::DictionaryContext::CURLY_BRACKET_OPEN() {
+  return getToken(sclParser::CURLY_BRACKET_OPEN, 0);
+}
+
+tree::TerminalNode* sclParser::DictionaryContext::CURLY_BRACKET_CLOSE() {
+  return getToken(sclParser::CURLY_BRACKET_CLOSE, 0);
+}
+
+std::vector<tree::TerminalNode *> sclParser::DictionaryContext::COMMA() {
+  return getTokens(sclParser::COMMA);
+}
+
+tree::TerminalNode* sclParser::DictionaryContext::COMMA(size_t i) {
+  return getToken(sclParser::COMMA, i);
+}
+
+std::vector<sclParser::DictionaryElementsContext *> sclParser::DictionaryContext::dictionaryElements() {
+  return getRuleContexts<sclParser::DictionaryElementsContext>();
+}
+
+sclParser::DictionaryElementsContext* sclParser::DictionaryContext::dictionaryElements(size_t i) {
+  return getRuleContext<sclParser::DictionaryElementsContext>(i);
+}
+
+
+size_t sclParser::DictionaryContext::getRuleIndex() const {
+  return sclParser::RuleDictionary;
+}
+
+
+antlrcpp::Any sclParser::DictionaryContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
+    return parserVisitor->visitDictionary(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+sclParser::DictionaryContext* sclParser::dictionary() {
+  DictionaryContext *_localctx = _tracker.createInstance<DictionaryContext>(_ctx, getState());
+  enterRule(_localctx, 22, sclParser::RuleDictionary);
+  size_t _la = 0;
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    size_t alt;
+    enterOuterAlt(_localctx, 1);
+    setState(113);
+    match(sclParser::CURLY_BRACKET_OPEN);
+    setState(119);
+    _errHandler->sync(this);
+    alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 10, _ctx);
+    while (alt != 2 && alt != atn::ATN::INVALID_ALT_NUMBER) {
+      if (alt == 1) {
+        setState(114);
+        dynamic_cast<DictionaryContext *>(_localctx)->dictionaryElementsContext = dictionaryElements();
+        dynamic_cast<DictionaryContext *>(_localctx)->elements.push_back(dynamic_cast<DictionaryContext *>(_localctx)->dictionaryElementsContext);
+        setState(115);
+        match(sclParser::COMMA); 
+      }
+      setState(121);
+      _errHandler->sync(this);
+      alt = getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 10, _ctx);
+    }
+    setState(126);
+    _errHandler->sync(this);
+
+    _la = _input->LA(1);
+    if ((((_la & ~ 0x3fULL) == 0) &&
+      ((1ULL << _la) & ((1ULL << sclParser::T__0)
+      | (1ULL << sclParser::SQUARED_BRACKET_OPEN)
+      | (1ULL << sclParser::CURLY_BRACKET_OPEN)
+      | (1ULL << sclParser::ROUND_BRACKET_OPEN)
+      | (1ULL << sclParser::BOOLEAN_TRUE)
+      | (1ULL << sclParser::BOOLEAN_FALSE)
+      | (1ULL << sclParser::INTEGER)
+      | (1ULL << sclParser::FLOAT)
+      | (1ULL << sclParser::STRING_DOUBLE_QUOTE)
+      | (1ULL << sclParser::STRING_SINGLE_QUOTE))) != 0)) {
+      setState(122);
+      dynamic_cast<DictionaryContext *>(_localctx)->dictionaryElementsContext = dictionaryElements();
+      dynamic_cast<DictionaryContext *>(_localctx)->elements.push_back(dynamic_cast<DictionaryContext *>(_localctx)->dictionaryElementsContext);
+      setState(124);
+      _errHandler->sync(this);
+
+      _la = _input->LA(1);
+      if (_la == sclParser::COMMA) {
+        setState(123);
+        match(sclParser::COMMA);
+      }
+    }
+    setState(128);
+    match(sclParser::CURLY_BRACKET_CLOSE);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- DictionaryElementsContext ------------------------------------------------------------------
+
+sclParser::DictionaryElementsContext::DictionaryElementsContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* sclParser::DictionaryElementsContext::COLON() {
+  return getToken(sclParser::COLON, 0);
+}
+
+std::vector<sclParser::ExpressionContext *> sclParser::DictionaryElementsContext::expression() {
+  return getRuleContexts<sclParser::ExpressionContext>();
+}
+
+sclParser::ExpressionContext* sclParser::DictionaryElementsContext::expression(size_t i) {
+  return getRuleContext<sclParser::ExpressionContext>(i);
+}
+
+
+size_t sclParser::DictionaryElementsContext::getRuleIndex() const {
+  return sclParser::RuleDictionaryElements;
+}
+
+
+antlrcpp::Any sclParser::DictionaryElementsContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
+    return parserVisitor->visitDictionaryElements(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+sclParser::DictionaryElementsContext* sclParser::dictionaryElements() {
+  DictionaryElementsContext *_localctx = _tracker.createInstance<DictionaryElementsContext>(_ctx, getState());
+  enterRule(_localctx, 24, sclParser::RuleDictionaryElements);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(130);
+    dynamic_cast<DictionaryElementsContext *>(_localctx)->key = expression();
+    setState(131);
+    match(sclParser::COLON);
+    setState(132);
+    dynamic_cast<DictionaryElementsContext *>(_localctx)->value = expression();
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- ExpressiontypeContext ------------------------------------------------------------------
+
+sclParser::ExpressiontypeContext::ExpressiontypeContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+sclParser::TypeContext* sclParser::ExpressiontypeContext::type() {
+  return getRuleContext<sclParser::TypeContext>(0);
+}
+
+
+size_t sclParser::ExpressiontypeContext::getRuleIndex() const {
+  return sclParser::RuleExpressiontype;
+}
+
+
+antlrcpp::Any sclParser::ExpressiontypeContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
+    return parserVisitor->visitExpressiontype(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+sclParser::ExpressiontypeContext* sclParser::expressiontype() {
+  ExpressiontypeContext *_localctx = _tracker.createInstance<ExpressiontypeContext>(_ctx, getState());
+  enterRule(_localctx, 26, sclParser::RuleExpressiontype);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(134);
+    type();
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- TypeContext ------------------------------------------------------------------
+
+sclParser::TypeContext::TypeContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+sclParser::BooleanContext* sclParser::TypeContext::boolean() {
+  return getRuleContext<sclParser::BooleanContext>(0);
+}
+
+sclParser::NumericIntContext* sclParser::TypeContext::numericInt() {
+  return getRuleContext<sclParser::NumericIntContext>(0);
+}
+
+sclParser::NumericFloatContext* sclParser::TypeContext::numericFloat() {
+  return getRuleContext<sclParser::NumericFloatContext>(0);
+}
+
+sclParser::StringContext* sclParser::TypeContext::string() {
+  return getRuleContext<sclParser::StringContext>(0);
+}
+
+
+size_t sclParser::TypeContext::getRuleIndex() const {
+  return sclParser::RuleType;
+}
+
+
+antlrcpp::Any sclParser::TypeContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
+    return parserVisitor->visitType(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+sclParser::TypeContext* sclParser::type() {
+  TypeContext *_localctx = _tracker.createInstance<TypeContext>(_ctx, getState());
+  enterRule(_localctx, 28, sclParser::RuleType);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    setState(140);
+    _errHandler->sync(this);
+    switch (_input->LA(1)) {
+      case sclParser::BOOLEAN_TRUE:
+      case sclParser::BOOLEAN_FALSE: {
+        enterOuterAlt(_localctx, 1);
+        setState(136);
+        boolean();
+        break;
+      }
+
+      case sclParser::INTEGER: {
+        enterOuterAlt(_localctx, 2);
+        setState(137);
+        numericInt();
+        break;
+      }
+
+      case sclParser::FLOAT: {
+        enterOuterAlt(_localctx, 3);
+        setState(138);
+        numericFloat();
+        break;
+      }
+
+      case sclParser::STRING_DOUBLE_QUOTE:
+      case sclParser::STRING_SINGLE_QUOTE: {
+        enterOuterAlt(_localctx, 4);
+        setState(139);
+        string();
+        break;
+      }
+
+    default:
+      throw NoViableAltException(this);
+    }
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- BooleanContext ------------------------------------------------------------------
+
+sclParser::BooleanContext::BooleanContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* sclParser::BooleanContext::BOOLEAN_TRUE() {
+  return getToken(sclParser::BOOLEAN_TRUE, 0);
+}
+
+tree::TerminalNode* sclParser::BooleanContext::BOOLEAN_FALSE() {
+  return getToken(sclParser::BOOLEAN_FALSE, 0);
+}
+
+
+size_t sclParser::BooleanContext::getRuleIndex() const {
+  return sclParser::RuleBoolean;
+}
+
+
+antlrcpp::Any sclParser::BooleanContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
+    return parserVisitor->visitBoolean(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+sclParser::BooleanContext* sclParser::boolean() {
+  BooleanContext *_localctx = _tracker.createInstance<BooleanContext>(_ctx, getState());
+  enterRule(_localctx, 30, sclParser::RuleBoolean);
+  size_t _la = 0;
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(142);
+    _la = _input->LA(1);
+    if (!(_la == sclParser::BOOLEAN_TRUE
+
+    || _la == sclParser::BOOLEAN_FALSE)) {
+    _errHandler->recoverInline(this);
+    }
+    else {
+      _errHandler->reportMatch(this);
+      consume();
+    }
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- NumericIntContext ------------------------------------------------------------------
+
+sclParser::NumericIntContext::NumericIntContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* sclParser::NumericIntContext::INTEGER() {
+  return getToken(sclParser::INTEGER, 0);
+}
+
+
+size_t sclParser::NumericIntContext::getRuleIndex() const {
+  return sclParser::RuleNumericInt;
+}
+
+
+antlrcpp::Any sclParser::NumericIntContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
+    return parserVisitor->visitNumericInt(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+sclParser::NumericIntContext* sclParser::numericInt() {
+  NumericIntContext *_localctx = _tracker.createInstance<NumericIntContext>(_ctx, getState());
+  enterRule(_localctx, 32, sclParser::RuleNumericInt);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(144);
+    match(sclParser::INTEGER);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- NumericFloatContext ------------------------------------------------------------------
+
+sclParser::NumericFloatContext::NumericFloatContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* sclParser::NumericFloatContext::FLOAT() {
+  return getToken(sclParser::FLOAT, 0);
+}
+
+
+size_t sclParser::NumericFloatContext::getRuleIndex() const {
+  return sclParser::RuleNumericFloat;
+}
+
+
+antlrcpp::Any sclParser::NumericFloatContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
+    return parserVisitor->visitNumericFloat(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+sclParser::NumericFloatContext* sclParser::numericFloat() {
+  NumericFloatContext *_localctx = _tracker.createInstance<NumericFloatContext>(_ctx, getState());
+  enterRule(_localctx, 34, sclParser::RuleNumericFloat);
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(146);
+    match(sclParser::FLOAT);
+   
+  }
+  catch (RecognitionException &e) {
+    _errHandler->reportError(this, e);
+    _localctx->exception = std::current_exception();
+    _errHandler->recover(this, _localctx->exception);
+  }
+
+  return _localctx;
+}
+
+//----------------- StringContext ------------------------------------------------------------------
+
+sclParser::StringContext::StringContext(ParserRuleContext *parent, size_t invokingState)
+  : ParserRuleContext(parent, invokingState) {
+}
+
+tree::TerminalNode* sclParser::StringContext::STRING_SINGLE_QUOTE() {
+  return getToken(sclParser::STRING_SINGLE_QUOTE, 0);
+}
+
+tree::TerminalNode* sclParser::StringContext::STRING_DOUBLE_QUOTE() {
+  return getToken(sclParser::STRING_DOUBLE_QUOTE, 0);
+}
+
+
+size_t sclParser::StringContext::getRuleIndex() const {
+  return sclParser::RuleString;
+}
+
+
+antlrcpp::Any sclParser::StringContext::accept(tree::ParseTreeVisitor *visitor) {
+  if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
+    return parserVisitor->visitString(this);
+  else
+    return visitor->visitChildren(this);
+}
+
+sclParser::StringContext* sclParser::string() {
+  StringContext *_localctx = _tracker.createInstance<StringContext>(_ctx, getState());
+  enterRule(_localctx, 36, sclParser::RuleString);
+  size_t _la = 0;
+
+  auto onExit = finally([=] {
+    exitRule();
+  });
+  try {
+    enterOuterAlt(_localctx, 1);
+    setState(148);
+    _la = _input->LA(1);
+    if (!(_la == sclParser::STRING_DOUBLE_QUOTE
+
+    || _la == sclParser::STRING_SINGLE_QUOTE)) {
+    _errHandler->recoverInline(this);
+    }
+    else {
+      _errHandler->reportMatch(this);
+      consume();
+    }
    
   }
   catch (RecognitionException &e) {
@@ -1273,8 +1454,9 @@ std::vector<uint16_t> sclParser::_serializedATN;
 
 std::vector<std::string> sclParser::_ruleNames = {
   "module", "scope", "variable", "instruction", "print", "assign", "expression", 
-  "expressionconcated", "expressiongrouped", "expressionconst", "expressiontype", 
-  "type", "boolean", "numericInt", "numericFloat", "string", "array"
+  "expressionconcated", "expressiongrouped", "expressionconst", "array", 
+  "dictionary", "dictionaryElements", "expressiontype", "type", "boolean", 
+  "numericInt", "numericFloat", "string"
 };
 
 std::vector<std::string> sclParser::_literalNames = {
@@ -1319,86 +1501,103 @@ sclParser::Initializer::Initializer() {
 
   _serializedATN = {
     0x3, 0x608b, 0xa72a, 0x8133, 0xb9ed, 0x417c, 0x3be7, 0x7786, 0x5964, 
-    0x3, 0x31, 0x7f, 0x4, 0x2, 0x9, 0x2, 0x4, 0x3, 0x9, 0x3, 0x4, 0x4, 0x9, 
+    0x3, 0x31, 0x99, 0x4, 0x2, 0x9, 0x2, 0x4, 0x3, 0x9, 0x3, 0x4, 0x4, 0x9, 
     0x4, 0x4, 0x5, 0x9, 0x5, 0x4, 0x6, 0x9, 0x6, 0x4, 0x7, 0x9, 0x7, 0x4, 
     0x8, 0x9, 0x8, 0x4, 0x9, 0x9, 0x9, 0x4, 0xa, 0x9, 0xa, 0x4, 0xb, 0x9, 
     0xb, 0x4, 0xc, 0x9, 0xc, 0x4, 0xd, 0x9, 0xd, 0x4, 0xe, 0x9, 0xe, 0x4, 
     0xf, 0x9, 0xf, 0x4, 0x10, 0x9, 0x10, 0x4, 0x11, 0x9, 0x11, 0x4, 0x12, 
-    0x9, 0x12, 0x3, 0x2, 0x3, 0x2, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x7, 0x3, 
-    0x2a, 0xa, 0x3, 0xc, 0x3, 0xe, 0x3, 0x2d, 0xb, 0x3, 0x3, 0x3, 0x5, 0x3, 
-    0x30, 0xa, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x4, 0x3, 0x4, 0x3, 0x4, 0x3, 
-    0x5, 0x3, 0x5, 0x5, 0x5, 0x39, 0xa, 0x5, 0x3, 0x6, 0x3, 0x6, 0x3, 0x6, 
-    0x3, 0x7, 0x3, 0x7, 0x3, 0x7, 0x3, 0x7, 0x3, 0x8, 0x3, 0x8, 0x3, 0x9, 
-    0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 
-    0x3, 0x9, 0x7, 0x9, 0x4d, 0xa, 0x9, 0xc, 0x9, 0xe, 0x9, 0x50, 0xb, 0x9, 
-    0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x3, 0xa, 0x5, 0xa, 0x57, 0xa, 
-    0xa, 0x3, 0xb, 0x3, 0xb, 0x3, 0xb, 0x5, 0xb, 0x5c, 0xa, 0xb, 0x3, 0xc, 
-    0x3, 0xc, 0x3, 0xd, 0x3, 0xd, 0x3, 0xd, 0x3, 0xd, 0x5, 0xd, 0x64, 0xa, 
-    0xd, 0x3, 0xe, 0x3, 0xe, 0x3, 0xf, 0x3, 0xf, 0x3, 0x10, 0x3, 0x10, 0x3, 
-    0x11, 0x3, 0x11, 0x3, 0x12, 0x3, 0x12, 0x3, 0x12, 0x3, 0x12, 0x7, 0x12, 
-    0x72, 0xa, 0x12, 0xc, 0x12, 0xe, 0x12, 0x75, 0xb, 0x12, 0x3, 0x12, 0x3, 
-    0x12, 0x5, 0x12, 0x79, 0xa, 0x12, 0x5, 0x12, 0x7b, 0xa, 0x12, 0x3, 0x12, 
-    0x3, 0x12, 0x3, 0x12, 0x2, 0x3, 0x10, 0x13, 0x2, 0x4, 0x6, 0x8, 0xa, 
+    0x9, 0x12, 0x4, 0x13, 0x9, 0x13, 0x4, 0x14, 0x9, 0x14, 0x3, 0x2, 0x3, 
+    0x2, 0x3, 0x3, 0x3, 0x3, 0x3, 0x3, 0x7, 0x3, 0x2e, 0xa, 0x3, 0xc, 0x3, 
+    0xe, 0x3, 0x31, 0xb, 0x3, 0x3, 0x3, 0x5, 0x3, 0x34, 0xa, 0x3, 0x3, 0x3, 
+    0x3, 0x3, 0x3, 0x4, 0x3, 0x4, 0x3, 0x4, 0x3, 0x5, 0x3, 0x5, 0x5, 0x5, 
+    0x3d, 0xa, 0x5, 0x3, 0x6, 0x3, 0x6, 0x3, 0x6, 0x3, 0x7, 0x3, 0x7, 0x3, 
+    0x7, 0x3, 0x7, 0x3, 0x8, 0x3, 0x8, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 
+    0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x3, 0x9, 0x7, 0x9, 0x51, 
+    0xa, 0x9, 0xc, 0x9, 0xe, 0x9, 0x54, 0xb, 0x9, 0x3, 0xa, 0x3, 0xa, 0x3, 
+    0xa, 0x3, 0xa, 0x3, 0xa, 0x5, 0xa, 0x5b, 0xa, 0xa, 0x3, 0xb, 0x3, 0xb, 
+    0x3, 0xb, 0x3, 0xb, 0x5, 0xb, 0x61, 0xa, 0xb, 0x3, 0xc, 0x3, 0xc, 0x3, 
+    0xc, 0x3, 0xc, 0x7, 0xc, 0x67, 0xa, 0xc, 0xc, 0xc, 0xe, 0xc, 0x6a, 0xb, 
+    0xc, 0x3, 0xc, 0x3, 0xc, 0x5, 0xc, 0x6e, 0xa, 0xc, 0x5, 0xc, 0x70, 0xa, 
+    0xc, 0x3, 0xc, 0x3, 0xc, 0x3, 0xd, 0x3, 0xd, 0x3, 0xd, 0x3, 0xd, 0x7, 
+    0xd, 0x78, 0xa, 0xd, 0xc, 0xd, 0xe, 0xd, 0x7b, 0xb, 0xd, 0x3, 0xd, 0x3, 
+    0xd, 0x5, 0xd, 0x7f, 0xa, 0xd, 0x5, 0xd, 0x81, 0xa, 0xd, 0x3, 0xd, 0x3, 
+    0xd, 0x3, 0xe, 0x3, 0xe, 0x3, 0xe, 0x3, 0xe, 0x3, 0xf, 0x3, 0xf, 0x3, 
+    0x10, 0x3, 0x10, 0x3, 0x10, 0x3, 0x10, 0x5, 0x10, 0x8f, 0xa, 0x10, 0x3, 
+    0x11, 0x3, 0x11, 0x3, 0x12, 0x3, 0x12, 0x3, 0x13, 0x3, 0x13, 0x3, 0x14, 
+    0x3, 0x14, 0x3, 0x14, 0x2, 0x3, 0x10, 0x15, 0x2, 0x4, 0x6, 0x8, 0xa, 
     0xc, 0xe, 0x10, 0x12, 0x14, 0x16, 0x18, 0x1a, 0x1c, 0x1e, 0x20, 0x22, 
-    0x2, 0x6, 0x3, 0x2, 0x10, 0x16, 0x3, 0x2, 0x23, 0x28, 0x3, 0x2, 0x29, 
-    0x2a, 0x3, 0x2, 0x2d, 0x2e, 0x2, 0x7b, 0x2, 0x24, 0x3, 0x2, 0x2, 0x2, 
-    0x4, 0x2b, 0x3, 0x2, 0x2, 0x2, 0x6, 0x33, 0x3, 0x2, 0x2, 0x2, 0x8, 0x38, 
-    0x3, 0x2, 0x2, 0x2, 0xa, 0x3a, 0x3, 0x2, 0x2, 0x2, 0xc, 0x3d, 0x3, 0x2, 
-    0x2, 0x2, 0xe, 0x41, 0x3, 0x2, 0x2, 0x2, 0x10, 0x43, 0x3, 0x2, 0x2, 
-    0x2, 0x12, 0x56, 0x3, 0x2, 0x2, 0x2, 0x14, 0x5b, 0x3, 0x2, 0x2, 0x2, 
-    0x16, 0x5d, 0x3, 0x2, 0x2, 0x2, 0x18, 0x63, 0x3, 0x2, 0x2, 0x2, 0x1a, 
-    0x65, 0x3, 0x2, 0x2, 0x2, 0x1c, 0x67, 0x3, 0x2, 0x2, 0x2, 0x1e, 0x69, 
-    0x3, 0x2, 0x2, 0x2, 0x20, 0x6b, 0x3, 0x2, 0x2, 0x2, 0x22, 0x6d, 0x3, 
-    0x2, 0x2, 0x2, 0x24, 0x25, 0x5, 0x4, 0x3, 0x2, 0x25, 0x3, 0x3, 0x2, 
-    0x2, 0x2, 0x26, 0x27, 0x5, 0x8, 0x5, 0x2, 0x27, 0x28, 0x7, 0x4, 0x2, 
-    0x2, 0x28, 0x2a, 0x3, 0x2, 0x2, 0x2, 0x29, 0x26, 0x3, 0x2, 0x2, 0x2, 
-    0x2a, 0x2d, 0x3, 0x2, 0x2, 0x2, 0x2b, 0x29, 0x3, 0x2, 0x2, 0x2, 0x2b, 
-    0x2c, 0x3, 0x2, 0x2, 0x2, 0x2c, 0x2f, 0x3, 0x2, 0x2, 0x2, 0x2d, 0x2b, 
-    0x3, 0x2, 0x2, 0x2, 0x2e, 0x30, 0x5, 0x8, 0x5, 0x2, 0x2f, 0x2e, 0x3, 
-    0x2, 0x2, 0x2, 0x2f, 0x30, 0x3, 0x2, 0x2, 0x2, 0x30, 0x31, 0x3, 0x2, 
-    0x2, 0x2, 0x31, 0x32, 0x7, 0x2, 0x2, 0x3, 0x32, 0x5, 0x3, 0x2, 0x2, 
-    0x2, 0x33, 0x34, 0x7, 0x3, 0x2, 0x2, 0x34, 0x35, 0x7, 0x30, 0x2, 0x2, 
-    0x35, 0x7, 0x3, 0x2, 0x2, 0x2, 0x36, 0x39, 0x5, 0xc, 0x7, 0x2, 0x37, 
-    0x39, 0x5, 0xa, 0x6, 0x2, 0x38, 0x36, 0x3, 0x2, 0x2, 0x2, 0x38, 0x37, 
-    0x3, 0x2, 0x2, 0x2, 0x39, 0x9, 0x3, 0x2, 0x2, 0x2, 0x3a, 0x3b, 0x7, 
-    0x8, 0x2, 0x2, 0x3b, 0x3c, 0x5, 0xe, 0x8, 0x2, 0x3c, 0xb, 0x3, 0x2, 
-    0x2, 0x2, 0x3d, 0x3e, 0x5, 0x6, 0x4, 0x2, 0x3e, 0x3f, 0x7, 0xf, 0x2, 
-    0x2, 0x3f, 0x40, 0x5, 0xe, 0x8, 0x2, 0x40, 0xd, 0x3, 0x2, 0x2, 0x2, 
-    0x41, 0x42, 0x5, 0x10, 0x9, 0x2, 0x42, 0xf, 0x3, 0x2, 0x2, 0x2, 0x43, 
-    0x44, 0x8, 0x9, 0x1, 0x2, 0x44, 0x45, 0x5, 0x12, 0xa, 0x2, 0x45, 0x4e, 
-    0x3, 0x2, 0x2, 0x2, 0x46, 0x47, 0xc, 0x4, 0x2, 0x2, 0x47, 0x48, 0x9, 
-    0x2, 0x2, 0x2, 0x48, 0x4d, 0x5, 0x10, 0x9, 0x5, 0x49, 0x4a, 0xc, 0x3, 
-    0x2, 0x2, 0x4a, 0x4b, 0x9, 0x3, 0x2, 0x2, 0x4b, 0x4d, 0x5, 0x10, 0x9, 
-    0x4, 0x4c, 0x46, 0x3, 0x2, 0x2, 0x2, 0x4c, 0x49, 0x3, 0x2, 0x2, 0x2, 
-    0x4d, 0x50, 0x3, 0x2, 0x2, 0x2, 0x4e, 0x4c, 0x3, 0x2, 0x2, 0x2, 0x4e, 
-    0x4f, 0x3, 0x2, 0x2, 0x2, 0x4f, 0x11, 0x3, 0x2, 0x2, 0x2, 0x50, 0x4e, 
-    0x3, 0x2, 0x2, 0x2, 0x51, 0x57, 0x5, 0x14, 0xb, 0x2, 0x52, 0x53, 0x7, 
-    0x1c, 0x2, 0x2, 0x53, 0x54, 0x5, 0xe, 0x8, 0x2, 0x54, 0x55, 0x7, 0x1d, 
-    0x2, 0x2, 0x55, 0x57, 0x3, 0x2, 0x2, 0x2, 0x56, 0x51, 0x3, 0x2, 0x2, 
-    0x2, 0x56, 0x52, 0x3, 0x2, 0x2, 0x2, 0x57, 0x13, 0x3, 0x2, 0x2, 0x2, 
-    0x58, 0x5c, 0x5, 0x16, 0xc, 0x2, 0x59, 0x5c, 0x5, 0x6, 0x4, 0x2, 0x5a, 
-    0x5c, 0x5, 0x22, 0x12, 0x2, 0x5b, 0x58, 0x3, 0x2, 0x2, 0x2, 0x5b, 0x59, 
-    0x3, 0x2, 0x2, 0x2, 0x5b, 0x5a, 0x3, 0x2, 0x2, 0x2, 0x5c, 0x15, 0x3, 
-    0x2, 0x2, 0x2, 0x5d, 0x5e, 0x5, 0x18, 0xd, 0x2, 0x5e, 0x17, 0x3, 0x2, 
-    0x2, 0x2, 0x5f, 0x64, 0x5, 0x1a, 0xe, 0x2, 0x60, 0x64, 0x5, 0x1c, 0xf, 
-    0x2, 0x61, 0x64, 0x5, 0x1e, 0x10, 0x2, 0x62, 0x64, 0x5, 0x20, 0x11, 
-    0x2, 0x63, 0x5f, 0x3, 0x2, 0x2, 0x2, 0x63, 0x60, 0x3, 0x2, 0x2, 0x2, 
-    0x63, 0x61, 0x3, 0x2, 0x2, 0x2, 0x63, 0x62, 0x3, 0x2, 0x2, 0x2, 0x64, 
-    0x19, 0x3, 0x2, 0x2, 0x2, 0x65, 0x66, 0x9, 0x4, 0x2, 0x2, 0x66, 0x1b, 
-    0x3, 0x2, 0x2, 0x2, 0x67, 0x68, 0x7, 0x2b, 0x2, 0x2, 0x68, 0x1d, 0x3, 
-    0x2, 0x2, 0x2, 0x69, 0x6a, 0x7, 0x2c, 0x2, 0x2, 0x6a, 0x1f, 0x3, 0x2, 
-    0x2, 0x2, 0x6b, 0x6c, 0x9, 0x5, 0x2, 0x2, 0x6c, 0x21, 0x3, 0x2, 0x2, 
-    0x2, 0x6d, 0x73, 0x7, 0x18, 0x2, 0x2, 0x6e, 0x6f, 0x5, 0xe, 0x8, 0x2, 
-    0x6f, 0x70, 0x7, 0x20, 0x2, 0x2, 0x70, 0x72, 0x3, 0x2, 0x2, 0x2, 0x71, 
-    0x6e, 0x3, 0x2, 0x2, 0x2, 0x72, 0x75, 0x3, 0x2, 0x2, 0x2, 0x73, 0x71, 
-    0x3, 0x2, 0x2, 0x2, 0x73, 0x74, 0x3, 0x2, 0x2, 0x2, 0x74, 0x7a, 0x3, 
-    0x2, 0x2, 0x2, 0x75, 0x73, 0x3, 0x2, 0x2, 0x2, 0x76, 0x78, 0x5, 0xe, 
-    0x8, 0x2, 0x77, 0x79, 0x7, 0x20, 0x2, 0x2, 0x78, 0x77, 0x3, 0x2, 0x2, 
-    0x2, 0x78, 0x79, 0x3, 0x2, 0x2, 0x2, 0x79, 0x7b, 0x3, 0x2, 0x2, 0x2, 
-    0x7a, 0x76, 0x3, 0x2, 0x2, 0x2, 0x7a, 0x7b, 0x3, 0x2, 0x2, 0x2, 0x7b, 
-    0x7c, 0x3, 0x2, 0x2, 0x2, 0x7c, 0x7d, 0x7, 0x19, 0x2, 0x2, 0x7d, 0x23, 
-    0x3, 0x2, 0x2, 0x2, 0xd, 0x2b, 0x2f, 0x38, 0x4c, 0x4e, 0x56, 0x5b, 0x63, 
-    0x73, 0x78, 0x7a, 
+    0x24, 0x26, 0x2, 0x6, 0x3, 0x2, 0x10, 0x16, 0x3, 0x2, 0x23, 0x28, 0x3, 
+    0x2, 0x29, 0x2a, 0x3, 0x2, 0x2d, 0x2e, 0x2, 0x97, 0x2, 0x28, 0x3, 0x2, 
+    0x2, 0x2, 0x4, 0x2f, 0x3, 0x2, 0x2, 0x2, 0x6, 0x37, 0x3, 0x2, 0x2, 0x2, 
+    0x8, 0x3c, 0x3, 0x2, 0x2, 0x2, 0xa, 0x3e, 0x3, 0x2, 0x2, 0x2, 0xc, 0x41, 
+    0x3, 0x2, 0x2, 0x2, 0xe, 0x45, 0x3, 0x2, 0x2, 0x2, 0x10, 0x47, 0x3, 
+    0x2, 0x2, 0x2, 0x12, 0x5a, 0x3, 0x2, 0x2, 0x2, 0x14, 0x60, 0x3, 0x2, 
+    0x2, 0x2, 0x16, 0x62, 0x3, 0x2, 0x2, 0x2, 0x18, 0x73, 0x3, 0x2, 0x2, 
+    0x2, 0x1a, 0x84, 0x3, 0x2, 0x2, 0x2, 0x1c, 0x88, 0x3, 0x2, 0x2, 0x2, 
+    0x1e, 0x8e, 0x3, 0x2, 0x2, 0x2, 0x20, 0x90, 0x3, 0x2, 0x2, 0x2, 0x22, 
+    0x92, 0x3, 0x2, 0x2, 0x2, 0x24, 0x94, 0x3, 0x2, 0x2, 0x2, 0x26, 0x96, 
+    0x3, 0x2, 0x2, 0x2, 0x28, 0x29, 0x5, 0x4, 0x3, 0x2, 0x29, 0x3, 0x3, 
+    0x2, 0x2, 0x2, 0x2a, 0x2b, 0x5, 0x8, 0x5, 0x2, 0x2b, 0x2c, 0x7, 0x4, 
+    0x2, 0x2, 0x2c, 0x2e, 0x3, 0x2, 0x2, 0x2, 0x2d, 0x2a, 0x3, 0x2, 0x2, 
+    0x2, 0x2e, 0x31, 0x3, 0x2, 0x2, 0x2, 0x2f, 0x2d, 0x3, 0x2, 0x2, 0x2, 
+    0x2f, 0x30, 0x3, 0x2, 0x2, 0x2, 0x30, 0x33, 0x3, 0x2, 0x2, 0x2, 0x31, 
+    0x2f, 0x3, 0x2, 0x2, 0x2, 0x32, 0x34, 0x5, 0x8, 0x5, 0x2, 0x33, 0x32, 
+    0x3, 0x2, 0x2, 0x2, 0x33, 0x34, 0x3, 0x2, 0x2, 0x2, 0x34, 0x35, 0x3, 
+    0x2, 0x2, 0x2, 0x35, 0x36, 0x7, 0x2, 0x2, 0x3, 0x36, 0x5, 0x3, 0x2, 
+    0x2, 0x2, 0x37, 0x38, 0x7, 0x3, 0x2, 0x2, 0x38, 0x39, 0x7, 0x30, 0x2, 
+    0x2, 0x39, 0x7, 0x3, 0x2, 0x2, 0x2, 0x3a, 0x3d, 0x5, 0xc, 0x7, 0x2, 
+    0x3b, 0x3d, 0x5, 0xa, 0x6, 0x2, 0x3c, 0x3a, 0x3, 0x2, 0x2, 0x2, 0x3c, 
+    0x3b, 0x3, 0x2, 0x2, 0x2, 0x3d, 0x9, 0x3, 0x2, 0x2, 0x2, 0x3e, 0x3f, 
+    0x7, 0x8, 0x2, 0x2, 0x3f, 0x40, 0x5, 0xe, 0x8, 0x2, 0x40, 0xb, 0x3, 
+    0x2, 0x2, 0x2, 0x41, 0x42, 0x5, 0x6, 0x4, 0x2, 0x42, 0x43, 0x7, 0xf, 
+    0x2, 0x2, 0x43, 0x44, 0x5, 0xe, 0x8, 0x2, 0x44, 0xd, 0x3, 0x2, 0x2, 
+    0x2, 0x45, 0x46, 0x5, 0x10, 0x9, 0x2, 0x46, 0xf, 0x3, 0x2, 0x2, 0x2, 
+    0x47, 0x48, 0x8, 0x9, 0x1, 0x2, 0x48, 0x49, 0x5, 0x12, 0xa, 0x2, 0x49, 
+    0x52, 0x3, 0x2, 0x2, 0x2, 0x4a, 0x4b, 0xc, 0x4, 0x2, 0x2, 0x4b, 0x4c, 
+    0x9, 0x2, 0x2, 0x2, 0x4c, 0x51, 0x5, 0x10, 0x9, 0x5, 0x4d, 0x4e, 0xc, 
+    0x3, 0x2, 0x2, 0x4e, 0x4f, 0x9, 0x3, 0x2, 0x2, 0x4f, 0x51, 0x5, 0x10, 
+    0x9, 0x4, 0x50, 0x4a, 0x3, 0x2, 0x2, 0x2, 0x50, 0x4d, 0x3, 0x2, 0x2, 
+    0x2, 0x51, 0x54, 0x3, 0x2, 0x2, 0x2, 0x52, 0x50, 0x3, 0x2, 0x2, 0x2, 
+    0x52, 0x53, 0x3, 0x2, 0x2, 0x2, 0x53, 0x11, 0x3, 0x2, 0x2, 0x2, 0x54, 
+    0x52, 0x3, 0x2, 0x2, 0x2, 0x55, 0x5b, 0x5, 0x14, 0xb, 0x2, 0x56, 0x57, 
+    0x7, 0x1c, 0x2, 0x2, 0x57, 0x58, 0x5, 0xe, 0x8, 0x2, 0x58, 0x59, 0x7, 
+    0x1d, 0x2, 0x2, 0x59, 0x5b, 0x3, 0x2, 0x2, 0x2, 0x5a, 0x55, 0x3, 0x2, 
+    0x2, 0x2, 0x5a, 0x56, 0x3, 0x2, 0x2, 0x2, 0x5b, 0x13, 0x3, 0x2, 0x2, 
+    0x2, 0x5c, 0x61, 0x5, 0x1c, 0xf, 0x2, 0x5d, 0x61, 0x5, 0x6, 0x4, 0x2, 
+    0x5e, 0x61, 0x5, 0x16, 0xc, 0x2, 0x5f, 0x61, 0x5, 0x18, 0xd, 0x2, 0x60, 
+    0x5c, 0x3, 0x2, 0x2, 0x2, 0x60, 0x5d, 0x3, 0x2, 0x2, 0x2, 0x60, 0x5e, 
+    0x3, 0x2, 0x2, 0x2, 0x60, 0x5f, 0x3, 0x2, 0x2, 0x2, 0x61, 0x15, 0x3, 
+    0x2, 0x2, 0x2, 0x62, 0x68, 0x7, 0x18, 0x2, 0x2, 0x63, 0x64, 0x5, 0xe, 
+    0x8, 0x2, 0x64, 0x65, 0x7, 0x20, 0x2, 0x2, 0x65, 0x67, 0x3, 0x2, 0x2, 
+    0x2, 0x66, 0x63, 0x3, 0x2, 0x2, 0x2, 0x67, 0x6a, 0x3, 0x2, 0x2, 0x2, 
+    0x68, 0x66, 0x3, 0x2, 0x2, 0x2, 0x68, 0x69, 0x3, 0x2, 0x2, 0x2, 0x69, 
+    0x6f, 0x3, 0x2, 0x2, 0x2, 0x6a, 0x68, 0x3, 0x2, 0x2, 0x2, 0x6b, 0x6d, 
+    0x5, 0xe, 0x8, 0x2, 0x6c, 0x6e, 0x7, 0x20, 0x2, 0x2, 0x6d, 0x6c, 0x3, 
+    0x2, 0x2, 0x2, 0x6d, 0x6e, 0x3, 0x2, 0x2, 0x2, 0x6e, 0x70, 0x3, 0x2, 
+    0x2, 0x2, 0x6f, 0x6b, 0x3, 0x2, 0x2, 0x2, 0x6f, 0x70, 0x3, 0x2, 0x2, 
+    0x2, 0x70, 0x71, 0x3, 0x2, 0x2, 0x2, 0x71, 0x72, 0x7, 0x19, 0x2, 0x2, 
+    0x72, 0x17, 0x3, 0x2, 0x2, 0x2, 0x73, 0x79, 0x7, 0x1a, 0x2, 0x2, 0x74, 
+    0x75, 0x5, 0x1a, 0xe, 0x2, 0x75, 0x76, 0x7, 0x20, 0x2, 0x2, 0x76, 0x78, 
+    0x3, 0x2, 0x2, 0x2, 0x77, 0x74, 0x3, 0x2, 0x2, 0x2, 0x78, 0x7b, 0x3, 
+    0x2, 0x2, 0x2, 0x79, 0x77, 0x3, 0x2, 0x2, 0x2, 0x79, 0x7a, 0x3, 0x2, 
+    0x2, 0x2, 0x7a, 0x80, 0x3, 0x2, 0x2, 0x2, 0x7b, 0x79, 0x3, 0x2, 0x2, 
+    0x2, 0x7c, 0x7e, 0x5, 0x1a, 0xe, 0x2, 0x7d, 0x7f, 0x7, 0x20, 0x2, 0x2, 
+    0x7e, 0x7d, 0x3, 0x2, 0x2, 0x2, 0x7e, 0x7f, 0x3, 0x2, 0x2, 0x2, 0x7f, 
+    0x81, 0x3, 0x2, 0x2, 0x2, 0x80, 0x7c, 0x3, 0x2, 0x2, 0x2, 0x80, 0x81, 
+    0x3, 0x2, 0x2, 0x2, 0x81, 0x82, 0x3, 0x2, 0x2, 0x2, 0x82, 0x83, 0x7, 
+    0x1b, 0x2, 0x2, 0x83, 0x19, 0x3, 0x2, 0x2, 0x2, 0x84, 0x85, 0x5, 0xe, 
+    0x8, 0x2, 0x85, 0x86, 0x7, 0x1f, 0x2, 0x2, 0x86, 0x87, 0x5, 0xe, 0x8, 
+    0x2, 0x87, 0x1b, 0x3, 0x2, 0x2, 0x2, 0x88, 0x89, 0x5, 0x1e, 0x10, 0x2, 
+    0x89, 0x1d, 0x3, 0x2, 0x2, 0x2, 0x8a, 0x8f, 0x5, 0x20, 0x11, 0x2, 0x8b, 
+    0x8f, 0x5, 0x22, 0x12, 0x2, 0x8c, 0x8f, 0x5, 0x24, 0x13, 0x2, 0x8d, 
+    0x8f, 0x5, 0x26, 0x14, 0x2, 0x8e, 0x8a, 0x3, 0x2, 0x2, 0x2, 0x8e, 0x8b, 
+    0x3, 0x2, 0x2, 0x2, 0x8e, 0x8c, 0x3, 0x2, 0x2, 0x2, 0x8e, 0x8d, 0x3, 
+    0x2, 0x2, 0x2, 0x8f, 0x1f, 0x3, 0x2, 0x2, 0x2, 0x90, 0x91, 0x9, 0x4, 
+    0x2, 0x2, 0x91, 0x21, 0x3, 0x2, 0x2, 0x2, 0x92, 0x93, 0x7, 0x2b, 0x2, 
+    0x2, 0x93, 0x23, 0x3, 0x2, 0x2, 0x2, 0x94, 0x95, 0x7, 0x2c, 0x2, 0x2, 
+    0x95, 0x25, 0x3, 0x2, 0x2, 0x2, 0x96, 0x97, 0x9, 0x5, 0x2, 0x2, 0x97, 
+    0x27, 0x3, 0x2, 0x2, 0x2, 0x10, 0x2f, 0x33, 0x3c, 0x50, 0x52, 0x5a, 
+    0x60, 0x68, 0x6d, 0x6f, 0x79, 0x7e, 0x80, 0x8e, 
   };
 
   atn::ATNDeserializer deserializer;

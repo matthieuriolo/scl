@@ -55,6 +55,18 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitArray(sclParser::ArrayContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitDictionary(sclParser::DictionaryContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitDictionaryElements(sclParser::DictionaryElementsContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitExpressiontype(sclParser::ExpressiontypeContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -76,10 +88,6 @@ public:
   }
 
   virtual antlrcpp::Any visitString(sclParser::StringContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitArray(sclParser::ArrayContext *ctx) override {
     return visitChildren(ctx);
   }
 

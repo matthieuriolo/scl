@@ -101,6 +101,7 @@ expressionconst
 	: expressiontype
 	| variable
 	| array
+	| dictionary
 //	| expression RANGE expression RANGE expression
 //	| expression RANGE expression
 //	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS
@@ -111,6 +112,16 @@ expressionconst
 ;
 
 
+array: SQUARED_BRACKET_OPEN (elements+=expression COMMA)*  (elements+=expression COMMA?)? SQUARED_BRACKET_CLOSE;
+
+dictionary: CURLY_BRACKET_OPEN (elements+=dictionaryElements COMMA)* (elements+=dictionaryElements COMMA?)? CURLY_BRACKET_CLOSE;
+
+dictionaryElements: key=expression COLON value=expression;
+
+
+
+
+
 /* Types */
 expressiontype: type;
 
@@ -119,8 +130,6 @@ type
 	| numericInt
 	| numericFloat
 	| string
-/*	| array
-	| dictionary*/
 ;
 
 boolean
@@ -135,24 +144,6 @@ string
 	: STRING_SINGLE_QUOTE
 	| STRING_DOUBLE_QUOTE
 ;
-
-array: SQUARED_BRACKET_OPEN (elements+=expression COMMA)*  (elements+=expression COMMA?)? SQUARED_BRACKET_CLOSE;
-
-/*
-dictionary
-	: CURLY_BRACKET_OPEN CURLY_BRACKET_CLOSE
-	| CURLY_BRACKET_OPEN DICTIONARY_ELEMENTS CURLY_BRACKET_CLOSE
-;
-
-DICTIONARY_ELEMENTS
-	: DICTIONARY_ELEMENTS EXPRESSION COLON EXPRESSION
-	| DICTIONARY_ELEMENTS COMMA EXPRESSION COLON EXPRESSION
-	| DICTIONARY_ELEMENTS COMMA
-;
-*/
-
-
-
 
 
 
@@ -220,4 +211,4 @@ STRING_SINGLE_QUOTE: '\'' .*? '\'';
 FUNCTION_NAME: ':' [a-zA-Z]+;
 
 IDENTIFIER: [a-zA-Z0-9]+;
-COMMENT: '#' ~('\n')*? -> skip;
+COMMENT: SPACE* '#' ~'\n'* '\n'*-> skip;

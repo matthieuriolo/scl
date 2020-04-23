@@ -11,6 +11,7 @@
 
 
 #include "scl/ast/array.hpp"
+#include "scl/ast/dictionary.hpp"
 
 #include "scl/types/boolean.hpp"
 #include "scl/types/integer.hpp"
@@ -121,6 +122,15 @@ namespace SCL {
 		}
 		return (SCL::AST::Expression*)arr;
 	}
+
+	antlrcpp::Any ASTVisitor::visitDictionary(sclParser::DictionaryContext *ctx) {
+		auto dict = new SCL::AST::Dictionary();
+		for(auto val : ctx->elements) {
+			dict->add(visitExpression(val->key), visitExpression(val->value));
+		}
+		return (SCL::AST::Expression*)dict;
+	}
+
 
 	/* types */
 	antlrcpp::Any ASTVisitor::visitBoolean(sclParser::BooleanContext *ctx) {

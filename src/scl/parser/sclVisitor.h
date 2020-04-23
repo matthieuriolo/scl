@@ -39,6 +39,12 @@ public:
 
     virtual antlrcpp::Any visitExpressionconst(sclParser::ExpressionconstContext *context) = 0;
 
+    virtual antlrcpp::Any visitArray(sclParser::ArrayContext *context) = 0;
+
+    virtual antlrcpp::Any visitDictionary(sclParser::DictionaryContext *context) = 0;
+
+    virtual antlrcpp::Any visitDictionaryElements(sclParser::DictionaryElementsContext *context) = 0;
+
     virtual antlrcpp::Any visitExpressiontype(sclParser::ExpressiontypeContext *context) = 0;
 
     virtual antlrcpp::Any visitType(sclParser::TypeContext *context) = 0;
@@ -50,8 +56,6 @@ public:
     virtual antlrcpp::Any visitNumericFloat(sclParser::NumericFloatContext *context) = 0;
 
     virtual antlrcpp::Any visitString(sclParser::StringContext *context) = 0;
-
-    virtual antlrcpp::Any visitArray(sclParser::ArrayContext *context) = 0;
 
 
 };
