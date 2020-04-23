@@ -8,7 +8,7 @@
 #include "scl/ast/print.hpp"
 #include "scl/ast/operand.hpp"
 #include "scl/ast/comparator.hpp"
-
+#include "scl/ast/unaryminus.hpp"
 
 #include "scl/ast/array.hpp"
 #include "scl/ast/dictionary.hpp"
@@ -41,22 +41,22 @@ namespace SCL {
 	}
 
 	/* expression */
-	antlrcpp::Any ASTVisitor::visitExpressiontype(sclParser::ExpressiontypeContext *ctx) {
+	antlrcpp::Any ASTVisitor::visitExpressionType(sclParser::ExpressionTypeContext *ctx) {
 		return (SCL::AST::Expression*)new SCL::AST::ExpressionType(visitType(ctx->type()).as<SCL::Type*>());
 	}
 
-	antlrcpp::Any ASTVisitor::visitExpressiongrouped(sclParser::ExpressiongroupedContext *ctx) {
-		if(ctx->expressionconst()) {
-			return visitExpressionconst(ctx->expressionconst());
+	antlrcpp::Any ASTVisitor::visitExpressionGrouped(sclParser::ExpressionGroupedContext *ctx) {
+		if(ctx->expressionConst()) {
+			return visitExpressionConst(ctx->expressionConst());
 		}else if(ctx->expression()) {
 			return visitExpression(ctx->expression());
 		}
 		throw new std::logic_error("cannot parse tree");
 	}
 
-	antlrcpp::Any ASTVisitor::visitExpressionconcated(sclParser::ExpressionconcatedContext *ctx) {
-		if(ctx->expressiongrouped()) {
-			return visitExpressiongrouped(ctx->expressiongrouped());	
+	antlrcpp::Any ASTVisitor::visitExpressionConcated(sclParser::ExpressionConcatedContext *ctx) {
+		if(ctx->expressionGrouped()) {
+			return visitExpressionGrouped(ctx->expressionGrouped());	
 		}else if(ctx->operand) {
 			AST::Operand_Type operand;
 			
@@ -78,7 +78,7 @@ namespace SCL {
 				throw new std::logic_error("Unknown operand");
 			}
 
-			return (SCL::AST::Expression*)new SCL::AST::Operand(operand, visitExpressionconcated(ctx->left), visitExpressionconcated(ctx->right));
+			return (SCL::AST::Expression*)new SCL::AST::Operand(operand, visitExpressionConcated(ctx->left), visitExpressionConcated(ctx->right));
 		}else if(ctx->comparator) {
 			AST::Comparator_Type comparator;
 			
@@ -98,10 +98,14 @@ namespace SCL {
 				throw new std::logic_error("Unknown comparator");
 			}
 
-			return (SCL::AST::Expression*)new SCL::AST::Comparator(comparator, visitExpressionconcated(ctx->left), visitExpressionconcated(ctx->right));
+			return (SCL::AST::Expression*)new SCL::AST::Comparator(comparator, visitExpressionConcated(ctx->left), visitExpressionConcated(ctx->right));
 		}
 
 		throw new std::logic_error("cannot parse tree");
+	}
+
+	antlrcpp::Any ASTVisitor::visitExpressionUnary(sclParser::ExpressionUnaryContext *ctx) {
+		return (SCL::AST::Expression*)new SCL::AST::UnaryMinus(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
 	}
 
 

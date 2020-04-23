@@ -392,8 +392,8 @@ sclParser::ExpressionContext::ExpressionContext(ParserRuleContext *parent, size_
   : ParserRuleContext(parent, invokingState) {
 }
 
-sclParser::ExpressionconcatedContext* sclParser::ExpressionContext::expressionconcated() {
-  return getRuleContext<sclParser::ExpressionconcatedContext>(0);
+sclParser::ExpressionConcatedContext* sclParser::ExpressionContext::expressionConcated() {
+  return getRuleContext<sclParser::ExpressionConcatedContext>(0);
 }
 
 
@@ -419,7 +419,7 @@ sclParser::ExpressionContext* sclParser::expression() {
   try {
     enterOuterAlt(_localctx, 1);
     setState(69);
-    expressionconcated(0);
+    expressionConcated(0);
    
   }
   catch (RecognitionException &e) {
@@ -431,102 +431,102 @@ sclParser::ExpressionContext* sclParser::expression() {
   return _localctx;
 }
 
-//----------------- ExpressionconcatedContext ------------------------------------------------------------------
+//----------------- ExpressionConcatedContext ------------------------------------------------------------------
 
-sclParser::ExpressionconcatedContext::ExpressionconcatedContext(ParserRuleContext *parent, size_t invokingState)
+sclParser::ExpressionConcatedContext::ExpressionConcatedContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-sclParser::ExpressiongroupedContext* sclParser::ExpressionconcatedContext::expressiongrouped() {
-  return getRuleContext<sclParser::ExpressiongroupedContext>(0);
+sclParser::ExpressionGroupedContext* sclParser::ExpressionConcatedContext::expressionGrouped() {
+  return getRuleContext<sclParser::ExpressionGroupedContext>(0);
 }
 
-std::vector<sclParser::ExpressionconcatedContext *> sclParser::ExpressionconcatedContext::expressionconcated() {
-  return getRuleContexts<sclParser::ExpressionconcatedContext>();
+std::vector<sclParser::ExpressionConcatedContext *> sclParser::ExpressionConcatedContext::expressionConcated() {
+  return getRuleContexts<sclParser::ExpressionConcatedContext>();
 }
 
-sclParser::ExpressionconcatedContext* sclParser::ExpressionconcatedContext::expressionconcated(size_t i) {
-  return getRuleContext<sclParser::ExpressionconcatedContext>(i);
+sclParser::ExpressionConcatedContext* sclParser::ExpressionConcatedContext::expressionConcated(size_t i) {
+  return getRuleContext<sclParser::ExpressionConcatedContext>(i);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_PLUS() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::OPERAND_PLUS() {
   return getToken(sclParser::OPERAND_PLUS, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_MINUS() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::OPERAND_MINUS() {
   return getToken(sclParser::OPERAND_MINUS, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_ASTERISK() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::OPERAND_ASTERISK() {
   return getToken(sclParser::OPERAND_ASTERISK, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_SLASH() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::OPERAND_SLASH() {
   return getToken(sclParser::OPERAND_SLASH, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_CARET() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::OPERAND_CARET() {
   return getToken(sclParser::OPERAND_CARET, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_AND() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::OPERAND_AND() {
   return getToken(sclParser::OPERAND_AND, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::OPERAND_OR() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::OPERAND_OR() {
   return getToken(sclParser::OPERAND_OR, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_EQUAL() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::COMPARATOR_EQUAL() {
   return getToken(sclParser::COMPARATOR_EQUAL, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_NOT_EQUAL() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::COMPARATOR_NOT_EQUAL() {
   return getToken(sclParser::COMPARATOR_NOT_EQUAL, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_LESS() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::COMPARATOR_LESS() {
   return getToken(sclParser::COMPARATOR_LESS, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_GREATER() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::COMPARATOR_GREATER() {
   return getToken(sclParser::COMPARATOR_GREATER, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_LESS_EQUAL() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::COMPARATOR_LESS_EQUAL() {
   return getToken(sclParser::COMPARATOR_LESS_EQUAL, 0);
 }
 
-tree::TerminalNode* sclParser::ExpressionconcatedContext::COMPARATOR_GREATER_EQUAL() {
+tree::TerminalNode* sclParser::ExpressionConcatedContext::COMPARATOR_GREATER_EQUAL() {
   return getToken(sclParser::COMPARATOR_GREATER_EQUAL, 0);
 }
 
 
-size_t sclParser::ExpressionconcatedContext::getRuleIndex() const {
-  return sclParser::RuleExpressionconcated;
+size_t sclParser::ExpressionConcatedContext::getRuleIndex() const {
+  return sclParser::RuleExpressionConcated;
 }
 
 
-antlrcpp::Any sclParser::ExpressionconcatedContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any sclParser::ExpressionConcatedContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitExpressionconcated(this);
+    return parserVisitor->visitExpressionConcated(this);
   else
     return visitor->visitChildren(this);
 }
 
 
-sclParser::ExpressionconcatedContext* sclParser::expressionconcated() {
-   return expressionconcated(0);
+sclParser::ExpressionConcatedContext* sclParser::expressionConcated() {
+   return expressionConcated(0);
 }
 
-sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int precedence) {
+sclParser::ExpressionConcatedContext* sclParser::expressionConcated(int precedence) {
   ParserRuleContext *parentContext = _ctx;
   size_t parentState = getState();
-  sclParser::ExpressionconcatedContext *_localctx = _tracker.createInstance<ExpressionconcatedContext>(_ctx, parentState);
-  sclParser::ExpressionconcatedContext *previousContext = _localctx;
+  sclParser::ExpressionConcatedContext *_localctx = _tracker.createInstance<ExpressionConcatedContext>(_ctx, parentState);
+  sclParser::ExpressionConcatedContext *previousContext = _localctx;
   (void)previousContext; // Silence compiler, in case the context is not used by generated code.
   size_t startState = 14;
-  enterRecursionRule(_localctx, 14, sclParser::RuleExpressionconcated, precedence);
+  enterRecursionRule(_localctx, 14, sclParser::RuleExpressionConcated, precedence);
 
     size_t _la = 0;
 
@@ -537,7 +537,7 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
     size_t alt;
     enterOuterAlt(_localctx, 1);
     setState(72);
-    expressiongrouped();
+    expressionGrouped();
     _ctx->stop = _input->LT(-1);
     setState(82);
     _errHandler->sync(this);
@@ -551,14 +551,14 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
         _errHandler->sync(this);
         switch (getInterpreter<atn::ParserATNSimulator>()->adaptivePredict(_input, 3, _ctx)) {
         case 1: {
-          _localctx = _tracker.createInstance<ExpressionconcatedContext>(parentContext, parentState);
+          _localctx = _tracker.createInstance<ExpressionConcatedContext>(parentContext, parentState);
           _localctx->left = previousContext;
-          pushNewRecursionContext(_localctx, startState, RuleExpressionconcated);
+          pushNewRecursionContext(_localctx, startState, RuleExpressionConcated);
           setState(74);
 
           if (!(precpred(_ctx, 2))) throw FailedPredicateException(this, "precpred(_ctx, 2)");
           setState(75);
-          dynamic_cast<ExpressionconcatedContext *>(_localctx)->operand = _input->LT(1);
+          dynamic_cast<ExpressionConcatedContext *>(_localctx)->operand = _input->LT(1);
           _la = _input->LA(1);
           if (!((((_la & ~ 0x3fULL) == 0) &&
             ((1ULL << _la) & ((1ULL << sclParser::OPERAND_PLUS)
@@ -568,26 +568,26 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
             | (1ULL << sclParser::OPERAND_CARET)
             | (1ULL << sclParser::OPERAND_AND)
             | (1ULL << sclParser::OPERAND_OR))) != 0))) {
-            dynamic_cast<ExpressionconcatedContext *>(_localctx)->operand = _errHandler->recoverInline(this);
+            dynamic_cast<ExpressionConcatedContext *>(_localctx)->operand = _errHandler->recoverInline(this);
           }
           else {
             _errHandler->reportMatch(this);
             consume();
           }
           setState(76);
-          dynamic_cast<ExpressionconcatedContext *>(_localctx)->right = expressionconcated(3);
+          dynamic_cast<ExpressionConcatedContext *>(_localctx)->right = expressionConcated(3);
           break;
         }
 
         case 2: {
-          _localctx = _tracker.createInstance<ExpressionconcatedContext>(parentContext, parentState);
+          _localctx = _tracker.createInstance<ExpressionConcatedContext>(parentContext, parentState);
           _localctx->left = previousContext;
-          pushNewRecursionContext(_localctx, startState, RuleExpressionconcated);
+          pushNewRecursionContext(_localctx, startState, RuleExpressionConcated);
           setState(77);
 
           if (!(precpred(_ctx, 1))) throw FailedPredicateException(this, "precpred(_ctx, 1)");
           setState(78);
-          dynamic_cast<ExpressionconcatedContext *>(_localctx)->comparator = _input->LT(1);
+          dynamic_cast<ExpressionConcatedContext *>(_localctx)->comparator = _input->LT(1);
           _la = _input->LA(1);
           if (!((((_la & ~ 0x3fULL) == 0) &&
             ((1ULL << _la) & ((1ULL << sclParser::COMPARATOR_EQUAL)
@@ -596,14 +596,14 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
             | (1ULL << sclParser::COMPARATOR_GREATER_EQUAL)
             | (1ULL << sclParser::COMPARATOR_LESS)
             | (1ULL << sclParser::COMPARATOR_LESS_EQUAL))) != 0))) {
-            dynamic_cast<ExpressionconcatedContext *>(_localctx)->comparator = _errHandler->recoverInline(this);
+            dynamic_cast<ExpressionConcatedContext *>(_localctx)->comparator = _errHandler->recoverInline(this);
           }
           else {
             _errHandler->reportMatch(this);
             consume();
           }
           setState(79);
-          dynamic_cast<ExpressionconcatedContext *>(_localctx)->right = expressionconcated(2);
+          dynamic_cast<ExpressionConcatedContext *>(_localctx)->right = expressionConcated(2);
           break;
         }
 
@@ -622,44 +622,44 @@ sclParser::ExpressionconcatedContext* sclParser::expressionconcated(int preceden
   return _localctx;
 }
 
-//----------------- ExpressiongroupedContext ------------------------------------------------------------------
+//----------------- ExpressionGroupedContext ------------------------------------------------------------------
 
-sclParser::ExpressiongroupedContext::ExpressiongroupedContext(ParserRuleContext *parent, size_t invokingState)
+sclParser::ExpressionGroupedContext::ExpressionGroupedContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-sclParser::ExpressionconstContext* sclParser::ExpressiongroupedContext::expressionconst() {
-  return getRuleContext<sclParser::ExpressionconstContext>(0);
+sclParser::ExpressionConstContext* sclParser::ExpressionGroupedContext::expressionConst() {
+  return getRuleContext<sclParser::ExpressionConstContext>(0);
 }
 
-tree::TerminalNode* sclParser::ExpressiongroupedContext::ROUND_BRACKET_OPEN() {
+tree::TerminalNode* sclParser::ExpressionGroupedContext::ROUND_BRACKET_OPEN() {
   return getToken(sclParser::ROUND_BRACKET_OPEN, 0);
 }
 
-sclParser::ExpressionContext* sclParser::ExpressiongroupedContext::expression() {
+sclParser::ExpressionContext* sclParser::ExpressionGroupedContext::expression() {
   return getRuleContext<sclParser::ExpressionContext>(0);
 }
 
-tree::TerminalNode* sclParser::ExpressiongroupedContext::ROUND_BRACKET_CLOSE() {
+tree::TerminalNode* sclParser::ExpressionGroupedContext::ROUND_BRACKET_CLOSE() {
   return getToken(sclParser::ROUND_BRACKET_CLOSE, 0);
 }
 
 
-size_t sclParser::ExpressiongroupedContext::getRuleIndex() const {
-  return sclParser::RuleExpressiongrouped;
+size_t sclParser::ExpressionGroupedContext::getRuleIndex() const {
+  return sclParser::RuleExpressionGrouped;
 }
 
 
-antlrcpp::Any sclParser::ExpressiongroupedContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any sclParser::ExpressionGroupedContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitExpressiongrouped(this);
+    return parserVisitor->visitExpressionGrouped(this);
   else
     return visitor->visitChildren(this);
 }
 
-sclParser::ExpressiongroupedContext* sclParser::expressiongrouped() {
-  ExpressiongroupedContext *_localctx = _tracker.createInstance<ExpressiongroupedContext>(_ctx, getState());
-  enterRule(_localctx, 16, sclParser::RuleExpressiongrouped);
+sclParser::ExpressionGroupedContext* sclParser::expressionGrouped() {
+  ExpressionGroupedContext *_localctx = _tracker.createInstance<ExpressionGroupedContext>(_ctx, getState());
+  enterRule(_localctx, 16, sclParser::RuleExpressionGrouped);
 
   auto onExit = finally([=] {
     exitRule();
@@ -680,7 +680,7 @@ sclParser::ExpressiongroupedContext* sclParser::expressiongrouped() {
       case sclParser::STRING_SINGLE_QUOTE: {
         enterOuterAlt(_localctx, 1);
         setState(85);
-        expressionconst();
+        expressionConst();
         break;
       }
 
@@ -709,48 +709,48 @@ sclParser::ExpressiongroupedContext* sclParser::expressiongrouped() {
   return _localctx;
 }
 
-//----------------- ExpressionconstContext ------------------------------------------------------------------
+//----------------- ExpressionConstContext ------------------------------------------------------------------
 
-sclParser::ExpressionconstContext::ExpressionconstContext(ParserRuleContext *parent, size_t invokingState)
+sclParser::ExpressionConstContext::ExpressionConstContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-sclParser::ExpressiontypeContext* sclParser::ExpressionconstContext::expressiontype() {
-  return getRuleContext<sclParser::ExpressiontypeContext>(0);
+sclParser::ExpressionTypeContext* sclParser::ExpressionConstContext::expressionType() {
+  return getRuleContext<sclParser::ExpressionTypeContext>(0);
 }
 
-sclParser::ExpressionunaryContext* sclParser::ExpressionconstContext::expressionunary() {
-  return getRuleContext<sclParser::ExpressionunaryContext>(0);
+sclParser::ExpressionUnaryContext* sclParser::ExpressionConstContext::expressionUnary() {
+  return getRuleContext<sclParser::ExpressionUnaryContext>(0);
 }
 
-sclParser::VariableContext* sclParser::ExpressionconstContext::variable() {
+sclParser::VariableContext* sclParser::ExpressionConstContext::variable() {
   return getRuleContext<sclParser::VariableContext>(0);
 }
 
-sclParser::ArrayContext* sclParser::ExpressionconstContext::array() {
+sclParser::ArrayContext* sclParser::ExpressionConstContext::array() {
   return getRuleContext<sclParser::ArrayContext>(0);
 }
 
-sclParser::DictionaryContext* sclParser::ExpressionconstContext::dictionary() {
+sclParser::DictionaryContext* sclParser::ExpressionConstContext::dictionary() {
   return getRuleContext<sclParser::DictionaryContext>(0);
 }
 
 
-size_t sclParser::ExpressionconstContext::getRuleIndex() const {
-  return sclParser::RuleExpressionconst;
+size_t sclParser::ExpressionConstContext::getRuleIndex() const {
+  return sclParser::RuleExpressionConst;
 }
 
 
-antlrcpp::Any sclParser::ExpressionconstContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any sclParser::ExpressionConstContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitExpressionconst(this);
+    return parserVisitor->visitExpressionConst(this);
   else
     return visitor->visitChildren(this);
 }
 
-sclParser::ExpressionconstContext* sclParser::expressionconst() {
-  ExpressionconstContext *_localctx = _tracker.createInstance<ExpressionconstContext>(_ctx, getState());
-  enterRule(_localctx, 18, sclParser::RuleExpressionconst);
+sclParser::ExpressionConstContext* sclParser::expressionConst() {
+  ExpressionConstContext *_localctx = _tracker.createInstance<ExpressionConstContext>(_ctx, getState());
+  enterRule(_localctx, 18, sclParser::RuleExpressionConst);
 
   auto onExit = finally([=] {
     exitRule();
@@ -767,14 +767,14 @@ sclParser::ExpressionconstContext* sclParser::expressionconst() {
       case sclParser::STRING_SINGLE_QUOTE: {
         enterOuterAlt(_localctx, 1);
         setState(92);
-        expressiontype();
+        expressionType();
         break;
       }
 
       case sclParser::OPERAND_MINUS: {
         enterOuterAlt(_localctx, 2);
         setState(93);
-        expressionunary();
+        expressionUnary();
         break;
       }
 
@@ -813,36 +813,36 @@ sclParser::ExpressionconstContext* sclParser::expressionconst() {
   return _localctx;
 }
 
-//----------------- ExpressionunaryContext ------------------------------------------------------------------
+//----------------- ExpressionUnaryContext ------------------------------------------------------------------
 
-sclParser::ExpressionunaryContext::ExpressionunaryContext(ParserRuleContext *parent, size_t invokingState)
+sclParser::ExpressionUnaryContext::ExpressionUnaryContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-tree::TerminalNode* sclParser::ExpressionunaryContext::OPERAND_MINUS() {
+tree::TerminalNode* sclParser::ExpressionUnaryContext::OPERAND_MINUS() {
   return getToken(sclParser::OPERAND_MINUS, 0);
 }
 
-sclParser::ExpressionContext* sclParser::ExpressionunaryContext::expression() {
+sclParser::ExpressionContext* sclParser::ExpressionUnaryContext::expression() {
   return getRuleContext<sclParser::ExpressionContext>(0);
 }
 
 
-size_t sclParser::ExpressionunaryContext::getRuleIndex() const {
-  return sclParser::RuleExpressionunary;
+size_t sclParser::ExpressionUnaryContext::getRuleIndex() const {
+  return sclParser::RuleExpressionUnary;
 }
 
 
-antlrcpp::Any sclParser::ExpressionunaryContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any sclParser::ExpressionUnaryContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitExpressionunary(this);
+    return parserVisitor->visitExpressionUnary(this);
   else
     return visitor->visitChildren(this);
 }
 
-sclParser::ExpressionunaryContext* sclParser::expressionunary() {
-  ExpressionunaryContext *_localctx = _tracker.createInstance<ExpressionunaryContext>(_ctx, getState());
-  enterRule(_localctx, 20, sclParser::RuleExpressionunary);
+sclParser::ExpressionUnaryContext* sclParser::expressionUnary() {
+  ExpressionUnaryContext *_localctx = _tracker.createInstance<ExpressionUnaryContext>(_ctx, getState());
+  enterRule(_localctx, 20, sclParser::RuleExpressionUnary);
 
   auto onExit = finally([=] {
     exitRule();
@@ -1145,32 +1145,32 @@ sclParser::DictionaryElementsContext* sclParser::dictionaryElements() {
   return _localctx;
 }
 
-//----------------- ExpressiontypeContext ------------------------------------------------------------------
+//----------------- ExpressionTypeContext ------------------------------------------------------------------
 
-sclParser::ExpressiontypeContext::ExpressiontypeContext(ParserRuleContext *parent, size_t invokingState)
+sclParser::ExpressionTypeContext::ExpressionTypeContext(ParserRuleContext *parent, size_t invokingState)
   : ParserRuleContext(parent, invokingState) {
 }
 
-sclParser::TypeContext* sclParser::ExpressiontypeContext::type() {
+sclParser::TypeContext* sclParser::ExpressionTypeContext::type() {
   return getRuleContext<sclParser::TypeContext>(0);
 }
 
 
-size_t sclParser::ExpressiontypeContext::getRuleIndex() const {
-  return sclParser::RuleExpressiontype;
+size_t sclParser::ExpressionTypeContext::getRuleIndex() const {
+  return sclParser::RuleExpressionType;
 }
 
 
-antlrcpp::Any sclParser::ExpressiontypeContext::accept(tree::ParseTreeVisitor *visitor) {
+antlrcpp::Any sclParser::ExpressionTypeContext::accept(tree::ParseTreeVisitor *visitor) {
   if (auto parserVisitor = dynamic_cast<sclVisitor*>(visitor))
-    return parserVisitor->visitExpressiontype(this);
+    return parserVisitor->visitExpressionType(this);
   else
     return visitor->visitChildren(this);
 }
 
-sclParser::ExpressiontypeContext* sclParser::expressiontype() {
-  ExpressiontypeContext *_localctx = _tracker.createInstance<ExpressiontypeContext>(_ctx, getState());
-  enterRule(_localctx, 28, sclParser::RuleExpressiontype);
+sclParser::ExpressionTypeContext* sclParser::expressionType() {
+  ExpressionTypeContext *_localctx = _tracker.createInstance<ExpressionTypeContext>(_ctx, getState());
+  enterRule(_localctx, 28, sclParser::RuleExpressionType);
 
   auto onExit = finally([=] {
     exitRule();
@@ -1490,7 +1490,7 @@ sclParser::StringContext* sclParser::string() {
 
 bool sclParser::sempred(RuleContext *context, size_t ruleIndex, size_t predicateIndex) {
   switch (ruleIndex) {
-    case 7: return expressionconcatedSempred(dynamic_cast<ExpressionconcatedContext *>(context), predicateIndex);
+    case 7: return expressionConcatedSempred(dynamic_cast<ExpressionConcatedContext *>(context), predicateIndex);
 
   default:
     break;
@@ -1498,7 +1498,7 @@ bool sclParser::sempred(RuleContext *context, size_t ruleIndex, size_t predicate
   return true;
 }
 
-bool sclParser::expressionconcatedSempred(ExpressionconcatedContext *_localctx, size_t predicateIndex) {
+bool sclParser::expressionConcatedSempred(ExpressionConcatedContext *_localctx, size_t predicateIndex) {
   switch (predicateIndex) {
     case 0: return precpred(_ctx, 2);
     case 1: return precpred(_ctx, 1);
@@ -1519,8 +1519,8 @@ std::vector<uint16_t> sclParser::_serializedATN;
 
 std::vector<std::string> sclParser::_ruleNames = {
   "module", "scope", "variable", "instruction", "print", "assign", "expression", 
-  "expressionconcated", "expressiongrouped", "expressionconst", "expressionunary", 
-  "array", "dictionary", "dictionaryElements", "expressiontype", "type", 
+  "expressionConcated", "expressionGrouped", "expressionConst", "expressionUnary", 
+  "array", "dictionary", "dictionaryElements", "expressionType", "type", 
   "boolean", "numericInt", "numericFloat", "string"
 };
 

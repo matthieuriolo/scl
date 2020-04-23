@@ -68,12 +68,12 @@ assign
 ;
 
 expression
-	: expressionconcated
+	: expressionConcated
 ;
 
-expressionconcated
-	: expressiongrouped
-	| left=expressionconcated operand=(
+expressionConcated
+	: expressionGrouped
+	| left=expressionConcated operand=(
 		  OPERAND_PLUS
 		| OPERAND_MINUS
 		| OPERAND_ASTERISK
@@ -81,25 +81,25 @@ expressionconcated
 		| OPERAND_CARET
 		| OPERAND_AND
 		| OPERAND_OR
-	) right=expressionconcated
-	| left=expressionconcated comparator=(
+	) right=expressionConcated
+	| left=expressionConcated comparator=(
 		  COMPARATOR_EQUAL
 		| COMPARATOR_NOT_EQUAL
 		| COMPARATOR_LESS
 		| COMPARATOR_GREATER
 		| COMPARATOR_LESS_EQUAL
 		| COMPARATOR_GREATER_EQUAL
-	) right=expressionconcated
+	) right=expressionConcated
 ;
 
-expressiongrouped
-	: expressionconst
+expressionGrouped
+	: expressionConst
 	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
 ;
 
-expressionconst
-	: expressiontype
-	| expressionunary
+expressionConst
+	: expressionType
+	| expressionUnary
 	| variable
 	| array
 	| dictionary
@@ -111,7 +111,7 @@ expressionconst
 //	| expression SQUARED_BRACKET_OPEN expression COLON expression SQUARED_BRACKET_CLOSE
 ;
 
-expressionunary: OPERAND_MINUS expression;
+expressionUnary: OPERAND_MINUS expression;
 
 array: SQUARED_BRACKET_OPEN (elements+=expression COMMA)*  (elements+=expression COMMA?)? SQUARED_BRACKET_CLOSE;
 
@@ -122,7 +122,7 @@ dictionaryElements: key=expression COLON value=expression;
 
 
 /* Types */
-expressiontype: type;
+expressionType: type;
 
 type
 	: boolean

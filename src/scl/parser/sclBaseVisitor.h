@@ -43,19 +43,19 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitExpressionconcated(sclParser::ExpressionconcatedContext *ctx) override {
+  virtual antlrcpp::Any visitExpressionConcated(sclParser::ExpressionConcatedContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitExpressiongrouped(sclParser::ExpressiongroupedContext *ctx) override {
+  virtual antlrcpp::Any visitExpressionGrouped(sclParser::ExpressionGroupedContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitExpressionconst(sclParser::ExpressionconstContext *ctx) override {
+  virtual antlrcpp::Any visitExpressionConst(sclParser::ExpressionConstContext *ctx) override {
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitExpressionunary(sclParser::ExpressionunaryContext *ctx) override {
+  virtual antlrcpp::Any visitExpressionUnary(sclParser::ExpressionUnaryContext *ctx) override {
     return visitChildren(ctx);
   }
 
@@ -71,7 +71,7 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitExpressiontype(sclParser::ExpressiontypeContext *ctx) override {
+  virtual antlrcpp::Any visitExpressionType(sclParser::ExpressionTypeContext *ctx) override {
     return visitChildren(ctx);
   }
 

@@ -33,13 +33,13 @@ public:
 
     virtual antlrcpp::Any visitExpression(sclParser::ExpressionContext *context) = 0;
 
-    virtual antlrcpp::Any visitExpressionconcated(sclParser::ExpressionconcatedContext *context) = 0;
+    virtual antlrcpp::Any visitExpressionConcated(sclParser::ExpressionConcatedContext *context) = 0;
 
-    virtual antlrcpp::Any visitExpressiongrouped(sclParser::ExpressiongroupedContext *context) = 0;
+    virtual antlrcpp::Any visitExpressionGrouped(sclParser::ExpressionGroupedContext *context) = 0;
 
-    virtual antlrcpp::Any visitExpressionconst(sclParser::ExpressionconstContext *context) = 0;
+    virtual antlrcpp::Any visitExpressionConst(sclParser::ExpressionConstContext *context) = 0;
 
-    virtual antlrcpp::Any visitExpressionunary(sclParser::ExpressionunaryContext *context) = 0;
+    virtual antlrcpp::Any visitExpressionUnary(sclParser::ExpressionUnaryContext *context) = 0;
 
     virtual antlrcpp::Any visitArray(sclParser::ArrayContext *context) = 0;
 
@@ -47,7 +47,7 @@ public:
 
     virtual antlrcpp::Any visitDictionaryElements(sclParser::DictionaryElementsContext *context) = 0;
 
-    virtual antlrcpp::Any visitExpressiontype(sclParser::ExpressiontypeContext *context) = 0;
+    virtual antlrcpp::Any visitExpressionType(sclParser::ExpressionTypeContext *context) = 0;
 
     virtual antlrcpp::Any visitType(sclParser::TypeContext *context) = 0;
 
