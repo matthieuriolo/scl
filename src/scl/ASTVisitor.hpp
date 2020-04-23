@@ -18,12 +18,13 @@ namespace SCL {
 			antlrcpp::Any visitExpressiongrouped(sclParser::ExpressiongroupedContext *ctx) override;
 			antlrcpp::Any visitExpressionconcated(sclParser::ExpressionconcatedContext *ctx) override;
 			antlrcpp::Any visitExpressiontype(sclParser::ExpressiontypeContext *ctx) override;
-			
+			antlrcpp::Any visitExpressionunary(sclParser::ExpressionunaryContext *ctx) override;
+
 			antlrcpp::Any visitVariable(sclParser::VariableContext *ctx) override;
 			SCL::AST::Variable* visitExplicitVariable(sclParser::VariableContext *ctx);
 			antlrcpp::Any visitArray(sclParser::ArrayContext *ctx) override;
 			antlrcpp::Any visitDictionary(sclParser::DictionaryContext *ctx) override;
-			
+
 			/* types */
 			antlrcpp::Any visitBoolean(sclParser::BooleanContext *ctx) override;
 			antlrcpp::Any visitNumericInt(sclParser::NumericIntContext *ctx) override;

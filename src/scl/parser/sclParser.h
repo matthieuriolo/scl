@@ -29,10 +29,10 @@ public:
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
     RulePrint = 4, RuleAssign = 5, RuleExpression = 6, RuleExpressionconcated = 7, 
-    RuleExpressiongrouped = 8, RuleExpressionconst = 9, RuleArray = 10, 
-    RuleDictionary = 11, RuleDictionaryElements = 12, RuleExpressiontype = 13, 
-    RuleType = 14, RuleBoolean = 15, RuleNumericInt = 16, RuleNumericFloat = 17, 
-    RuleString = 18
+    RuleExpressiongrouped = 8, RuleExpressionconst = 9, RuleExpressionunary = 10, 
+    RuleArray = 11, RuleDictionary = 12, RuleDictionaryElements = 13, RuleExpressiontype = 14, 
+    RuleType = 15, RuleBoolean = 16, RuleNumericInt = 17, RuleNumericFloat = 18, 
+    RuleString = 19
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -55,6 +55,7 @@ public:
   class ExpressionconcatedContext;
   class ExpressiongroupedContext;
   class ExpressionconstContext;
+  class ExpressionunaryContext;
   class ArrayContext;
   class DictionaryContext;
   class DictionaryElementsContext;
@@ -222,6 +223,7 @@ public:
     ExpressionconstContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     ExpressiontypeContext *expressiontype();
+    ExpressionunaryContext *expressionunary();
     VariableContext *variable();
     ArrayContext *array();
     DictionaryContext *dictionary();
@@ -232,6 +234,20 @@ public:
   };
 
   ExpressionconstContext* expressionconst();
+
+  class  ExpressionunaryContext : public antlr4::ParserRuleContext {
+  public:
+    ExpressionunaryContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *OPERAND_MINUS();
+    ExpressionContext *expression();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  ExpressionunaryContext* expressionunary();
 
   class  ArrayContext : public antlr4::ParserRuleContext {
   public:

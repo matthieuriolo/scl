@@ -39,6 +39,8 @@ public:
 
     virtual antlrcpp::Any visitExpressionconst(sclParser::ExpressionconstContext *context) = 0;
 
+    virtual antlrcpp::Any visitExpressionunary(sclParser::ExpressionunaryContext *context) = 0;
+
     virtual antlrcpp::Any visitArray(sclParser::ArrayContext *context) = 0;
 
     virtual antlrcpp::Any visitDictionary(sclParser::DictionaryContext *context) = 0;

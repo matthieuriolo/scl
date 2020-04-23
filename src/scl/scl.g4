@@ -99,26 +99,25 @@ expressiongrouped
 
 expressionconst
 	: expressiontype
+	| expressionunary
 	| variable
 	| array
 	| dictionary
 //	| expression RANGE expression RANGE expression
 //	| expression RANGE expression
-//	| OPERAND_MINUS EXPRESSION %prec OPERAND_MINUS
 //	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE
 //	| expression SQUARED_BRACKET_OPEN expression COLON SQUARED_BRACKET_CLOSE
 //	| expression SQUARED_BRACKET_OPEN COLON expression SQUARED_BRACKET_CLOSE
 //	| expression SQUARED_BRACKET_OPEN expression COLON expression SQUARED_BRACKET_CLOSE
 ;
 
+expressionunary: OPERAND_MINUS expression;
 
 array: SQUARED_BRACKET_OPEN (elements+=expression COMMA)*  (elements+=expression COMMA?)? SQUARED_BRACKET_CLOSE;
 
 dictionary: CURLY_BRACKET_OPEN (elements+=dictionaryElements COMMA)* (elements+=dictionaryElements COMMA?)? CURLY_BRACKET_CLOSE;
 
 dictionaryElements: key=expression COLON value=expression;
-
-
 
 
 

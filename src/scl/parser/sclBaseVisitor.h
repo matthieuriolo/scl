@@ -55,6 +55,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitExpressionunary(sclParser::ExpressionunaryContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitArray(sclParser::ArrayContext *ctx) override {
     return visitChildren(ctx);
   }
