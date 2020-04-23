@@ -16,7 +16,6 @@ namespace SCL {
 				
 			public:
 				IteratorFloat(double start, double end);
-				IteratorFloat(double start, double end, double increment);
 				SCL::Type *next();
 				SCL::Types::Iterator *iterator();
 		};

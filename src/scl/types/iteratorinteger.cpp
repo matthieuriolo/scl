@@ -9,14 +9,7 @@ namespace SCL {
 			this->end = end;
 			this->increment = getDefaultIncrement(start, end);
 		}
-
-		IteratorInteger::IteratorInteger(long start, long end, long increment) {
-			this->current = start;
-			this->start = start;
-			this->end = end;
-			this->increment = increment;
-		}
-
+		
 		long IteratorInteger::getDefaultIncrement(long start, long end) {
 			return start < end ? 1 : -1;
 		}

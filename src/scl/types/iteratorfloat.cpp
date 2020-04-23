@@ -11,24 +11,7 @@ namespace SCL {
 			this->increment = getDefaultIncrement(start, end);
 		}
 
-		IteratorFloat::IteratorFloat(double start, double end, double increment) {
-			this->current = start;
-			this->start = start;
-			this->end = end;
-			this->increment = increment;
-		}
-
 		double IteratorFloat::getDefaultIncrement(double start, double end) {
-			/*
-			possible case scenario for start/end 
-			7 4 => 3
-			4 7 => 3
-			-4 -7 => -3
-			-7 -4 => -3
-			4 -7 => 11
-			-7 4 => 11
-			*/
-
 			double diff;
 			if((start < 0 && end > 0) || (start > 0 && end < 0)) {
 				diff = fabs(start) + fabs(end);

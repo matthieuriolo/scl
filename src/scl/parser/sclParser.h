@@ -217,6 +217,7 @@ public:
     antlr4::Token *operand = nullptr;;
     sclParser::ExpressionConcatedContext *right = nullptr;;
     antlr4::Token *comparator = nullptr;;
+    antlr4::Token *range = nullptr;;
     ExpressionConcatedContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     ExpressionGroupedContext *expressionGrouped();
@@ -235,6 +236,7 @@ public:
     antlr4::tree::TerminalNode *COMPARATOR_GREATER();
     antlr4::tree::TerminalNode *COMPARATOR_LESS_EQUAL();
     antlr4::tree::TerminalNode *COMPARATOR_GREATER_EQUAL();
+    antlr4::tree::TerminalNode *RANGE();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;

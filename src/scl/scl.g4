@@ -93,6 +93,7 @@ expressionConcated
 		| COMPARATOR_LESS_EQUAL
 		| COMPARATOR_GREATER_EQUAL
 	) right=expressionConcated
+	| left=expressionConcated range=RANGE right=expressionConcated
 ;
 
 expressionGrouped
@@ -106,8 +107,6 @@ expressionConst
 	| variable
 	| array
 	| dictionary
-//	| expression RANGE expression RANGE expression
-//	| expression RANGE expression
 //	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE
 //	| expression SQUARED_BRACKET_OPEN expression COLON SQUARED_BRACKET_CLOSE
 //	| expression SQUARED_BRACKET_OPEN COLON expression SQUARED_BRACKET_CLOSE
@@ -121,7 +120,6 @@ array: SQUARED_BRACKET_OPEN (elements+=expression COMMA)*  (elements+=expression
 dictionary: CURLY_BRACKET_OPEN (elements+=dictionaryElements COMMA)* (elements+=dictionaryElements COMMA?)? CURLY_BRACKET_CLOSE;
 
 dictionaryElements: key=expression COLON value=expression;
-
 
 
 /* Types */

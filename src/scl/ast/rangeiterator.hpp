@@ -9,10 +9,8 @@ namespace SCL {
 			private:
 				SCL::AST::Expression *start;
 				SCL::AST::Expression *end;
-				SCL::AST::Expression *increment;
 				
 			public:
-				RangeIterator(SCL::AST::Expression *start, SCL::AST::Expression *end, SCL::AST::Expression *increment);
 				RangeIterator(SCL::AST::Expression *start, SCL::AST::Expression *end);
 
 				SCL::Type *compute(SCL::Context * ctx);

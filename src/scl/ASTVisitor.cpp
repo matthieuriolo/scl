@@ -12,6 +12,7 @@
 #include "scl/ast/operand.hpp"
 #include "scl/ast/comparator.hpp"
 #include "scl/ast/unaryminus.hpp"
+#include "scl/ast/rangeiterator.hpp"
 
 #include "scl/ast/array.hpp"
 #include "scl/ast/dictionary.hpp"
@@ -68,6 +69,8 @@ namespace SCL {
 	antlrcpp::Any ASTVisitor::visitExpressionConcated(sclParser::ExpressionConcatedContext *ctx) {
 		if(ctx->expressionGrouped()) {
 			return visitExpressionGrouped(ctx->expressionGrouped());	
+		}else if(ctx->range) {
+			return (SCL::AST::Expression*)new SCL::AST::RangeIterator(visitExpressionConcated(ctx->left), visitExpressionConcated(ctx->right));
 		}else if(ctx->operand) {
 			AST::Operand_Type operand;
 			

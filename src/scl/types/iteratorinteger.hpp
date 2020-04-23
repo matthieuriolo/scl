@@ -16,7 +16,6 @@ namespace SCL {
 
 			public:
 				IteratorInteger(long start, long end);
-				IteratorInteger(long start, long end, long increment);
 				SCL::Type *next();
 				SCL::Types::Iterator *iterator();
 		};
