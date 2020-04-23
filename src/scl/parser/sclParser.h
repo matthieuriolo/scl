@@ -28,11 +28,11 @@ public:
 
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
-    RulePrint = 4, RuleAssign = 5, RuleExpression = 6, RuleExpressionConcated = 7, 
-    RuleExpressionGrouped = 8, RuleExpressionConst = 9, RuleExpressionUnary = 10, 
-    RuleArray = 11, RuleDictionary = 12, RuleDictionaryElements = 13, RuleExpressionType = 14, 
-    RuleType = 15, RuleBoolean = 16, RuleNumericInt = 17, RuleNumericFloat = 18, 
-    RuleString = 19
+    RuleIfControl = 4, RulePrint = 5, RuleAssign = 6, RuleExpression = 7, 
+    RuleExpressionConcated = 8, RuleExpressionGrouped = 9, RuleExpressionConst = 10, 
+    RuleExpressionUnary = 11, RuleArray = 12, RuleDictionary = 13, RuleDictionaryElements = 14, 
+    RuleExpressionType = 15, RuleType = 16, RuleBoolean = 17, RuleNumericInt = 18, 
+    RuleNumericFloat = 19, RuleString = 20
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -49,6 +49,7 @@ public:
   class ScopeContext;
   class VariableContext;
   class InstructionContext;
+  class IfControlContext;
   class PrintContext;
   class AssignContext;
   class ExpressionContext;
@@ -71,6 +72,7 @@ public:
     sclParser::ScopeContext *content = nullptr;;
     ModuleContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *EOF();
     ScopeContext *scope();
 
 
@@ -86,7 +88,6 @@ public:
     std::vector<InstructionContext *> instructions;;
     ScopeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *EOF();
     std::vector<antlr4::tree::TerminalNode *> DELIMITER();
     antlr4::tree::TerminalNode* DELIMITER(size_t i);
     std::vector<InstructionContext *> instruction();
@@ -118,6 +119,7 @@ public:
     virtual size_t getRuleIndex() const override;
     AssignContext *assign();
     PrintContext *print();
+    IfControlContext *ifControl();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -125,6 +127,23 @@ public:
   };
 
   InstructionContext* instruction();
+
+  class  IfControlContext : public antlr4::ParserRuleContext {
+  public:
+    IfControlContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *CONTROL_IF();
+    ExpressionContext *expression();
+    antlr4::tree::TerminalNode *DELIMITER();
+    ScopeContext *scope();
+    antlr4::tree::TerminalNode *CONTROL_END();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  IfControlContext* ifControl();
 
   class  PrintContext : public antlr4::ParserRuleContext {
   public:

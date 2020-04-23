@@ -1,8 +1,8 @@
 grammar scl;
 
 /* grammar */
-module: content=scope;
-scope: (instructions += instruction DELIMITER)* (instructions += instruction)? EOF;
+module: content=scope EOF;
+scope: (instructions += instruction DELIMITER)* (instructions += instruction)?;
 
 
 variable: '$' IDENTIFIER;
@@ -12,12 +12,12 @@ variable: '$' IDENTIFIER;
 instruction
 	: assign
 	| print
-/*	| INCLUDE
-	| IMPORT
-	| FUNCTION_DECLARATION
-	| command
-	| CONTROL_IF expression DELIMITER scope DELIMITER CONTROL_END
-	| CONTROL_FOR variable CONTROL_IN expression DELIMITER scope DELIMITER CONTROL_END */
+//	| INCLUDE
+//	| IMPORT
+//	| FUNCTION_DECLARATION
+//	| command
+	| ifControl
+//	| CONTROL_FOR variable CONTROL_IN expression DELIMITER scope DELIMITER CONTROL_END
 ;
 
 
@@ -59,6 +59,8 @@ IDENTIFIERS
 	: IDENTIFIERS IDENTIFIER
 	| IDENTIFIERS COMMA IDENTIFIER
 ;*/
+
+ifControl: CONTROL_IF expression DELIMITER scope CONTROL_END;
 
 print: KEYWORD_PRINT expression;
 

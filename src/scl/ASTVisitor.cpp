@@ -2,10 +2,12 @@
 #include "scl/module.hpp"
 #include "scl/scope.hpp"
 
-#include "scl/ast/expressiontype.hpp"
+#include "scl/ast/if.hpp"
 #include "scl/ast/variable.hpp"
 #include "scl/ast/assign.hpp"
 #include "scl/ast/print.hpp"
+
+#include "scl/ast/expressiontype.hpp"
 #include "scl/ast/operand.hpp"
 #include "scl/ast/comparator.hpp"
 #include "scl/ast/unaryminus.hpp"
@@ -32,6 +34,10 @@ namespace SCL {
 	}
 
 	/* instructions */
+	antlrcpp::Any ASTVisitor::visitIfControl(sclParser::IfControlContext *ctx) {
+		return (SCL::AST::Instruction*)new SCL::AST::If(visitExpression(ctx->expression()), visitScope(ctx->scope()));
+	}
+
 	antlrcpp::Any ASTVisitor::visitAssign(sclParser::AssignContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::Assign(visitExplicitVariable(ctx->key), visitExpression(ctx->value));
 	}
