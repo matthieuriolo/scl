@@ -29,6 +29,8 @@ public:
 
     virtual antlrcpp::Any visitIfControl(sclParser::IfControlContext *context) = 0;
 
+    virtual antlrcpp::Any visitForControl(sclParser::ForControlContext *context) = 0;
+
     virtual antlrcpp::Any visitPrint(sclParser::PrintContext *context) = 0;
 
     virtual antlrcpp::Any visitAssign(sclParser::AssignContext *context) = 0;

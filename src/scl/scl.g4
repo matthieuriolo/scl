@@ -17,7 +17,7 @@ instruction
 //	| FUNCTION_DECLARATION
 //	| command
 	| ifControl
-//	| CONTROL_FOR variable CONTROL_IN expression DELIMITER scope DELIMITER CONTROL_END
+	| forControl
 ;
 
 
@@ -61,6 +61,7 @@ IDENTIFIERS
 ;*/
 
 ifControl: CONTROL_IF expression DELIMITER scope CONTROL_END;
+forControl: CONTROL_FOR variable CONTROL_IN expression DELIMITER scope CONTROL_END;
 
 print: KEYWORD_PRINT expression;
 

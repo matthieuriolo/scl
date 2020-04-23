@@ -35,6 +35,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitForControl(sclParser::ForControlContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitPrint(sclParser::PrintContext *ctx) override {
     return visitChildren(ctx);
   }

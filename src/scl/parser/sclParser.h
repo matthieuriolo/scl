@@ -28,11 +28,12 @@ public:
 
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
-    RuleIfControl = 4, RulePrint = 5, RuleAssign = 6, RuleExpression = 7, 
-    RuleExpressionConcated = 8, RuleExpressionGrouped = 9, RuleExpressionConst = 10, 
-    RuleExpressionUnary = 11, RuleArray = 12, RuleDictionary = 13, RuleDictionaryElements = 14, 
-    RuleExpressionType = 15, RuleType = 16, RuleBoolean = 17, RuleNumericInt = 18, 
-    RuleNumericFloat = 19, RuleString = 20
+    RuleIfControl = 4, RuleForControl = 5, RulePrint = 6, RuleAssign = 7, 
+    RuleExpression = 8, RuleExpressionConcated = 9, RuleExpressionGrouped = 10, 
+    RuleExpressionConst = 11, RuleExpressionUnary = 12, RuleArray = 13, 
+    RuleDictionary = 14, RuleDictionaryElements = 15, RuleExpressionType = 16, 
+    RuleType = 17, RuleBoolean = 18, RuleNumericInt = 19, RuleNumericFloat = 20, 
+    RuleString = 21
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -50,6 +51,7 @@ public:
   class VariableContext;
   class InstructionContext;
   class IfControlContext;
+  class ForControlContext;
   class PrintContext;
   class AssignContext;
   class ExpressionContext;
@@ -120,6 +122,7 @@ public:
     AssignContext *assign();
     PrintContext *print();
     IfControlContext *ifControl();
+    ForControlContext *forControl();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -144,6 +147,25 @@ public:
   };
 
   IfControlContext* ifControl();
+
+  class  ForControlContext : public antlr4::ParserRuleContext {
+  public:
+    ForControlContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *CONTROL_FOR();
+    VariableContext *variable();
+    antlr4::tree::TerminalNode *CONTROL_IN();
+    ExpressionContext *expression();
+    antlr4::tree::TerminalNode *DELIMITER();
+    ScopeContext *scope();
+    antlr4::tree::TerminalNode *CONTROL_END();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  ForControlContext* forControl();
 
   class  PrintContext : public antlr4::ParserRuleContext {
   public:

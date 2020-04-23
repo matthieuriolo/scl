@@ -3,6 +3,7 @@
 #include "scl/scope.hpp"
 
 #include "scl/ast/if.hpp"
+#include "scl/ast/for.hpp"
 #include "scl/ast/variable.hpp"
 #include "scl/ast/assign.hpp"
 #include "scl/ast/print.hpp"
@@ -36,6 +37,10 @@ namespace SCL {
 	/* instructions */
 	antlrcpp::Any ASTVisitor::visitIfControl(sclParser::IfControlContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::If(visitExpression(ctx->expression()), visitScope(ctx->scope()));
+	}
+
+	antlrcpp::Any ASTVisitor::visitForControl(sclParser::ForControlContext *ctx) {
+		return (SCL::AST::Instruction*)new SCL::AST::For(visitExplicitVariable(ctx->variable()), visitExpression(ctx->expression()), visitScope(ctx->scope()));
 	}
 
 	antlrcpp::Any ASTVisitor::visitAssign(sclParser::AssignContext *ctx) {
