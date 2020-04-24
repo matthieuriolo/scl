@@ -6,6 +6,7 @@
 #include "scl/ast/for.hpp"
 #include "scl/ast/variable.hpp"
 #include "scl/ast/assign.hpp"
+#include "scl/ast/assignattribute.hpp"
 #include "scl/ast/print.hpp"
 
 #include "scl/ast/expressiontype.hpp"
@@ -49,7 +50,15 @@ namespace SCL {
 	antlrcpp::Any ASTVisitor::visitAssign(sclParser::AssignContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::Assign(visitExplicitVariable(ctx->key), visitExpression(ctx->value));
 	}
-
+	
+	antlrcpp::Any ASTVisitor::visitAssignProperty(sclParser::AssignPropertyContext *ctx) {
+		return (SCL::AST::Instruction*)new SCL::AST::AssignAttribute(
+			visitExpression(ctx->property),
+			visitExpression(ctx->key),
+			visitExpression(ctx->value)
+		);
+	}
+	
 	antlrcpp::Any ASTVisitor::visitPrint(sclParser::PrintContext *ctx)  {
 		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
 	}

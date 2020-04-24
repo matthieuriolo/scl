@@ -47,6 +47,10 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitAssignProperty(sclParser::AssignPropertyContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitExpression(sclParser::ExpressionContext *ctx) override {
     return visitChildren(ctx);
   }

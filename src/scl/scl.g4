@@ -11,6 +11,7 @@ variable: '$' IDENTIFIER;
 
 instruction
 	: assign
+	| assignProperty
 	| print
 //	| INCLUDE
 //	| IMPORT
@@ -65,10 +66,8 @@ forControl: CONTROL_FOR variable CONTROL_IN expression DELIMITER scope CONTROL_E
 
 print: KEYWORD_PRINT expression;
 
-assign
-	: key=variable OPERAND_EQUAL value=expression
-/*	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE OPERAND_EQUAL expression */
-;
+assign: key=variable OPERAND_EQUAL value=expression;
+assignProperty: property=expression SQUARED_BRACKET_OPEN key=expression SQUARED_BRACKET_CLOSE OPERAND_EQUAL value=expression;
 
 expression
 	: expressionConcated

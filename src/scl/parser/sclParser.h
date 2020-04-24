@@ -29,11 +29,12 @@ public:
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
     RuleIfControl = 4, RuleForControl = 5, RulePrint = 6, RuleAssign = 7, 
-    RuleExpression = 8, RuleExpressionAccess = 9, RuleAccess = 10, RuleAccessRange = 11, 
-    RuleExpressionConcated = 12, RuleExpressionGrouped = 13, RuleExpressionConst = 14, 
-    RuleExpressionUnary = 15, RuleArray = 16, RuleDictionary = 17, RuleDictionaryElements = 18, 
-    RuleExpressionType = 19, RuleType = 20, RuleBoolean = 21, RuleNumericInt = 22, 
-    RuleNumericFloat = 23, RuleString = 24
+    RuleAssignProperty = 8, RuleExpression = 9, RuleExpressionAccess = 10, 
+    RuleAccess = 11, RuleAccessRange = 12, RuleExpressionConcated = 13, 
+    RuleExpressionGrouped = 14, RuleExpressionConst = 15, RuleExpressionUnary = 16, 
+    RuleArray = 17, RuleDictionary = 18, RuleDictionaryElements = 19, RuleExpressionType = 20, 
+    RuleType = 21, RuleBoolean = 22, RuleNumericInt = 23, RuleNumericFloat = 24, 
+    RuleString = 25
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -54,6 +55,7 @@ public:
   class ForControlContext;
   class PrintContext;
   class AssignContext;
+  class AssignPropertyContext;
   class ExpressionContext;
   class ExpressionAccessContext;
   class AccessContext;
@@ -123,6 +125,7 @@ public:
     InstructionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     AssignContext *assign();
+    AssignPropertyContext *assignProperty();
     PrintContext *print();
     IfControlContext *ifControl();
     ForControlContext *forControl();
@@ -200,6 +203,26 @@ public:
   };
 
   AssignContext* assign();
+
+  class  AssignPropertyContext : public antlr4::ParserRuleContext {
+  public:
+    sclParser::ExpressionContext *property = nullptr;;
+    sclParser::ExpressionContext *key = nullptr;;
+    sclParser::ExpressionContext *value = nullptr;;
+    AssignPropertyContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *SQUARED_BRACKET_OPEN();
+    antlr4::tree::TerminalNode *SQUARED_BRACKET_CLOSE();
+    antlr4::tree::TerminalNode *OPERAND_EQUAL();
+    std::vector<ExpressionContext *> expression();
+    ExpressionContext* expression(size_t i);
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  AssignPropertyContext* assignProperty();
 
   class  ExpressionContext : public antlr4::ParserRuleContext {
   public:

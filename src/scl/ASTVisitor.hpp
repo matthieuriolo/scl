@@ -14,6 +14,7 @@ namespace SCL {
 			antlrcpp::Any visitIfControl(sclParser::IfControlContext *ctx) override;
 			antlrcpp::Any visitForControl(sclParser::ForControlContext *ctx) override;
 			antlrcpp::Any visitAssign(sclParser::AssignContext *ctx) override;
+			antlrcpp::Any visitAssignProperty(sclParser::AssignPropertyContext *ctx) override;
 			antlrcpp::Any visitPrint(sclParser::PrintContext *ctx) override;
 
 			/* expression */
