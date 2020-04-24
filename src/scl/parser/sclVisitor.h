@@ -37,6 +37,12 @@ public:
 
     virtual antlrcpp::Any visitExpression(sclParser::ExpressionContext *context) = 0;
 
+    virtual antlrcpp::Any visitExpressionAccess(sclParser::ExpressionAccessContext *context) = 0;
+
+    virtual antlrcpp::Any visitAccess(sclParser::AccessContext *context) = 0;
+
+    virtual antlrcpp::Any visitAccessRange(sclParser::AccessRangeContext *context) = 0;
+
     virtual antlrcpp::Any visitExpressionConcated(sclParser::ExpressionConcatedContext *context) = 0;
 
     virtual antlrcpp::Any visitExpressionGrouped(sclParser::ExpressionGroupedContext *context) = 0;

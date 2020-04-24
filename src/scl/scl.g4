@@ -72,6 +72,22 @@ assign
 
 expression
 	: expressionConcated
+	| expressionAccess
+;
+
+expressionAccess
+	: access
+	| accessRange
+;
+
+access
+	: property=expressionConcated SQUARED_BRACKET_OPEN key=expressionConcated SQUARED_BRACKET_CLOSE
+;
+
+accessRange
+	: property=expressionConcated SQUARED_BRACKET_OPEN start=expressionConcated COLON SQUARED_BRACKET_CLOSE
+	| property=expressionConcated SQUARED_BRACKET_OPEN COLON end=expressionConcated SQUARED_BRACKET_CLOSE
+	| property=expressionConcated SQUARED_BRACKET_OPEN start=expressionConcated COLON end=expressionConcated SQUARED_BRACKET_CLOSE
 ;
 
 expressionConcated
@@ -107,10 +123,6 @@ expressionConst
 	| variable
 	| array
 	| dictionary
-//	| expression SQUARED_BRACKET_OPEN expression SQUARED_BRACKET_CLOSE
-//	| expression SQUARED_BRACKET_OPEN expression COLON SQUARED_BRACKET_CLOSE
-//	| expression SQUARED_BRACKET_OPEN COLON expression SQUARED_BRACKET_CLOSE
-//	| expression SQUARED_BRACKET_OPEN expression COLON expression SQUARED_BRACKET_CLOSE
 ;
 
 expressionUnary: OPERAND_MINUS expression;

@@ -51,6 +51,18 @@ public:
     return visitChildren(ctx);
   }
 
+  virtual antlrcpp::Any visitExpressionAccess(sclParser::ExpressionAccessContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitAccess(sclParser::AccessContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitAccessRange(sclParser::AccessRangeContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
   virtual antlrcpp::Any visitExpressionConcated(sclParser::ExpressionConcatedContext *ctx) override {
     return visitChildren(ctx);
   }

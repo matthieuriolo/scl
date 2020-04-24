@@ -9,6 +9,8 @@
 #include "scl/ast/print.hpp"
 
 #include "scl/ast/expressiontype.hpp"
+#include "scl/ast/access.hpp"
+#include "scl/ast/range.hpp"
 #include "scl/ast/operand.hpp"
 #include "scl/ast/comparator.hpp"
 #include "scl/ast/unaryminus.hpp"
@@ -124,6 +126,18 @@ namespace SCL {
 
 
 
+
+	antlrcpp::Any ASTVisitor::visitAccess(sclParser::AccessContext *ctx) {
+		return (SCL::AST::Expression*)new SCL::AST::Access(visitExpressionConcated(ctx->property), visitExpressionConcated(ctx->key));
+	}
+
+	antlrcpp::Any ASTVisitor::visitAccessRange(sclParser::AccessRangeContext *ctx) {
+		return (SCL::AST::Expression*)new SCL::AST::Range(
+			visitExpressionConcated(ctx->property),
+			ctx->start ? visitExpressionConcated(ctx->start).as<SCL::AST::Expression*>() : NULL,
+			ctx->end ? visitExpressionConcated(ctx->end).as<SCL::AST::Expression*>() : NULL
+		);
+	}
 
 	antlrcpp::Any ASTVisitor::visitVariable(sclParser::VariableContext *ctx) {
 		return (SCL::AST::Expression*)visitExplicitVariable(ctx);

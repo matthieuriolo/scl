@@ -29,11 +29,11 @@ public:
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
     RuleIfControl = 4, RuleForControl = 5, RulePrint = 6, RuleAssign = 7, 
-    RuleExpression = 8, RuleExpressionConcated = 9, RuleExpressionGrouped = 10, 
-    RuleExpressionConst = 11, RuleExpressionUnary = 12, RuleArray = 13, 
-    RuleDictionary = 14, RuleDictionaryElements = 15, RuleExpressionType = 16, 
-    RuleType = 17, RuleBoolean = 18, RuleNumericInt = 19, RuleNumericFloat = 20, 
-    RuleString = 21
+    RuleExpression = 8, RuleExpressionAccess = 9, RuleAccess = 10, RuleAccessRange = 11, 
+    RuleExpressionConcated = 12, RuleExpressionGrouped = 13, RuleExpressionConst = 14, 
+    RuleExpressionUnary = 15, RuleArray = 16, RuleDictionary = 17, RuleDictionaryElements = 18, 
+    RuleExpressionType = 19, RuleType = 20, RuleBoolean = 21, RuleNumericInt = 22, 
+    RuleNumericFloat = 23, RuleString = 24
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -55,6 +55,9 @@ public:
   class PrintContext;
   class AssignContext;
   class ExpressionContext;
+  class ExpressionAccessContext;
+  class AccessContext;
+  class AccessRangeContext;
   class ExpressionConcatedContext;
   class ExpressionGroupedContext;
   class ExpressionConstContext;
@@ -203,6 +206,7 @@ public:
     ExpressionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     ExpressionConcatedContext *expressionConcated();
+    ExpressionAccessContext *expressionAccess();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -210,6 +214,58 @@ public:
   };
 
   ExpressionContext* expression();
+
+  class  ExpressionAccessContext : public antlr4::ParserRuleContext {
+  public:
+    ExpressionAccessContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    AccessContext *access();
+    AccessRangeContext *accessRange();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  ExpressionAccessContext* expressionAccess();
+
+  class  AccessContext : public antlr4::ParserRuleContext {
+  public:
+    sclParser::ExpressionConcatedContext *property = nullptr;;
+    sclParser::ExpressionConcatedContext *key = nullptr;;
+    AccessContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *SQUARED_BRACKET_OPEN();
+    antlr4::tree::TerminalNode *SQUARED_BRACKET_CLOSE();
+    std::vector<ExpressionConcatedContext *> expressionConcated();
+    ExpressionConcatedContext* expressionConcated(size_t i);
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  AccessContext* access();
+
+  class  AccessRangeContext : public antlr4::ParserRuleContext {
+  public:
+    sclParser::ExpressionConcatedContext *property = nullptr;;
+    sclParser::ExpressionConcatedContext *start = nullptr;;
+    sclParser::ExpressionConcatedContext *end = nullptr;;
+    AccessRangeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *SQUARED_BRACKET_OPEN();
+    antlr4::tree::TerminalNode *COLON();
+    antlr4::tree::TerminalNode *SQUARED_BRACKET_CLOSE();
+    std::vector<ExpressionConcatedContext *> expressionConcated();
+    ExpressionConcatedContext* expressionConcated(size_t i);
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  AccessRangeContext* accessRange();
 
   class  ExpressionConcatedContext : public antlr4::ParserRuleContext {
   public:

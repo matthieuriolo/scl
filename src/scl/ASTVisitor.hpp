@@ -22,6 +22,8 @@ namespace SCL {
 			antlrcpp::Any visitExpressionType(sclParser::ExpressionTypeContext *ctx) override;
 			antlrcpp::Any visitExpressionUnary(sclParser::ExpressionUnaryContext *ctx) override;
 
+			antlrcpp::Any visitAccess(sclParser::AccessContext *ctx) override;
+			antlrcpp::Any visitAccessRange(sclParser::AccessRangeContext *ctx) override;
 			antlrcpp::Any visitVariable(sclParser::VariableContext *ctx) override;
 			SCL::AST::Variable* visitExplicitVariable(sclParser::VariableContext *ctx);
 			antlrcpp::Any visitArray(sclParser::ArrayContext *ctx) override;
