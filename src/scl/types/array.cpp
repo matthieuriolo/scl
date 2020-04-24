@@ -48,7 +48,7 @@ namespace SCL {
 				sIndex = SCL::Type::getIndexFromNegative(((SCL::Types::Integer *)start)->getValue(), values.size());
 			}
 
-			long eIndex = 0;
+			long eIndex = values.size() - 1;
 			if(end != NULL) {
 				eIndex = SCL::Type::getIndexFromNegative(((SCL::Types::Integer *)end)->getValue(), values.size());
 			}
