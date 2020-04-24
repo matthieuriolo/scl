@@ -18,9 +18,19 @@ namespace SCL {
 		void Range::printAST(int level) {
 			std::cout << std::string(level * 2, ' ') << "expression.range\n";
 			std::cout << std::string((level+1) * 2, ' ') << "start:\n";
-			start->printAST(level + 2);
+			if(start) {
+				start->printAST(level + 2);
+			}else{
+				std::cout << std::string(level * 2, ' ') << "NULL\n";
+			}
+			
 			std::cout << std::string((level+1) * 2, ' ') << "end:\n";
-			end->printAST(level + 2);
+			if(end) {
+				end->printAST(level + 2);
+			}else{
+				std::cout << std::string(level * 2, ' ') << "NULL\n";
+			}
+
 			std::cout << std::string((level+1) * 2, ' ') << "expression:\n";
 			expression->printAST(level + 2);
 		}
