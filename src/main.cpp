@@ -1,15 +1,6 @@
 #include <iostream>
 #include <string.h>
-#include <fstream>
-
-
-#include "antlr4-runtime.h"
-#include "scl/parser/sclParser.h"
-#include "scl/parser/sclLexer.h"
-#include "scl/ASTVisitor.hpp"
 #include "scl/module.hpp"
-
-using namespace antlr4;
 
 void help() {
 	std::cout << "SCL - System Control Language\n";
@@ -45,23 +36,8 @@ int main(int argc, char **argv) {
 		
 		for(int i = 2; i < argc; i++) {
 			try {
-				std::ifstream stream;
-				stream.open(argv[i]);
-
-				ANTLRInputStream input(stream);
-				sclLexer lexer(&input);
-
-				CommonTokenStream tokens(&lexer);
-				sclParser parser(&tokens);
-				parser.setTrace(displayTrace);
-				if(displayTrace) {
-					std::cout << "File: " << argv[i] << "\n";
-				}
-				
-				sclParser::ModuleContext* tree = parser.module();
+				SCL::Module* module = SCL::Module::fromFile(displayTrace, argv[i]);
 				if(!displayTrace) {
-					SCL::ASTVisitor visitor;
-					SCL::Module* module = visitor.visitModule(tree);
 					if(displayAST) {
 						std::cout << "File: " << argv[i] << "\n";
 						module->printAST();

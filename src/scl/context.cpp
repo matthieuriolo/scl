@@ -5,16 +5,6 @@
 #include "scl/types/function.hpp"
 
 namespace SCL {
-	/*Context::Context(SCL::Scope *scope) {
-		this->parent = NULL;
-		this->scope = scope;
-	}
-
-	Context::Context(Context *parent, SCL::Scope *scope) {
-		this->parent = parent;
-		this->scope = scope;
-	}*/
-
 	Context::Context() {
 		this->parent = NULL;
 	}
