@@ -8,6 +8,8 @@
 #include "scl/ast/assign.hpp"
 #include "scl/ast/assignattribute.hpp"
 #include "scl/ast/print.hpp"
+#include "scl/ast/include.hpp"
+#include "scl/ast/import.hpp"
 
 #include "scl/ast/expressiontype.hpp"
 #include "scl/ast/access.hpp"
@@ -62,6 +64,15 @@ namespace SCL {
 	antlrcpp::Any ASTVisitor::visitPrint(sclParser::PrintContext *ctx)  {
 		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
 	}
+/*
+	antlrcpp::Any ASTVisitor::visitIncludeFile(sclParser::IncludeFileContext *ctx) {
+		//return NULL;
+		return (SCL::AST::Instruction*)new SCL::AST::Include(ctx->path->getText());
+	}
+*/
+/*	antlrcpp::Any ASTVisitor::visitIncludeCModule(sclParser::IncludeCModuleContext *ctx) {
+		return (SCL::AST::Instruction*)new SCL::AST::Import(ctx->path->getText());
+	}*/
 
 	/* expression */
 	antlrcpp::Any ASTVisitor::visitExpressionType(sclParser::ExpressionTypeContext *ctx) {

@@ -37,6 +37,8 @@ public:
 
     virtual antlrcpp::Any visitAssignProperty(sclParser::AssignPropertyContext *context) = 0;
 
+    virtual antlrcpp::Any visitIncludeFile(sclParser::IncludeFileContext *context) = 0;
+
     virtual antlrcpp::Any visitExpression(sclParser::ExpressionContext *context) = 0;
 
     virtual antlrcpp::Any visitExpressionAccess(sclParser::ExpressionAccessContext *context) = 0;

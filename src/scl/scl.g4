@@ -1,8 +1,8 @@
 grammar scl;
 
 /* grammar */
-module: content=scope EOF;
-scope: (instructions += instruction DELIMITER)* (instructions += instruction)?;
+module: DELIMITER* content=scope EOF;
+scope: (SPACE* instructions += instruction SPACE* DELIMITER+)* (SPACE* instructions += instruction)?;
 
 
 variable: '$' IDENTIFIER;
@@ -10,11 +10,11 @@ variable: '$' IDENTIFIER;
 
 
 instruction
-	: assign
+	: print
+//	| includeFile
+//	| includeCModule
+	| assign
 	| assignProperty
-	| print
-//	| INCLUDE
-//	| IMPORT
 //	| FUNCTION_DECLARATION
 //	| command
 	| ifControl
@@ -61,14 +61,23 @@ IDENTIFIERS
 	| IDENTIFIERS COMMA IDENTIFIER
 ;*/
 
+
+
+/* instructions */
 ifControl: CONTROL_IF expression DELIMITER scope CONTROL_END;
 forControl: CONTROL_FOR variable CONTROL_IN expression DELIMITER scope CONTROL_END;
 
 print: KEYWORD_PRINT expression;
 
-assign: key=variable OPERAND_EQUAL value=expression;
+assign: key=variable SPACE* OPERAND_EQUAL SPACE* value=expression;
 assignProperty: property=expression SQUARED_BRACKET_OPEN key=expression SQUARED_BRACKET_CLOSE OPERAND_EQUAL value=expression;
 
+includeFile: KEYWORD_INCLUDE SPACE* path=NONENEWLINE;
+//includeCModule: KEYWORD_IMPORT path=~(DELIMITER)+;
+
+//NONENEWLINE: ~'\n'+?;
+
+/* expression */
 expression
 	: expressionConcated
 	| expressionAccess
@@ -160,10 +169,9 @@ string
 
 /* symbols */
 
-DELIMITER: (NEWLINE | SEMICOLON)+;
-NEWLINE: ('\n'|'\r')+ -> skip;
-SPACE: (' ' | TAB)+ -> skip;
-TAB: '\t'+ -> skip;
+DELIMITER: (NEWLINE | SEMICOLON);
+NEWLINE: ('\n'|'\r');
+SPACE: [ \t]+;
 
 
 KEYWORD_PRINT: 'print';
@@ -222,4 +230,4 @@ STRING_SINGLE_QUOTE: '\'' .*? '\'';
 FUNCTION_NAME: ':' [a-zA-Z]+;
 
 IDENTIFIER: [a-zA-Z0-9]+;
-COMMENT: SPACE* '#' ~'\n'* '\n'*-> skip;
+COMMENT: '#' ~'\n'* -> skip;

@@ -12,29 +12,30 @@
 class  sclParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, DELIMITER = 2, NEWLINE = 3, SPACE = 4, TAB = 5, KEYWORD_PRINT = 6, 
-    KEYWORD_INCLUDE = 7, KEYWORD_IMPORT = 8, CONTROL_IF = 9, CONTROL_FOR = 10, 
-    CONTROL_IN = 11, CONTROL_END = 12, OPERAND_EQUAL = 13, OPERAND_PLUS = 14, 
-    OPERAND_MINUS = 15, OPERAND_ASTERISK = 16, OPERAND_SLASH = 17, OPERAND_CARET = 18, 
-    OPERAND_AND = 19, OPERAND_OR = 20, RANGE = 21, SQUARED_BRACKET_OPEN = 22, 
-    SQUARED_BRACKET_CLOSE = 23, CURLY_BRACKET_OPEN = 24, CURLY_BRACKET_CLOSE = 25, 
-    ROUND_BRACKET_OPEN = 26, ROUND_BRACKET_CLOSE = 27, SEMICOLON = 28, COLON = 29, 
-    COMMA = 30, QUESTION_MARK = 31, EXCLAMATION_MARK = 32, COMPARATOR_EQUAL = 33, 
-    COMPARATOR_NOT_EQUAL = 34, COMPARATOR_GREATER = 35, COMPARATOR_GREATER_EQUAL = 36, 
-    COMPARATOR_LESS = 37, COMPARATOR_LESS_EQUAL = 38, BOOLEAN_TRUE = 39, 
-    BOOLEAN_FALSE = 40, INTEGER = 41, FLOAT = 42, STRING_DOUBLE_QUOTE = 43, 
-    STRING_SINGLE_QUOTE = 44, FUNCTION_NAME = 45, IDENTIFIER = 46, COMMENT = 47
+    T__0 = 1, DELIMITER = 2, NEWLINE = 3, SPACE = 4, KEYWORD_PRINT = 5, 
+    KEYWORD_INCLUDE = 6, KEYWORD_IMPORT = 7, CONTROL_IF = 8, CONTROL_FOR = 9, 
+    CONTROL_IN = 10, CONTROL_END = 11, OPERAND_EQUAL = 12, OPERAND_PLUS = 13, 
+    OPERAND_MINUS = 14, OPERAND_ASTERISK = 15, OPERAND_SLASH = 16, OPERAND_CARET = 17, 
+    OPERAND_AND = 18, OPERAND_OR = 19, RANGE = 20, SQUARED_BRACKET_OPEN = 21, 
+    SQUARED_BRACKET_CLOSE = 22, CURLY_BRACKET_OPEN = 23, CURLY_BRACKET_CLOSE = 24, 
+    ROUND_BRACKET_OPEN = 25, ROUND_BRACKET_CLOSE = 26, SEMICOLON = 27, COLON = 28, 
+    COMMA = 29, QUESTION_MARK = 30, EXCLAMATION_MARK = 31, COMPARATOR_EQUAL = 32, 
+    COMPARATOR_NOT_EQUAL = 33, COMPARATOR_GREATER = 34, COMPARATOR_GREATER_EQUAL = 35, 
+    COMPARATOR_LESS = 36, COMPARATOR_LESS_EQUAL = 37, BOOLEAN_TRUE = 38, 
+    BOOLEAN_FALSE = 39, INTEGER = 40, FLOAT = 41, STRING_DOUBLE_QUOTE = 42, 
+    STRING_SINGLE_QUOTE = 43, FUNCTION_NAME = 44, IDENTIFIER = 45, COMMENT = 46, 
+    NONENEWLINE = 47
   };
 
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
     RuleIfControl = 4, RuleForControl = 5, RulePrint = 6, RuleAssign = 7, 
-    RuleAssignProperty = 8, RuleExpression = 9, RuleExpressionAccess = 10, 
-    RuleAccess = 11, RuleAccessRange = 12, RuleExpressionConcated = 13, 
-    RuleExpressionGrouped = 14, RuleExpressionConst = 15, RuleExpressionUnary = 16, 
-    RuleArray = 17, RuleDictionary = 18, RuleDictionaryElements = 19, RuleExpressionType = 20, 
-    RuleType = 21, RuleBoolean = 22, RuleNumericInt = 23, RuleNumericFloat = 24, 
-    RuleString = 25
+    RuleAssignProperty = 8, RuleIncludeFile = 9, RuleExpression = 10, RuleExpressionAccess = 11, 
+    RuleAccess = 12, RuleAccessRange = 13, RuleExpressionConcated = 14, 
+    RuleExpressionGrouped = 15, RuleExpressionConst = 16, RuleExpressionUnary = 17, 
+    RuleArray = 18, RuleDictionary = 19, RuleDictionaryElements = 20, RuleExpressionType = 21, 
+    RuleType = 22, RuleBoolean = 23, RuleNumericInt = 24, RuleNumericFloat = 25, 
+    RuleString = 26
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -56,6 +57,7 @@ public:
   class PrintContext;
   class AssignContext;
   class AssignPropertyContext;
+  class IncludeFileContext;
   class ExpressionContext;
   class ExpressionAccessContext;
   class AccessContext;
@@ -81,6 +83,8 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *EOF();
     ScopeContext *scope();
+    std::vector<antlr4::tree::TerminalNode *> DELIMITER();
+    antlr4::tree::TerminalNode* DELIMITER(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -95,10 +99,12 @@ public:
     std::vector<InstructionContext *> instructions;;
     ScopeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<antlr4::tree::TerminalNode *> DELIMITER();
-    antlr4::tree::TerminalNode* DELIMITER(size_t i);
     std::vector<InstructionContext *> instruction();
     InstructionContext* instruction(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> DELIMITER();
+    antlr4::tree::TerminalNode* DELIMITER(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -124,9 +130,9 @@ public:
   public:
     InstructionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
+    PrintContext *print();
     AssignContext *assign();
     AssignPropertyContext *assignProperty();
-    PrintContext *print();
     IfControlContext *ifControl();
     ForControlContext *forControl();
 
@@ -196,6 +202,8 @@ public:
     antlr4::tree::TerminalNode *OPERAND_EQUAL();
     VariableContext *variable();
     ExpressionContext *expression();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -223,6 +231,23 @@ public:
   };
 
   AssignPropertyContext* assignProperty();
+
+  class  IncludeFileContext : public antlr4::ParserRuleContext {
+  public:
+    antlr4::Token *path = nullptr;;
+    IncludeFileContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *KEYWORD_INCLUDE();
+    antlr4::tree::TerminalNode *NONENEWLINE();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  IncludeFileContext* includeFile();
 
   class  ExpressionContext : public antlr4::ParserRuleContext {
   public:

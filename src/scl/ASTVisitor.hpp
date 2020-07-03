@@ -16,6 +16,8 @@ namespace SCL {
 			antlrcpp::Any visitAssign(sclParser::AssignContext *ctx) override;
 			antlrcpp::Any visitAssignProperty(sclParser::AssignPropertyContext *ctx) override;
 			antlrcpp::Any visitPrint(sclParser::PrintContext *ctx) override;
+			//antlrcpp::Any visitIncludeFile(sclParser::IncludeFileContext *ctx) override;
+			//antlrcpp::Any visitIncludeCModule(sclParser::IncludeCModuleContext *ctx) override;
 
 			/* expression */
 			antlrcpp::Any visitExpressionGrouped(sclParser::ExpressionGroupedContext *ctx) override;
