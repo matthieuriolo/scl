@@ -1,8 +1,8 @@
 grammar scl;
 
 /* grammar */
-module: DELIMITER* content=scope EOF;
-scope: (SPACE* instructions += instruction SPACE* DELIMITER+)* (SPACE* instructions += instruction)?;
+module: content=scope EOF;
+scope: (DELIMITER | SPACE | (instructions += instruction SPACE* DELIMITER))* (instructions += instruction)?;
 
 
 variable: '$' IDENTIFIER;
@@ -64,16 +64,16 @@ IDENTIFIERS
 
 
 /* instructions */
-ifControl: CONTROL_IF expression DELIMITER scope CONTROL_END;
-forControl: CONTROL_FOR variable CONTROL_IN expression DELIMITER scope CONTROL_END;
+ifControl: CONTROL_IF SPACE+ expression SPACE* DELIMITER scope CONTROL_END;
+forControl: CONTROL_FOR SPACE+ variable SPACE+ CONTROL_IN SPACE+ expression SPACE* DELIMITER scope CONTROL_END;
 
-print: KEYWORD_PRINT expression;
+print: KEYWORD_PRINT SPACE+ expression;
 
 assign: key=variable SPACE* OPERAND_EQUAL SPACE* value=expression;
-assignProperty: property=expression SQUARED_BRACKET_OPEN key=expression SQUARED_BRACKET_CLOSE OPERAND_EQUAL value=expression;
+assignProperty: property=expression SPACE* SQUARED_BRACKET_OPEN SPACE* key=expression SPACE* SQUARED_BRACKET_CLOSE SPACE* OPERAND_EQUAL SPACE* value=expression;
 
-includeFile: KEYWORD_INCLUDE SPACE* path=NONENEWLINE;
-//includeCModule: KEYWORD_IMPORT path=~(DELIMITER)+;
+//includeFile: KEYWORD_INCLUDE SPACE+ path=NONENEWLINE;
+//includeCModule: KEYWORD_IMPORT SPACE+ path=~(DELIMITER)+;
 
 //NONENEWLINE: ~'\n'+?;
 
@@ -89,18 +89,18 @@ expressionAccess
 ;
 
 access
-	: property=expressionConcated SQUARED_BRACKET_OPEN key=expressionConcated SQUARED_BRACKET_CLOSE
+	: property=expressionConcated SPACE* SQUARED_BRACKET_OPEN SPACE* key=expressionConcated SPACE* SQUARED_BRACKET_CLOSE
 ;
 
 accessRange
-	: property=expressionConcated SQUARED_BRACKET_OPEN start=expressionConcated COLON SQUARED_BRACKET_CLOSE
-	| property=expressionConcated SQUARED_BRACKET_OPEN COLON end=expressionConcated SQUARED_BRACKET_CLOSE
-	| property=expressionConcated SQUARED_BRACKET_OPEN start=expressionConcated COLON end=expressionConcated SQUARED_BRACKET_CLOSE
+	: property=expressionConcated SPACE* SQUARED_BRACKET_OPEN SPACE* start=expressionConcated SPACE* COLON SPACE* SQUARED_BRACKET_CLOSE
+	| property=expressionConcated SPACE* SQUARED_BRACKET_OPEN SPACE* COLON SPACE* end=expressionConcated SPACE* SQUARED_BRACKET_CLOSE
+	| property=expressionConcated SPACE* SQUARED_BRACKET_OPEN SPACE* start=expressionConcated SPACE* COLON SPACE* end=expressionConcated SPACE* SQUARED_BRACKET_CLOSE
 ;
 
 expressionConcated
 	: expressionGrouped
-	| left=expressionConcated operand=(
+	| left=expressionConcated SPACE* operand=(
 		  OPERAND_PLUS
 		| OPERAND_MINUS
 		| OPERAND_ASTERISK
@@ -108,21 +108,21 @@ expressionConcated
 		| OPERAND_CARET
 		| OPERAND_AND
 		| OPERAND_OR
-	) right=expressionConcated
-	| left=expressionConcated comparator=(
+	) SPACE* right=expressionConcated
+	| left=expressionConcated SPACE* comparator=(
 		  COMPARATOR_EQUAL
 		| COMPARATOR_NOT_EQUAL
 		| COMPARATOR_LESS
 		| COMPARATOR_GREATER
 		| COMPARATOR_LESS_EQUAL
 		| COMPARATOR_GREATER_EQUAL
-	) right=expressionConcated
-	| left=expressionConcated range=RANGE right=expressionConcated
+	) SPACE* right=expressionConcated
+	| left=expressionConcated SPACE* range=RANGE SPACE* right=expressionConcated
 ;
 
 expressionGrouped
 	: expressionConst
-	| ROUND_BRACKET_OPEN expression ROUND_BRACKET_CLOSE
+	| ROUND_BRACKET_OPEN SPACE* expression SPACE* ROUND_BRACKET_CLOSE
 ;
 
 expressionConst
@@ -135,11 +135,11 @@ expressionConst
 
 expressionUnary: OPERAND_MINUS expression;
 
-array: SQUARED_BRACKET_OPEN (elements+=expression COMMA)*  (elements+=expression COMMA?)? SQUARED_BRACKET_CLOSE;
+array: SQUARED_BRACKET_OPEN SPACE* (elements+=expression SPACE* COMMA SPACE*)* (elements+=expression  SPACE* COMMA?)?  SPACE* SQUARED_BRACKET_CLOSE;
 
-dictionary: CURLY_BRACKET_OPEN (elements+=dictionaryElements COMMA)* (elements+=dictionaryElements COMMA?)? CURLY_BRACKET_CLOSE;
+dictionary: CURLY_BRACKET_OPEN  SPACE* (elements+=dictionaryElements SPACE* COMMA SPACE*)* (elements+=dictionaryElements SPACE* COMMA?)? SPACE* CURLY_BRACKET_CLOSE;
 
-dictionaryElements: key=expression COLON value=expression;
+dictionaryElements: key=expression SPACE* COLON SPACE* value=expression;
 
 
 /* Types */

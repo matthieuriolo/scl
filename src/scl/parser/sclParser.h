@@ -23,19 +23,18 @@ public:
     COMPARATOR_NOT_EQUAL = 33, COMPARATOR_GREATER = 34, COMPARATOR_GREATER_EQUAL = 35, 
     COMPARATOR_LESS = 36, COMPARATOR_LESS_EQUAL = 37, BOOLEAN_TRUE = 38, 
     BOOLEAN_FALSE = 39, INTEGER = 40, FLOAT = 41, STRING_DOUBLE_QUOTE = 42, 
-    STRING_SINGLE_QUOTE = 43, FUNCTION_NAME = 44, IDENTIFIER = 45, COMMENT = 46, 
-    NONENEWLINE = 47
+    STRING_SINGLE_QUOTE = 43, FUNCTION_NAME = 44, IDENTIFIER = 45, COMMENT = 46
   };
 
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
     RuleIfControl = 4, RuleForControl = 5, RulePrint = 6, RuleAssign = 7, 
-    RuleAssignProperty = 8, RuleIncludeFile = 9, RuleExpression = 10, RuleExpressionAccess = 11, 
-    RuleAccess = 12, RuleAccessRange = 13, RuleExpressionConcated = 14, 
-    RuleExpressionGrouped = 15, RuleExpressionConst = 16, RuleExpressionUnary = 17, 
-    RuleArray = 18, RuleDictionary = 19, RuleDictionaryElements = 20, RuleExpressionType = 21, 
-    RuleType = 22, RuleBoolean = 23, RuleNumericInt = 24, RuleNumericFloat = 25, 
-    RuleString = 26
+    RuleAssignProperty = 8, RuleExpression = 9, RuleExpressionAccess = 10, 
+    RuleAccess = 11, RuleAccessRange = 12, RuleExpressionConcated = 13, 
+    RuleExpressionGrouped = 14, RuleExpressionConst = 15, RuleExpressionUnary = 16, 
+    RuleArray = 17, RuleDictionary = 18, RuleDictionaryElements = 19, RuleExpressionType = 20, 
+    RuleType = 21, RuleBoolean = 22, RuleNumericInt = 23, RuleNumericFloat = 24, 
+    RuleString = 25
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -57,7 +56,6 @@ public:
   class PrintContext;
   class AssignContext;
   class AssignPropertyContext;
-  class IncludeFileContext;
   class ExpressionContext;
   class ExpressionAccessContext;
   class AccessContext;
@@ -83,8 +81,6 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *EOF();
     ScopeContext *scope();
-    std::vector<antlr4::tree::TerminalNode *> DELIMITER();
-    antlr4::tree::TerminalNode* DELIMITER(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -99,12 +95,12 @@ public:
     std::vector<InstructionContext *> instructions;;
     ScopeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
-    std::vector<InstructionContext *> instruction();
-    InstructionContext* instruction(size_t i);
-    std::vector<antlr4::tree::TerminalNode *> SPACE();
-    antlr4::tree::TerminalNode* SPACE(size_t i);
     std::vector<antlr4::tree::TerminalNode *> DELIMITER();
     antlr4::tree::TerminalNode* DELIMITER(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
+    std::vector<InstructionContext *> instruction();
+    InstructionContext* instruction(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -152,6 +148,8 @@ public:
     antlr4::tree::TerminalNode *DELIMITER();
     ScopeContext *scope();
     antlr4::tree::TerminalNode *CONTROL_END();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -171,6 +169,8 @@ public:
     antlr4::tree::TerminalNode *DELIMITER();
     ScopeContext *scope();
     antlr4::tree::TerminalNode *CONTROL_END();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -185,6 +185,8 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *KEYWORD_PRINT();
     ExpressionContext *expression();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -224,21 +226,6 @@ public:
     antlr4::tree::TerminalNode *OPERAND_EQUAL();
     std::vector<ExpressionContext *> expression();
     ExpressionContext* expression(size_t i);
-
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  AssignPropertyContext* assignProperty();
-
-  class  IncludeFileContext : public antlr4::ParserRuleContext {
-  public:
-    antlr4::Token *path = nullptr;;
-    IncludeFileContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *KEYWORD_INCLUDE();
-    antlr4::tree::TerminalNode *NONENEWLINE();
     std::vector<antlr4::tree::TerminalNode *> SPACE();
     antlr4::tree::TerminalNode* SPACE(size_t i);
 
@@ -247,7 +234,7 @@ public:
    
   };
 
-  IncludeFileContext* includeFile();
+  AssignPropertyContext* assignProperty();
 
   class  ExpressionContext : public antlr4::ParserRuleContext {
   public:
@@ -287,6 +274,8 @@ public:
     antlr4::tree::TerminalNode *SQUARED_BRACKET_CLOSE();
     std::vector<ExpressionConcatedContext *> expressionConcated();
     ExpressionConcatedContext* expressionConcated(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -307,6 +296,8 @@ public:
     antlr4::tree::TerminalNode *SQUARED_BRACKET_CLOSE();
     std::vector<ExpressionConcatedContext *> expressionConcated();
     ExpressionConcatedContext* expressionConcated(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -334,6 +325,8 @@ public:
     antlr4::tree::TerminalNode *OPERAND_CARET();
     antlr4::tree::TerminalNode *OPERAND_AND();
     antlr4::tree::TerminalNode *OPERAND_OR();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
     antlr4::tree::TerminalNode *COMPARATOR_EQUAL();
     antlr4::tree::TerminalNode *COMPARATOR_NOT_EQUAL();
     antlr4::tree::TerminalNode *COMPARATOR_LESS();
@@ -357,6 +350,8 @@ public:
     antlr4::tree::TerminalNode *ROUND_BRACKET_OPEN();
     ExpressionContext *expression();
     antlr4::tree::TerminalNode *ROUND_BRACKET_CLOSE();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -404,6 +399,8 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *SQUARED_BRACKET_OPEN();
     antlr4::tree::TerminalNode *SQUARED_BRACKET_CLOSE();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
     std::vector<antlr4::tree::TerminalNode *> COMMA();
     antlr4::tree::TerminalNode* COMMA(size_t i);
     std::vector<ExpressionContext *> expression();
@@ -424,6 +421,8 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *CURLY_BRACKET_OPEN();
     antlr4::tree::TerminalNode *CURLY_BRACKET_CLOSE();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
     std::vector<antlr4::tree::TerminalNode *> COMMA();
     antlr4::tree::TerminalNode* COMMA(size_t i);
     std::vector<DictionaryElementsContext *> dictionaryElements();
@@ -445,6 +444,8 @@ public:
     antlr4::tree::TerminalNode *COLON();
     std::vector<ExpressionContext *> expression();
     ExpressionContext* expression(size_t i);
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;

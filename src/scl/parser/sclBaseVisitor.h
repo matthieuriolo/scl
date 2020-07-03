@@ -51,10 +51,6 @@ public:
     return visitChildren(ctx);
   }
 
-  virtual antlrcpp::Any visitIncludeFile(sclParser::IncludeFileContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
   virtual antlrcpp::Any visitExpression(sclParser::ExpressionContext *ctx) override {
     return visitChildren(ctx);
   }
