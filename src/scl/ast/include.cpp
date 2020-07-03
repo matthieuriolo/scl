@@ -1,7 +1,6 @@
 #include "scl/ast/include.hpp"
 #include "scl/context.hpp"
-
-#include "scl/parserresult.hpp"
+#include "scl/module.hpp"
 
 #include <string>
 #include <iostream>
@@ -12,12 +11,8 @@ namespace SCL {
 		}
 
 		void Include::execute(SCL::Context * ctx) {
-			SCL::ParserResult res;
-			if(res.parse(path) == 0) {
-				res.module->execute(ctx);
-			}else {
-				throw new std::logic_error("file '" + path + "' not found");
-			}
+			SCL::Module* module = SCL::Module::fromFile(path);
+			module->execute(ctx);
 		}
 
 		void Include::printAST(int level) {
