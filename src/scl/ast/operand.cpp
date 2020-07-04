@@ -38,18 +38,25 @@ namespace SCL {
 			switch(this->operand) {
 				case PLUS:
 					std::cout << "PLUS";
+					break;
 				case MINUS:
 					std::cout << "MINUS";
+					break;
 				case ASTERISK:
 					std::cout << "ASTERISK";
+					break;
 				case SLASH:
 					std::cout << "SLASH";
+					break;
 				case CARET:
 					std::cout << "CARET";
+					break;
 				case AND:
 					std::cout << "AND";
+					break;
 				case OR:
 					std::cout << "OR";
+					break;
 			}
 
 			std::cout << "\n";
