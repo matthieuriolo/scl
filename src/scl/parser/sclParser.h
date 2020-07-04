@@ -23,18 +23,19 @@ public:
     COMPARATOR_NOT_EQUAL = 33, COMPARATOR_GREATER = 34, COMPARATOR_GREATER_EQUAL = 35, 
     COMPARATOR_LESS = 36, COMPARATOR_LESS_EQUAL = 37, BOOLEAN_TRUE = 38, 
     BOOLEAN_FALSE = 39, INTEGER = 40, FLOAT = 41, STRING_DOUBLE_QUOTE = 42, 
-    STRING_SINGLE_QUOTE = 43, FUNCTION_NAME = 44, IDENTIFIER = 45, COMMENT = 46
+    STRING_SINGLE_QUOTE = 43, FUNCTION_NAME = 44, IDENTIFIER = 45, COMMENT = 46, 
+    ARGUMENT = 47
   };
 
   enum {
     RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
     RuleIfControl = 4, RuleForControl = 5, RulePrint = 6, RuleAssign = 7, 
-    RuleAssignProperty = 8, RuleExpression = 9, RuleExpressionAccess = 10, 
-    RuleAccess = 11, RuleAccessRange = 12, RuleExpressionConcated = 13, 
-    RuleExpressionGrouped = 14, RuleExpressionConst = 15, RuleExpressionUnary = 16, 
-    RuleArray = 17, RuleDictionary = 18, RuleDictionaryElements = 19, RuleExpressionType = 20, 
-    RuleType = 21, RuleBoolean = 22, RuleNumericInt = 23, RuleNumericFloat = 24, 
-    RuleString = 25
+    RuleAssignProperty = 8, RuleIncludeFile = 9, RuleExpression = 10, RuleExpressionAccess = 11, 
+    RuleAccess = 12, RuleAccessRange = 13, RuleExpressionConcated = 14, 
+    RuleExpressionGrouped = 15, RuleExpressionConst = 16, RuleExpressionUnary = 17, 
+    RuleArray = 18, RuleDictionary = 19, RuleDictionaryElements = 20, RuleExpressionType = 21, 
+    RuleType = 22, RuleBoolean = 23, RuleNumericInt = 24, RuleNumericFloat = 25, 
+    RuleString = 26
   };
 
   sclParser(antlr4::TokenStream *input);
@@ -56,6 +57,7 @@ public:
   class PrintContext;
   class AssignContext;
   class AssignPropertyContext;
+  class IncludeFileContext;
   class ExpressionContext;
   class ExpressionAccessContext;
   class AccessContext;
@@ -127,6 +129,7 @@ public:
     InstructionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     PrintContext *print();
+    IncludeFileContext *includeFile();
     AssignContext *assign();
     AssignPropertyContext *assignProperty();
     IfControlContext *ifControl();
@@ -235,6 +238,23 @@ public:
   };
 
   AssignPropertyContext* assignProperty();
+
+  class  IncludeFileContext : public antlr4::ParserRuleContext {
+  public:
+    antlr4::Token *path = nullptr;;
+    IncludeFileContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *KEYWORD_INCLUDE();
+    antlr4::tree::TerminalNode *ARGUMENT();
+    std::vector<antlr4::tree::TerminalNode *> SPACE();
+    antlr4::tree::TerminalNode* SPACE(size_t i);
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  IncludeFileContext* includeFile();
 
   class  ExpressionContext : public antlr4::ParserRuleContext {
   public:

@@ -64,12 +64,11 @@ namespace SCL {
 	antlrcpp::Any ASTVisitor::visitPrint(sclParser::PrintContext *ctx)  {
 		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
 	}
-/*
+
 	antlrcpp::Any ASTVisitor::visitIncludeFile(sclParser::IncludeFileContext *ctx) {
-		//return NULL;
 		return (SCL::AST::Instruction*)new SCL::AST::Include(ctx->path->getText());
 	}
-*/
+
 /*	antlrcpp::Any ASTVisitor::visitIncludeCModule(sclParser::IncludeCModuleContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::Import(ctx->path->getText());
 	}*/
@@ -164,7 +163,7 @@ namespace SCL {
 	}
 
 	SCL::AST::Variable* ASTVisitor::visitExplicitVariable(sclParser::VariableContext *ctx) {
-		return new SCL::AST::Variable(ctx->IDENTIFIER()->getText().substr(1));
+		return new SCL::AST::Variable(ctx->IDENTIFIER()->getText());
 	}
 
 	antlrcpp::Any ASTVisitor::visitArray(sclParser::ArrayContext *ctx) {

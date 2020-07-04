@@ -17,14 +17,14 @@ namespace SCL {
 		this->scope = scope;
 	}
 
-	void Module::execute(SCL::Context* parentCtx) {
-		Context* ctx = new SCL::Context(parentCtx);
+	void Module::execute(SCL::Context* ctx) {
 		scope->execute(ctx);
-		delete ctx;
 	}
 
 	void Module::launch() {
-		execute(NULL);
+		Context* ctx = new SCL::Context();
+		execute(ctx);
+		delete ctx;
 	}
 
 	void Module::printAST() {

@@ -11,7 +11,7 @@ variable: '$' IDENTIFIER;
 
 instruction
 	: print
-//	| includeFile
+	| includeFile
 //	| includeCModule
 	| assign
 	| assignProperty
@@ -72,10 +72,8 @@ print: KEYWORD_PRINT SPACE+ expression;
 assign: key=variable SPACE* OPERAND_EQUAL SPACE* value=expression;
 assignProperty: property=expression SPACE* SQUARED_BRACKET_OPEN SPACE* key=expression SPACE* SQUARED_BRACKET_CLOSE SPACE* OPERAND_EQUAL SPACE* value=expression;
 
-//includeFile: KEYWORD_INCLUDE SPACE+ path=NONENEWLINE;
+includeFile: KEYWORD_INCLUDE SPACE+ path=ARGUMENT;
 //includeCModule: KEYWORD_IMPORT SPACE+ path=~(DELIMITER)+;
-
-//NONENEWLINE: ~'\n'+?;
 
 /* expression */
 expression
@@ -231,3 +229,5 @@ FUNCTION_NAME: ':' [a-zA-Z]+;
 
 IDENTIFIER: [a-zA-Z0-9]+;
 COMMENT: '#' ~'\n'* -> skip;
+
+ARGUMENT: (~[$#\n ] | '\\ ' | '\\$' | '\\#')+;
