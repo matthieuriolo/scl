@@ -65,9 +65,9 @@ namespace SCL {
 		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
 	}
 
-	antlrcpp::Any ASTVisitor::visitIncludeFile(sclParser::IncludeFileContext *ctx) {
+/*	antlrcpp::Any ASTVisitor::visitIncludeFile(sclParser::IncludeFileContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::Include(ctx->path->getText());
-	}
+	}*/
 
 /*	antlrcpp::Any ASTVisitor::visitIncludeCModule(sclParser::IncludeCModuleContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::Import(ctx->path->getText());
