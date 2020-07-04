@@ -40,6 +40,10 @@ namespace SCL {
 		std::ifstream stream;
 		stream.open(path);
 
+		if(!stream.is_open()) {
+			throw new std::logic_error("File '" + path + "' not found!");
+		}
+
 		ANTLRInputStream input(stream);
 		sclLexer lexer(&input);
 
