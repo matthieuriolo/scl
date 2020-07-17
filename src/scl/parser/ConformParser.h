@@ -1,5 +1,5 @@
 
-// Generated from /Users/matthieuriolo/Documents/Sourcecode/scl/src/scl/scl.g4 by ANTLR 4.8
+// Generated from /Users/matthieuriolo/Documents/Sourcecode/scl/src/scl/Conform.g4 by ANTLR 4.8
 
 #pragma once
 
@@ -9,7 +9,7 @@
 
 
 
-class  sclParser : public antlr4::Parser {
+class  ConformParser : public antlr4::Parser {
 public:
   enum {
     T__0 = 1, DELIMITER = 2, NEWLINE = 3, WHITESPACE = 4, KEYWORD_PRINT = 5, 
@@ -37,8 +37,8 @@ public:
     RuleString = 25
   };
 
-  sclParser(antlr4::TokenStream *input);
-  ~sclParser();
+  ConformParser(antlr4::TokenStream *input);
+  ~ConformParser();
 
   virtual std::string getGrammarFileName() const override;
   virtual const antlr4::atn::ATN& getATN() const override { return _atn; };
@@ -76,7 +76,7 @@ public:
 
   class  ModuleContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::ScopeContext *content = nullptr;;
+    ConformParser::ScopeContext *content = nullptr;;
     ModuleContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *EOF();
@@ -91,7 +91,7 @@ public:
 
   class  ScopeContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::InstructionContext *instructionContext = nullptr;;
+    ConformParser::InstructionContext *instructionContext = nullptr;;
     std::vector<InstructionContext *> instructions;;
     ScopeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -189,8 +189,8 @@ public:
 
   class  AssignContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::VariableContext *key = nullptr;;
-    sclParser::ExpressionContext *value = nullptr;;
+    ConformParser::VariableContext *key = nullptr;;
+    ConformParser::ExpressionContext *value = nullptr;;
     AssignContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *OPERAND_EQUAL();
@@ -206,9 +206,9 @@ public:
 
   class  AssignPropertyContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::ExpressionContext *property = nullptr;;
-    sclParser::ExpressionContext *key = nullptr;;
-    sclParser::ExpressionContext *value = nullptr;;
+    ConformParser::ExpressionContext *property = nullptr;;
+    ConformParser::ExpressionContext *key = nullptr;;
+    ConformParser::ExpressionContext *value = nullptr;;
     AssignPropertyContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *SQUARED_BRACKET_OPEN();
@@ -254,8 +254,8 @@ public:
 
   class  AccessContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::ExpressionConcatedContext *property = nullptr;;
-    sclParser::ExpressionConcatedContext *key = nullptr;;
+    ConformParser::ExpressionConcatedContext *property = nullptr;;
+    ConformParser::ExpressionConcatedContext *key = nullptr;;
     AccessContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *SQUARED_BRACKET_OPEN();
@@ -272,9 +272,9 @@ public:
 
   class  AccessRangeContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::ExpressionConcatedContext *property = nullptr;;
-    sclParser::ExpressionConcatedContext *start = nullptr;;
-    sclParser::ExpressionConcatedContext *end = nullptr;;
+    ConformParser::ExpressionConcatedContext *property = nullptr;;
+    ConformParser::ExpressionConcatedContext *start = nullptr;;
+    ConformParser::ExpressionConcatedContext *end = nullptr;;
     AccessRangeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *SQUARED_BRACKET_OPEN();
@@ -292,9 +292,9 @@ public:
 
   class  ExpressionConcatedContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::ExpressionConcatedContext *left = nullptr;;
+    ConformParser::ExpressionConcatedContext *left = nullptr;;
     antlr4::Token *operand = nullptr;;
-    sclParser::ExpressionConcatedContext *right = nullptr;;
+    ConformParser::ExpressionConcatedContext *right = nullptr;;
     antlr4::Token *comparator = nullptr;;
     antlr4::Token *range = nullptr;;
     ExpressionConcatedContext(antlr4::ParserRuleContext *parent, size_t invokingState);
@@ -373,7 +373,7 @@ public:
 
   class  ArrayContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::ExpressionContext *expressionContext = nullptr;;
+    ConformParser::ExpressionContext *expressionContext = nullptr;;
     std::vector<ExpressionContext *> elements;;
     ArrayContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -393,7 +393,7 @@ public:
 
   class  DictionaryContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::DictionaryElementsContext *dictionaryElementsContext = nullptr;;
+    ConformParser::DictionaryElementsContext *dictionaryElementsContext = nullptr;;
     std::vector<DictionaryElementsContext *> elements;;
     DictionaryContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
@@ -413,8 +413,8 @@ public:
 
   class  DictionaryElementsContext : public antlr4::ParserRuleContext {
   public:
-    sclParser::ExpressionContext *key = nullptr;;
-    sclParser::ExpressionContext *value = nullptr;;
+    ConformParser::ExpressionContext *key = nullptr;;
+    ConformParser::ExpressionContext *value = nullptr;;
     DictionaryElementsContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *COLON();

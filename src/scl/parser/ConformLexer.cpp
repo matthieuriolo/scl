@@ -1,50 +1,50 @@
 
-// Generated from /Users/matthieuriolo/Documents/Sourcecode/scl/src/scl/scl.g4 by ANTLR 4.8
+// Generated from /Users/matthieuriolo/Documents/Sourcecode/scl/src/scl/Conform.g4 by ANTLR 4.8
 
 
-#include "sclLexer.h"
+#include "ConformLexer.h"
 
 
 using namespace antlr4;
 
 
-sclLexer::sclLexer(CharStream *input) : Lexer(input) {
+ConformLexer::ConformLexer(CharStream *input) : Lexer(input) {
   _interpreter = new atn::LexerATNSimulator(this, _atn, _decisionToDFA, _sharedContextCache);
 }
 
-sclLexer::~sclLexer() {
+ConformLexer::~ConformLexer() {
   delete _interpreter;
 }
 
-std::string sclLexer::getGrammarFileName() const {
-  return "scl.g4";
+std::string ConformLexer::getGrammarFileName() const {
+  return "Conform.g4";
 }
 
-const std::vector<std::string>& sclLexer::getRuleNames() const {
+const std::vector<std::string>& ConformLexer::getRuleNames() const {
   return _ruleNames;
 }
 
-const std::vector<std::string>& sclLexer::getChannelNames() const {
+const std::vector<std::string>& ConformLexer::getChannelNames() const {
   return _channelNames;
 }
 
-const std::vector<std::string>& sclLexer::getModeNames() const {
+const std::vector<std::string>& ConformLexer::getModeNames() const {
   return _modeNames;
 }
 
-const std::vector<std::string>& sclLexer::getTokenNames() const {
+const std::vector<std::string>& ConformLexer::getTokenNames() const {
   return _tokenNames;
 }
 
-dfa::Vocabulary& sclLexer::getVocabulary() const {
+dfa::Vocabulary& ConformLexer::getVocabulary() const {
   return _vocabulary;
 }
 
-const std::vector<uint16_t> sclLexer::getSerializedATN() const {
+const std::vector<uint16_t> ConformLexer::getSerializedATN() const {
   return _serializedATN;
 }
 
-const atn::ATN& sclLexer::getATN() const {
+const atn::ATN& ConformLexer::getATN() const {
   return _atn;
 }
 
@@ -52,14 +52,14 @@ const atn::ATN& sclLexer::getATN() const {
 
 
 // Static vars and initialization.
-std::vector<dfa::DFA> sclLexer::_decisionToDFA;
-atn::PredictionContextCache sclLexer::_sharedContextCache;
+std::vector<dfa::DFA> ConformLexer::_decisionToDFA;
+atn::PredictionContextCache ConformLexer::_sharedContextCache;
 
 // We own the ATN which in turn owns the ATN states.
-atn::ATN sclLexer::_atn;
-std::vector<uint16_t> sclLexer::_serializedATN;
+atn::ATN ConformLexer::_atn;
+std::vector<uint16_t> ConformLexer::_serializedATN;
 
-std::vector<std::string> sclLexer::_ruleNames = {
+std::vector<std::string> ConformLexer::_ruleNames = {
   u8"T__0", u8"DELIMITER", u8"NEWLINE", u8"WHITESPACE", u8"KEYWORD_PRINT", 
   u8"KEYWORD_INCLUDE", u8"KEYWORD_IMPORT", u8"CONTROL_IF", u8"CONTROL_FOR", 
   u8"CONTROL_IN", u8"CONTROL_END", u8"OPERAND_EQUAL", u8"OPERAND_PLUS", 
@@ -74,15 +74,15 @@ std::vector<std::string> sclLexer::_ruleNames = {
   u8"IDENTIFIER", u8"COMMENT"
 };
 
-std::vector<std::string> sclLexer::_channelNames = {
+std::vector<std::string> ConformLexer::_channelNames = {
   "DEFAULT_TOKEN_CHANNEL", "HIDDEN"
 };
 
-std::vector<std::string> sclLexer::_modeNames = {
+std::vector<std::string> ConformLexer::_modeNames = {
   u8"DEFAULT_MODE"
 };
 
-std::vector<std::string> sclLexer::_literalNames = {
+std::vector<std::string> ConformLexer::_literalNames = {
   "", u8"'$'", "", "", "", u8"'print'", u8"'include'", u8"'import'", u8"'if'", 
   u8"'for'", u8"'in'", u8"'end'", u8"'='", u8"'+'", u8"'-'", u8"'*'", u8"'/'", 
   u8"'^'", u8"'&&'", u8"'||'", u8"'..'", u8"'['", u8"']'", u8"'{'", u8"'}'", 
@@ -90,7 +90,7 @@ std::vector<std::string> sclLexer::_literalNames = {
   u8"'!='", u8"'>'", u8"'>='", u8"'<'", u8"'<='", u8"'TRUE'", u8"'FALSE'"
 };
 
-std::vector<std::string> sclLexer::_symbolicNames = {
+std::vector<std::string> ConformLexer::_symbolicNames = {
   "", "", u8"DELIMITER", u8"NEWLINE", u8"WHITESPACE", u8"KEYWORD_PRINT", 
   u8"KEYWORD_INCLUDE", u8"KEYWORD_IMPORT", u8"CONTROL_IF", u8"CONTROL_FOR", 
   u8"CONTROL_IN", u8"CONTROL_END", u8"OPERAND_EQUAL", u8"OPERAND_PLUS", 
@@ -105,11 +105,11 @@ std::vector<std::string> sclLexer::_symbolicNames = {
   u8"IDENTIFIER", u8"COMMENT"
 };
 
-dfa::Vocabulary sclLexer::_vocabulary(_literalNames, _symbolicNames);
+dfa::Vocabulary ConformLexer::_vocabulary(_literalNames, _symbolicNames);
 
-std::vector<std::string> sclLexer::_tokenNames;
+std::vector<std::string> ConformLexer::_tokenNames;
 
-sclLexer::Initializer::Initializer() {
+ConformLexer::Initializer::Initializer() {
   // This code could be in a static initializer lambda, but VS doesn't allow access to private class members from there.
 	for (size_t i = 0; i < _symbolicNames.size(); ++i) {
 		std::string name = _vocabulary.getLiteralName(i);
@@ -312,4 +312,4 @@ sclLexer::Initializer::Initializer() {
   }
 }
 
-sclLexer::Initializer sclLexer::_init;
+ConformLexer::Initializer ConformLexer::_init;

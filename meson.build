@@ -14,7 +14,7 @@ src = files(
 	'src/scl/scope.cpp',
 	'src/scl/type.cpp',
 	
-	'src/scl/ASTVisitor.cpp',
+	'src/scl/ConformVisitor.cpp',
 
 	'src/scl/ast/command.cpp',
 	'src/scl/ast/dictionary.cpp',
@@ -55,26 +55,45 @@ src = files(
 	'src/scl/types/iteratorfloat.cpp',
 	'src/scl/types/undefined.cpp',
 
-	'src/scl/parser/sclParser.cpp',
-	'src/scl/parser/sclVisitor.cpp',
-	'src/scl/parser/sclBaseVisitor.cpp',
-	'src/scl/parser/sclLexer.cpp',
+	'src/scl/parser/ConformParser.cpp',
+	'src/scl/parser/ConformVisitor.cpp',
+	'src/scl/parser/ConformBaseVisitor.cpp',
+	'src/scl/parser/ConformLexer.cpp',
+
+	'src/scl/parser/CommandParser.cpp',
+	'src/scl/parser/CommandVisitor.cpp',
+	'src/scl/parser/CommandBaseVisitor.cpp',
+	'src/scl/parser/CommandLexer.cpp',
 )
 
 
 antlr_compiler = find_program('antlr')
-run_target('build-parser',
+run_target('build-parser-conform',
 	command: [
- 		antlr_compiler,
- 		'-Dlanguage=Cpp',
- 		'-no-listener',
- 		'-visitor',
- 		'-encoding',
- 		'UTF-8',
- 		'-o',
- 		meson.current_source_dir() + '/src/scl/parser',
- 		meson.current_source_dir() + '/src/scl/scl.g4'
- 	],
+		antlr_compiler,
+		'-Dlanguage=Cpp',
+		'-no-listener',
+		'-visitor',
+		'-encoding',
+		'UTF-8',
+		'-o',
+		meson.current_source_dir() + '/src/scl/parser',
+		meson.current_source_dir() + '/src/scl/Conform.g4'
+	],
+)
+
+run_target('build-parser-command',
+	command: [
+		antlr_compiler,
+		'-Dlanguage=Cpp',
+		'-no-listener',
+		'-visitor',
+		'-encoding',
+		'UTF-8',
+		'-o',
+		meson.current_source_dir() + '/src/scl/parser',
+		meson.current_source_dir() + '/src/scl/Command.g4'
+	],
 )
 
 cpp = meson.get_compiler('cpp')

@@ -1,4 +1,4 @@
-grammar scl;
+grammar Command;
 
 /* grammar */
 module: content=scope EOF;

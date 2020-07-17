@@ -6,9 +6,9 @@
 
 
 #include "antlr4-runtime.h"
-#include "scl/parser/sclParser.h"
-#include "scl/parser/sclLexer.h"
-#include "scl/ASTVisitor.hpp"
+#include "scl/parser/ConformParser.h"
+#include "scl/parser/ConformLexer.h"
+#include "scl/ConformVisitor.hpp"
 
 using namespace antlr4;
 
@@ -45,18 +45,18 @@ namespace SCL {
 		}
 
 		ANTLRInputStream input(stream);
-		sclLexer lexer(&input);
+		ConformLexer lexer(&input);
 
 		CommonTokenStream tokens(&lexer);
-		sclParser parser(&tokens);
+		ConformParser parser(&tokens);
 		parser.setTrace(showTrace);
 
 		if(showTrace) {
 			std::cout << "File: " << path << "\n";
 		}
 		
-		sclParser::ModuleContext* tree = parser.module();
-		SCL::ASTVisitor visitor;
+		ConformParser::ModuleContext* tree = parser.module();
+		SCL::ConformVisitor visitor;
 		if(showTrace) {
 			return NULL;
 		}

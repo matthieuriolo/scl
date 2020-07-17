@@ -1,5 +1,5 @@
 
-// Generated from /Users/matthieuriolo/Documents/Sourcecode/scl/src/scl/scl.g4 by ANTLR 4.8
+// Generated from /Users/matthieuriolo/Documents/Sourcecode/scl/src/scl/Conform.g4 by ANTLR 4.8
 
 #pragma once
 
@@ -9,7 +9,7 @@
 
 
 
-class  sclLexer : public antlr4::Lexer {
+class  ConformLexer : public antlr4::Lexer {
 public:
   enum {
     T__0 = 1, DELIMITER = 2, NEWLINE = 3, WHITESPACE = 4, KEYWORD_PRINT = 5, 
@@ -26,8 +26,8 @@ public:
     STRING_SINGLE_QUOTE = 43, IDENTIFIER = 44, COMMENT = 45
   };
 
-  sclLexer(antlr4::CharStream *input);
-  ~sclLexer();
+  ConformLexer(antlr4::CharStream *input);
+  ~ConformLexer();
 
   virtual std::string getGrammarFileName() const override;
   virtual const std::vector<std::string>& getRuleNames() const override;

@@ -1,4 +1,4 @@
-#include "scl/ASTVisitor.hpp"
+#include "scl/ConformVisitor.hpp"
 #include "scl/module.hpp"
 #include "scl/scope.hpp"
 
@@ -28,11 +28,11 @@
 #include "scl/types/string.hpp"
 
 namespace SCL {
-	antlrcpp::Any ASTVisitor::visitModule(sclParser::ModuleContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitModule(ConformParser::ModuleContext *ctx) {
 		return new SCL::Module(visitScope(ctx->content).as<SCL::Scope*>());
 	}
 
-	antlrcpp::Any ASTVisitor::visitScope(sclParser::ScopeContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitScope(ConformParser::ScopeContext *ctx) {
 		std::list<SCL::AST::Instruction*> instructions;
 		for(auto instruction : ctx->instructions) {
 			instructions.push_back(visitInstruction(instruction));
@@ -41,19 +41,19 @@ namespace SCL {
 	}
 
 	/* instructions */
-	antlrcpp::Any ASTVisitor::visitIfControl(sclParser::IfControlContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitIfControl(ConformParser::IfControlContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::If(visitExpression(ctx->expression()), visitScope(ctx->scope()));
 	}
 
-	antlrcpp::Any ASTVisitor::visitForControl(sclParser::ForControlContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitForControl(ConformParser::ForControlContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::For(visitExplicitVariable(ctx->variable()), visitExpression(ctx->expression()), visitScope(ctx->scope()));
 	}
 
-	antlrcpp::Any ASTVisitor::visitAssign(sclParser::AssignContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitAssign(ConformParser::AssignContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::Assign(visitExplicitVariable(ctx->key), visitExpression(ctx->value));
 	}
 	
-	antlrcpp::Any ASTVisitor::visitAssignProperty(sclParser::AssignPropertyContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitAssignProperty(ConformParser::AssignPropertyContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::AssignAttribute(
 			visitExpression(ctx->property),
 			visitExpression(ctx->key),
@@ -61,24 +61,24 @@ namespace SCL {
 		);
 	}
 	
-	antlrcpp::Any ASTVisitor::visitPrint(sclParser::PrintContext *ctx)  {
+	antlrcpp::Any ConformVisitor::visitPrint(ConformParser::PrintContext *ctx)  {
 		return (SCL::AST::Instruction*)new SCL::AST::Print(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
 	}
 
-/*	antlrcpp::Any ASTVisitor::visitIncludeFile(sclParser::IncludeFileContext *ctx) {
+/*	antlrcpp::Any ConformVisitor::visitIncludeFile(ConformParser::IncludeFileContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::Include(ctx->path->getText());
 	}*/
 
-/*	antlrcpp::Any ASTVisitor::visitIncludeCModule(sclParser::IncludeCModuleContext *ctx) {
+/*	antlrcpp::Any ConformVisitor::visitIncludeCModule(ConformParser::IncludeCModuleContext *ctx) {
 		return (SCL::AST::Instruction*)new SCL::AST::Import(ctx->path->getText());
 	}*/
 
 	/* expression */
-	antlrcpp::Any ASTVisitor::visitExpressionType(sclParser::ExpressionTypeContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitExpressionType(ConformParser::ExpressionTypeContext *ctx) {
 		return (SCL::AST::Expression*)new SCL::AST::ExpressionType(visitType(ctx->type()).as<SCL::Type*>());
 	}
 
-	antlrcpp::Any ASTVisitor::visitExpressionGrouped(sclParser::ExpressionGroupedContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitExpressionGrouped(ConformParser::ExpressionGroupedContext *ctx) {
 		if(ctx->expressionConst()) {
 			return visitExpressionConst(ctx->expressionConst());
 		}else if(ctx->expression()) {
@@ -87,7 +87,7 @@ namespace SCL {
 		throw new std::logic_error("cannot parse tree");
 	}
 
-	antlrcpp::Any ASTVisitor::visitExpressionConcated(sclParser::ExpressionConcatedContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitExpressionConcated(ConformParser::ExpressionConcatedContext *ctx) {
 		if(ctx->expressionGrouped()) {
 			return visitExpressionGrouped(ctx->expressionGrouped());	
 		}else if(ctx->range) {
@@ -139,18 +139,18 @@ namespace SCL {
 		throw new std::logic_error("cannot parse tree");
 	}
 
-	antlrcpp::Any ASTVisitor::visitExpressionUnary(sclParser::ExpressionUnaryContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitExpressionUnary(ConformParser::ExpressionUnaryContext *ctx) {
 		return (SCL::AST::Expression*)new SCL::AST::UnaryMinus(visitExpression(ctx->expression()).as<SCL::AST::Expression*>());
 	}
 
 
 
 
-	antlrcpp::Any ASTVisitor::visitAccess(sclParser::AccessContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitAccess(ConformParser::AccessContext *ctx) {
 		return (SCL::AST::Expression*)new SCL::AST::Access(visitExpressionConcated(ctx->property), visitExpressionConcated(ctx->key));
 	}
 
-	antlrcpp::Any ASTVisitor::visitAccessRange(sclParser::AccessRangeContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitAccessRange(ConformParser::AccessRangeContext *ctx) {
 		return (SCL::AST::Expression*)new SCL::AST::Range(
 			visitExpressionConcated(ctx->property),
 			ctx->start ? visitExpressionConcated(ctx->start).as<SCL::AST::Expression*>() : NULL,
@@ -158,15 +158,15 @@ namespace SCL {
 		);
 	}
 
-	antlrcpp::Any ASTVisitor::visitVariable(sclParser::VariableContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitVariable(ConformParser::VariableContext *ctx) {
 		return (SCL::AST::Expression*)visitExplicitVariable(ctx);
 	}
 
-	SCL::AST::Variable* ASTVisitor::visitExplicitVariable(sclParser::VariableContext *ctx) {
+	SCL::AST::Variable* ConformVisitor::visitExplicitVariable(ConformParser::VariableContext *ctx) {
 		return new SCL::AST::Variable(ctx->IDENTIFIER()->getText());
 	}
 
-	antlrcpp::Any ASTVisitor::visitArray(sclParser::ArrayContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitArray(ConformParser::ArrayContext *ctx) {
 		auto arr = new SCL::AST::Array();
 		for(auto val : ctx->elements) {
 			arr->add(visitExpression(val));
@@ -174,7 +174,7 @@ namespace SCL {
 		return (SCL::AST::Expression*)arr;
 	}
 
-	antlrcpp::Any ASTVisitor::visitDictionary(sclParser::DictionaryContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitDictionary(ConformParser::DictionaryContext *ctx) {
 		auto dict = new SCL::AST::Dictionary();
 		for(auto val : ctx->elements) {
 			dict->add(visitExpression(val->key), visitExpression(val->value));
@@ -184,7 +184,7 @@ namespace SCL {
 
 
 	/* types */
-	antlrcpp::Any ASTVisitor::visitBoolean(sclParser::BooleanContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitBoolean(ConformParser::BooleanContext *ctx) {
 		if(ctx->BOOLEAN_TRUE()) {
 			return (SCL::Type*)SCL::Types::Boolean::getTrue();
 		}
@@ -192,15 +192,15 @@ namespace SCL {
 		return (SCL::Type*)SCL::Types::Boolean::getFalse();
 	}
 
-	antlrcpp::Any ASTVisitor::visitNumericInt(sclParser::NumericIntContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitNumericInt(ConformParser::NumericIntContext *ctx) {
 		return (SCL::Type*)new SCL::Types::Integer(ctx->INTEGER()->getText());
 	}
 
-	antlrcpp::Any ASTVisitor::visitNumericFloat(sclParser::NumericFloatContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitNumericFloat(ConformParser::NumericFloatContext *ctx) {
 		return (SCL::Type*)new SCL::Types::Float(ctx->FLOAT()->getText());
 	}
 
-	antlrcpp::Any ASTVisitor::visitString(sclParser::StringContext *ctx) {
+	antlrcpp::Any ConformVisitor::visitString(ConformParser::StringContext *ctx) {
 		std::string s;
 
 		if(ctx->STRING_SINGLE_QUOTE()) {
