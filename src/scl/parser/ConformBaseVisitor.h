@@ -15,18 +15,6 @@
 class  ConformBaseVisitor : public ConformVisitor {
 public:
 
-  virtual antlrcpp::Any visitModule(ConformParser::ModuleContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitScope(ConformParser::ScopeContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
-  virtual antlrcpp::Any visitVariable(ConformParser::VariableContext *ctx) override {
-    return visitChildren(ctx);
-  }
-
   virtual antlrcpp::Any visitInstruction(ConformParser::InstructionContext *ctx) override {
     return visitChildren(ctx);
   }
@@ -116,6 +104,10 @@ public:
   }
 
   virtual antlrcpp::Any visitString(ConformParser::StringContext *ctx) override {
+    return visitChildren(ctx);
+  }
+
+  virtual antlrcpp::Any visitVariable(ConformParser::VariableContext *ctx) override {
     return visitChildren(ctx);
   }
 

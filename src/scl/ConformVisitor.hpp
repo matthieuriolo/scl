@@ -7,9 +7,6 @@
 namespace SCL {
 	class ConformVisitor : public ConformBaseVisitor {
 		public:
-			antlrcpp::Any visitModule(ConformParser::ModuleContext *ctx) override;
-			antlrcpp::Any visitScope(ConformParser::ScopeContext *ctx) override;
-			
 			/* instructions */
 			antlrcpp::Any visitIfControl(ConformParser::IfControlContext *ctx) override;
 			antlrcpp::Any visitForControl(ConformParser::ForControlContext *ctx) override;

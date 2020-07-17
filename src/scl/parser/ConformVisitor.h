@@ -19,12 +19,6 @@ public:
   /**
    * Visit parse trees produced by ConformParser.
    */
-    virtual antlrcpp::Any visitModule(ConformParser::ModuleContext *context) = 0;
-
-    virtual antlrcpp::Any visitScope(ConformParser::ScopeContext *context) = 0;
-
-    virtual antlrcpp::Any visitVariable(ConformParser::VariableContext *context) = 0;
-
     virtual antlrcpp::Any visitInstruction(ConformParser::InstructionContext *context) = 0;
 
     virtual antlrcpp::Any visitIfControl(ConformParser::IfControlContext *context) = 0;
@@ -70,6 +64,8 @@ public:
     virtual antlrcpp::Any visitNumericFloat(ConformParser::NumericFloatContext *context) = 0;
 
     virtual antlrcpp::Any visitString(ConformParser::StringContext *context) = 0;
+
+    virtual antlrcpp::Any visitVariable(ConformParser::VariableContext *context) = 0;
 
 
 };

@@ -1,6 +1,4 @@
 #include "scl/ConformVisitor.hpp"
-#include "scl/module.hpp"
-#include "scl/scope.hpp"
 
 #include "scl/ast/if.hpp"
 #include "scl/ast/for.hpp"
@@ -28,25 +26,13 @@
 #include "scl/types/string.hpp"
 
 namespace SCL {
-	antlrcpp::Any ConformVisitor::visitModule(ConformParser::ModuleContext *ctx) {
-		return new SCL::Module(visitScope(ctx->content).as<SCL::Scope*>());
-	}
-
-	antlrcpp::Any ConformVisitor::visitScope(ConformParser::ScopeContext *ctx) {
-		std::list<SCL::AST::Instruction*> instructions;
-		for(auto instruction : ctx->instructions) {
-			instructions.push_back(visitInstruction(instruction));
-		}
-		return new SCL::Scope(instructions);
-	}
-
 	/* instructions */
 	antlrcpp::Any ConformVisitor::visitIfControl(ConformParser::IfControlContext *ctx) {
-		return (SCL::AST::Instruction*)new SCL::AST::If(visitExpression(ctx->expression()), visitScope(ctx->scope()));
+		return (SCL::AST::Instruction*)new SCL::AST::If(visitExpression(ctx->expression()));
 	}
 
 	antlrcpp::Any ConformVisitor::visitForControl(ConformParser::ForControlContext *ctx) {
-		return (SCL::AST::Instruction*)new SCL::AST::For(visitExplicitVariable(ctx->variable()), visitExpression(ctx->expression()), visitScope(ctx->scope()));
+		return (SCL::AST::Instruction*)new SCL::AST::For(visitExplicitVariable(ctx->variable()), visitExpression(ctx->expression()));
 	}
 
 	antlrcpp::Any ConformVisitor::visitAssign(ConformParser::AssignContext *ctx) {

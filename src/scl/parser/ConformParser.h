@@ -12,29 +12,27 @@
 class  ConformParser : public antlr4::Parser {
 public:
   enum {
-    T__0 = 1, DELIMITER = 2, NEWLINE = 3, WHITESPACE = 4, KEYWORD_PRINT = 5, 
-    KEYWORD_INCLUDE = 6, KEYWORD_IMPORT = 7, CONTROL_IF = 8, CONTROL_FOR = 9, 
-    CONTROL_IN = 10, CONTROL_END = 11, OPERAND_EQUAL = 12, OPERAND_PLUS = 13, 
-    OPERAND_MINUS = 14, OPERAND_ASTERISK = 15, OPERAND_SLASH = 16, OPERAND_CARET = 17, 
-    OPERAND_AND = 18, OPERAND_OR = 19, RANGE = 20, SQUARED_BRACKET_OPEN = 21, 
-    SQUARED_BRACKET_CLOSE = 22, CURLY_BRACKET_OPEN = 23, CURLY_BRACKET_CLOSE = 24, 
-    ROUND_BRACKET_OPEN = 25, ROUND_BRACKET_CLOSE = 26, SEMICOLON = 27, COLON = 28, 
-    COMMA = 29, QUESTION_MARK = 30, EXCLAMATION_MARK = 31, COMPARATOR_EQUAL = 32, 
-    COMPARATOR_NOT_EQUAL = 33, COMPARATOR_GREATER = 34, COMPARATOR_GREATER_EQUAL = 35, 
-    COMPARATOR_LESS = 36, COMPARATOR_LESS_EQUAL = 37, BOOLEAN_TRUE = 38, 
-    BOOLEAN_FALSE = 39, INTEGER = 40, FLOAT = 41, STRING_DOUBLE_QUOTE = 42, 
-    STRING_SINGLE_QUOTE = 43, IDENTIFIER = 44, COMMENT = 45
+    T__0 = 1, WHITESPACE = 2, KEYWORD_PRINT = 3, KEYWORD_INCLUDE = 4, KEYWORD_IMPORT = 5, 
+    CONTROL_IF = 6, CONTROL_FOR = 7, CONTROL_IN = 8, OPERAND_EQUAL = 9, 
+    OPERAND_PLUS = 10, OPERAND_MINUS = 11, OPERAND_ASTERISK = 12, OPERAND_SLASH = 13, 
+    OPERAND_CARET = 14, OPERAND_AND = 15, OPERAND_OR = 16, RANGE = 17, SQUARED_BRACKET_OPEN = 18, 
+    SQUARED_BRACKET_CLOSE = 19, CURLY_BRACKET_OPEN = 20, CURLY_BRACKET_CLOSE = 21, 
+    ROUND_BRACKET_OPEN = 22, ROUND_BRACKET_CLOSE = 23, SEMICOLON = 24, COLON = 25, 
+    COMMA = 26, QUESTION_MARK = 27, EXCLAMATION_MARK = 28, COMPARATOR_EQUAL = 29, 
+    COMPARATOR_NOT_EQUAL = 30, COMPARATOR_GREATER = 31, COMPARATOR_GREATER_EQUAL = 32, 
+    COMPARATOR_LESS = 33, COMPARATOR_LESS_EQUAL = 34, BOOLEAN_TRUE = 35, 
+    BOOLEAN_FALSE = 36, INTEGER = 37, FLOAT = 38, STRING_DOUBLE_QUOTE = 39, 
+    STRING_SINGLE_QUOTE = 40, IDENTIFIER = 41, COMMENT = 42
   };
 
   enum {
-    RuleModule = 0, RuleScope = 1, RuleVariable = 2, RuleInstruction = 3, 
-    RuleIfControl = 4, RuleForControl = 5, RulePrint = 6, RuleAssign = 7, 
-    RuleAssignProperty = 8, RuleExpression = 9, RuleExpressionAccess = 10, 
-    RuleAccess = 11, RuleAccessRange = 12, RuleExpressionConcated = 13, 
-    RuleExpressionGrouped = 14, RuleExpressionConst = 15, RuleExpressionUnary = 16, 
-    RuleArray = 17, RuleDictionary = 18, RuleDictionaryElements = 19, RuleExpressionType = 20, 
-    RuleType = 21, RuleBoolean = 22, RuleNumericInt = 23, RuleNumericFloat = 24, 
-    RuleString = 25
+    RuleInstruction = 0, RuleIfControl = 1, RuleForControl = 2, RulePrint = 3, 
+    RuleAssign = 4, RuleAssignProperty = 5, RuleExpression = 6, RuleExpressionAccess = 7, 
+    RuleAccess = 8, RuleAccessRange = 9, RuleExpressionConcated = 10, RuleExpressionGrouped = 11, 
+    RuleExpressionConst = 12, RuleExpressionUnary = 13, RuleArray = 14, 
+    RuleDictionary = 15, RuleDictionaryElements = 16, RuleExpressionType = 17, 
+    RuleType = 18, RuleBoolean = 19, RuleNumericInt = 20, RuleNumericFloat = 21, 
+    RuleString = 22, RuleVariable = 23
   };
 
   ConformParser(antlr4::TokenStream *input);
@@ -47,9 +45,6 @@ public:
   virtual antlr4::dfa::Vocabulary& getVocabulary() const override;
 
 
-  class ModuleContext;
-  class ScopeContext;
-  class VariableContext;
   class InstructionContext;
   class IfControlContext;
   class ForControlContext;
@@ -72,58 +67,14 @@ public:
   class BooleanContext;
   class NumericIntContext;
   class NumericFloatContext;
-  class StringContext; 
-
-  class  ModuleContext : public antlr4::ParserRuleContext {
-  public:
-    ConformParser::ScopeContext *content = nullptr;;
-    ModuleContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *EOF();
-    ScopeContext *scope();
-
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  ModuleContext* module();
-
-  class  ScopeContext : public antlr4::ParserRuleContext {
-  public:
-    ConformParser::InstructionContext *instructionContext = nullptr;;
-    std::vector<InstructionContext *> instructions;;
-    ScopeContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    std::vector<antlr4::tree::TerminalNode *> DELIMITER();
-    antlr4::tree::TerminalNode* DELIMITER(size_t i);
-    std::vector<InstructionContext *> instruction();
-    InstructionContext* instruction(size_t i);
-
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  ScopeContext* scope();
-
-  class  VariableContext : public antlr4::ParserRuleContext {
-  public:
-    VariableContext(antlr4::ParserRuleContext *parent, size_t invokingState);
-    virtual size_t getRuleIndex() const override;
-    antlr4::tree::TerminalNode *IDENTIFIER();
-
-
-    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
-   
-  };
-
-  VariableContext* variable();
+  class StringContext;
+  class VariableContext; 
 
   class  InstructionContext : public antlr4::ParserRuleContext {
   public:
     InstructionContext(antlr4::ParserRuleContext *parent, size_t invokingState);
     virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *EOF();
     PrintContext *print();
     AssignContext *assign();
     AssignPropertyContext *assignProperty();
@@ -143,9 +94,6 @@ public:
     virtual size_t getRuleIndex() const override;
     antlr4::tree::TerminalNode *CONTROL_IF();
     ExpressionContext *expression();
-    antlr4::tree::TerminalNode *DELIMITER();
-    ScopeContext *scope();
-    antlr4::tree::TerminalNode *CONTROL_END();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -162,9 +110,6 @@ public:
     VariableContext *variable();
     antlr4::tree::TerminalNode *CONTROL_IN();
     ExpressionContext *expression();
-    antlr4::tree::TerminalNode *DELIMITER();
-    ScopeContext *scope();
-    antlr4::tree::TerminalNode *CONTROL_END();
 
 
     virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
@@ -510,6 +455,19 @@ public:
   };
 
   StringContext* string();
+
+  class  VariableContext : public antlr4::ParserRuleContext {
+  public:
+    VariableContext(antlr4::ParserRuleContext *parent, size_t invokingState);
+    virtual size_t getRuleIndex() const override;
+    antlr4::tree::TerminalNode *IDENTIFIER();
+
+
+    virtual antlrcpp::Any accept(antlr4::tree::ParseTreeVisitor *visitor) override;
+   
+  };
+
+  VariableContext* variable();
 
 
   virtual bool sempred(antlr4::RuleContext *_localctx, size_t ruleIndex, size_t predicateIndex) override;

@@ -1,24 +1,19 @@
 grammar Conform;
 
 /* grammar */
-module: content=scope EOF;
-scope: (DELIMITER | (instructions += instruction DELIMITER))* (instructions += instruction)?;
-
-
-variable: '$' IDENTIFIER;
-
-
 
 instruction
-	: print
-//	| includeFile
-//	| includeCModule
-	| assign
-	| assignProperty
-//	| FUNCTION_DECLARATION
-//	| command
-	| ifControl
-	| forControl
+	: (
+		  print
+	//	| includeFile
+	//	| includeCModule
+		| assign
+		| assignProperty
+	//	| FUNCTION_DECLARATION
+	//	| command
+		| ifControl
+		| forControl
+	) EOF
 ;
 
 
@@ -64,8 +59,8 @@ IDENTIFIERS
 
 
 /* instructions */
-ifControl: CONTROL_IF expression DELIMITER scope CONTROL_END;
-forControl: CONTROL_FOR variable CONTROL_IN expression DELIMITER scope CONTROL_END;
+ifControl: CONTROL_IF expression;
+forControl: CONTROL_FOR variable CONTROL_IN expression;
 
 print: KEYWORD_PRINT expression;
 
@@ -163,12 +158,10 @@ string
 	| STRING_DOUBLE_QUOTE
 ;
 
+variable: '$' IDENTIFIER;
 
 
 /* symbols */
-
-DELIMITER: (NEWLINE | SEMICOLON);
-NEWLINE: ('\n'|'\r');
 WHITESPACE: (' '|'\t')+ -> skip;
 
 KEYWORD_PRINT: 'print';
@@ -179,7 +172,6 @@ KEYWORD_IMPORT: 'import';
 CONTROL_IF: 'if';
 CONTROL_FOR: 'for';
 CONTROL_IN: 'in';
-CONTROL_END: 'end';
 
 
 OPERAND_EQUAL: '=';

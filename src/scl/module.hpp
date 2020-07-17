@@ -1,6 +1,8 @@
 #ifndef __SCL_MODUL__
 #define __SCL_MODUL__
 
+#include <fstream>
+
 #include "scl/scope.hpp"
 #include "scl/context.hpp"
 
@@ -8,6 +10,8 @@ namespace SCL {
 	class Module {
 		private:
 			SCL::Scope* scope;
+
+			static SCL::Scope* buildScope(bool showTrace, std::ifstream* stream);
 		public:
 			Module(SCL::Scope* scope);
 
