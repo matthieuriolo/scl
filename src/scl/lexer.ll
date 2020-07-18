@@ -143,7 +143,7 @@ import\ +([^\n]+)      {
 											BEGIN(COMMAND);
 											return Parser::make_COMMANDPATH(yytext, loc);
 										}
-<COMMAND>[^ \n]+                       return Parser::make_COMMANDARGUMENT(yytext, loc);
+<COMMAND>[^ \n#]+                       return Parser::make_COMMANDARGUMENT(yytext, loc);
 
 %{
 /*
@@ -166,7 +166,7 @@ import\ +([^\n]+)      {
 /* analyctics */
 %}
 
-#[^\n]*
+<INITIAL,COMMAND>#[^\n]*
 
 <INITIAL,FUNCTION,COMMAND>[ \t\r]+              loc.step();
 <INITIAL,FUNCTION,COMMAND>.                     {
