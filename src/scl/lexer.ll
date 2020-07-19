@@ -88,12 +88,19 @@ import\ +([^\n]+)      {
 									BEGIN(INITIAL);
 								return Parser::make_SYMBOL_ROUND_BRACKET_CLOSE(loc);
 								}
-";"                   return Parser::make_SYMBOL_SEMICOLON(loc);
+
 <INITIAL,FUNCTION>":" return Parser::make_SYMBOL_COLON(loc);
 <INITIAL,FUNCTION>","                   return Parser::make_SYMBOL_COMMA(loc);
 <INITIAL,FUNCTION>"?"                   return Parser::make_SYMBOL_QUESTION_MARK(loc);
 <INITIAL,FUNCTION>"!"                   return Parser::make_SYMBOL_EXCLAMATION_MARK(loc);
 
+
+<INITIAL,COMMAND>";"  {
+						BEGIN(INITIAL);
+						loc.lines(yyleng);
+						loc.step();
+						return Parser::make_SYMBOL_SEMICOLON(loc);
+					   }
 <INITIAL,COMMAND>\n+  {
 						BEGIN(INITIAL);
 						loc.lines(yyleng);
@@ -143,7 +150,7 @@ import\ +([^\n]+)      {
 											BEGIN(COMMAND);
 											return Parser::make_COMMANDPATH(yytext, loc);
 										}
-<COMMAND>[^ \n#]+                       return Parser::make_COMMANDARGUMENT(yytext, loc);
+<COMMAND>[^ \n#;]+                       return Parser::make_COMMANDARGUMENT(yytext, loc);
 
 %{
 /*
