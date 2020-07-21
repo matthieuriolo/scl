@@ -14,13 +14,9 @@ namespace SCL {
 			this->commandpath = commandpath;
 		}
 
-		Command::Command(std::string commandpath, std::list<std::string> arguments) {
+		Command::Command(std::string commandpath, std::list<SCL::AST::Commands::Argument*> arguments) {
 			this->commandpath = commandpath;
 			this->arguments = arguments;
-		}
-
-		void Command::addArgument(std::string argument) {
-			arguments.push_back(argument);
 		}
 
 		std::string* Command::findCommand(std::string cmd) {
@@ -66,9 +62,9 @@ namespace SCL {
 
 			for(auto arg : arguments) {
 				cmd.append(" ");
-				cmd.append(arg);
+				cmd.append(arg->compute(ctx)->stringify());
 			}
-
+			std::cout << "cmd is " << cmd << "\n";
 			FILE* pipe = popen(cmd.c_str(), "r");
 			if(!pipe) {
 				std::cout << "Failure executing '" << path << "'\n";
@@ -102,7 +98,7 @@ namespace SCL {
 			std::cout << std::string((level+1) * 2, ' ') << "arguments:\n";
 
 			for(auto arg : arguments) {
-				std::cout << std::string((level+1) * 2, ' ') << arg <<"\n";
+				arg->printAST(level+2);
 			}
 		}
 

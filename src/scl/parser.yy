@@ -50,6 +50,7 @@
 	#include "scl/types/float.hpp"
 	#include "scl/types/integer.hpp"
 	#include "scl/types/boolean.hpp"
+	#include "scl/types/string.hpp"
 
 	namespace SCL {
 		class ParserResult;
@@ -112,9 +113,11 @@
 
 
 %type <SCL::AST::Command*> COMMAND
-%token <std::string> COMMANDPATH COMMANDARGUMENT
-//%right COMMANDARGUMENT
-
+%token <std::string> COMMANDPATH
+%type <SCL::AST::Commands::Argument*> COMMAND_ARGUMENT
+%token <SCL::Types::String*> COMMAND_STRING
+%type <std::list<SCL::AST::Commands::Argument*> > COMMAND_ARGUMENTS
+%token WHITESPACE
 
 %token <std::string> IDENTIFIER
 %type <std::list<std::string> > IDENTIFIERS
@@ -142,6 +145,7 @@ INSTRUCTIONS
 	| INSTRUCTIONS SYMBOL_NEW_LINE INSTRUCTION { $$ = $1; $$.push_back($3); }
 	| INSTRUCTIONS SYMBOL_SEMICOLON INSTRUCTION { $$ = $1; $$.push_back($3); }
 	| INSTRUCTIONS SYMBOL_NEW_LINE { $$ = $1; }
+	| INSTRUCTIONS SYMBOL_SEMICOLON { $$ = $1; }
 ;
 
 INSTRUCTION
@@ -161,9 +165,21 @@ INSTRUCTION
 
 
 COMMAND
-	: COMMANDPATH { $$ = new SCL::AST::Command($1) ; }
-	| COMMAND COMMANDARGUMENT { $$ = $1; $$->addArgument($2); }
+	: COMMANDPATH { $$ = new SCL::AST::Command($1); }
+	| COMMANDPATH COMMAND_ARGUMENTS { $$ = new SCL::AST::Command($1, $2); }
 ;
+
+COMMAND_ARGUMENTS
+	: %empty { $$ = std::list<SCL::AST::Commands::Argument*>(); }
+	| COMMAND_ARGUMENTS WHITESPACE COMMAND_ARGUMENT { $$ = $1; $$.push_back($3); }
+;
+
+COMMAND_ARGUMENT
+	: %empty { $$ = new SCL::AST::Commands::Argument(); }
+	| COMMAND_ARGUMENT COMMAND_STRING { $$ = $1; $$->addExpression(new SCL::AST::ExpressionType($2)); }
+	| COMMAND_ARGUMENT VARIABLE { $$ = $1; $$->addExpression($2); }
+;
+
 
 FUNCTION_DECLARATION
 	: FUNCTION_NAME FUNCTION_BODIES CONTROL_END { $$ = new SCL::AST::FunctionDeclare($1, new SCL::Types::Function($2)); }

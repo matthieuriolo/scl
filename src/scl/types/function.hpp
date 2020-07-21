@@ -5,6 +5,7 @@
 #include "scl/type.hpp"
 #include "scl/types/boolean.hpp"
 #include "scl/types/functionbody.hpp"
+#include "scl/ast/commands/argument.hpp"
 
 namespace SCL {
 	namespace Types {
@@ -22,7 +23,7 @@ namespace SCL {
 
 				int compare(SCL::Type *right);
 
-				SCL::Type *execute(SCL::Context *ctx, std::list<std::string> arguments);
+				SCL::Type *execute(SCL::Context *ctx, std::list<SCL::AST::Commands::Argument*> arguments);
 				void printAST(int level);
 		};
 	}
