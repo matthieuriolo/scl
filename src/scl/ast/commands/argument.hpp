@@ -7,7 +7,7 @@
 namespace SCL {
 	namespace AST {
 		namespace Commands {
-			class Argument : public SCL::AST::Expression {
+			class Argument {
 				private:
 					std::list<SCL::AST::Expression*> expressions;
 					
@@ -16,8 +16,10 @@ namespace SCL {
 					
 					void addExpression(SCL::AST::Expression* expression);
 
-					SCL::Type *compute(SCL::Context *ctx);
 					void printAST(int level);
+
+					std::string stringify(SCL::Context *ctx);
+					//std::string getoptify(SCL::Context *ctx, SCL::Types::Dictionary * dict);
 			};
 		}
 	}
