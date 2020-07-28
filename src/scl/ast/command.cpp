@@ -7,6 +7,7 @@
 #include <cstdio>
 #include <string>
 #include <unistd.h>
+#include <regex>
 
 namespace SCL {
 	namespace AST {
@@ -63,10 +64,33 @@ namespace SCL {
 
 		void Command::executeProcess(std::string path, SCL::Context *ctx) {
 			std::string cmd = std::string(path);
-
 			for(auto arg : arguments) {
 				cmd.append(" ");
-				cmd.append(arg);
+
+				auto findVariableRegex = std::regex("\\$[a-zA-Z0-9]+");
+				std::string txt = arg;
+				size_t start = 0;
+				std::match_results<std::string::iterator> result;
+				std::cout << "before while\n";
+
+				while(std::regex_search(
+						txt.begin() + start,
+						txt.end(),
+						result,
+						findVariableRegex,
+						std::regex_constants::match_flag_type::match_continuous
+					)) {
+
+					auto type = ctx->getValue(result.str().substr(1));
+					std::string newString = txt.substr(0, start);
+					newString += type->stringify();
+					size_t n_start = newString.size();
+					newString += txt.substr(start + result.length());
+					txt = newString;
+					start = n_start;
+				}
+
+				cmd.append(txt);
 			}
 
 			FILE* pipe = popen(cmd.c_str(), "r");
