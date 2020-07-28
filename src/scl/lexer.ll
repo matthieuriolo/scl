@@ -130,7 +130,7 @@ import\ +([^\n]+)      {
 
 <INITIAL,FUNCTION>[0-9]+                return Parser::make_INTEGER(new Types::Integer(yytext), loc);
 <INITIAL,FUNCTION>[0-9]+\.[0-9]+        return Parser::make_FLOAT(new Types::Float(yytext), loc);
-<INITIAL,FUNCTION,COMMAND>\$[a-zA-Z0-9]+        return Parser::make_VARIABLE(new AST::Variable(yytext + 1), loc);
+<INITIAL,FUNCTION>\$[a-zA-Z0-9]+        return Parser::make_VARIABLE(new AST::Variable(yytext + 1), loc);
 
 <INITIAL,FUNCTION>\"(\\|[^\\"])*\"    {
 						auto s = std::string(yytext);
@@ -150,7 +150,14 @@ import\ +([^\n]+)      {
 											BEGIN(COMMAND);
 											return Parser::make_COMMANDPATH(yytext, loc);
 										}
-<COMMAND>[^\ \n#;$]+                     return Parser::make_COMMAND_STRING(new Types::String(yytext), loc);
+<COMMAND>[^ \n#;]+                       return Parser::make_COMMANDARGUMENT(yytext, loc);
+
+%{
+/*
+<COMMAND>-[a-zA-Z0-9]+
+<COMMAND>--[^ =\n]+
+*/
+%}
 
 
 :[a-zA-Z]+         {
@@ -167,8 +174,8 @@ import\ +([^\n]+)      {
 %}
 
 <INITIAL,COMMAND>#[^\n]*
-<COMMAND>[ \t\r]+              return Parser::make_WHITESPACE(loc);
-<INITIAL,FUNCTION>[ \t\r]+              loc.step();
+
+<INITIAL,FUNCTION,COMMAND>[ \t\r]+              loc.step();
 <INITIAL,FUNCTION,COMMAND>.                     {
 						throw SCL::Parser::syntax_error
 						(loc, "invalid character: " + std::string(yytext));

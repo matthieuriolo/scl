@@ -29,7 +29,7 @@ namespace SCL {
 			return SCL::Type::comparison(this, right);
 		}
 
-		SCL::Type* Function::execute(SCL::Context *ctx, std::list<SCL::AST::Commands::Argument*> arguments) {
+		SCL::Type* Function::execute(SCL::Context *ctx, std::list<std::string> arguments) {
 			/*for (auto arg : arguments)
 			{
 				std::cout << "\"" << arg << "\"" << "\n";

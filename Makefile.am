@@ -20,7 +20,6 @@ scl_SOURCES = \
 	src/scl/type.cpp \
 	\
 	src/scl/ast/command.cpp \
-	src/scl/ast/commands/argument.cpp \
 	src/scl/ast/dictionary.cpp \
 	src/scl/ast/array.cpp \
 	src/scl/ast/access.cpp \

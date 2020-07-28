@@ -4,14 +4,13 @@
 #include <string>
 #include <list>
 #include "scl/ast/instruction.hpp"
-#include "scl/ast/commands/argument.hpp"
 
 namespace SCL {
 	namespace AST {
 		class Command : public SCL::AST::Instruction {
 			private:
 				std::string commandpath;
-				std::list<SCL::AST::Commands::Argument*> arguments;
+				std::list<std::string> arguments;
 				
 				bool isAbsolutePath();
 				bool isRelativePath();
@@ -22,8 +21,10 @@ namespace SCL {
 				void executeProcess(std::string path, SCL::Context * ctx);
 			public:
 				Command(std::string commandpath);
-				Command(std::string commandpath, std::list<SCL::AST::Commands::Argument*> arguments);
-				
+				Command(std::string commandpath, std::list<std::string> arguments);
+
+				void addArgument(std::string argument);
+
 				void execute(SCL::Context * ctx);
 				void printAST(int level);
 		};

@@ -19,12 +19,12 @@ namespace SCL {
 			this->scope = scope;
 		}
 
-		bool FunctionBody::matchingParameters(std::list<SCL::AST::Commands::Argument*> arguments) {
-			/*if(parameters.size() == 0) {
+		bool FunctionBody::matchingParameters(std::list<std::string> arguments) {
+			if(parameters.size() == 0) {
 				return true;
 			}
 
-			/* construct getopt options*
+			/* construct getopt options*/
 
 			std::list<struct option> long_options;
 			std::string optstring;
@@ -115,11 +115,11 @@ namespace SCL {
 				return false;
 			}
 
-			return true;*/
+			return true;
 		}
 
-		SCL::Type *FunctionBody::execute(SCL::Context *ctx, std::list<SCL::AST::Commands::Argument*> arguments) {
-			/*SCL::Context *newCtx = new SCL::Context(ctx);
+		SCL::Type *FunctionBody::execute(SCL::Context *ctx, std::list<std::string> arguments) {
+			SCL::Context *newCtx = new SCL::Context(ctx);
 			
 			if(parameters.size() == 0) {
 				scope->execute(newCtx);
@@ -128,7 +128,7 @@ namespace SCL {
 			}
 
 			
-			/* construct getopt options - cheap copy&paste from the previous method *
+			/* construct getopt options - cheap copy&paste from the previous method */
 			std::list<struct option> long_options;
 			std::string optstring;
 			for(auto param : parameters) {
@@ -172,7 +172,7 @@ namespace SCL {
 				args.push_back(strdup(a.c_str()));
 			}
 
-			/* set all flags to false and set default values *
+			/* set all flags to false and set default values */
 			for(auto param : parameters) {
 				if(param->isFlag) {
 					newCtx->setValue(param->internName, SCL::Types::Boolean::getFalse());
@@ -240,7 +240,7 @@ namespace SCL {
 
 			scope->execute(newCtx);
 			delete(newCtx);
-*/
+
 			return NULL;
 		}
 
