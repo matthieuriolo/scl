@@ -62,10 +62,8 @@ namespace SCL {
 
 			for(auto arg : arguments) {
 				cmd.append(" ");
-				cmd.append(arg->stringify(ctx));
+				cmd.append(arg->compute(ctx)->stringify());
 			}
-
-
 			std::cout << "cmd is " << cmd << "\n";
 			FILE* pipe = popen(cmd.c_str(), "r");
 			if(!pipe) {

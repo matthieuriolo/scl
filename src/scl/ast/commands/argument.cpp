@@ -15,7 +15,11 @@ namespace SCL {
 				expressions.push_back(expression);
 			}
 
-			std::string Argument::stringify(SCL::Context *ctx) {
+			SCL::Type *Argument::compute(SCL::Context *ctx) {
+				if(expressions.size() == 1) {
+					return expressions.front()->compute(ctx);
+				}
+
 				std::string str;
 				for(auto expr : expressions) {
 					auto type = expr->compute(ctx);
@@ -30,7 +34,7 @@ namespace SCL {
 					str += type->stringify();
 				}
 
-				return str;
+				return new SCL::Types::String(str);
 			}
 
 			void Argument::printAST(int level) {
