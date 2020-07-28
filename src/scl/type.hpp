@@ -12,7 +12,9 @@ namespace SCL {
 	class Type {
 		public:
 			virtual std::string getName() = 0;
-			virtual std::string stringify() = 0;
+			virtual std::string humanify() = 0;
+			virtual std::string stringify();
+
 			virtual int compare(Type *right) = 0;
 			virtual SCL::Types::Iterator *iterator();
 

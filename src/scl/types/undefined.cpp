@@ -22,8 +22,7 @@ namespace SCL {
 			return Undefined::getTypeName();
 		}
 
-
-		std::string Undefined::stringify() {
+		std::string Undefined::humanify() {
 			return this->getName();
 		}
 

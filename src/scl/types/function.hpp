@@ -16,7 +16,7 @@ namespace SCL {
 				Function(std::list<SCL::Types::FunctionBody*> bodies);
 				std::string getName();
 				static std::string getTypeName();
-				std::string stringify();
+				std::string humanify();
 				
 				SCL::Types::Boolean *toBoolean();
 

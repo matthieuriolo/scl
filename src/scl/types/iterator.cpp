@@ -11,7 +11,7 @@ namespace SCL {
 			return Iterator::getTypeName();
 		}
 		
-		std::string Iterator::stringify() {
+		std::string Iterator::humanify() {
 			return getName();
 		}
 

@@ -46,7 +46,7 @@ namespace SCL {
 			throw new std::logic_error("key has the wrong type");*/
 		}
 
-		std::string Dictionary::stringify() {
+		std::string Dictionary::humanify() {
 			std::stringstream ss;
 			ss << "{";
 

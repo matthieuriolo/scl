@@ -24,7 +24,7 @@ namespace SCL {
 				SCL::Type *getRange(Type *start, Type *end);
 				void setAttribute(Type *key, Type *value);
 
-				std::string stringify();
+				std::string humanify();
 				int compare(Type *right);
 				SCL::Types::Boolean *toBoolean();
 				SCL::Types::Iterator *iterator();

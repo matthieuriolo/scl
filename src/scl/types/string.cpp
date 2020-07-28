@@ -30,8 +30,12 @@ namespace SCL {
 			return String::getTypeName();
 		}
 
-		std::string String::stringify() {
+		std::string String::humanify() {
 			return std::string("\"") + value + std::string("\"");
+		}
+
+		std::string String::stringify() {
+			return value;
 		}
 
 		SCL::Type *String::getAccess(SCL::Type *key) {

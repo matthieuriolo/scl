@@ -22,6 +22,7 @@ namespace SCL {
 				SCL::Type *getAccess(SCL::Type *key);
 				SCL::Type *getRange(Type *start, Type *end);
 				std::string stringify();
+				std::string humanify();
 				SCL::Types::Boolean *toBoolean();
 				int compare(Type *right);
 				

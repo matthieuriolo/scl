@@ -35,7 +35,7 @@ namespace SCL {
 
 				SCL::Types::Boolean *toBoolean();
 				std::string getName();
-				std::string stringify();
+				std::string humanify();
 				int compare(Type *right) ;
 		};
 	}

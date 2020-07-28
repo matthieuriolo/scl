@@ -41,6 +41,10 @@ namespace SCL {
 			return std::to_string(value);
 		}
 
+		std::string Integer::humanify() {
+			return std::to_string(value);
+		}
+
 		int Integer::compare(Type *right) {
 			if(right->getName() == "float") {
 				return toFloat()->compare(right);

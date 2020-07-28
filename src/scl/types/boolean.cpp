@@ -33,7 +33,7 @@ namespace SCL {
 			return this;
 		}
 
-		std::string Boolean::stringify() {
+		std::string Boolean::humanify() {
 			return this == getTrue() ? "true" : "false";
 		}
 

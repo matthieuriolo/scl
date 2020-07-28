@@ -17,7 +17,7 @@ namespace SCL {
 		}
 
 
-		std::string Function::stringify() {
+		std::string Function::humanify() {
 			return this->getName();
 		}
 

@@ -10,7 +10,7 @@ namespace SCL {
 			public:
 				std::string getName();
 				static std::string getTypeName();
-				std::string stringify();
+				std::string humanify();
 				int compare(Type *right);
 				SCL::Types::Boolean *toBoolean();
 				

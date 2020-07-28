@@ -9,12 +9,12 @@ namespace SCL {
 		}
 
 		void PrintStatic::execute(SCL::Context * ctx) {
-			std::cout << type->stringify() << "\n";
+			std::cout << type->humanify() << "\n";
 		}
 
 		void PrintStatic::printAST(int level) {
 			std::cout << std::string(level*2, ' ') << "instruction.printStatic\n";
-			std::cout << std::string((level+1) * 2, ' ') << "type: " << type->stringify() << "\n";
+			std::cout << std::string((level+1) * 2, ' ') << "type: " << type->humanify() << "\n";
 		}
 	}
 }

@@ -79,7 +79,7 @@ namespace SCL {
 			throw new std::logic_error("key has the wrong type");
 		}
 
-		std::string Array::stringify() {
+		std::string Array::humanify() {
 			std::stringstream ss;
 			ss << "[";
 

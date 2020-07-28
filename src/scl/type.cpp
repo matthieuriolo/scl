@@ -71,4 +71,8 @@ namespace SCL {
 	Type *Type::operator_or(SCL::Context *ctx, Type *right) {
 		return Types::Undefined::getUndefined();
 	}
+
+	std::string Type::stringify() {
+		throw new std::logic_error("type '" + getName() + "' does not support stringify");
+	}
 }
