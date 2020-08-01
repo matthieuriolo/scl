@@ -76,8 +76,7 @@ namespace SCL {
 						txt.begin() + start,
 						txt.end(),
 						result,
-						findVariableRegex,
-						std::regex_constants::match_flag_type::match_continuous
+						findVariableRegex
 					)) {
 
 					auto type = ctx->getValue(result.str().substr(1));

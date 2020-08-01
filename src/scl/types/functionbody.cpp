@@ -12,6 +12,8 @@
 
 #include <iostream>
 #include <string>
+#include <regex>
+
 namespace SCL {
 	namespace Types {
 		FunctionBody::FunctionBody(std::vector<SCL::Types::FunctionParameter*> parameters, SCL::Scope* scope) {
@@ -193,7 +195,27 @@ namespace SCL {
 							if(getoptParam[0] == '$') {
 								val = newCtx->getValue(std::string(getoptParam).substr(1));
 							}else {
-								val = new SCL::Types::String(getoptParam);
+								auto findVariableRegex = std::regex("\\$[a-zA-Z0-9]+");
+								std::string txt = getoptParam;
+								size_t start = 0;
+								std::match_results<std::string::iterator> result;
+
+								while(std::regex_search(
+										txt.begin() + start,
+										txt.end(),
+										result,
+										findVariableRegex
+									)) {
+									auto type = ctx->getValue(result.str().substr(1));
+									std::string newString = txt.substr(0, start);
+									newString += type->stringify();
+									size_t n_start = newString.size();
+									newString += txt.substr(start + result.length());
+									txt = newString;
+									start = n_start;
+								}
+
+								val = new SCL::Types::String(txt);
 							}
 						}else {
 							throw new std::logic_error("could not parse parameters1");
@@ -218,10 +240,29 @@ namespace SCL {
 									if(getoptParam[0] == '$') {
 										val = newCtx->getValue(std::string(getoptParam).substr(1));
 									}else {
+										auto findVariableRegex = std::regex("\\$[a-zA-Z0-9]+");
+										std::string txt = getoptParam;
+										size_t start = 0;
+										std::match_results<std::string::iterator> result;
 
-										//todo: better handling of none string types
-										val = new SCL::Types::String(getoptParam);
+										while(std::regex_search(
+												txt.begin() + start,
+												txt.end(),
+												result,
+												findVariableRegex,
+												std::regex_constants::match_flag_type::match_continuous
+											)) {
 
+											auto type = ctx->getValue(result.str().substr(1));
+											std::string newString = txt.substr(0, start);
+											newString += type->stringify();
+											size_t n_start = newString.size();
+											newString += txt.substr(start + result.length());
+											txt = newString;
+											start = n_start;
+										}
+										
+										val = new SCL::Types::String(txt);
 									}
 								}else {
 									throw new std::logic_error("could not parse parameters3");
