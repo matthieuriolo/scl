@@ -30,11 +30,6 @@ namespace SCL {
 		}
 
 		SCL::Type* Function::execute(SCL::Context *ctx, std::list<std::string> arguments) {
-			/*for (auto arg : arguments)
-			{
-				std::cout << "\"" << arg << "\"" << "\n";
-			}*/
-
 			for(auto body : bodies) {
 				if(body->matchingParameters(arguments)) {
 					return body->execute(ctx, arguments);

@@ -71,8 +71,7 @@ namespace SCL {
 				std::string txt = arg;
 				size_t start = 0;
 				std::match_results<std::string::iterator> result;
-				std::cout << "before while\n";
-
+				
 				while(std::regex_search(
 						txt.begin() + start,
 						txt.end(),
