@@ -5,5 +5,7 @@
 # -----------------------------
 
 /bin/cat /etc/shells
-
 cat /etc/shells
+
+$var = "/etc"
+cat /etc/../$var/shells

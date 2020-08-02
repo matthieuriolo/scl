@@ -207,10 +207,10 @@ namespace SCL {
 										findVariableRegex
 									)) {
 									auto type = ctx->getValue(result.str().substr(1));
-									std::string newString = txt.substr(0, start);
+									std::string newString = result.prefix().str();
 									newString += type->stringify();
 									size_t n_start = newString.size();
-									newString += txt.substr(start + result.length());
+									newString += result.suffix().str();
 									txt = newString;
 									start = n_start;
 								}
@@ -252,12 +252,11 @@ namespace SCL {
 												findVariableRegex,
 												std::regex_constants::match_flag_type::match_continuous
 											)) {
-
 											auto type = ctx->getValue(result.str().substr(1));
-											std::string newString = txt.substr(0, start);
+											std::string newString = result.prefix().str();
 											newString += type->stringify();
 											size_t n_start = newString.size();
-											newString += txt.substr(start + result.length());
+											newString += result.suffix().str();
 											txt = newString;
 											start = n_start;
 										}

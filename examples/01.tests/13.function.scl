@@ -57,3 +57,12 @@ funcWithDefaultValues -asad
 
 print "testing default value - normal parameter and without set value"
 funcWithDefaultValues
+
+
+:func($internA:aaa,a="test1")
+	print $internA
+end
+
+print "testing variable replacement in string"
+$var = "test"
+func --aaa=/test/$var/test
